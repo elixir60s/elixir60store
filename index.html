@@ -45,14 +45,14 @@
             50% { opacity: 0.7; transform: scale(1.2); }
         }
         
-        @keyframes borderRotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        @keyframes cardShimmer {
+            0% { background-position: -100% 0; }
+            100% { background-position: 200% 0; }
         }
         
-        @keyframes cardGlow {
-            0% { box-shadow: 0 0 0px rgba(168,85,247,0); }
-            100% { box-shadow: 0 0 30px rgba(168,85,247,0.4); }
+        @keyframes cardBorderGlow {
+            0%, 100% { border-color: rgba(168,85,247,0.2); box-shadow: 0 0 0px rgba(168,85,247,0); }
+            50% { border-color: rgba(168,85,247,0.5); box-shadow: 0 0 20px rgba(168,85,247,0.15); }
         }
         
         .animated-bg {
@@ -151,22 +151,37 @@
             border-bottom: 1px solid rgba(168,85,247,0.2);
         }
         
-        /* PREMIUM CARD MAKSIMAL - 3D TILT + GLOSSY */
+        /* PREMIUM CARD - BACKGROUND BERGERAK */
         .premium-card {
             position: relative;
-            background: linear-gradient(145deg, rgba(15, 15, 30, 0.6), rgba(10, 10, 25, 0.5));
-            backdrop-filter: blur(16px);
-            border-radius: 32px;
+            background: linear-gradient(135deg, rgba(15, 15, 30, 0.7), rgba(20, 15, 35, 0.6));
+            backdrop-filter: blur(12px);
+            border-radius: 28px;
             padding: 24px;
-            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             overflow: hidden;
             border: 1px solid rgba(168,85,247,0.2);
-            transform-style: preserve-3d;
-            perspective: 1000px;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
         
-        /* Animated gradient border */
+        /* Animated background shimmer */
         .premium-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(168,85,247,0.08), 
+                rgba(192,132,252,0.05), 
+                transparent);
+            animation: cardShimmer 4s infinite;
+            pointer-events: none;
+        }
+        
+        /* Gradient border on hover */
+        .premium-card::after {
             content: '';
             position: absolute;
             top: -2px;
@@ -175,98 +190,82 @@
             bottom: -2px;
             background: linear-gradient(135deg, #a855f7, #c084fc, #7e22ce, #a855f7);
             background-size: 300% 300%;
-            border-radius: 34px;
+            border-radius: 30px;
             opacity: 0;
             transition: opacity 0.4s;
             z-index: -2;
         }
         
-        .premium-card:hover::before {
-            opacity: 0.5;
+        .premium-card:hover::after {
+            opacity: 0.4;
             animation: gradientFlow 2s ease infinite;
         }
         
-        /* Glossy effect overlay */
-        .premium-card .gloss {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 50%;
-            background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 100%);
-            border-radius: 32px 32px 0 0;
-            pointer-events: none;
+        .premium-card:hover {
+            transform: translateY(-6px);
+            animation: cardBorderGlow 1.5s ease infinite;
         }
         
         /* Inner glow */
-        .premium-card .inner-glow {
+        .card-glow {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at 50% 0%, rgba(168,85,247,0.15), transparent 70%);
-            border-radius: 32px;
+            background: radial-gradient(circle at 50% 0%, rgba(168,85,247,0.12), transparent 70%);
             opacity: 0;
             transition: opacity 0.4s;
             pointer-events: none;
+            border-radius: 28px;
         }
         
-        .premium-card:hover .inner-glow {
+        .premium-card:hover .card-glow {
             opacity: 1;
         }
         
-        .premium-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(168,85,247,0.4);
-            animation: cardGlow 0.6s ease forwards;
-        }
-        
-        /* Shine line effect */
-        .card-shine {
+        /* Glossy top effect */
+        .card-gloss {
             position: absolute;
             top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
-            transition: left 0.6s;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 100%);
+            border-radius: 28px 28px 0 0;
             pointer-events: none;
-            z-index: 1;
         }
         
-        .premium-card:hover .card-shine {
-            left: 100%;
+        .product-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            letter-spacing: -0.2px;
+            margin-bottom: 12px;
+            text-align: center;
         }
         
-        /* Icon container premium */
-        .icon-container {
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(145deg, rgba(168,85,247,0.2), rgba(126,34,206,0.1));
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid rgba(168,85,247,0.3);
-            transition: all 0.3s;
+        .price-text {
+            background: linear-gradient(135deg, #fff, #e9d5ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-align: center;
+            display: block;
+            margin-bottom: 16px;
         }
         
-        .premium-card:hover .icon-container {
-            border-color: rgba(168,85,247,0.8);
-            transform: scale(1.05);
-        }
-        
-        /* PREMIUM BUTTON */
         .premium-btn {
             position: relative;
             width: 100%;
             background: linear-gradient(135deg, #7e22ce, #a855f7);
             background-size: 200% auto;
             border: none;
-            padding: 14px 20px;
+            padding: 12px 20px;
             border-radius: 60px;
-            font-weight: 700;
+            font-weight: 600;
             font-size: 0.85rem;
             color: white;
             cursor: pointer;
@@ -275,8 +274,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            letter-spacing: 0.5px;
+            gap: 8px;
         }
         
         .premium-btn::before {
@@ -286,8 +284,8 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
-            transition: left 0.6s;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
         }
         
         .premium-btn:hover::before {
@@ -297,27 +295,9 @@
         .premium-btn:hover {
             transform: translateY(-2px);
             background-position: 100% 0;
-            box-shadow: 0 10px 25px -5px rgba(168,85,247,0.6);
+            box-shadow: 0 8px 20px rgba(168,85,247,0.4);
         }
         
-        .premium-btn:active {
-            transform: translateY(1px);
-        }
-        
-        .premium-btn i {
-            transition: all 0.2s;
-        }
-        
-        .premium-btn:hover i:first-child {
-            transform: scale(1.1);
-        }
-        
-        .premium-btn:hover i:last-child {
-            transform: translateX(4px);
-            opacity: 1;
-        }
-        
-        /* Hero text */
         .hero-text {
             background: linear-gradient(135deg, #ffffff 0%, #c084fc 30%, #a855f7 60%, #e9d5ff 100%);
             background-size: 200% auto;
@@ -346,48 +326,43 @@
             background: rgba(0,0,0,0.4);
             border: 1px solid rgba(168,85,247,0.2);
             border-radius: 60px;
-            padding: 12px 18px;
+            padding: 10px 16px;
             width: 100%;
             color: white;
             font-size: 0.8rem;
             transition: all 0.2s;
+            margin-bottom: 14px;
+            text-align: center;
         }
         
         .nickname-input:focus {
             outline: none;
             border-color: #a855f7;
-            box-shadow: 0 0 15px rgba(168,85,247,0.2);
+            box-shadow: 0 0 12px rgba(168,85,247,0.2);
         }
         
         .star-rating {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin: 16px 0;
+            gap: 8px;
+            margin: 12px 0 16px;
         }
         
         .star-rating i {
             color: rgba(255,255,255,0.2);
-            font-size: 1.1rem;
+            font-size: 1rem;
             cursor: pointer;
             transition: all 0.15s;
         }
         
         .star-rating i.active {
             color: #fbbf24;
-            text-shadow: 0 0 8px rgba(251,191,36,0.4);
+            text-shadow: 0 0 6px rgba(251,191,36,0.4);
         }
         
         .star-rating i:hover {
             transform: scale(1.15);
             color: #fbbf24;
-        }
-        
-        .price-text {
-            background: linear-gradient(135deg, #fff, #e9d5ff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
         }
     </style>
 </head>
@@ -494,17 +469,17 @@
         const formatRp = (n) => "Rp" + n.toLocaleString('id-ID');
 
         const products = [
-            ...["100K","200K","300K","400K","500K","600K","700K","800K","900K","1JT","1.1 JT","1.2 JT","1.3 JT","1.4 JT","1.5 JT","1.6 JT","1.7 JT"].map((name, idx) => ({ name: `SBC ${name}`, price: [12000,20000,30000,40000,50000,60000,70000,80000,90000,100000,110000,120000,130000,140000,150000,160000,170000][idx], category: "sbc", needNickname: true, icon: "fa-bolt" })),
-            { name: "SCRIPT MARSHMALLOW - HARIAN", price: 13000, category: "script", needNickname: false, icon: "fa-calendar-day" },
-            { name: "SCRIPT MARSHMALLOW - BULANAN", price: 60000, category: "script", needNickname: false, icon: "fa-calendar-alt" },
-            { name: "SCRIPT MARSHMALLOW - LIFETIME", price: 150000, category: "script", needNickname: false, icon: "fa-infinity" },
-            { name: "SCRIPT COMBAT - HARIAN", price: 20000, category: "script", needNickname: false, icon: "fa-calendar-day" },
-            { name: "SCRIPT COMBAT - BULANAN", price: 80000, category: "script", needNickname: false, icon: "fa-calendar-alt" },
-            { name: "SCRIPT COMBAT - LIFETIME", price: 200000, category: "script", needNickname: false, icon: "fa-infinity" },
-            { name: "SCRIPT FPS - LIFETIME", price: 50000, category: "script", needNickname: false, icon: "fa-infinity" },
-            { name: "TIER 1 - GREEN NAME", price: 150000, category: "tier", needNickname: false, icon: "fa-leaf" },
-            { name: "TIER 2 - PINK NAME", price: 250000, category: "tier", needNickname: false, icon: "fa-heart" },
-            { name: "TIER 3 - BLUE NAME", price: 350000, category: "tier", needNickname: false, icon: "fa-droplet" }
+            ...["100K","200K","300K","400K","500K","600K","700K","800K","900K","1JT","1.1 JT","1.2 JT","1.3 JT","1.4 JT","1.5 JT","1.6 JT","1.7 JT"].map((name, idx) => ({ name: `SBC ${name}`, price: [12000,20000,30000,40000,50000,60000,70000,80000,90000,100000,110000,120000,130000,140000,150000,160000,170000][idx], category: "sbc", needNickname: true })),
+            { name: "SCRIPT MARSHMALLOW - HARIAN", price: 13000, category: "script", needNickname: false },
+            { name: "SCRIPT MARSHMALLOW - BULANAN", price: 60000, category: "script", needNickname: false },
+            { name: "SCRIPT MARSHMALLOW - LIFETIME", price: 150000, category: "script", needNickname: false },
+            { name: "SCRIPT COMBAT - HARIAN", price: 20000, category: "script", needNickname: false },
+            { name: "SCRIPT COMBAT - BULANAN", price: 80000, category: "script", needNickname: false },
+            { name: "SCRIPT COMBAT - LIFETIME", price: 200000, category: "script", needNickname: false },
+            { name: "SCRIPT FPS - LIFETIME", price: 50000, category: "script", needNickname: false },
+            { name: "TIER 1 - GREEN NAME", price: 150000, category: "tier", needNickname: false },
+            { name: "TIER 2 - PINK NAME", price: 250000, category: "tier", needNickname: false },
+            { name: "TIER 3 - BLUE NAME", price: 350000, category: "tier", needNickname: false }
         ];
 
         const reviews = [
@@ -525,30 +500,21 @@
             const card = document.createElement('div');
             card.className = 'premium-card';
             card.innerHTML = `
-                <div class="card-shine"></div>
-                <div class="gloss"></div>
-                <div class="inner-glow"></div>
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="icon-container">
-                        <i class="fas ${product.icon} text-purple-400 text-base"></i>
-                    </div>
-                    <h3 class="text-white font-semibold text-sm flex-1 tracking-wide">${product.name}</h3>
-                </div>
-                <div class="mb-4 text-center">
-                    <span class="text-2xl font-bold price-text">${formatRp(product.price)}</span>
-                </div>
-                ${product.needNickname ? '<input type="text" class="nickname-input mb-3" placeholder="🎮 Enter your nickname">' : ''}
-                <div class="star-rating mb-4">
+                <div class="card-glow"></div>
+                <div class="card-gloss"></div>
+                <div class="product-name">${product.name}</div>
+                <span class="price-text">${formatRp(product.price)}</span>
+                ${product.needNickname ? '<input type="text" class="nickname-input" placeholder="🎮 Masukkan nickname">' : ''}
+                <div class="star-rating">
                     <i class="far fa-star" data-val="1"></i>
                     <i class="far fa-star" data-val="2"></i>
                     <i class="far fa-star" data-val="3"></i>
                     <i class="far fa-star" data-val="4"></i>
                     <i class="far fa-star" data-val="5"></i>
                 </div>
-                <button class="premium-btn group">
-                    <i class="fab fa-whatsapp text-sm"></i> 
-                    <span>Order Now</span>
-                    <i class="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1"></i>
+                <button class="premium-btn">
+                    <i class="fab fa-whatsapp"></i> Order Now
+                    <i class="fas fa-arrow-right text-xs"></i>
                 </button>
             `;
 
