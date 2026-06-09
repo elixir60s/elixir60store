@@ -13,13 +13,13 @@
         }
 
         body {
-            background: linear-gradient(135deg, #0f0c1f 0%, #1a0f2e 50%, #0b0716 100%);
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a0f2e 50%, #0b0716 100%);
             padding: 20px;
             padding-bottom: 60px;
             min-height: 100vh;
         }
 
-        /* Header Premium Ungu */
+        /* Header Premium */
         .header {
             text-align: center;
             padding: 35px 20px;
@@ -37,17 +37,14 @@
             background-clip: text;
             color: transparent;
             font-size: 2rem;
-            text-shadow: 0 0 20px rgba(168,85,247,0.3);
         }
 
         .tagline {
             color: #c084fc;
             margin-top: 10px;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
         }
 
-        /* Social Buttons Premium */
+        /* Social Buttons */
         .social-header {
             display: flex;
             justify-content: center;
@@ -65,26 +62,14 @@
             color: white;
             text-decoration: none;
             font-weight: 700;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            letter-spacing: 0.5px;
+            transition: all 0.3s;
         }
 
-        .social-icon.discord { 
-            background: linear-gradient(135deg, #5865F2, #4752c4);
-            box-shadow: 0 4px 15px rgba(88,101,242,0.4);
-        }
-        .social-icon.tiktok { 
-            background: linear-gradient(135deg, #000000, #1a1a2e);
-            border: 1px solid #fe2c55;
-            box-shadow: 0 4px 15px rgba(254,44,85,0.2);
-        }
-        .social-icon:hover {
-            transform: translateY(-3px);
-            filter: brightness(1.1);
-        }
+        .social-icon.discord { background: linear-gradient(135deg, #5865F2, #4752c4); }
+        .social-icon.tiktok { background: linear-gradient(135deg, #000000, #1a1a2e); border: 1px solid #fe2c55; }
+        .social-icon:hover { transform: translateY(-3px); filter: brightness(1.1); }
 
-        /* Tab Buttons Ungu */
+        /* Tab Buttons */
         .tab-buttons {
             display: flex;
             justify-content: center;
@@ -99,11 +84,10 @@
             border: 1px solid rgba(168, 85, 247, 0.3);
             padding: 14px 32px;
             font-weight: bold;
-            font-size: 1rem;
             border-radius: 60px;
             color: #c084fc;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
         }
 
         .tab-btn.active {
@@ -111,12 +95,6 @@
             color: white;
             border-color: transparent;
             box-shadow: 0 4px 20px rgba(168,85,247,0.5);
-        }
-
-        .tab-btn:hover:not(.active) {
-            border-color: #a855f7;
-            color: #e9d5ff;
-            background: rgba(168,85,247,0.2);
         }
 
         .tab-panel {
@@ -142,7 +120,6 @@
             font-size: 1.8rem;
             margin-bottom: 30px;
             font-weight: bold;
-            letter-spacing: 2px;
         }
 
         .grid {
@@ -153,26 +130,122 @@
             margin: 0 auto;
         }
 
-        /* Card Premium Ungu */
-        .card {
-            background: rgba(30, 20, 50, 0.6);
-            backdrop-filter: blur(15px);
+        /* ========== CARD JOKI SBC (Background Uang/Dolar) ========== */
+        .card-joki {
+            background: linear-gradient(135deg, rgba(20, 10, 40, 0.95), rgba(40, 20, 60, 0.95));
             border-radius: 28px;
             overflow: hidden;
-            border: 1px solid rgba(168, 85, 247, 0.25);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            transition: all 0.4s;
+            position: relative;
+            backdrop-filter: blur(5px);
         }
 
-        .card:hover {
-            transform: translateY(-8px) scale(1.01);
-            border-color: rgba(168, 85, 247, 0.6);
-            box-shadow: 0 20px 40px rgba(88, 28, 135, 0.4);
+        .card-joki::before {
+            content: "💰💰💰";
+            position: absolute;
+            bottom: -10px;
+            right: -10px;
+            font-size: 80px;
+            opacity: 0.1;
+            color: #ffd700;
+            pointer-events: none;
         }
 
+        .card-joki::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,215,0,0.08), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .card-joki:hover {
+            transform: translateY(-8px);
+            border-color: #ffd700;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(255,215,0,0.3);
+        }
+
+        /* ========== CARD SCRIPT (Background Binary/Hacker) ========== */
+        .card-script {
+            background: linear-gradient(135deg, rgba(10, 20, 30, 0.95), rgba(0, 15, 25, 0.95));
+            border-radius: 28px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            transition: all 0.4s;
+            position: relative;
+        }
+
+        .card-script::before {
+            content: "010011 101010 110100";
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            font-family: monospace;
+            font-size: 10px;
+            opacity: 0.15;
+            color: #00ffff;
+            white-space: pre-wrap;
+            pointer-events: none;
+        }
+
+        .card-script::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(0deg, rgba(0,255,255,0.02) 0px, rgba(0,255,255,0.02) 2px, transparent 2px, transparent 6px);
+            pointer-events: none;
+        }
+
+        .card-script:hover {
+            transform: translateY(-8px);
+            border-color: #00ffff;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(0,255,255,0.3);
+        }
+
+        /* ========== CARD TIER (Background Crown/Medali) ========== */
+        .card-tier {
+            background: linear-gradient(135deg, rgba(40, 20, 60, 0.95), rgba(60, 30, 80, 0.95));
+            border-radius: 28px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 215, 0, 0.4);
+            transition: all 0.4s;
+            position: relative;
+        }
+
+        .card-tier::before {
+            content: "👑🏆⭐";
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 70px;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .card-tier:hover {
+            transform: translateY(-8px);
+            border-color: #ffd700;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(255,215,0,0.3);
+        }
+
+        /* Card Content Styles (sama untuk semua card) */
         .card-header {
-            background: linear-gradient(135deg, rgba(168,85,247,0.2), rgba(126,34,206,0.1));
             padding: 20px 24px;
-            border-bottom: 1px solid rgba(168,85,247,0.2);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         .product-title {
@@ -192,71 +265,52 @@
 
         .rating span {
             color: #a78bfa;
-            margin-left: 6px;
         }
 
         .card-body {
             padding: 24px;
         }
 
-        /* Option Item Premium */
-        .option-item {
-            background: linear-gradient(135deg, rgba(88, 28, 135, 0.4), rgba(168,85,247,0.1));
+        .info-item {
+            background: rgba(0,0,0,0.3);
             border-radius: 20px;
             padding: 16px;
             margin-bottom: 16px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(168,85,247,0.2);
+            border: 1px solid rgba(255,255,255,0.05);
         }
 
-        .option-item.selected {
-            background: linear-gradient(135deg, rgba(168,85,247,0.3), rgba(126,34,206,0.2));
-            border-color: #a855f7;
-            box-shadow: 0 0 15px rgba(168,85,247,0.3);
-        }
-
-        .option-title {
+        .info-title {
             font-weight: bold;
             color: #e9d5ff;
             font-size: 1.1rem;
         }
 
-        .option-desc {
+        .info-desc {
             font-size: 0.75rem;
             color: #a78bfa;
             margin-top: 6px;
         }
 
-        .price-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-top: 12px;
-        }
-
-        .price-sale {
+        .price {
             color: #fbbf24;
             font-weight: bold;
             font-size: 1.4rem;
+            margin-top: 12px;
         }
 
         .input-field {
             width: 100%;
             padding: 14px 16px;
-            background: rgba(30, 20, 50, 0.6);
+            background: rgba(0,0,0,0.4);
             border: 1px solid rgba(168,85,247,0.3);
             border-radius: 20px;
             color: #e9d5ff;
             margin: 16px 0;
-            font-size: 0.9rem;
-            transition: all 0.3s;
         }
 
         .input-field:focus {
             outline: none;
             border-color: #a855f7;
-            box-shadow: 0 0 10px rgba(168,85,247,0.3);
         }
 
         .star-rating {
@@ -270,12 +324,10 @@
 
         .star {
             color: #4a2a6e;
-            transition: 0.1s;
         }
 
         .star.active {
             color: #fbbf24;
-            text-shadow: 0 0 8px #fbbf24;
         }
 
         .btn-buy {
@@ -286,12 +338,10 @@
             text-align: center;
             padding: 16px;
             border-radius: 60px;
-            text-decoration: none;
             font-weight: bold;
-            font-size: 1rem;
             border: none;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
             margin-top: 8px;
         }
 
@@ -328,16 +378,19 @@
         <button class="tab-btn" data-tab="tab3">⭐ AKUN TIER</button>
     </div>
 
+    <!-- TAB 1: JOKI SBC -->
     <div id="tab1" class="tab-panel active-panel">
         <h2 class="section-title">💰 LIST HARGA JOKI SBC 💰</h2>
         <div class="grid" id="jokiGrid"></div>
     </div>
 
+    <!-- TAB 2: SCRIPT -->
     <div id="tab2" class="tab-panel">
         <h2 class="section-title">💻 SCRIPT ELIXIRPROJECTION 💻</h2>
         <div class="grid" id="scriptGrid"></div>
     </div>
 
+    <!-- TAB 3: AKUN TIER -->
     <div id="tab3" class="tab-panel">
         <h2 class="section-title">⭐ AKUN TIER ⭐</h2>
         <div class="grid" id="tierGrid"></div>
@@ -351,7 +404,7 @@
 <script>
     const waNumber = "62895385984764";
 
-    // JOKI SBC (17 PRODUK - NO DELAY ONLY)
+    // JOKI SBC (17 PRODUK)
     const jokiData = [
         { name: "SBC 100K", price: 12000 },
         { name: "SBC 200K", price: 20000 },
@@ -374,13 +427,13 @@
 
     // SCRIPT DATA
     const scriptData = [
-        { name: "MARSHMALLOW", type: "HARIAN", price: 13000, originalPrice: 25000 },
-        { name: "MARSHMALLOW", type: "BULANAN", price: 60000, originalPrice: 100000 },
-        { name: "MARSHMALLOW", type: "LIFETIME", price: 150000, originalPrice: 250000 },
-        { name: "COMBAT", type: "HARIAN", price: 20000, originalPrice: 35000 },
-        { name: "COMBAT", type: "BULANAN", price: 80000, originalPrice: 150000 },
-        { name: "COMBAT", type: "LIFETIME", price: 200000, originalPrice: 350000 },
-        { name: "FPS", type: "LIFETIME", price: 50000, originalPrice: 100000 }
+        { name: "MARSHMALLOW", type: "HARIAN", price: 13000 },
+        { name: "MARSHMALLOW", type: "BULANAN", price: 60000 },
+        { name: "MARSHMALLOW", type: "LIFETIME", price: 150000 },
+        { name: "COMBAT", type: "HARIAN", price: 20000 },
+        { name: "COMBAT", type: "BULANAN", price: 80000 },
+        { name: "COMBAT", type: "LIFETIME", price: 200000 },
+        { name: "FPS", type: "LIFETIME", price: 50000 }
     ];
 
     // TIER DATA
@@ -399,22 +452,20 @@
         window.open(`https://wa.me/${waNumber}?text=${message}`, '_blank');
     }
 
-    // RENDER JOKI (17 PRODUK)
+    // RENDER JOKI SBC (card-joki)
     const jokiContainer = document.getElementById('jokiGrid');
     let jokiHTML = "";
     for (let p of jokiData) {
-        jokiHTML += `<div class="card">
+        jokiHTML += `<div class="card-joki">
             <div class="card-header">
                 <div class="product-title">🎯 ${p.name}</div>
                 <div class="rating">⭐⭐⭐⭐⭐ <span>5 (4 ulasan)</span></div>
             </div>
             <div class="card-body">
-                <div class="option-item selected" data-product="${p.name}" data-price="${p.price}" style="cursor:default">
-                    <div class="option-title">⚡ NO DELAY</div>
-                    <div class="option-desc">VIA TRANSFER IN GAME SOUTH BRONX</div>
-                    <div class="price-row">
-                        <span class="price-sale">${formatRupiah(p.price)}</span>
-                    </div>
+                <div class="info-item">
+                    <div class="info-title">⚡ NO DELAY</div>
+                    <div class="info-desc">VIA TRANSFER IN GAME SOUTH BRONX</div>
+                    <div class="price">${formatRupiah(p.price)}</div>
                 </div>
                 <input type="text" class="input-field nickname" placeholder="📝 Nickname kamu...">
                 <div class="star-rating">
@@ -424,29 +475,26 @@
                     <span class="star" data-value="4">★</span>
                     <span class="star" data-value="5">★</span>
                 </div>
-                <button class="btn-buy">💳 BELI SEKARANG</button>
+                <button class="btn-buy" data-product="${p.name}" data-price="${p.price}">💳 BELI SEKARANG</button>
             </div>
         </div>`;
     }
     jokiContainer.innerHTML = jokiHTML;
 
-    // RENDER SCRIPT
+    // RENDER SCRIPT (card-script)
     const scriptContainer = document.getElementById('scriptGrid');
     let scriptHTML = "";
     for (let s of scriptData) {
         const typeIcon = s.type === "HARIAN" ? "📆" : (s.type === "BULANAN" ? "📅" : "♾️");
-        scriptHTML += `<div class="card">
+        scriptHTML += `<div class="card-script">
             <div class="card-header">
                 <div class="product-title">💻 SCRIPT ${s.name}</div>
                 <div class="rating">⭐⭐⭐⭐⭐ <span>${s.type === "LIFETIME" ? "5 (8 ulasan)" : "4 (3 ulasan)"}</span></div>
             </div>
             <div class="card-body">
-                <div class="option-item selected" data-product="SCRIPT ${s.name} - ${s.type}" data-price="${s.price}" style="cursor:default">
-                    <div class="option-title">${typeIcon} ${s.type}</div>
-                    <div class="price-row">
-                        ${s.originalPrice ? `<span class="price-original" style="color:#7e5a9e; text-decoration:line-through; margin-right:10px;">${formatRupiah(s.originalPrice)}</span>` : ""}
-                        <span class="price-sale">${formatRupiah(s.price)}</span>
-                    </div>
+                <div class="info-item">
+                    <div class="info-title">${typeIcon} ${s.type}</div>
+                    <div class="price">${formatRupiah(s.price)}</div>
                 </div>
                 <input type="text" class="input-field nickname" placeholder="📝 Nickname kamu...">
                 <div class="star-rating">
@@ -456,27 +504,25 @@
                     <span class="star" data-value="4">★</span>
                     <span class="star" data-value="5">★</span>
                 </div>
-                <button class="btn-buy">💳 BELI SEKARANG</button>
+                <button class="btn-buy" data-product="SCRIPT ${s.name} - ${s.type}" data-price="${s.price}">💳 BELI SEKARANG</button>
             </div>
         </div>`;
     }
     scriptContainer.innerHTML = scriptHTML;
 
-    // RENDER TIER
+    // RENDER TIER (card-tier)
     const tierContainer = document.getElementById('tierGrid');
     let tierHTML = "";
     for (let t of tierData) {
-        tierHTML += `<div class="card">
+        tierHTML += `<div class="card-tier">
             <div class="card-header">
                 <div class="product-title">⭐ ${t.name}</div>
                 <div class="rating">⭐⭐⭐⭐⭐ <span>5 (12 ulasan)</span></div>
             </div>
             <div class="card-body">
-                <div class="option-item selected" data-product="${t.name} (${t.color})" data-price="${t.price}" style="cursor:default">
-                    <div class="option-title">${t.color}</div>
-                    <div class="price-row">
-                        <span class="price-sale">${formatRupiah(t.price)}</span>
-                    </div>
+                <div class="info-item">
+                    <div class="info-title">${t.color}</div>
+                    <div class="price">${formatRupiah(t.price)}</div>
                 </div>
                 <input type="text" class="input-field nickname" placeholder="📝 Nickname kamu...">
                 <div class="star-rating">
@@ -486,7 +532,7 @@
                     <span class="star" data-value="4">★</span>
                     <span class="star" data-value="5">★</span>
                 </div>
-                <button class="btn-buy">💳 BELI SEKARANG</button>
+                <button class="btn-buy" data-product="${t.name} (${t.color})" data-price="${t.price}">💳 BELI SEKARANG</button>
             </div>
         </div>`;
     }
@@ -504,7 +550,7 @@
 
     // ATTACH EVENT LISTENERS
     function attachCardListeners() {
-        document.querySelectorAll('.card').forEach(card => {
+        document.querySelectorAll('.card-joki, .card-script, .card-tier').forEach(card => {
             // Star rating
             const stars = card.querySelectorAll('.star');
             stars.forEach(star => {
@@ -521,13 +567,8 @@
             const buyBtn = card.querySelector('.btn-buy');
             if (buyBtn) {
                 buyBtn.addEventListener('click', () => {
-                    const selected = card.querySelector('.option-item');
-                    if (!selected) {
-                        alert('Pilih metode terlebih dahulu!');
-                        return;
-                    }
-                    const product = selected.dataset.product;
-                    const price = parseInt(selected.dataset.price);
+                    const product = buyBtn.dataset.product;
+                    const price = parseInt(buyBtn.dataset.price);
                     const nickname = card.querySelector('.nickname')?.value || '';
                     const starContainer = card.querySelector('.star-rating');
                     const activeStars = starContainer.querySelectorAll('.star.active').length;
