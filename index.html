@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>ELIXIR SB STORE - Premium Gaming Marketplace</title>
+    <title>ELIXIR SB STORE - Elite Gaming Service</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -12,239 +12,236 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- AOS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
-        * { font-family: 'Inter', sans-serif; }
+        * { font-family: 'Space Grotesk', sans-serif; }
         
-        /* Animasi Background Bergerak */
-        @keyframes moveBg {
+        /* Background Animasi - versi ELIXIR (berbeda) */
+        @keyframes drift {
             0% { transform: translate(0, 0) rotate(0deg); }
-            100% { transform: translate(50px, 50px) rotate(5deg); }
+            100% { transform: translate(-30px, 30px) rotate(10deg); }
         }
-        @keyframes moveBgSlow {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(-30px, -30px) scale(1.1); }
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.15; }
+            50% { opacity: 0.35; }
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.6; }
+        @keyframes borderFlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
         }
         
-        .bg-animate-1 {
+        .bg-drift {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 30% 50%, rgba(168,85,247,0.15), transparent 70%);
-            animation: moveBg 20s infinite alternate ease-in-out;
-            pointer-events: none;
-            z-index: 0;
-        }
-        .bg-animate-2 {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 70% 80%, rgba(236,72,153,0.1), transparent 70%);
-            animation: moveBgSlow 25s infinite alternate ease-in-out;
-            pointer-events: none;
-            z-index: 0;
-        }
-        .bg-animate-3 {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(45deg, rgba(168,85,247,0.02) 0px, rgba(168,85,247,0.02) 2px, transparent 2px, transparent 8px);
+            top: -20%;
+            left: -10%;
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle at 40% 50%, rgba(168,85,247,0.12), transparent 60%);
+            animation: drift 18s infinite alternate ease-in-out;
             pointer-events: none;
             z-index: 0;
         }
         
-        /* Floating orbs */
-        .floating-orb {
+        .bg-drift-2 {
             position: fixed;
+            bottom: -20%;
+            right: -10%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 60% 70%, rgba(59,130,246,0.08), transparent 70%);
+            animation: drift 22s infinite alternate-reverse ease-in-out;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .glow-pulse {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 50rem;
+            height: 50rem;
+            background: radial-gradient(circle, rgba(168,85,247,0.05), transparent);
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(168,85,247,0.4), transparent);
-            filter: blur(40px);
+            transform: translate(-50%, -50%);
+            animation: pulseGlow 6s infinite ease-in-out;
             pointer-events: none;
             z-index: 0;
-            animation: float 8s infinite ease-in-out;
         }
         
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: #1a1a2e; }
+        /* Custom scroll */
+        ::-webkit-scrollbar { width: 3px; }
+        ::-webkit-scrollbar-track { background: #0f0f1a; }
         ::-webkit-scrollbar-thumb { background: #a855f7; border-radius: 10px; }
         
-        .glass-card {
-            background: rgba(255,255,255,0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.05);
+        /* Efek khas ELIXIR */
+        .elixir-border {
+            position: relative;
+            overflow: hidden;
         }
         
-        .stat-card:hover {
-            border-color: rgba(168,85,247,0.4);
-            transform: translateY(-2px);
+        .elixir-border::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(168,85,247,0.1), transparent);
+            transition: left 0.5s;
+            pointer-events: none;
         }
         
-        .search-input:focus {
-            border-color: #a855f7;
-            box-shadow: 0 0 15px rgba(168,85,247,0.2);
+        .elixir-border:hover::before {
+            left: 100%;
         }
         
-        .product-card {
-            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-        }
-        
-        .product-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(168,85,247,0.5);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        .stat-value {
+            background: linear-gradient(135deg, #fff, #c084fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-[#0a0a0f] to-[#050510] min-h-screen">
+<body class="bg-[#0a0a0f] min-h-screen">
 
-    <!-- BACKGROUND BERGERAK -->
-    <div class="bg-animate-1"></div>
-    <div class="bg-animate-2"></div>
-    <div class="bg-animate-3"></div>
-    <div class="floating-orb w-96 h-96 top-20 -left-48" style="animation-delay: 0s;"></div>
-    <div class="floating-orb w-80 h-80 bottom-20 -right-48 bg-purple-500/20" style="animation-delay: 2s;"></div>
-    <div class="floating-orb w-64 h-64 top-1/2 left-1/2 bg-pink-500/10" style="animation-delay: 4s; filter: blur(60px);"></div>
+    <!-- BACKGROUND UNIK ELIXIR -->
+    <div class="bg-drift"></div>
+    <div class="bg-drift-2"></div>
+    <div class="glow-pulse"></div>
+    
+    <!-- Floating particles sederhana -->
+    <div class="fixed inset-0 pointer-events-none z-0 opacity-30">
+        <div class="absolute top-1/4 left-1/4 w-1 h-1 bg-purple-400 rounded-full animate-ping" style="animation-duration: 3s;"></div>
+        <div class="absolute top-3/4 right-1/3 w-0.5 h-0.5 bg-purple-300 rounded-full animate-ping" style="animation-duration: 4s;"></div>
+        <div class="absolute bottom-1/3 left-1/2 w-0.5 h-0.5 bg-pink-400 rounded-full animate-ping" style="animation-duration: 2.5s;"></div>
+    </div>
 
-    <!-- HEADER / NAVIGATION -->
-    <div class="relative z-20 max-w-7xl mx-auto px-5 pt-6">
+    <!-- NAVIGATION -->
+    <div class="relative z-20 max-w-6xl mx-auto px-6 pt-8">
         <div class="flex justify-between items-center flex-wrap gap-4">
-            <div class="flex items-center gap-2">
-                <div class="w-9 h-9 bg-gradient-to-br from-purple-500 to-purple-700 rounded-xl flex items-center justify-center shadow-lg">
-                    <i class="fas fa-crown text-yellow-400 text-sm"></i>
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-600 to-indigo-700 flex items-center justify-center shadow-lg shadow-purple-500/20">
+                    <i class="fas fa-skull text-white text-sm"></i>
                 </div>
-                <span class="text-white font-bold text-xl tracking-tight">ELIXIR<span class="text-purple-400">SB</span></span>
+                <div>
+                    <span class="text-white font-bold text-xl tracking-tight">ELIXIR<span class="text-purple-400">SB</span></span>
+                    <div class="text-[10px] text-purple-400/50 tracking-wider">ELITE SERVICE</div>
+                </div>
             </div>
-            <div class="flex gap-4">
-                <a href="#" class="text-white/60 hover:text-white text-sm transition">MARKET</a>
-                <a href="#" class="text-white/60 hover:text-white text-sm transition">CONTACT</a>
-                <a href="#" class="text-white/60 hover:text-white text-sm transition"><i class="fab fa-discord"></i> Discord</a>
+            <div class="flex gap-5 text-sm">
+                <a href="#" class="text-white/50 hover:text-purple-400 transition"><i class="fas fa-box mr-1"></i> Shop</a>
+                <a href="#" class="text-white/50 hover:text-purple-400 transition"><i class="fas fa-headset mr-1"></i> Support</a>
+                <a href="#" class="text-white/50 hover:text-purple-400 transition"><i class="fab fa-discord mr-1"></i> Discord</a>
             </div>
         </div>
     </div>
 
-    <!-- HERO SECTION -->
-    <div class="relative z-20 max-w-7xl mx-auto px-5 pt-16 pb-12 text-center" data-aos="fade-up">
-        <div class="inline-block px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-purple-300 text-xs mb-6">
-            <i class="fas fa-bolt mr-1"></i> PREMIUM GAMING MARKETPLACE
+    <!-- HERO (tapi beda) -->
+    <div class="relative z-20 max-w-5xl mx-auto px-6 pt-20 pb-10 text-center" data-aos="fade-up" data-aos-duration="800">
+        <div class="inline-block px-4 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-[11px] font-medium tracking-wider mb-5">
+            <i class="fas fa-bolt mr-1 text-yellow-500"></i> ELITE GAMING SERVICE
         </div>
-        <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-5 leading-tight">
-            Level Up Your<br>
-            <span class="bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">Gaming Experience</span>
+        <h1 class="text-5xl md:text-6xl font-bold text-white mb-4 leading-[1.2]">
+            <span class="bg-gradient-to-r from-white via-purple-200 to-purple-400 bg-clip-text text-transparent">Elixir Gaming</span>
         </h1>
-        <p class="text-white/50 max-w-lg mx-auto text-sm mb-8">
-            Premium Scripts, Exploits & In-Game Items for Serious Gamers
+        <p class="text-white/40 max-w-md mx-auto text-sm mb-8">
+            Joki SBC • Script Premium • Akun Tier
         </p>
-        <div class="flex justify-center gap-4 flex-wrap">
-            <button class="px-6 py-3 bg-purple-600 hover:bg-purple-500 text-white rounded-xl font-semibold transition-all flex items-center gap-2 shadow-lg shadow-purple-500/25">
-                <i class="fas fa-store"></i> SHOP NOW
+        <div class="flex justify-center gap-4">
+            <button class="px-7 py-3 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white rounded-xl font-semibold transition-all flex items-center gap-2 shadow-lg shadow-purple-500/20 text-sm">
+                <i class="fas fa-crown"></i> Explore Items
             </button>
-            <button class="px-6 py-3 bg-white/5 border border-white/10 hover:border-purple-500 text-white/80 rounded-xl font-semibold transition-all flex items-center gap-2">
-                <i class="fab fa-discord"></i> CONTACT
+            <button class="px-7 py-3 bg-white/5 border border-white/10 hover:border-purple-500/50 text-white/70 rounded-xl font-semibold transition-all flex items-center gap-2 text-sm">
+                <i class="fab fa-discord"></i> Join Discord
             </button>
         </div>
     </div>
 
-    <!-- STATS SECTION -->
-    <div class="relative z-20 max-w-5xl mx-auto px-5 py-8">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div class="glass-card rounded-2xl p-5 text-center stat-card transition-all">
-                <div class="text-3xl font-bold text-white">17+</div>
-                <div class="text-white/40 text-xs mt-1">PRODUCTS</div>
+    <!-- STATS - BEDA DESAIN -->
+    <div class="relative z-20 max-w-4xl mx-auto px-6 py-10">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div class="bg-white/5 backdrop-blur-sm rounded-2xl py-5 border border-white/5 elixir-border">
+                <div class="text-3xl font-black stat-value">17</div>
+                <div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">Produk</div>
             </div>
-            <div class="glass-card rounded-2xl p-5 text-center stat-card transition-all">
-                <div class="text-3xl font-bold text-white">100+</div>
-                <div class="text-white/40 text-xs mt-1">SOLD</div>
+            <div class="bg-white/5 backdrop-blur-sm rounded-2xl py-5 border border-white/5 elixir-border">
+                <div class="text-3xl font-black stat-value">100+</div>
+                <div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">Terjual</div>
             </div>
-            <div class="glass-card rounded-2xl p-5 text-center stat-card transition-all">
-                <div class="text-3xl font-bold text-white">10+</div>
-                <div class="text-white/40 text-xs mt-1">REVIEWS</div>
+            <div class="bg-white/5 backdrop-blur-sm rounded-2xl py-5 border border-white/5 elixir-border">
+                <div class="text-3xl font-black stat-value">12</div>
+                <div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">Ulasan</div>
             </div>
-            <div class="glass-card rounded-2xl p-5 text-center stat-card transition-all">
-                <div class="text-3xl font-bold text-white">24/7</div>
-                <div class="text-white/40 text-xs mt-1">SUPPORT</div>
+            <div class="bg-white/5 backdrop-blur-sm rounded-2xl py-5 border border-white/5 elixir-border">
+                <div class="text-3xl font-black stat-value">24/7</div>
+                <div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">Support</div>
             </div>
         </div>
     </div>
 
-    <!-- MARKETPLACE SECTION -->
-    <div class="relative z-20 max-w-7xl mx-auto px-5 py-12">
-        <div class="flex justify-between items-center flex-wrap gap-4 mb-8">
+    <!-- SEARCH & FILTER SECTION -->
+    <div class="relative z-20 max-w-6xl mx-auto px-6 py-8">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
             <div>
-                <h2 class="text-2xl font-bold text-white flex items-center gap-2">
-                    <i class="fas fa-store text-purple-400"></i> MARKETPLACE
+                <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                    <i class="fas fa-cubes text-purple-400 text-lg"></i> 
+                    <span>Koleksi Item</span>
                 </h2>
-                <p class="text-white/40 text-sm mt-1">17 ITEMS AVAILABLE</p>
+                <p class="text-white/30 text-xs mt-1">Semua produk tersedia</p>
             </div>
-            <!-- SEARCH BAR -->
-            <div class="relative">
-                <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-white/30 text-sm"></i>
-                <input type="text" id="searchInput" placeholder="Search scripts, exploits, items..." class="search-input w-64 md:w-80 bg-white/5 border border-white/10 rounded-full py-2.5 pl-10 pr-4 text-white/80 text-sm focus:outline-none transition-all">
+            <div class="relative w-full md:w-72">
+                <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-white/30 text-xs"></i>
+                <input type="text" id="searchInput" placeholder="Cari item..." class="w-full bg-white/5 border border-white/10 rounded-full py-2.5 pl-10 pr-4 text-white/70 text-sm focus:outline-none focus:border-purple-500/50 transition-all">
             </div>
         </div>
 
-        <!-- CATEGORY TABS -->
-        <div class="flex gap-2 mb-8 flex-wrap">
-            <button data-filter="all" class="filter-btn active-filter px-5 py-2 rounded-full text-sm font-medium transition-all bg-purple-600 text-white shadow-md shadow-purple-500/25">ALL</button>
-            <button data-filter="sbc" class="filter-btn px-5 py-2 rounded-full text-sm font-medium transition-all bg-white/5 text-white/60 hover:text-white">SBC</button>
-            <button data-filter="script" class="filter-btn px-5 py-2 rounded-full text-sm font-medium transition-all bg-white/5 text-white/60 hover:text-white">SCRIPT</button>
-            <button data-filter="tier" class="filter-btn px-5 py-2 rounded-full text-sm font-medium transition-all bg-white/5 text-white/60 hover:text-white">AKUN TIER</button>
+        <!-- FILTER BUTTONS - BEDA WARNA & STYLE -->
+        <div class="flex flex-wrap gap-2 mb-10">
+            <button data-filter="all" class="filter-btn active-filter px-5 py-2 rounded-full text-xs font-medium transition-all bg-purple-600 text-white">Semua</button>
+            <button data-filter="sbc" class="filter-btn px-5 py-2 rounded-full text-xs font-medium transition-all bg-white/5 text-white/50 hover:text-white">SBC</button>
+            <button data-filter="script" class="filter-btn px-5 py-2 rounded-full text-xs font-medium transition-all bg-white/5 text-white/50 hover:text-white">Script</button>
+            <button data-filter="tier" class="filter-btn px-5 py-2 rounded-full text-xs font-medium transition-all bg-white/5 text-white/50 hover:text-white">Akun Tier</button>
         </div>
 
         <!-- PRODUCT GRID -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5" id="productGrid"></div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="productGrid"></div>
     </div>
 
     <!-- FOOTER -->
-    <div class="relative z-20 text-center py-8 mt-8 border-t border-white/5 text-white/30 text-xs">
-        <i class="far fa-copyright"></i> 2025 ELIXIR SB STORE | PREMIUM GAMING MARKETPLACE
+    <div class="relative z-20 text-center py-8 mt-8 border-t border-white/5">
+        <div class="text-white/20 text-[10px] tracking-wider">
+            <i class="far fa-copyright"></i> 2025 ELIXIR SB STORE — ELITE GAMING SERVICE
+        </div>
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 600, once: true });
+        AOS.init({ duration: 500, once: true });
 
         const waNumber = "62895385984764";
         const formatRp = (n) => "Rp" + n.toLocaleString('id-ID');
 
-        // DATA PRODUK
         const products = [
-            // SBC (17 produk)
             ...["100K","200K","300K","400K","500K","600K","700K","800K","900K","1JT","1.1 JT","1.2 JT","1.3 JT","1.4 JT","1.5 JT","1.6 JT","1.7 JT"].map((name, idx) => ({
                 name: `SBC ${name}`,
                 price: [12000,20000,30000,40000,50000,60000,70000,80000,90000,100000,110000,120000,130000,140000,150000,160000,170000][idx],
-                category: "sbc",
-                icon: "fa-bolt"
+                category: "sbc"
             })),
-            // SCRIPT
-            { name: "SCRIPT MARSHMALLOW - HARIAN", price: 13000, category: "script", icon: "fa-code" },
-            { name: "SCRIPT MARSHMALLOW - BULANAN", price: 60000, category: "script", icon: "fa-code" },
-            { name: "SCRIPT MARSHMALLOW - LIFETIME", price: 150000, category: "script", icon: "fa-infinity" },
-            { name: "SCRIPT COMBAT - HARIAN", price: 20000, category: "script", icon: "fa-code" },
-            { name: "SCRIPT COMBAT - BULANAN", price: 80000, category: "script", icon: "fa-code" },
-            { name: "SCRIPT COMBAT - LIFETIME", price: 200000, category: "script", icon: "fa-infinity" },
-            { name: "SCRIPT FPS - LIFETIME", price: 50000, category: "script", icon: "fa-infinity" },
-            // TIER
-            { name: "TIER 1 - GREEN NAME", price: 150000, category: "tier", icon: "fa-gem" },
-            { name: "TIER 2 - PINK NAME", price: 250000, category: "tier", icon: "fa-gem" },
-            { name: "TIER 3 - BLUE NAME", price: 350000, category: "tier", icon: "fa-gem" }
+            { name: "SCRIPT MARSHMALLOW - HARIAN", price: 13000, category: "script" },
+            { name: "SCRIPT MARSHMALLOW - BULANAN", price: 60000, category: "script" },
+            { name: "SCRIPT MARSHMALLOW - LIFETIME", price: 150000, category: "script" },
+            { name: "SCRIPT COMBAT - HARIAN", price: 20000, category: "script" },
+            { name: "SCRIPT COMBAT - BULANAN", price: 80000, category: "script" },
+            { name: "SCRIPT COMBAT - LIFETIME", price: 200000, category: "script" },
+            { name: "SCRIPT FPS - LIFETIME", price: 50000, category: "script" },
+            { name: "TIER 1 - GREEN NAME", price: 150000, category: "tier" },
+            { name: "TIER 2 - PINK NAME", price: 250000, category: "tier" },
+            { name: "TIER 3 - BLUE NAME", price: 350000, category: "tier" }
         ];
 
         function sendWA(product, price, nickname, rating) {
@@ -252,45 +249,43 @@
             window.open(`https://wa.me/${waNumber}?text=${msg}`, '_blank');
         }
 
-        function createProductCard(product) {
+        function createCard(product) {
             const card = document.createElement('div');
-            card.className = `product-card bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 transition-all product-${product.category}`;
+            card.className = 'bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-5 transition-all duration-300 hover:border-purple-500/40 hover:-translate-y-1';
             card.innerHTML = `
                 <div class="flex items-center gap-2 mb-3">
-                    <div class="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center">
-                        <i class="fas ${product.icon} text-purple-400 text-sm"></i>
+                    <div class="w-7 h-7 rounded-lg bg-purple-500/15 flex items-center justify-center">
+                        <i class="fas ${product.category === 'sbc' ? 'fa-bolt' : (product.category === 'script' ? 'fa-terminal' : 'fa-gem')} text-purple-400 text-xs"></i>
                     </div>
-                    <h3 class="text-white font-semibold text-sm flex-1">${product.name}</h3>
+                    <h3 class="text-white font-medium text-sm flex-1">${product.name}</h3>
                 </div>
-                <div class="mb-3">
-                    <span class="text-xl font-bold text-white">${formatRp(product.price)}</span>
+                <div class="mb-4">
+                    <span class="text-2xl font-bold text-white">${formatRp(product.price)}</span>
                 </div>
-                <input type="text" class="nickname w-full bg-black/30 border border-white/10 rounded-xl px-3 py-2 text-white/70 text-xs placeholder:text-white/30 focus:outline-none focus:border-purple-500 transition-all mb-3" placeholder="Nickname">
+                <input type="text" class="nickname w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-white/60 text-xs placeholder:text-white/20 focus:outline-none focus:border-purple-500 transition-all mb-3" placeholder="Nickname">
                 <div class="flex justify-center gap-2 mb-3 stars">
-                    <i class="far fa-star text-white/30 text-base cursor-pointer hover:text-yellow-500 transition" data-val="1"></i>
-                    <i class="far fa-star text-white/30 text-base cursor-pointer hover:text-yellow-500 transition" data-val="2"></i>
-                    <i class="far fa-star text-white/30 text-base cursor-pointer hover:text-yellow-500 transition" data-val="3"></i>
-                    <i class="far fa-star text-white/30 text-base cursor-pointer hover:text-yellow-500 transition" data-val="4"></i>
-                    <i class="far fa-star text-white/30 text-base cursor-pointer hover:text-yellow-500 transition" data-val="5"></i>
+                    <i class="far fa-star text-white/30 text-sm cursor-pointer hover:text-yellow-500 transition" data-val="1"></i>
+                    <i class="far fa-star text-white/30 text-sm cursor-pointer hover:text-yellow-500 transition" data-val="2"></i>
+                    <i class="far fa-star text-white/30 text-sm cursor-pointer hover:text-yellow-500 transition" data-val="3"></i>
+                    <i class="far fa-star text-white/30 text-sm cursor-pointer hover:text-yellow-500 transition" data-val="4"></i>
+                    <i class="far fa-star text-white/30 text-sm cursor-pointer hover:text-yellow-500 transition" data-val="5"></i>
                 </div>
-                <button class="buy w-full bg-purple-600/80 hover:bg-purple-600 text-white font-medium py-2 rounded-xl transition-all flex items-center justify-center gap-2 text-sm">
-                    <i class="fab fa-whatsapp text-sm"></i> Order
+                <button class="buy w-full bg-purple-600/70 hover:bg-purple-600 text-white font-medium py-2 rounded-xl transition-all text-sm flex items-center justify-center gap-2">
+                    <i class="fab fa-whatsapp text-xs"></i> Order
                 </button>
             `;
 
-            // Star logic
             const stars = card.querySelectorAll('.stars i');
             stars.forEach(star => {
                 star.addEventListener('click', () => {
                     const val = parseInt(star.dataset.val);
                     stars.forEach((s, i) => {
-                        if (i < val) s.className = "fas fa-star text-yellow-500 text-base cursor-pointer";
-                        else s.className = "far fa-star text-white/30 text-base cursor-pointer hover:text-yellow-500 transition";
+                        if (i < val) s.className = "fas fa-star text-yellow-500 text-sm cursor-pointer";
+                        else s.className = "far fa-star text-white/30 text-sm cursor-pointer hover:text-yellow-500 transition";
                     });
                 });
             });
 
-            // Buy logic
             const buyBtn = card.querySelector('.buy');
             const nicknameInput = card.querySelector('.nickname');
             buyBtn.addEventListener('click', () => {
@@ -302,49 +297,43 @@
             return card;
         }
 
-        // Render products
         const productGrid = document.getElementById('productGrid');
         let currentFilter = 'all';
         let searchQuery = '';
 
-        function renderProducts() {
+        function render() {
             const filtered = products.filter(p => {
                 if (currentFilter !== 'all' && p.category !== currentFilter) return false;
                 if (searchQuery && !p.name.toLowerCase().includes(searchQuery.toLowerCase())) return false;
                 return true;
             });
-            
             productGrid.innerHTML = '';
             if (filtered.length === 0) {
-                productGrid.innerHTML = '<div class="col-span-full text-center text-white/40 py-12">Tidak ada produk yang ditemukan 😢</div>';
+                productGrid.innerHTML = '<div class="col-span-full text-center text-white/30 py-12 text-sm">Item tidak ditemukan 😢</div>';
                 return;
             }
-            filtered.forEach(p => productGrid.appendChild(createProductCard(p)));
+            filtered.forEach(p => productGrid.appendChild(createCard(p)));
         }
 
-        // Filter buttons
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.filter-btn').forEach(b => {
-                    b.classList.remove('bg-purple-600', 'text-white', 'shadow-md', 'shadow-purple-500/25');
-                    b.classList.add('bg-white/5', 'text-white/60');
+                    b.classList.remove('bg-purple-600', 'text-white');
+                    b.classList.add('bg-white/5', 'text-white/50');
                 });
-                btn.classList.remove('bg-white/5', 'text-white/60');
-                btn.classList.add('bg-purple-600', 'text-white', 'shadow-md', 'shadow-purple-500/25');
+                btn.classList.remove('bg-white/5', 'text-white/50');
+                btn.classList.add('bg-purple-600', 'text-white');
                 currentFilter = btn.dataset.filter;
-                renderProducts();
+                render();
             });
         });
 
-        // Search
-        const searchInput = document.getElementById('searchInput');
-        searchInput.addEventListener('input', (e) => {
+        document.getElementById('searchInput').addEventListener('input', (e) => {
             searchQuery = e.target.value;
-            renderProducts();
+            render();
         });
 
-        // Initial render
-        renderProducts();
+        render();
     </script>
 </body>
 </html>
