@@ -3,410 +3,267 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>ELIXIR SB STORE - Premium Store</title>
+    <title>ELIXIR SB STORE - Premium Gaming Service</title>
     
-    <!-- PREMIUM LIBRARIES -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS (Premium Library) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome 6 (Icon Library) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Google Fonts - Plus Jakarta Sans (Premium Font) -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- AOS Scroll Animation -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
-
-        body {
-            background: radial-gradient(circle at 20% 50%, #0a0a1a, #05050f);
-            padding: 20px;
-            padding-bottom: 60px;
-            min-height: 100vh;
-        }
-
-        /* GLOW ORB BACKGROUND */
-        .glow-orb {
-            position: fixed;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(168,85,247,0.15), transparent);
-            border-radius: 50%;
-            filter: blur(60px);
-            pointer-events: none;
-            z-index: 0;
-        }
-        .orb1 { top: 10%; left: -5%; }
-        .orb2 { bottom: 20%; right: -5%; background: radial-gradient(circle, rgba(255,215,0,0.1), transparent); }
-
-        /* HEADER PREMIUM */
-        .header {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            padding: 40px 20px;
-            background: rgba(10, 10, 20, 0.6);
-            backdrop-filter: blur(20px);
-            border-radius: 48px;
-            margin-bottom: 40px;
-            border: 1px solid rgba(168, 85, 247, 0.25);
-            box-shadow: 0 25px 45px -12px rgba(0,0,0,0.5);
-        }
-
-        .logo {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
-            padding: 12px 32px;
-            border-radius: 100px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(168,85,247,0.3);
-        }
-
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #a855f7, #7e22ce);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .logo-icon i {
-            font-size: 1.3rem;
-            color: white;
-        }
-
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #ffffff, #c084fc);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: 1px;
-        }
-
-        .tagline {
-            color: #7e5a9e;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            margin-top: 10px;
-        }
-
-        /* SOCIAL BUTTONS */
-        .social-header {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            margin-top: 25px;
-            flex-wrap: wrap;
-        }
-
-        .social-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 24px;
-            border-radius: 40px;
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.85rem;
-            transition: all 0.3s;
-            backdrop-filter: blur(10px);
-        }
-
-        .social-btn.discord { background: rgba(88, 101, 242, 0.2); border: 1px solid rgba(88, 101, 242, 0.5); }
-        .social-btn.tiktok { background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(254, 44, 85, 0.5); }
-        .social-btn:hover { transform: translateY(-3px); background: rgba(255,255,255,0.1); }
-
-        /* TAB BUTTONS */
-        .tab-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-            position: relative;
-            z-index: 2;
-        }
-
-        .tab-btn {
-            background: rgba(20, 20, 40, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(168, 85, 247, 0.2);
-            padding: 12px 28px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            border-radius: 50px;
-            color: #a78bfa;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .tab-btn i { font-size: 1rem; }
-
-        .tab-btn.active {
-            background: linear-gradient(135deg, #a855f7, #7e22ce);
-            color: white;
-            border-color: transparent;
-            box-shadow: 0 4px 20px rgba(168,85,247,0.4);
-        }
-
-        /* PANELS */
-        .tab-panel { display: none; animation: fadeIn 0.5s ease; }
-        .tab-panel.active-panel { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-        .section-title i { font-size: 1.8rem; color: #fbbf24; }
-        .section-title span {
-            font-size: 1.6rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #e9d5ff, #c084fc);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 28px;
-            max-width: 1400px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* CARD STYLES */
-        .card {
-            background: rgba(15, 15, 25, 0.6);
-            backdrop-filter: blur(12px);
-            border-radius: 28px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-        }
-        .card:hover { transform: translateY(-8px); border-color: rgba(168,85,247,0.4); box-shadow: 0 20px 35px -15px rgba(0,0,0,0.5); }
-
-        .card-header {
-            padding: 20px 24px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .product-title { font-size: 1.25rem; font-weight: 700; display: flex; align-items: center; gap: 10px; color: white; }
-        .product-title i { color: #c084fc; font-size: 1.2rem; }
-        .rating { display: flex; align-items: center; gap: 6px; color: #fbbf24; font-size: 0.8rem; }
-        .rating span { color: #7e5a9e; }
-
-        .card-body { padding: 24px; }
-        .price-info { background: rgba(0,0,0,0.3); border-radius: 20px; padding: 16px; margin-bottom: 20px; }
-        .price-label { font-size: 0.7rem; color: #a78bfa; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; display: flex; align-items: center; gap: 6px; }
-        .price-value { font-size: 1.6rem; font-weight: 700; color: #fbbf24; display: flex; align-items: baseline; gap: 4px; }
-        .price-value small { font-size: 0.8rem; font-weight: 400; color: #7e5a9e; }
-
-        .input-field {
-            width: 100%;
-            padding: 14px 16px;
-            background: rgba(0,0,0,0.3);
-            border: 1px solid rgba(168,85,247,0.2);
-            border-radius: 18px;
-            color: white;
-            font-size: 0.9rem;
-            margin-bottom: 16px;
-            transition: 0.2s;
-        }
-        .input-field:focus { outline: none; border-color: #a855f7; }
-
-        .star-rating {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            justify-content: center;
-        }
-        .star-rating i { font-size: 1.3rem; color: #3a2a5a; cursor: pointer; transition: 0.1s; }
-        .star-rating i.active { color: #fbbf24; }
-
-        .btn-buy {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            background: linear-gradient(135deg, #a855f7, #7e22ce);
-            border: none;
-            padding: 14px;
-            border-radius: 40px;
-            color: white;
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .btn-buy:hover { transform: scale(0.98); box-shadow: 0 5px 20px rgba(168,85,247,0.4); }
-
-        .footer {
-            text-align: center;
-            margin-top: 60px;
-            padding: 25px;
-            color: #5a4a7a;
-            font-size: 0.7rem;
-            border-top: 1px solid rgba(255,255,255,0.03);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
+        /* Custom scroll bar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #1a1a2e; }
+        ::-webkit-scrollbar-thumb { background: #a855f7; border-radius: 10px; }
+        
+        /* Hide scroll for cleaner look */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body>
+<body class="bg-gradient-to-br from-[#0a0a0f] via-[#1a0f2e] to-[#0b0716] min-h-screen">
 
-<div class="glow-orb orb1"></div>
-<div class="glow-orb orb2"></div>
+    <!-- GLOW ORBS BACKGROUND -->
+    <div class="fixed top-20 -left-20 w-72 h-72 bg-purple-600 rounded-full blur-[80px] opacity-20 pointer-events-none"></div>
+    <div class="fixed bottom-20 -right-20 w-96 h-96 bg-yellow-500 rounded-full blur-[100px] opacity-10 pointer-events-none"></div>
 
-<div class="header" data-aos="fade-down">
-    <div class="logo">
-        <div class="logo-icon"><i class="fas fa-crown"></i></div>
-        <div class="logo-text">ELIXIR SB STORE</div>
+    <!-- HEADER PREMIUM -->
+    <div class="relative z-10 max-w-7xl mx-auto px-4 pt-6" data-aos="fade-down">
+        <div class="text-center">
+            <!-- Logo Area -->
+            <div class="inline-flex items-center gap-3 bg-white/5 backdrop-blur-xl border border-purple-500/30 rounded-full px-6 py-3 mb-6">
+                <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-800 rounded-full flex items-center justify-center shadow-lg">
+                    <i class="fas fa-crown text-yellow-400 text-sm"></i>
+                </div>
+                <div class="text-xl font-extrabold bg-gradient-to-r from-white to-purple-300 bg-clip-text text-transparent">
+                    ELIXIR SB STORE
+                </div>
+            </div>
+            
+            <div class="text-purple-300/60 text-sm tracking-wider mb-5">PREMIUM GAMING SERVICE</div>
+            
+            <!-- Social Buttons -->
+            <div class="flex justify-center gap-4 flex-wrap">
+                <a href="https://discord.gg/CxbDP6QmW" target="_blank" class="inline-flex items-center gap-2 px-6 py-2.5 bg-white/5 backdrop-blur-sm border border-purple-500/30 rounded-full text-white/80 hover:bg-purple-600/20 hover:border-purple-400 transition-all duration-300">
+                    <i class="fab fa-discord text-[#5865F2]"></i>
+                    <span class="text-sm font-medium">Discord</span>
+                </a>
+                <a href="https://www.tiktok.com/@not_elixir" target="_blank" class="inline-flex items-center gap-2 px-6 py-2.5 bg-white/5 backdrop-blur-sm border border-purple-500/30 rounded-full text-white/80 hover:bg-purple-600/20 hover:border-purple-400 transition-all duration-300">
+                    <i class="fab fa-tiktok text-pink-500"></i>
+                    <span class="text-sm font-medium">TikTok</span>
+                </a>
+            </div>
+        </div>
     </div>
-    <div class="tagline">PREMIUM GAMING SERVICE</div>
-    <div class="social-header">
-        <a href="https://discord.gg/CxbDP6QmW" target="_blank" class="social-btn discord"><i class="fab fa-discord"></i> Discord</a>
-        <a href="https://www.tiktok.com/@not_elixir" target="_blank" class="social-btn tiktok"><i class="fab fa-tiktok"></i> TikTok</a>
+
+    <!-- TABS -->
+    <div class="relative z-10 max-w-7xl mx-auto px-4 mt-12" data-aos="fade-up">
+        <div class="flex justify-center gap-3 flex-wrap mb-12">
+            <button data-tab="joki" class="tab-btn active-tab inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 bg-gradient-to-r from-purple-600 to-purple-800 text-white shadow-lg shadow-purple-500/30">
+                <i class="fas fa-bolt"></i> JOKI SBC
+            </button>
+            <button data-tab="script" class="tab-btn inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 bg-white/5 backdrop-blur-sm border border-purple-500/30 text-white/70 hover:bg-purple-600/20">
+                <i class="fas fa-code"></i> SCRIPT
+            </button>
+            <button data-tab="tier" class="tab-btn inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 bg-white/5 backdrop-blur-sm border border-purple-500/30 text-white/70 hover:bg-purple-600/20">
+                <i class="fas fa-gem"></i> AKUN TIER
+            </button>
+        </div>
+
+        <!-- TAB JOKI -->
+        <div id="jokiTab" class="tab-content">
+            <div class="text-center mb-8 flex items-center justify-center gap-3">
+                <i class="fas fa-coins text-2xl text-yellow-500"></i>
+                <h2 class="text-2xl font-bold bg-gradient-to-r from-purple-300 to-purple-100 bg-clip-text text-transparent">LIST HARGA JOKI SBC</h2>
+                <i class="fas fa-coins text-2xl text-yellow-500"></i>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="jokiGrid"></div>
+        </div>
+
+        <!-- TAB SCRIPT -->
+        <div id="scriptTab" class="tab-content hidden">
+            <div class="text-center mb-8 flex items-center justify-center gap-3">
+                <i class="fas fa-terminal text-2xl text-cyan-400"></i>
+                <h2 class="text-2xl font-bold bg-gradient-to-r from-cyan-300 to-purple-300 bg-clip-text text-transparent">SCRIPT ELIXIRPROJECTION</h2>
+                <i class="fas fa-terminal text-2xl text-cyan-400"></i>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="scriptGrid"></div>
+        </div>
+
+        <!-- TAB TIER -->
+        <div id="tierTab" class="tab-content hidden">
+            <div class="text-center mb-8 flex items-center justify-center gap-3">
+                <i class="fas fa-trophy text-2xl text-yellow-500"></i>
+                <h2 class="text-2xl font-bold bg-gradient-to-r from-yellow-300 to-purple-300 bg-clip-text text-transparent">AKUN TIER</h2>
+                <i class="fas fa-trophy text-2xl text-yellow-500"></i>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="tierGrid"></div>
+        </div>
     </div>
-</div>
 
-<div class="tab-container">
-    <div class="tab-buttons" data-aos="fade-up">
-        <button class="tab-btn active" data-tab="tab1"><i class="fas fa-bolt"></i> JOKI SBC</button>
-        <button class="tab-btn" data-tab="tab2"><i class="fas fa-code"></i> SCRIPT</button>
-        <button class="tab-btn" data-tab="tab3"><i class="fas fa-gem"></i> AKUN TIER</button>
+    <!-- FOOTER -->
+    <div class="relative z-10 text-center mt-20 py-6 border-t border-white/5 text-white/40 text-xs flex items-center justify-center gap-2">
+        <i class="far fa-copyright"></i> 2025 ELIXIR SB STORE
     </div>
 
-    <div id="tab1" class="tab-panel active-panel">
-        <div class="section-title" data-aos="fade-up"><i class="fas fa-coins"></i><span>JOKI SBC</span><i class="fas fa-coins"></i></div>
-        <div class="grid" id="jokiGrid"></div>
-    </div>
-    <div id="tab2" class="tab-panel">
-        <div class="section-title" data-aos="fade-up"><i class="fas fa-terminal"></i><span>SCRIPT</span><i class="fas fa-terminal"></i></div>
-        <div class="grid" id="scriptGrid"></div>
-    </div>
-    <div id="tab3" class="tab-panel">
-        <div class="section-title" data-aos="fade-up"><i class="fas fa-trophy"></i><span>AKUN TIER</span><i class="fas fa-trophy"></i></div>
-        <div class="grid" id="tierGrid"></div>
-    </div>
-</div>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 600, once: true });
 
-<div class="footer" data-aos="fade-up">
-    <i class="far fa-copyright"></i> 2025 ELIXIR SB STORE
-</div>
+        const waNumber = "62895385984764";
+        const formatRupiah = (n) => "Rp" + n.toLocaleString('id-ID');
 
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-    AOS.init({ duration: 600, once: true });
+        // Data JOKI (17 produk)
+        const jokiPrices = [12000,20000,30000,40000,50000,60000,70000,80000,90000,100000,110000,120000,130000,140000,150000,160000,170000];
+        const jokiNames = ["SBC 100K","SBC 200K","SBC 300K","SBC 400K","SBC 500K","SBC 600K","SBC 700K","SBC 800K","SBC 900K","SBC 1JT","SBC 1.1 JT","SBC 1.2 JT","SBC 1.3 JT","SBC 1.4 JT","SBC 1.5 JT","SBC 1.6 JT","SBC 1.7 JT"];
 
-    const waNumber = "62895385984764";
+        // Data SCRIPT
+        const scripts = [
+            { name:"MARSHMALLOW", type:"HARIAN", price:13000, icon:"fa-calendar-day" },
+            { name:"MARSHMALLOW", type:"BULANAN", price:60000, icon:"fa-calendar-alt" },
+            { name:"MARSHMALLOW", type:"LIFETIME", price:150000, icon:"fa-infinity" },
+            { name:"COMBAT", type:"HARIAN", price:20000, icon:"fa-calendar-day" },
+            { name:"COMBAT", type:"BULANAN", price:80000, icon:"fa-calendar-alt" },
+            { name:"COMBAT", type:"LIFETIME", price:200000, icon:"fa-infinity" },
+            { name:"FPS", type:"LIFETIME", price:50000, icon:"fa-infinity" }
+        ];
 
-    const jokiData = [
-        "SBC 100K","SBC 200K","SBC 300K","SBC 400K","SBC 500K",
-        "SBC 600K","SBC 700K","SBC 800K","SBC 900K","SBC 1JT",
-        "SBC 1.1 JT","SBC 1.2 JT","SBC 1.3 JT","SBC 1.4 JT","SBC 1.5 JT","SBC 1.6 JT","SBC 1.7 JT"
-    ];
-    const scriptData = [
-        { name:"MARSHMALLOW", type:"HARIAN", price:13000 },
-        { name:"MARSHMALLOW", type:"BULANAN", price:60000 },
-        { name:"MARSHMALLOW", type:"LIFETIME", price:150000 },
-        { name:"COMBAT", type:"HARIAN", price:20000 },
-        { name:"COMBAT", type:"BULANAN", price:80000 },
-        { name:"COMBAT", type:"LIFETIME", price:200000 },
-        { name:"FPS", type:"LIFETIME", price:50000 }
-    ];
-    const tierData = [
-        { name:"TIER 1", color:"GREEN NAME", price:150000 },
-        { name:"TIER 2", color:"PINK NAME", price:250000 },
-        { name:"TIER 3", color:"BLUE NAME", price:350000 }
-    ];
+        // Data TIER
+        const tiers = [
+            { name:"TIER 1", color:"GREEN NAME", price:150000, icon:"fa-leaf" },
+            { name:"TIER 2", color:"PINK NAME", price:250000, icon:"fa-heart" },
+            { name:"TIER 3", color:"BLUE NAME", price:350000, icon:"fa-droplet" }
+        ];
 
-    const formatRupiah = (n) => "Rp" + n.toLocaleString('id-ID');
-    const openWA = (product, price, nickname, rating) => {
-        const msg = `Halo%20ELIXIR%20SB%20STORE%0A📦%20Produk%3A%20${encodeURIComponent(product)}%0A💰%20Total%3A%20${encodeURIComponent(formatRupiah(price))}%0A👤%20Nickname%3A%20${encodeURIComponent(nickname||'-')}%0A⭐%20Rating%3A%20${rating||'-'}`;
-        window.open(`https://wa.me/${waNumber}?text=${msg}`, '_blank');
-    };
-
-    const renderCards = (container, items, type) => {
-        let html = "";
-        if (type === 'joki') {
-            items.forEach((name, idx) => {
-                const price = [12000,20000,30000,40000,50000,60000,70000,80000,90000,100000,110000,120000,130000,140000,150000,160000,170000][idx];
-                html += `<div class="card" data-aos="fade-up"><div class="card-header"><div class="product-title"><i class="fas fa-bolt"></i> ${name}</div><div class="rating"><i class="fas fa-star"></i><span>5.0</span></div></div><div class="card-body"><div class="price-info"><div class="price-label"><i class="fas fa-tachometer-alt"></i> NO DELAY</div><div class="price-value">${formatRupiah(price)}<small>/SBC</small></div></div><input type="text" class="input-field nickname" placeholder="Nickname"><div class="star-rating"><i class="far fa-star" data-val="1"></i><i class="far fa-star" data-val="2"></i><i class="far fa-star" data-val="3"></i><i class="far fa-star" data-val="4"></i><i class="far fa-star" data-val="5"></i></div><button class="btn-buy" data-product="${name}" data-price="${price}"><i class="fab fa-whatsapp"></i> ORDER NOW</button></div></div>`;
-            });
-        } else if (type === 'script') {
-            items.forEach(s => {
-                const icon = s.type === "HARIAN" ? "fa-calendar-day" : (s.type === "BULANAN" ? "fa-calendar-alt" : "fa-infinity");
-                html += `<div class="card" data-aos="fade-up"><div class="card-header"><div class="product-title"><i class="fas fa-code"></i> ${s.name}</div><div class="rating"><i class="fas fa-star"></i><span>5.0</span></div></div><div class="card-body"><div class="price-info"><div class="price-label"><i class="fas ${icon}"></i> ${s.type}</div><div class="price-value">${formatRupiah(s.price)}</div></div><input type="text" class="input-field nickname" placeholder="Nickname"><div class="star-rating"><i class="far fa-star" data-val="1"></i><i class="far fa-star" data-val="2"></i><i class="far fa-star" data-val="3"></i><i class="far fa-star" data-val="4"></i><i class="far fa-star" data-val="5"></i></div><button class="btn-buy" data-product="SCRIPT ${s.name} - ${s.type}" data-price="${s.price}"><i class="fab fa-whatsapp"></i> ORDER NOW</button></div></div>`;
-            });
-        } else if (type === 'tier') {
-            items.forEach(t => {
-                html += `<div class="card" data-aos="fade-up"><div class="card-header"><div class="product-title"><i class="fas fa-gem"></i> ${t.name}</div><div class="rating"><i class="fas fa-star"></i><span>5.0</span></div></div><div class="card-body"><div class="price-info"><div class="price-label"><i class="fas fa-palette"></i> ${t.color}</div><div class="price-value">${formatRupiah(t.price)}</div></div><input type="text" class="input-field nickname" placeholder="Nickname"><div class="star-rating"><i class="far fa-star" data-val="1"></i><i class="far fa-star" data-val="2"></i><i class="far fa-star" data-val="3"></i><i class="far fa-star" data-val="4"></i><i class="far fa-star" data-val="5"></i></div><button class="btn-buy" data-product="${t.name} (${t.color})" data-price="${t.price}"><i class="fab fa-whatsapp"></i> ORDER NOW</button></div></div>`;
-            });
+        // Fungsi buka WhatsApp
+        function openWA(product, price, nickname, rating) {
+            const msg = `Halo ELIXIR SB STORE%0A%0A📦 Produk: ${encodeURIComponent(product)}%0A💰 Total: ${encodeURIComponent(formatRupiah(price))}%0A👤 Nickname: ${encodeURIComponent(nickname || '-')}%0A⭐ Rating: ${rating || '-'}%0A%0A✅ Saya sudah transfer. Berikut buktinya:`;
+            window.open(`https://wa.me/${waNumber}?text=${msg}`, '_blank');
         }
-        container.innerHTML = html;
-        attachCardEvents(container);
-    };
 
-    const attachCardEvents = (container) => {
-        container.querySelectorAll('.card').forEach(card => {
-            const stars = card.querySelectorAll('.star-rating i');
+        // Render fungsi dengan star rating
+        function createCard(productName, price, type, extra = null) {
+            const cardDiv = document.createElement('div');
+            cardDiv.className = "bg-white/5 backdrop-blur-lg border border-purple-500/20 rounded-2xl overflow-hidden hover:border-purple-500/50 transition-all duration-300 hover:-translate-y-1";
+            cardDiv.setAttribute('data-aos', 'fade-up');
+            
+            let headerHtml = `<div class="p-5 border-b border-white/5 flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <i class="fas ${type === 'joki' ? 'fa-bolt text-yellow-500' : (type === 'script' ? 'fa-code text-cyan-400' : 'fa-gem text-purple-400')}"></i>
+                    <h3 class="font-bold text-white">${productName}</h3>
+                </div>
+                <div class="flex items-center gap-1 text-yellow-500 text-sm">
+                    <i class="fas fa-star text-xs"></i> <span class="text-white/70 ml-1">5.0</span>
+                </div>
+            </div>`;
+            
+            let bodyHtml = `<div class="p-5">
+                <div class="bg-black/30 rounded-xl p-4 mb-4">
+                    <div class="flex items-center gap-2 text-purple-300 text-xs mb-2">
+                        <i class="fas fa-tachometer-alt"></i> <span>NO DELAY</span>
+                    </div>
+                    <div class="flex items-baseline gap-1">
+                        <span class="text-2xl font-bold text-yellow-500">${formatRupiah(price)}</span>
+                        <span class="text-white/40 text-xs">/${type === 'script' ? 'Paket' : 'SBC'}</span>
+                    </div>
+                </div>
+                <input type="text" class="nickname-input w-full bg-black/40 border border-purple-500/20 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-purple-500 transition-colors mb-4" placeholder="Nickname kamu...">
+                <div class="flex justify-center gap-2 mb-5 star-container">
+                    <i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star" data-val="1"></i>
+                    <i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star" data-val="2"></i>
+                    <i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star" data-val="3"></i>
+                    <i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star" data-val="4"></i>
+                    <i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star" data-val="5"></i>
+                </div>
+                <button class="buy-btn w-full bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-500 hover:to-purple-700 text-white font-semibold py-3 rounded-xl transition-all duration-300 flex items-center justify-center gap-2">
+                    <i class="fab fa-whatsapp"></i> ORDER NOW
+                </button>
+            </div>`;
+            
+            cardDiv.innerHTML = headerHtml + bodyHtml;
+            
+            // Star rating logic
+            const stars = cardDiv.querySelectorAll('.star');
             stars.forEach(star => {
-                star.onclick = () => {
-                    const val = parseInt(star.dataset.val);
+                star.addEventListener('click', function() {
+                    const val = parseInt(this.dataset.val);
                     stars.forEach((s, i) => {
-                        if (i < val) s.className = "fas fa-star active";
-                        else s.className = "far fa-star";
+                        if (i < val) {
+                            s.classList.remove('far');
+                            s.classList.add('fas', 'active', 'text-yellow-500');
+                        } else {
+                            s.classList.remove('fas', 'active', 'text-yellow-500');
+                            s.classList.add('far');
+                        }
                     });
-                };
+                });
             });
-            const btn = card.querySelector('.btn-buy');
-            if (btn) {
-                btn.onclick = () => {
-                    const product = btn.dataset.product;
-                    const price = parseInt(btn.dataset.price);
-                    const nickname = card.querySelector('.nickname')?.value || '';
-                    const activeStars = card.querySelectorAll('.star-rating .fas.active').length;
-                    openWA(product, price, nickname, activeStars || 5);
-                };
-            }
-        });
-    };
+            
+            // Buy button logic
+            const buyBtn = cardDiv.querySelector('.buy-btn');
+            const nicknameInput = cardDiv.querySelector('.nickname-input');
+            buyBtn.addEventListener('click', () => {
+                const nickname = nicknameInput.value;
+                const activeStars = cardDiv.querySelectorAll('.star.fas.active').length;
+                openWA(productName, price, nickname, activeStars || 5);
+            });
+            
+            return cardDiv;
+        }
 
-    renderCards(document.getElementById('jokiGrid'), jokiData, 'joki');
-    renderCards(document.getElementById('scriptGrid'), scriptData, 'script');
-    renderCards(document.getElementById('tierGrid'), tierData, 'tier');
-
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active-panel'));
-            btn.classList.add('active');
-            document.getElementById(btn.dataset.tab).classList.add('active-panel');
+        // Render JOKI
+        const jokiGrid = document.getElementById('jokiGrid');
+        jokiNames.forEach((name, idx) => {
+            jokiGrid.appendChild(createCard(name, jokiPrices[idx], 'joki'));
         });
-    });
-</script>
+        
+        // Render SCRIPT
+        const scriptGrid = document.getElementById('scriptGrid');
+        scripts.forEach(script => {
+            scriptGrid.appendChild(createCard(`SCRIPT ${script.name} - ${script.type}`, script.price, 'script'));
+        });
+        
+        // Render TIER
+        const tierGrid = document.getElementById('tierGrid');
+        tiers.forEach(tier => {
+            tierGrid.appendChild(createCard(`${tier.name} (${tier.color})`, tier.price, 'tier'));
+        });
+
+        // TAB SWITCHING
+        const tabs = document.querySelectorAll('.tab-btn');
+        const contents = {
+            joki: document.getElementById('jokiTab'),
+            script: document.getElementById('scriptTab'),
+            tier: document.getElementById('tierTab')
+        };
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.dataset.tab;
+                // Update button styles
+                tabs.forEach(t => {
+                    t.classList.remove('active-tab', 'bg-gradient-to-r', 'from-purple-600', 'to-purple-800', 'text-white', 'shadow-lg', 'shadow-purple-500/30');
+                    t.classList.add('bg-white/5', 'backdrop-blur-sm', 'border', 'border-purple-500/30', 'text-white/70');
+                });
+                tab.classList.remove('bg-white/5', 'backdrop-blur-sm', 'border', 'border-purple-500/30', 'text-white/70');
+                tab.classList.add('active-tab', 'bg-gradient-to-r', 'from-purple-600', 'to-purple-800', 'text-white', 'shadow-lg', 'shadow-purple-500/30');
+                
+                // Show/hide content
+                Object.keys(contents).forEach(key => {
+                    contents[key].classList.add('hidden');
+                });
+                contents[target].classList.remove('hidden');
+            });
+        });
+    </script>
 </body>
 </html>
