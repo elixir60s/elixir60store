@@ -19,7 +19,6 @@
             min-height: 100vh;
         }
 
-        /* Header Premium */
         .header {
             text-align: center;
             padding: 30px 20px;
@@ -28,7 +27,6 @@
             border-radius: 32px;
             margin-bottom: 30px;
             border: 1px solid rgba(255, 215, 0, 0.2);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
         }
 
         .header h1 {
@@ -37,16 +35,13 @@
             background-clip: text;
             color: transparent;
             font-size: 2rem;
-            letter-spacing: 2px;
         }
 
         .tagline {
             color: #94a3b8;
             margin-top: 8px;
-            font-size: 0.85rem;
         }
 
-        /* Social Buttons */
         .social-header {
             display: flex;
             justify-content: center;
@@ -64,19 +59,10 @@
             color: white;
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.85rem;
-            transition: all 0.2s;
         }
 
-        .social-icon.discord { background: #5865F2; box-shadow: 0 4px 15px rgba(88,101,242,0.3); }
+        .social-icon.discord { background: #5865F2; }
         .social-icon.tiktok { background: #000000; border: 1px solid #fe2c55; }
-        .social-icon:hover { transform: translateY(-3px); filter: brightness(1.05); }
-
-        /* Tab Styling Premium */
-        .tab-container {
-            max-width: 1300px;
-            margin: 0 auto;
-        }
 
         .tab-buttons {
             display: flex;
@@ -88,32 +74,22 @@
 
         .tab-btn {
             background: rgba(30, 41, 59, 0.6);
-            backdrop-filter: blur(10px);
             border: 1px solid rgba(255,215,0,0.2);
             padding: 12px 28px;
-            font-size: 0.9rem;
             font-weight: bold;
             border-radius: 50px;
             color: #94a3b8;
             cursor: pointer;
-            transition: all 0.3s;
         }
 
         .tab-btn.active {
             background: linear-gradient(135deg, #ffd700, #ffb347);
             color: #0f172a;
-            border-color: transparent;
-            box-shadow: 0 4px 20px rgba(255,215,0,0.3);
-        }
-
-        .tab-btn:hover:not(.active) {
-            border-color: rgba(255,215,0,0.5);
-            color: #ffd700;
         }
 
         .tab-panel {
             display: none;
-            animation: fadeIn 0.4s ease;
+            animation: fadeIn 0.3s ease;
         }
 
         .tab-panel.active-panel {
@@ -121,11 +97,10 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Grid Premium */
         .section-title {
             text-align: center;
             background: linear-gradient(135deg, #ffd700, #ffb347);
@@ -134,30 +109,28 @@
             color: transparent;
             font-size: 1.6rem;
             margin-bottom: 25px;
-            font-weight: bold;
         }
 
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 25px;
+            max-width: 1300px;
+            margin: 0 auto;
         }
 
-        /* Card Premium ala ZALSTORE */
         .card {
             background: rgba(30, 41, 59, 0.6);
             backdrop-filter: blur(10px);
             border-radius: 24px;
-            padding: 0;
             overflow: hidden;
-            transition: all 0.3s;
             border: 1px solid rgba(255,215,0,0.15);
+            transition: 0.3s;
         }
 
         .card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-5px);
             border-color: rgba(255,215,0,0.4);
-            box-shadow: 0 20px 35px rgba(0,0,0,0.3);
         }
 
         .card-header {
@@ -178,11 +151,6 @@
             margin-top: 6px;
         }
 
-        .rating span {
-            color: #94a3b8;
-            margin-left: 5px;
-        }
-
         .card-body {
             padding: 20px;
         }
@@ -193,13 +161,7 @@
             padding: 12px 15px;
             margin-bottom: 12px;
             cursor: pointer;
-            transition: all 0.2s;
             border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .option-item:hover {
-            background: rgba(255,215,0,0.1);
-            border-color: rgba(255,215,0,0.3);
         }
 
         .option-item.selected {
@@ -210,13 +172,11 @@
         .option-title {
             font-weight: bold;
             color: white;
-            font-size: 0.9rem;
         }
 
         .option-desc {
             font-size: 0.75rem;
             color: #94a3b8;
-            margin-top: 4px;
         }
 
         .price-row {
@@ -246,12 +206,6 @@
             border-radius: 14px;
             color: white;
             margin: 12px 0;
-            font-size: 0.9rem;
-        }
-
-        .input-field:focus {
-            outline: none;
-            border-color: #ffd700;
         }
 
         .star-rating {
@@ -264,7 +218,6 @@
 
         .star {
             color: #334155;
-            transition: 0.1s;
         }
 
         .star.active {
@@ -281,15 +234,8 @@
             border-radius: 40px;
             text-decoration: none;
             font-weight: bold;
-            margin-top: 15px;
-            transition: 0.2s;
             border: none;
             cursor: pointer;
-        }
-
-        .btn-buy:hover {
-            transform: scale(0.98);
-            filter: brightness(1.05);
         }
 
         .footer {
@@ -298,71 +244,6 @@
             padding: 20px;
             color: #64748b;
             font-size: 0.75rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-
-        /* Modal QRIS */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(8px);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 32px;
-            padding: 30px;
-            max-width: 400px;
-            width: 90%;
-            text-align: center;
-            border: 1px solid rgba(255,215,0,0.3);
-        }
-
-        .modal-content h3 {
-            color: #ffd700;
-            margin-bottom: 20px;
-        }
-
-        .qris-image {
-            width: 100%;
-            max-width: 250px;
-            margin: 15px auto;
-            display: block;
-            background: white;
-            padding: 10px;
-            border-radius: 20px;
-        }
-
-        .btn-wa {
-            background: #25D366;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 40px;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 15px;
-            font-weight: bold;
-        }
-
-        .close-modal {
-            margin-top: 15px;
-            color: #94a3b8;
-            cursor: pointer;
-        }
-
-        @media (max-width: 640px) {
-            body { padding: 15px; }
-            .tab-btn { padding: 8px 16px; font-size: 0.75rem; }
-            .grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -379,24 +260,21 @@
 
 <div class="tab-container">
     <div class="tab-buttons">
-        <button class="tab-btn active" data-tab="tab1">🎯 JOKI SBC / VTF / SB</button>
-        <button class="tab-btn" data-tab="tab2">💻 SCRIPT ELIXIRPROJECTION</button>
+        <button class="tab-btn active" data-tab="tab1">🎯 JOKI SBC</button>
+        <button class="tab-btn" data-tab="tab2">💻 SCRIPT</button>
         <button class="tab-btn" data-tab="tab3">⭐ AKUN TIER</button>
     </div>
 
-    <!-- TAB 1: JOKI SBC -->
     <div id="tab1" class="tab-panel active-panel">
         <h2 class="section-title">💰 LIST HARGA JOKI SBC 💰</h2>
         <div class="grid" id="jokiGrid"></div>
     </div>
 
-    <!-- TAB 2: SCRIPT -->
     <div id="tab2" class="tab-panel">
         <h2 class="section-title">💻 SCRIPT ELIXIRPROJECTION 💻</h2>
         <div class="grid" id="scriptGrid"></div>
     </div>
 
-    <!-- TAB 3: AKUN TIER -->
     <div id="tab3" class="tab-panel">
         <h2 class="section-title">⭐ AKUN TIER ⭐</h2>
         <div class="grid" id="tierGrid"></div>
@@ -404,72 +282,25 @@
 </div>
 
 <div class="footer">
-    © 2025 ELIXIR SB STORE | Premium Store | Trusted Since 2025
-</div>
-
-<!-- Modal QRIS -->
-<div id="qrisModal" class="modal">
-    <div class="modal-content">
-        <h3>💳 PEMBAYARAN QRIS</h3>
-        <p style="color:#94a3b8; font-size:14px;">Scan QRIS di bawah menggunakan:</p>
-        <p style="color:#ffd700; font-size:12px;">GoPay • OVO • DANA • BRImo • ShopeePay • LinkAja</p>
-        <img id="qrisImage" class="qris-image" src="https://via.placeholder.com/250x250?text=QRIS+ELIXIR" alt="QRIS">
-        <p id="modalTotal" style="color:#4ade80; font-weight:bold; margin:10px 0;">Total: Rp0</p>
-        <a id="waButton" href="#" class="btn-wa" target="_blank">📱 LANJUT KE WHATSAPP</a>
-        <div class="close-modal" onclick="closeModal()">✖️ Tutup</div>
-    </div>
+    © 2025 ELIXIR SB STORE | Order via WhatsApp | Harga dapat berubah
 </div>
 
 <script>
-    // Konfigurasi
     const waNumber = "62895385984764";
-    const qrisImageUrl = "https://i.ibb.co.com/Cp2N3cf8/IMG-9954.jpg // GANTI DENGAN LINK QRIS LO
 
-    // Data JOKI SBC (dengan 2 pilihan)
     const jokiData = [
-        { name: "SBC 100K", options: [
-            { title: "⚡ NO DELAY", desc: "VIA TRANSFER IN GAME SOUTH BRONX", price: 12000, originalPrice: 25000 },
-            { title: "🐢 REGULER", desc: "VIA TRANSFER IN GAME SOUTH BRONX", price: 25000, originalPrice: null }
-        ]},
-        { name: "SBC 200K", options: [
-            { title: "⚡ NO DELAY", desc: "VIA TRANSFER IN GAME SOUTH BRONX", price: 20000, originalPrice: 35000 },
-            { title: "🐢 REGULER", desc: "VIA TRANSFER IN GAME SOUTH BRONX", price: 35000, originalPrice: null }
-        ]},
-        { name: "SBC 300K", options: [
-            { title: "⚡ NO DELAY", desc: "VIA TRANSFER IN GAME SOUTH BRONX", price: 30000, originalPrice: 65000 },
-            { title: "🐢 REGULER", desc: "VIA TRANSFER IN GAME SOUTH BRONX", price: 65000, originalPrice: null }
-        ]},
-        { name: "SBC 400K", options: [
-            { title: "⚡ NO DELAY", desc: "VIA TRANSFER IN GAME SOUTH BRONX", price: 40000, originalPrice: 80000 },
-            { title: "🐢 REGULER", desc: "VIA TRANSFER IN GAME SOUTH BRONX", price: 80000, originalPrice: null }
-        ]},
-        { name: "SBC 500K", options: [
-            { title: "⚡ NO DELAY", desc: "VIA TRANSFER IN GAME SOUTH BRONX", price: 50000, originalPrice: 100000 },
-            { title: "🐢 REGULER", desc: "VIA TRANSFER IN GAME SOUTH BRONX", price: 100000, originalPrice: null }
-        ]},
-        { name: "SBC 600K", options: [
-            { title: "⚡ NO DELAY", desc: "VIA TRANSFER IN GAME SOUTH BRONX", price: 60000, originalPrice: 120000 },
-            { title: "🐢 REGULER", desc: "VIA TRANSFER IN GAME SOUTH BRONX", price: 120000, originalPrice: null }
-        ]},
-        { name: "SBC 700K", options: [
-            { title: "⚡ NO DELAY", desc: "VIA TRANSFER IN GAME SOUTH BRONX", price: 70000, originalPrice: 140000 },
-            { title: "🐢 REGULER", desc: "VIA TRANSFER IN GAME SOUTH BRONX", price: 140000, originalPrice: null }
-        ]},
-        { name: "SBC 800K", options: [
-            { title: "⚡ NO DELAY", desc: "VIA TRANSFER IN GAME SOUTH BRONX", price: 80000, originalPrice: 160000 },
-            { title: "🐢 REGULER", desc: "VIA TRANSFER IN GAME SOUTH BRONX", price: 160000, originalPrice: null }
-        ]},
-        { name: "SBC 900K", options: [
-            { title: "⚡ NO DELAY", desc: "VIA TRANSFER IN GAME SOUTH BRONX", price: 90000, originalPrice: 180000 },
-            { title: "🐢 REGULER", desc: "VIA TRANSFER IN GAME SOUTH BRONX", price: 180000, originalPrice: null }
-        ]},
-        { name: "SBC 1JT", options: [
-            { title: "⚡ NO DELAY", desc: "VIA TRANSFER IN GAME SOUTH BRONX", price: 100000, originalPrice: 200000 },
-            { title: "🐢 REGULER", desc: "VIA TRANSFER IN GAME SOUTH BRONX", price: 200000, originalPrice: null }
-        ]}
+        { name: "SBC 100K", options: [{ title: "⚡ NO DELAY", desc: "VIA TRANSFER IN GAME", price: 12000, originalPrice: 25000 }, { title: "🐢 REGULER", desc: "VIA TRANSFER IN GAME", price: 25000, originalPrice: null }] },
+        { name: "SBC 200K", options: [{ title: "⚡ NO DELAY", desc: "VIA TRANSFER IN GAME", price: 20000, originalPrice: 35000 }, { title: "🐢 REGULER", desc: "VIA TRANSFER IN GAME", price: 35000, originalPrice: null }] },
+        { name: "SBC 300K", options: [{ title: "⚡ NO DELAY", desc: "VIA TRANSFER IN GAME", price: 30000, originalPrice: 65000 }, { title: "🐢 REGULER", desc: "VIA TRANSFER IN GAME", price: 65000, originalPrice: null }] },
+        { name: "SBC 400K", options: [{ title: "⚡ NO DELAY", desc: "VIA TRANSFER IN GAME", price: 40000, originalPrice: 80000 }, { title: "🐢 REGULER", desc: "VIA TRANSFER IN GAME", price: 80000, originalPrice: null }] },
+        { name: "SBC 500K", options: [{ title: "⚡ NO DELAY", desc: "VIA TRANSFER IN GAME", price: 50000, originalPrice: 100000 }, { title: "🐢 REGULER", desc: "VIA TRANSFER IN GAME", price: 100000, originalPrice: null }] },
+        { name: "SBC 600K", options: [{ title: "⚡ NO DELAY", desc: "VIA TRANSFER IN GAME", price: 60000, originalPrice: 120000 }, { title: "🐢 REGULER", desc: "VIA TRANSFER IN GAME", price: 120000, originalPrice: null }] },
+        { name: "SBC 700K", options: [{ title: "⚡ NO DELAY", desc: "VIA TRANSFER IN GAME", price: 70000, originalPrice: 140000 }, { title: "🐢 REGULER", desc: "VIA TRANSFER IN GAME", price: 140000, originalPrice: null }] },
+        { name: "SBC 800K", options: [{ title: "⚡ NO DELAY", desc: "VIA TRANSFER IN GAME", price: 80000, originalPrice: 160000 }, { title: "🐢 REGULER", desc: "VIA TRANSFER IN GAME", price: 160000, originalPrice: null }] },
+        { name: "SBC 900K", options: [{ title: "⚡ NO DELAY", desc: "VIA TRANSFER IN GAME", price: 90000, originalPrice: 180000 }, { title: "🐢 REGULER", desc: "VIA TRANSFER IN GAME", price: 180000, originalPrice: null }] },
+        { name: "SBC 1JT", options: [{ title: "⚡ NO DELAY", desc: "VIA TRANSFER IN GAME", price: 100000, originalPrice: 200000 }, { title: "🐢 REGULER", desc: "VIA TRANSFER IN GAME", price: 200000, originalPrice: null }] }
     ];
 
-    // Data SCRIPT
     const scriptData = [
         { name: "MARSHMALLOW", type: "HARIAN", price: 13000, originalPrice: 25000 },
         { name: "MARSHMALLOW", type: "BULANAN", price: 60000, originalPrice: 100000 },
@@ -480,231 +311,91 @@
         { name: "FPS", type: "LIFETIME", price: 50000, originalPrice: 100000 }
     ];
 
-    // Data AKUN TIER
     const tierData = [
-        { name: "TIER 1", color: "GREEN NAME", badge: "🟢", price: 150000 },
-        { name: "TIER 2", color: "PINK NAME", badge: "🩷", price: 250000 },
-        { name: "TIER 3", color: "BLUE NAME", badge: "🔵", price: 350000 }
+        { name: "TIER 1", color: "GREEN NAME", price: 150000 },
+        { name: "TIER 2", color: "PINK NAME", price: 250000 },
+        { name: "TIER 3", color: "BLUE NAME", price: 350000 }
     ];
 
     function formatRupiah(amount) {
         return "Rp" + amount.toLocaleString('id-ID');
     }
 
-    // Global variable untuk menyimpan data checkout
-    let currentCheckout = {};
-
-    function openModal(productName, optionName, price, nickname, rating) {
-        const modal = document.getElementById('qrisModal');
-        const modalTotal = document.getElementById('modalTotal');
-        const waBtn = document.getElementById('waButton');
-        
-        modalTotal.innerHTML = `Total: ${formatRupiah(price)}<br><small style="color:#94a3b8">${productName} - ${optionName}</small>`;
-        
-        const waMessage = `Halo%20ELIXIR%20SB%20STORE%0A%0A📦%20*PESANAN%20BARU*%0A━━━━━━━━━━━━━━━━━━%0A📍%20Produk%3A%20${encodeURIComponent(productName)}%0A⚡%20Paket%3A%20${encodeURIComponent(optionName)}%0A💰%20Total%3A%20${encodeURIComponent(formatRupiah(price))}%0A👤%20Nickname%3A%20${encodeURIComponent(nickname || '-')}%0A⭐%20Rating%3A%20${encodeURIComponent(rating || '-')}%0A━━━━━━━━━━━━━━━━━━%0A%0A✅%20Saya%20sudah%20melakukan%20pembayaran.%20Berikut%20bukti%20transfernya%3A`;
-        
-        waBtn.href = `https://wa.me/${waNumber}?text=${waMessage}`;
-        
-        document.getElementById('qrisImage').src = qrisImageUrl;
-        modal.style.display = 'flex';
+    function openWhatsApp(productName, optionName, price, nickname, rating) {
+        const message = `Halo%20ELIXIR%20SB%20STORE%0A%0A📦%20*PESANAN%20BARU*%0A━━━━━━━━━━━━━━━━━━%0A📍%20Produk%3A%20${encodeURIComponent(productName)}%0A⚡%20Paket%3A%20${encodeURIComponent(optionName)}%0A💰%20Total%3A%20${encodeURIComponent(formatRupiah(price))}%0A👤%20Nickname%3A%20${encodeURIComponent(nickname || '-')}%0A⭐%20Rating%3A%20${encodeURIComponent(rating || '-')}%0A━━━━━━━━━━━━━━━━━━%0A%0A✅%20Saya%20sudah%20transfer.%20Berikut%20bukti%20transfernya%3A`;
+        window.open(`https://wa.me/${waNumber}?text=${message}`, '_blank');
     }
 
-    function closeModal() {
-        document.getElementById('qrisModal').style.display = 'none';
-    }
-
-    // Render JOKI Grid
+    // Render JOKI
     const jokiContainer = document.getElementById('jokiGrid');
     let jokiHTML = "";
-    
     jokiData.forEach(product => {
         let optionsHTML = "";
-        product.options.forEach((opt, idx) => {
-            const priceDisplay = formatRupiah(opt.price);
-            const originalDisplay = opt.originalPrice ? `<span class="price-original">${formatRupiah(opt.originalPrice)}</span>` : "";
-            optionsHTML += `
-                <div class="option-item" data-product="${product.name}" data-option="${opt.title}" data-price="${opt.price}">
-                    <div class="option-title">${opt.title}</div>
-                    <div class="option-desc">${opt.desc}</div>
-                    <div class="price-row">
-                        ${originalDisplay}
-                        <span class="price-sale">${priceDisplay}</span>
-                    </div>
-                </div>
-            `;
+        product.options.forEach(opt => {
+            optionsHTML += `<div class="option-item" data-product="${product.name}" data-option="${opt.title}" data-price="${opt.price}">
+                <div class="option-title">${opt.title}</div>
+                <div class="option-desc">${opt.desc}</div>
+                <div class="price-row">${opt.originalPrice ? `<span class="price-original">${formatRupiah(opt.originalPrice)}</span>` : ""}<span class="price-sale">${formatRupiah(opt.price)}</span></div>
+            </div>`;
         });
-        
-        jokiHTML += `
-            <div class="card">
-                <div class="card-header">
-                    <div class="product-title">🎯 ${product.name}</div>
-                    <div class="rating">⭐⭐⭐⭐⭐ <span>5 (4 ulasan)</span></div>
-                </div>
-                <div class="card-body">
-                    ${optionsHTML}
-                    <input type="text" class="input-field" id="nickname_${product.name.replace(/\s/g, '')}" placeholder="📝 Nickname kamu...">
-                    <div class="star-rating" id="stars_${product.name.replace(/\s/g, '')}">
-                        <span class="star" data-value="1">★</span>
-                        <span class="star" data-value="2">★</span>
-                        <span class="star" data-value="3">★</span>
-                        <span class="star" data-value="4">★</span>
-                        <span class="star" data-value="5">★</span>
-                    </div>
-                    <button class="btn-buy" onclick="handleBuy(this)">💳 BELI SEKARANG</button>
-                </div>
-            </div>
-        `;
+        jokiHTML += `<div class="card"><div class="card-header"><div class="product-title">🎯 ${product.name}</div><div class="rating">⭐⭐⭐⭐⭐ <span>5 (4 ulasan)</span></div></div><div class="card-body">${optionsHTML}<input type="text" class="input-field nickname" placeholder="📝 Nickname kamu..."><div class="star-rating"><span class="star" data-value="1">★</span><span class="star" data-value="2">★</span><span class="star" data-value="3">★</span><span class="star" data-value="4">★</span><span class="star" data-value="5">★</span></div><button class="btn-buy">💳 BELI SEKARANG</button></div></div>`;
     });
     jokiContainer.innerHTML = jokiHTML;
 
-    // Render SCRIPT Grid
+    // Render SCRIPT
     const scriptContainer = document.getElementById('scriptGrid');
     let scriptHTML = "";
     scriptData.forEach(script => {
-        let typeIcon = script.type === "HARIAN" ? "📆" : (script.type === "BULANAN" ? "📅" : "♾️");
-        scriptHTML += `
-            <div class="card">
-                <div class="card-header">
-                    <div class="product-title">💻 SCRIPT ${script.name}</div>
-                    <div class="rating">⭐⭐⭐⭐⭐ <span>${script.type === "LIFETIME" ? "5 (8 ulasan)" : "4 (3 ulasan)"}</span></div>
-                </div>
-                <div class="card-body">
-                    <div class="option-item" data-product="SCRIPT ${script.name}" data-option="${script.type}" data-price="${script.price}" style="cursor:default">
-                        <div class="option-title">${typeIcon} ${script.type}</div>
-                        <div class="price-row">
-                            ${script.originalPrice ? `<span class="price-original">${formatRupiah(script.originalPrice)}</span>` : ""}
-                            <span class="price-sale">${formatRupiah(script.price)}</span>
-                        </div>
-                    </div>
-                    <input type="text" class="input-field" id="nickname_script_${script.name}_${script.type}" placeholder="📝 Nickname kamu...">
-                    <div class="star-rating" id="stars_script_${script.name}_${script.type}">
-                        <span class="star" data-value="1">★</span>
-                        <span class="star" data-value="2">★</span>
-                        <span class="star" data-value="3">★</span>
-                        <span class="star" data-value="4">★</span>
-                        <span class="star" data-value="5">★</span>
-                    </div>
-                    <button class="btn-buy" onclick="handleBuyScript(this, '${script.name}', '${script.type}', ${script.price})">💳 BELI SEKARANG</button>
-                </div>
-            </div>
-        `;
+        scriptHTML += `<div class="card"><div class="card-header"><div class="product-title">💻 SCRIPT ${script.name}</div><div class="rating">⭐⭐⭐⭐⭐ <span>${script.type === "LIFETIME" ? "5 (8 ulasan)" : "4 (3 ulasan)"}</span></div></div><div class="card-body"><div class="option-item" data-product="SCRIPT ${script.name}" data-option="${script.type}" data-price="${script.price}" style="cursor:default"><div class="option-title">${script.type === "HARIAN" ? "📆" : script.type === "BULANAN" ? "📅" : "♾️"} ${script.type}</div><div class="price-row">${script.originalPrice ? `<span class="price-original">${formatRupiah(script.originalPrice)}</span>` : ""}<span class="price-sale">${formatRupiah(script.price)}</span></div></div><input type="text" class="input-field nickname" placeholder="📝 Nickname kamu..."><div class="star-rating"><span class="star" data-value="1">★</span><span class="star" data-value="2">★</span><span class="star" data-value="3">★</span><span class="star" data-value="4">★</span><span class="star" data-value="5">★</span></div><button class="btn-buy">💳 BELI SEKARANG</button></div></div>`;
     });
     scriptContainer.innerHTML = scriptHTML;
 
-    // Render TIER Grid
+    // Render TIER
     const tierContainer = document.getElementById('tierGrid');
     let tierHTML = "";
     tierData.forEach(tier => {
-        tierHTML += `
-            <div class="card">
-                <div class="card-header">
-                    <div class="product-title">⭐ ${tier.name}</div>
-                    <div class="rating">⭐⭐⭐⭐⭐ <span>5 (12 ulasan)</span></div>
-                </div>
-                <div class="card-body">
-                    <div class="option-item" data-product="${tier.name}" data-option="${tier.color}" data-price="${tier.price}" style="cursor:default">
-                        <div class="option-title">${tier.badge} ${tier.color}</div>
-                        <div class="price-row">
-                            <span class="price-sale">${formatRupiah(tier.price)}</span>
-                        </div>
-                    </div>
-                    <input type="text" class="input-field" id="nickname_tier_${tier.name}" placeholder="📝 Nickname kamu...">
-                    <div class="star-rating" id="stars_tier_${tier.name}">
-                        <span class="star" data-value="1">★</span>
-                        <span class="star" data-value="2">★</span>
-                        <span class="star" data-value="3">★</span>
-                        <span class="star" data-value="4">★</span>
-                        <span class="star" data-value="5">★</span>
-                    </div>
-                    <button class="btn-buy" onclick="handleBuyTier(this, '${tier.name}', '${tier.color}', ${tier.price})">💳 BELI SEKARANG</button>
-                </div>
-            </div>
-        `;
+        tierHTML += `<div class="card"><div class="card-header"><div class="product-title">⭐ ${tier.name}</div><div class="rating">⭐⭐⭐⭐⭐ <span>5 (12 ulasan)</span></div></div><div class="card-body"><div class="option-item" data-product="${tier.name}" data-option="${tier.color}" data-price="${tier.price}" style="cursor:default"><div class="option-title">${tier.color}</div><div class="price-row"><span class="price-sale">${formatRupiah(tier.price)}</span></div></div><input type="text" class="input-field nickname" placeholder="📝 Nickname kamu..."><div class="star-rating"><span class="star" data-value="1">★</span><span class="star" data-value="2">★</span><span class="star" data-value="3">★</span><span class="star" data-value="4">★</span><span class="star" data-value="5">★</span></div><button class="btn-buy">💳 BELI SEKARANG</button></div></div>`;
     });
     tierContainer.innerHTML = tierHTML;
 
-    // Fungsi untuk menangani pembelian JOKI
-    window.handleBuy = function(button) {
-        const card = button.closest('.card');
-        const selectedOption = card.querySelector('.option-item.selected');
-        if (!selectedOption) {
-            alert('Silakan pilih metode terlebih dahulu!');
-            return;
-        }
-        const productName = selectedOption.dataset.product;
-        const optionName = selectedOption.dataset.option;
-        const price = parseInt(selectedOption.dataset.price);
-        const nicknameInput = card.querySelector('.input-field');
-        const nickname = nicknameInput ? nicknameInput.value : '';
-        const starContainer = card.querySelector('.star-rating');
-        const rating = starContainer ? starContainer.dataset.selected || '5' : '5';
-        
-        openModal(productName, optionName, price, nickname, rating);
-    };
-
-    window.handleBuyScript = function(button, name, type, price) {
-        const card = button.closest('.card');
-        const nicknameInput = card.querySelector('.input-field');
-        const nickname = nicknameInput ? nicknameInput.value : '';
-        const starContainer = card.querySelector('.star-rating');
-        const rating = starContainer ? starContainer.dataset.selected || '5' : '5';
-        openModal(`SCRIPT ${name}`, type, price, nickname, rating);
-    };
-
-    window.handleBuyTier = function(button, name, color, price) {
-        const card = button.closest('.card');
-        const nicknameInput = card.querySelector('.input-field');
-        const nickname = nicknameInput ? nicknameInput.value : '';
-        const starContainer = card.querySelector('.star-rating');
-        const rating = starContainer ? starContainer.dataset.selected || '5' : '5';
-        openModal(`${name} (${color})`, "AKUN TIER", price, nickname, rating);
-    };
-
-    // Event listener untuk option item (pilih metode)
-    document.addEventListener('click', function(e) {
-        const optionItem = e.target.closest('.option-item');
-        if (optionItem && !optionItem.closest('.btn-buy')) {
-            const card = optionItem.closest('.card');
-            if (card) {
-                card.querySelectorAll('.option-item').forEach(item => item.classList.remove('selected'));
-                optionItem.classList.add('selected');
-            }
-        }
-    });
-
-    // Star rating logic
-    document.addEventListener('click', function(e) {
-        const star = e.target.closest('.star');
-        if (star) {
-            const starContainer = star.closest('.star-rating');
-            const value = parseInt(star.dataset.value);
-            starContainer.querySelectorAll('.star').forEach((s, idx) => {
-                if (idx < value) s.classList.add('active');
-                else s.classList.remove('active');
-            });
-            starContainer.dataset.selected = value;
-        }
-    });
-
-    // Tab switching
-    const tabButtons = document.querySelectorAll('.tab-btn');
-    const tabPanels = document.querySelectorAll('.tab-panel');
-    tabButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            tabPanels.forEach(panel => panel.classList.remove('active-panel'));
-            button.classList.add('active');
-            const tabId = button.getAttribute('data-tab');
-            document.getElementById(tabId).classList.add('active-panel');
+    // Event Listeners
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active-panel'));
+            btn.classList.add('active');
+            document.getElementById(btn.dataset.tab).classList.add('active-panel');
         });
     });
 
-    // Close modal klik di luar
-    window.onclick = function(event) {
-        const modal = document.getElementById('qrisModal');
-        if (event.target === modal) closeModal();
-    };
-</script>
+    document.querySelectorAll('.card').forEach(card => {
+        card.querySelectorAll('.option-item').forEach(opt => {
+            opt.addEventListener('click', () => {
+                card.querySelectorAll('.option-item').forEach(o => o.classList.remove('selected'));
+                opt.classList.add('selected');
+            });
+        });
 
+        card.querySelectorAll('.star').forEach(star => {
+            star.addEventListener('click', function() {
+                const val = parseInt(this.dataset.value);
+                const stars = this.closest('.star-rating').querySelectorAll('.star');
+                stars.forEach((s, i) => i < val ? s.classList.add('active') : s.classList.remove('active'));
+            });
+        });
+
+        card.querySelector('.btn-buy').addEventListener('click', () => {
+            const selected = card.querySelector('.option-item.selected');
+            if (!selected) { alert('Pilih metode dulu!'); return; }
+            const product = selected.dataset.product;
+            const option = selected.dataset.option;
+            const price = parseInt(selected.dataset.price);
+            const nickname = card.querySelector('.nickname')?.value || '';
+            const starContainer = card.querySelector('.star-rating');
+            const activeStars = starContainer.querySelectorAll('.star.active').length;
+            openWhatsApp(product, option, price, nickname, activeStars || 5);
+        });
+    });
+</script>
 </body>
 </html>
