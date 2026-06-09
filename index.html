@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>ELIXIRSTORE | Elite Gaming Marketplace</title>
+    <title>ELIXIRSTORE | Premium Southbronx Store</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -179,7 +179,7 @@
                     <div class="text-white font-bold text-xl tracking-tight">
                         ELIXIR<span class="text-purple-400">STORE</span>
                     </div>
-                    <div class="text-[9px] text-purple-400/40 tracking-[0.2em]">ELITE GAMING</div>
+                    <div class="text-[9px] text-purple-400/40 tracking-[0.2em]">PROJECTION</div>
                 </div>
                 <div class="flex gap-6">
                     <a href="#marketplace" class="text-white/50 hover:text-purple-400 transition text-sm">
@@ -200,7 +200,7 @@
     <div class="relative z-10 max-w-6xl mx-auto px-6 pt-32 pb-16 text-center" data-aos="fade-up" data-aos-duration="1000">
         <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 mb-6 backdrop-blur-sm">
             <i class="fas fa-bolt text-yellow-500 text-xs"></i>
-            <span class="text-purple-300 text-[10px] font-medium tracking-wider">PREMIUM GAMING MARKETPLACE</span>
+            <span class="text-purple-300 text-[10px] font-medium tracking-wider">PREMIUM SOUTHBRONX STORE</span>
         </div>
         
         <h1 class="text-6xl md:text-7xl font-extrabold mb-5">
@@ -287,9 +287,7 @@
             <p class="text-white/30 text-sm mt-2">Apa kata mereka tentang ELIXIRSTORE</p>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="reviewsGrid">
-            <!-- Review akan diisi JavaScript -->
-        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="reviewsGrid"></div>
     </div>
 
     <!-- FOOTER PREMIUM -->
@@ -302,8 +300,8 @@
                         ELIXIR<span class="text-purple-400">STORE</span>
                     </div>
                     <p class="text-white/40 text-sm leading-relaxed">
-                        Premium Game Scripts & Exploits.<br>
-                        Trusted premium gaming marketplace.
+                        Premium Shop Southbronx<br>
+                        Trusted Southbronx Marketplace
                     </p>
                 </div>
 
@@ -363,7 +361,7 @@
             
             <div class="border-t border-white/10 mt-10 pt-6 text-center">
                 <p class="text-white/20 text-[10px] tracking-wider">
-                    © 2025 ELIXIRSTORE. All rights reserved. | ELITE GAMING MARKETPLACE
+                    © 2025 ELIXIRSTORE. All rights reserved. | TRUSTED SOUTHBRONX MARKETPLACE
                 </p>
             </div>
         </div>
@@ -396,7 +394,6 @@
             { name: "TIER 3 - BLUE NAME", price: 350000, category: "tier", needNickname: false, icon: "fa-droplet" }
         ];
 
-        // Review Data Static (contoh)
         const reviews = [
             { name: "Verns", rating: 5, comment: "Gacor banget! Jokinya cepet dan terpercaya ✅", date: "31 May 2026" },
             { name: "RIP_BOUNTYY177", rating: 5, comment: "Pengen beli SBC lagi nih, recommended!", date: "28 May 2026" },
@@ -482,7 +479,6 @@
             return div;
         }
 
-        // Render products
         const productGrid = document.getElementById('productGrid');
         let currentFilter = 'all';
         let searchQuery = '';
@@ -501,11 +497,9 @@
             filtered.forEach(p => productGrid.appendChild(createCard(p)));
         }
 
-        // Render reviews
         const reviewsGrid = document.getElementById('reviewsGrid');
         reviews.forEach(review => reviewsGrid.appendChild(createReviewCard(review)));
 
-        // Filter buttons
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.filter-btn').forEach(b => {
@@ -519,7 +513,6 @@
             });
         });
 
-        // Search
         document.getElementById('searchInput').addEventListener('input', (e) => {
             searchQuery = e.target.value;
             renderProducts();
