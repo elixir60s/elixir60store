@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>ELIXIRSBSTORE - Official Store</title>
+    <title>ELIXIR SB STORE - Joki SBC VTF Southbronx</title>
     <style>
         * {
             margin: 0;
@@ -13,268 +13,245 @@
         }
 
         body {
-            background-color: #f5f5f5;
+            background: linear-gradient(135deg, #0a0f1e 0%, #0f172a 100%);
             padding: 20px;
             padding-bottom: 60px;
+            min-height: 100vh;
         }
 
+        /* Header */
         .header {
             text-align: center;
-            padding: 25px 0;
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-            border-radius: 20px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 30px 20px;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 28px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
         }
 
         .header h1 {
             color: #ffd700;
-            font-size: 28px;
+            font-size: 2rem;
             letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(255,215,0,0.3);
         }
 
-        .header p {
-            color: #ccc;
-            margin-top: 8px;
-            font-size: 14px;
+        .header h1 span {
+            background: linear-gradient(135deg, #ffd700, #ffb347);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: none;
         }
 
-        .produk-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
+        .tagline {
+            color: #94a3b8;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* Sosial Media Links di Header */
+        .social-header {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.1);
+            padding: 8px 18px;
+            border-radius: 40px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .social-icon:hover {
+            transform: translateY(-2px);
+            background: rgba(255,255,255,0.2);
+        }
+
+        .social-icon.discord { background: #5865F2; border-color: #5865F2; }
+        .social-icon.tiktok { background: #000000; border-color: #fe2c55; }
+        
+        /* Grid Harga */
+        .price-list {
             max-width: 1200px;
             margin: 0 auto;
         }
 
+        .section-title {
+            text-align: center;
+            color: #ffd700;
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
         .card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(4px);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
             transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid rgba(255,215,0,0.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border-color: rgba(255,215,0,0.5);
         }
 
-        .gambar-produk {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            background-color: #eee;
-        }
-
-        .info-produk {
-            padding: 16px;
-        }
-
-        .nama-produk {
-            font-size: 18px;
+        .rp-value {
+            font-size: 1.6rem;
             font-weight: bold;
-            color: #203a43;
+            color: #ffd700;
             margin-bottom: 8px;
         }
 
-        .harga {
-            font-size: 22px;
+        .price {
+            font-size: 1.8rem;
             font-weight: bold;
-            color: #2e7d32;
-            margin-bottom: 12px;
+            color: #4ade80;
+            margin-bottom: 15px;
         }
 
-        .harga small {
-            font-size: 12px;
-            font-weight: normal;
-            color: #888;
+        .price small {
+            font-size: 0.8rem;
+            color: #94a3b8;
         }
 
-        .deskripsi {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 16px;
-            line-height: 1.4;
-        }
-
-        .tombol-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 12px;
-        }
-
-        .btn {
-            flex: 1;
-            text-align: center;
-            padding: 10px 12px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 600;
-            transition: all 0.2s;
+        .btn-order {
             display: inline-block;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            transform: scale(0.97);
-            opacity: 0.9;
-        }
-
-        .btn-wa {
-            background-color: #25D366;
+            background: #25D366;
             color: white;
+            padding: 10px 20px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: 0.2s;
+            width: 100%;
         }
 
-        .btn-dc {
-            background-color: #5865F2;
-            color: white;
-        }
-
-        .btn-tt {
-            background-color: #000000;
-            color: white;
+        .btn-order:hover {
+            background: #128C7E;
+            transform: scale(0.98);
         }
 
         .footer {
             text-align: center;
+            margin-top: 50px;
             padding: 20px;
-            margin-top: 30px;
-            color: #888;
-            font-size: 12px;
-            border-top: 1px solid #ddd;
+            color: #64748b;
+            font-size: 0.8rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
 
-        @media (max-width: 600px) {
-            body {
-                padding: 10px;
-            }
-            .produk-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            .btn {
-                padding: 8px 10px;
-                font-size: 12px;
-            }
-            .header h1 {
-                font-size: 22px;
-            }
+        @media (max-width: 640px) {
+            body { padding: 15px; }
+            .header h1 { font-size: 1.6rem; }
+            .rp-value { font-size: 1.3rem; }
+            .price { font-size: 1.5rem; }
+            .social-header { flex-wrap: wrap; }
         }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <h1>✨ ELIXIRSBSTORE ✨</h1>
-    <p>Klik tombol di bawah untuk order langsung via WhatsApp</p>
+    <h1>⚡ ELIXIR SB STORE ⚡</h1>
+    <div class="tagline">JOKI SBC • VTF • SOUTHBRONX | Fast & Trusted</div>
+    <div class="social-header">
+        <a href="https://discord.gg/CxbDP6QmW" target="_blank" class="social-icon discord">🎮 Join Discord</a>
+        <a href="https://www.tiktok.com/@not_elixir" target="_blank" class="social-icon tiktok">📱 TikTok @not_elixir</a>
+    </div>
 </div>
 
-<div class="produk-grid" id="daftar-produk">
-    <!-- Semua produk akan muncul di sini dari JavaScript -->
+<div class="price-list">
+    <h2 class="section-title">💰 LIST HARGA JOKI 💰</h2>
+    <div class="grid" id="priceGrid"></div>
 </div>
 
 <div class="footer">
-    © 2026 ELIXIRSBSTORE | Harga bisa berubah sewaktu-waktu
+    © 2025 ELIXIR SB STORE | Order via WhatsApp | Harga dapat berubah
 </div>
 
 <script>
-    // ==================================================
-    // 🔧 EDIT BAGIAN INI SESUAI PRODUK LO 🔧
-    // ==================================================
-    
-    const produk = [
-        {
-            nama: "Contoh Produk 1",
-            harga: 100000,
-            deskripsi: "Deskripsi produk lo di sini. Bisa tulis bahan, ukuran, varian, dll.",
-            gambar: "https://via.placeholder.com/400x300?text=Produk+1",
-            wa: "https://wa.me/6281234567890?text=Halo%20ELIXIRSBSTORE%2C%20saya%20mau%20order%20Contoh%20Produk%201"
-        },
-        {
-            nama: "Contoh Produk 2",
-            harga: 150000,
-            deskripsi: "Contoh: Ready stock, cod jakarta, quality guaranteed.",
-            gambar: "https://via.placeholder.com/400x300?text=Produk+2",
-            wa: "https://wa.me/6281234567890?text=Halo%20ELIXIRSBSTORE%2C%20saya%20mau%20order%20Contoh%20Produk%202"
-        },
-        {
-            nama: "Contoh Produk 3",
-            harga: 200000,
-            deskripsi: "Free gift untuk pembelian pertama!",
-            gambar: "https://via.placeholder.com/400x300?text=Produk+3",
-            wa: "https://wa.me/6281234567890?text=Halo%20ELIXIRSBSTORE%2C%20saya%20mau%20order%20Contoh%20Produk%203"
-        }
+    // Data harga sesuai permintaan
+    const priceData = [
+        { rp: "100K", price: 10000 },
+        { rp: "200K", price: 20000 },
+        { rp: "300K", price: 30000 },
+        { rp: "400K", price: 40000 },
+        { rp: "500K", price: 50000 },
+        { rp: "600K", price: 60000 },
+        { rp: "700K", price: 70000 },
+        { rp: "800K", price: 80000 },
+        { rp: "900K", price: 90000 },
+        { rp: "1JT", price: 100000 },
+        { rp: "1.1 JT", price: 110000 },
+        { rp: "1.2 JT", price: 120000 },
+        { rp: "1.3 JT", price: 130000 },
+        { rp: "1.4 JT", price: 140000 },
+        { rp: "1.5 JT", price: 150000 },
+        { rp: "1.6 JT", price: 160000 },
+        { rp: "1.7 JT", price: 170000 }
     ];
 
-    // KALO MAU TAMBAHIN DISCORD ATAU TIKTOK, PAKE FORMAT DI BAWAH
-    // Contoh produk pake Discord & TikTok (copy dan hapus tanda // di depan):
-    /*
-    {
-        nama: "Produk Special",
-        harga: 500000,
-        deskripsi: "Limited edition!",
-        gambar: "https://via.placeholder.com/400x300?text=Special",
-        wa: "https://wa.me/6281234567890?text=Order%20Special",
-        discord: "https://discord.gg/invite-lo",
-        tiktok: "https://tiktok.com/@username-lo"
-    }
-    */
-
-    // ==================================================
-    // SAMPAI SINI DOANG YANG LO EDIT
-    // ==================================================
-
-    function formatRupiah(angka) {
+    // Nomor WhatsApp (format internasional tanpa 0)
+    const waNumber = "62895385984764"; // 0895385984764 -> 62895385984764
+    
+    // Fungsi format Rupiah
+    function formatRupiah(amount) {
         return new Intl.NumberFormat('id-ID', {
             style: 'currency',
             currency: 'IDR',
             minimumFractionDigits: 0
-        }).format(angka);
+        }).format(amount);
     }
 
-    function tampilkanProduk() {
-        const container = document.getElementById('daftar-produk');
-        container.innerHTML = '';
+    // Generate pesan WA otomatis
+    function generateWaMessage(rpValue, priceAmount) {
+        const text = `Halo%20ELIXIR%20SB%20STORE%2C%20saya%20mau%20order%20joki%20SBC%2FVTF%2FSouthbronx%20untuk%20${rpValue}%20RP%20dengan%20harga%20${formatRupiah(priceAmount).replace(/\./g, '%2E')}.%20Apakah%20tersedia%3F`;
+        return `https://wa.me/${waNumber}?text=${text}`;
+    }
+
+    // Render grid
+    const gridContainer = document.getElementById('priceGrid');
+    
+    priceData.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'card';
         
-        produk.forEach(item => {
-            const card = document.createElement('div');
-            card.className = 'card';
-            
-            let waBtn = `<a href="${item.wa}" class="btn btn-wa" target="_blank">💬 Pesan via WA</a>`;
-            
-            let dcBtn = '';
-            if (item.discord && item.discord !== '') {
-                dcBtn = `<a href="${item.discord}" class="btn btn-dc" target="_blank">🎮 Join Discord</a>`;
-            }
-            
-            let ttBtn = '';
-            if (item.tiktok && item.tiktok !== '') {
-                ttBtn = `<a href="${item.tiktok}" class="btn btn-tt" target="_blank">📱 TikTok Shop</a>`;
-            }
-            
-            let gambarSrc = item.gambar || 'https://via.placeholder.com/400x300?text=ELIXIRSBSTORE';
-            
-            card.innerHTML = `
-                <img class="gambar-produk" src="${gambarSrc}" alt="${item.nama}" onerror="this.src='https://via.placeholder.com/400x300?text=Gambar+Tidak+Tersedia'">
-                <div class="info-produk">
-                    <div class="nama-produk">${item.nama}</div>
-                    <div class="harga">${formatRupiah(item.harga)}</div>
-                    <div class="deskripsi">${item.deskripsi}</div>
-                    <div class="tombol-group">
-                        ${waBtn}
-                        ${dcBtn}
-                        ${ttBtn}
-                    </div>
-                </div>
-            `;
-            container.appendChild(card);
-        });
-    }
-
-    tampilkanProduk();
+        const waLink = generateWaMessage(item.rp, item.price);
+        
+        card.innerHTML = `
+            <div class="rp-value">🎯 ${item.rp} RP</div>
+            <div class="price">${formatRupiah(item.price)}</div>
+            <a href="${waLink}" class="btn-order" target="_blank">💬 Order via WhatsApp</a>
+        `;
+        
+        gridContainer.appendChild(card);
+    });
 </script>
 
 </body>
