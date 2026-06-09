@@ -13,83 +13,115 @@
         }
 
         body {
-            background: linear-gradient(135deg, #0a0f1e 0%, #0f172a 100%);
+            background: linear-gradient(135deg, #0f0c1f 0%, #1a0f2e 50%, #0b0716 100%);
             padding: 20px;
             padding-bottom: 60px;
             min-height: 100vh;
         }
 
+        /* Header Premium Ungu */
         .header {
             text-align: center;
-            padding: 30px 20px;
-            background: rgba(15, 23, 42, 0.7);
+            padding: 35px 20px;
+            background: rgba(88, 28, 135, 0.3);
             backdrop-filter: blur(20px);
-            border-radius: 32px;
-            margin-bottom: 30px;
-            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 48px;
+            margin-bottom: 35px;
+            border: 1px solid rgba(168, 85, 247, 0.4);
+            box-shadow: 0 8px 32px rgba(88, 28, 135, 0.3);
         }
 
         .header h1 {
-            background: linear-gradient(135deg, #ffd700, #ffb347);
+            background: linear-gradient(135deg, #c084fc, #a855f7, #7e22ce);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             font-size: 2rem;
+            text-shadow: 0 0 20px rgba(168,85,247,0.3);
         }
 
         .tagline {
-            color: #94a3b8;
-            margin-top: 8px;
+            color: #c084fc;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
         }
 
+        /* Social Buttons Premium */
         .social-header {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 18px;
+            margin-top: 25px;
             flex-wrap: wrap;
         }
 
         .social-icon {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 10px 24px;
-            border-radius: 40px;
+            gap: 10px;
+            padding: 12px 28px;
+            border-radius: 60px;
             color: white;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
         }
 
-        .social-icon.discord { background: #5865F2; }
-        .social-icon.tiktok { background: #000000; border: 1px solid #fe2c55; }
+        .social-icon.discord { 
+            background: linear-gradient(135deg, #5865F2, #4752c4);
+            box-shadow: 0 4px 15px rgba(88,101,242,0.4);
+        }
+        .social-icon.tiktok { 
+            background: linear-gradient(135deg, #000000, #1a1a2e);
+            border: 1px solid #fe2c55;
+            box-shadow: 0 4px 15px rgba(254,44,85,0.2);
+        }
+        .social-icon:hover {
+            transform: translateY(-3px);
+            filter: brightness(1.1);
+        }
 
+        /* Tab Buttons Ungu */
         .tab-buttons {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 30px;
+            gap: 18px;
+            margin-bottom: 35px;
             flex-wrap: wrap;
         }
 
         .tab-btn {
-            background: rgba(30, 41, 59, 0.6);
-            border: 1px solid rgba(255,215,0,0.2);
-            padding: 12px 28px;
+            background: rgba(88, 28, 135, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            padding: 14px 32px;
             font-weight: bold;
-            border-radius: 50px;
-            color: #94a3b8;
+            font-size: 1rem;
+            border-radius: 60px;
+            color: #c084fc;
             cursor: pointer;
+            transition: all 0.3s ease;
         }
 
         .tab-btn.active {
-            background: linear-gradient(135deg, #ffd700, #ffb347);
-            color: #0f172a;
+            background: linear-gradient(135deg, #a855f7, #7e22ce);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 20px rgba(168,85,247,0.5);
+        }
+
+        .tab-btn:hover:not(.active) {
+            border-color: #a855f7;
+            color: #e9d5ff;
+            background: rgba(168,85,247,0.2);
         }
 
         .tab-panel {
             display: none;
-            animation: fadeIn 0.3s ease;
+            animation: fadeIn 0.4s ease;
         }
 
         .tab-panel.active-panel {
@@ -97,153 +129,184 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .section-title {
             text-align: center;
-            background: linear-gradient(135deg, #ffd700, #ffb347);
+            background: linear-gradient(135deg, #e9d5ff, #c084fc);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            font-size: 1.6rem;
-            margin-bottom: 25px;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            font-weight: bold;
+            letter-spacing: 2px;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 25px;
-            max-width: 1300px;
+            grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+            gap: 28px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
+        /* Card Premium Ungu */
         .card {
-            background: rgba(30, 41, 59, 0.6);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
+            background: rgba(30, 20, 50, 0.6);
+            backdrop-filter: blur(15px);
+            border-radius: 28px;
             overflow: hidden;
-            border: 1px solid rgba(255,215,0,0.15);
-            transition: 0.3s;
+            border: 1px solid rgba(168, 85, 247, 0.25);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255,215,0,0.4);
+            transform: translateY(-8px) scale(1.01);
+            border-color: rgba(168, 85, 247, 0.6);
+            box-shadow: 0 20px 40px rgba(88, 28, 135, 0.4);
         }
 
         .card-header {
-            background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,180,71,0.05));
-            padding: 18px 20px;
-            border-bottom: 1px solid rgba(255,215,0,0.1);
+            background: linear-gradient(135deg, rgba(168,85,247,0.2), rgba(126,34,206,0.1));
+            padding: 20px 24px;
+            border-bottom: 1px solid rgba(168,85,247,0.2);
         }
 
         .product-title {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: bold;
-            color: #ffd700;
+            background: linear-gradient(135deg, #e9d5ff, #c084fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         .rating {
-            color: #ffd700;
-            font-size: 0.85rem;
-            margin-top: 6px;
+            color: #fbbf24;
+            font-size: 0.9rem;
+            margin-top: 8px;
+        }
+
+        .rating span {
+            color: #a78bfa;
+            margin-left: 6px;
         }
 
         .card-body {
-            padding: 20px;
+            padding: 24px;
         }
 
+        /* Option Item Premium */
         .option-item {
-            background: rgba(15, 23, 42, 0.5);
-            border-radius: 16px;
-            padding: 12px 15px;
-            margin-bottom: 12px;
+            background: linear-gradient(135deg, rgba(88, 28, 135, 0.4), rgba(168,85,247,0.1));
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 16px;
             cursor: pointer;
-            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(168,85,247,0.2);
         }
 
         .option-item.selected {
-            background: rgba(255,215,0,0.15);
-            border-color: #ffd700;
+            background: linear-gradient(135deg, rgba(168,85,247,0.3), rgba(126,34,206,0.2));
+            border-color: #a855f7;
+            box-shadow: 0 0 15px rgba(168,85,247,0.3);
         }
 
         .option-title {
             font-weight: bold;
-            color: white;
+            color: #e9d5ff;
+            font-size: 1.1rem;
         }
 
         .option-desc {
             font-size: 0.75rem;
-            color: #94a3b8;
+            color: #a78bfa;
+            margin-top: 6px;
         }
 
         .price-row {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-top: 8px;
-        }
-
-        .price-original {
-            color: #94a3b8;
-            text-decoration: line-through;
-            font-size: 0.8rem;
+            align-items: baseline;
+            margin-top: 12px;
         }
 
         .price-sale {
-            color: #4ade80;
+            color: #fbbf24;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
         }
 
         .input-field {
             width: 100%;
-            padding: 12px 15px;
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 14px;
-            color: white;
-            margin: 12px 0;
+            padding: 14px 16px;
+            background: rgba(30, 20, 50, 0.6);
+            border: 1px solid rgba(168,85,247,0.3);
+            border-radius: 20px;
+            color: #e9d5ff;
+            margin: 16px 0;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #a855f7;
+            box-shadow: 0 0 10px rgba(168,85,247,0.3);
         }
 
         .star-rating {
             display: flex;
-            gap: 8px;
-            margin: 12px 0;
-            font-size: 1.5rem;
+            gap: 12px;
+            margin: 16px 0;
+            font-size: 1.8rem;
             cursor: pointer;
+            justify-content: center;
         }
 
         .star {
-            color: #334155;
+            color: #4a2a6e;
+            transition: 0.1s;
         }
 
         .star.active {
-            color: #ffd700;
+            color: #fbbf24;
+            text-shadow: 0 0 8px #fbbf24;
         }
 
         .btn-buy {
             display: block;
             width: 100%;
-            background: linear-gradient(135deg, #25D366, #128C7E);
+            background: linear-gradient(135deg, #a855f7, #7e22ce);
             color: white;
             text-align: center;
-            padding: 14px;
-            border-radius: 40px;
+            padding: 16px;
+            border-radius: 60px;
             text-decoration: none;
             font-weight: bold;
+            font-size: 1rem;
             border: none;
             cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 8px;
+        }
+
+        .btn-buy:hover {
+            transform: scale(0.98);
+            box-shadow: 0 4px 20px rgba(168,85,247,0.5);
         }
 
         .footer {
             text-align: center;
-            margin-top: 50px;
-            padding: 20px;
-            color: #64748b;
-            font-size: 0.75rem;
+            margin-top: 60px;
+            padding: 25px;
+            color: #7e5a9e;
+            font-size: 0.8rem;
+            border-top: 1px solid rgba(168,85,247,0.2);
         }
     </style>
 </head>
@@ -282,25 +345,34 @@
 </div>
 
 <div class="footer">
-    © 2025 ELIXIR SB STORE | Order via WhatsApp | Harga dapat berubah
+    © 2025 ELIXIR SB STORE | Order via WhatsApp | Fast & Trusted
 </div>
 
 <script>
     const waNumber = "62895385984764";
 
+    // JOKI SBC (17 PRODUK - NO DELAY ONLY)
     const jokiData = [
-        { name: "SBC 100K", options: [{ title: "⚡ NO DELAY", desc: "VIA TRANSFER IN GAME", price: 12000, originalPrice: 25000 }, { title: "🐢 REGULER", desc: "VIA TRANSFER IN GAME", price: 25000, originalPrice: null }] },
-        { name: "SBC 200K", options: [{ title: "⚡ NO DELAY", desc: "VIA TRANSFER IN GAME", price: 20000, originalPrice: 35000 }, { title: "🐢 REGULER", desc: "VIA TRANSFER IN GAME", price: 35000, originalPrice: null }] },
-        { name: "SBC 300K", options: [{ title: "⚡ NO DELAY", desc: "VIA TRANSFER IN GAME", price: 30000, originalPrice: 65000 }, { title: "🐢 REGULER", desc: "VIA TRANSFER IN GAME", price: 65000, originalPrice: null }] },
-        { name: "SBC 400K", options: [{ title: "⚡ NO DELAY", desc: "VIA TRANSFER IN GAME", price: 40000, originalPrice: 80000 }, { title: "🐢 REGULER", desc: "VIA TRANSFER IN GAME", price: 80000, originalPrice: null }] },
-        { name: "SBC 500K", options: [{ title: "⚡ NO DELAY", desc: "VIA TRANSFER IN GAME", price: 50000, originalPrice: 100000 }, { title: "🐢 REGULER", desc: "VIA TRANSFER IN GAME", price: 100000, originalPrice: null }] },
-        { name: "SBC 600K", options: [{ title: "⚡ NO DELAY", desc: "VIA TRANSFER IN GAME", price: 60000, originalPrice: 120000 }, { title: "🐢 REGULER", desc: "VIA TRANSFER IN GAME", price: 120000, originalPrice: null }] },
-        { name: "SBC 700K", options: [{ title: "⚡ NO DELAY", desc: "VIA TRANSFER IN GAME", price: 70000, originalPrice: 140000 }, { title: "🐢 REGULER", desc: "VIA TRANSFER IN GAME", price: 140000, originalPrice: null }] },
-        { name: "SBC 800K", options: [{ title: "⚡ NO DELAY", desc: "VIA TRANSFER IN GAME", price: 80000, originalPrice: 160000 }, { title: "🐢 REGULER", desc: "VIA TRANSFER IN GAME", price: 160000, originalPrice: null }] },
-        { name: "SBC 900K", options: [{ title: "⚡ NO DELAY", desc: "VIA TRANSFER IN GAME", price: 90000, originalPrice: 180000 }, { title: "🐢 REGULER", desc: "VIA TRANSFER IN GAME", price: 180000, originalPrice: null }] },
-        { name: "SBC 1JT", options: [{ title: "⚡ NO DELAY", desc: "VIA TRANSFER IN GAME", price: 100000, originalPrice: 200000 }, { title: "🐢 REGULER", desc: "VIA TRANSFER IN GAME", price: 200000, originalPrice: null }] }
+        { name: "SBC 100K", price: 12000 },
+        { name: "SBC 200K", price: 20000 },
+        { name: "SBC 300K", price: 30000 },
+        { name: "SBC 400K", price: 40000 },
+        { name: "SBC 500K", price: 50000 },
+        { name: "SBC 600K", price: 60000 },
+        { name: "SBC 700K", price: 70000 },
+        { name: "SBC 800K", price: 80000 },
+        { name: "SBC 900K", price: 90000 },
+        { name: "SBC 1JT", price: 100000 },
+        { name: "SBC 1.1 JT", price: 110000 },
+        { name: "SBC 1.2 JT", price: 120000 },
+        { name: "SBC 1.3 JT", price: 130000 },
+        { name: "SBC 1.4 JT", price: 140000 },
+        { name: "SBC 1.5 JT", price: 150000 },
+        { name: "SBC 1.6 JT", price: 160000 },
+        { name: "SBC 1.7 JT", price: 170000 }
     ];
 
+    // SCRIPT DATA
     const scriptData = [
         { name: "MARSHMALLOW", type: "HARIAN", price: 13000, originalPrice: 25000 },
         { name: "MARSHMALLOW", type: "BULANAN", price: 60000, originalPrice: 100000 },
@@ -311,6 +383,7 @@
         { name: "FPS", type: "LIFETIME", price: 50000, originalPrice: 100000 }
     ];
 
+    // TIER DATA
     const tierData = [
         { name: "TIER 1", color: "GREEN NAME", price: 150000 },
         { name: "TIER 2", color: "PINK NAME", price: 250000 },
@@ -321,44 +394,105 @@
         return "Rp" + amount.toLocaleString('id-ID');
     }
 
-    function openWhatsApp(productName, optionName, price, nickname, rating) {
-        const message = `Halo%20ELIXIR%20SB%20STORE%0A%0A📦%20*PESANAN%20BARU*%0A━━━━━━━━━━━━━━━━━━%0A📍%20Produk%3A%20${encodeURIComponent(productName)}%0A⚡%20Paket%3A%20${encodeURIComponent(optionName)}%0A💰%20Total%3A%20${encodeURIComponent(formatRupiah(price))}%0A👤%20Nickname%3A%20${encodeURIComponent(nickname || '-')}%0A⭐%20Rating%3A%20${encodeURIComponent(rating || '-')}%0A━━━━━━━━━━━━━━━━━━%0A%0A✅%20Saya%20sudah%20transfer.%20Berikut%20bukti%20transfernya%3A`;
+    function openWhatsApp(productName, price, nickname, rating) {
+        const message = `Halo%20ELIXIR%20SB%20STORE%0A%0A📦%20*PESANAN%20BARU*%0A━━━━━━━━━━━━━━━━━━%0A📍%20Produk%3A%20${encodeURIComponent(productName)}%0A💰%20Total%3A%20${encodeURIComponent(formatRupiah(price))}%0A👤%20Nickname%3A%20${encodeURIComponent(nickname || '-')}%0A⭐%20Rating%3A%20${encodeURIComponent(rating || '-')}%0A━━━━━━━━━━━━━━━━━━%0A%0A✅%20Saya%20sudah%20transfer.%20Berikut%20bukti%20transfernya%3A`;
         window.open(`https://wa.me/${waNumber}?text=${message}`, '_blank');
     }
 
-    // Render JOKI
+    // RENDER JOKI (17 PRODUK)
     const jokiContainer = document.getElementById('jokiGrid');
     let jokiHTML = "";
-    jokiData.forEach(product => {
-        let optionsHTML = "";
-        product.options.forEach(opt => {
-            optionsHTML += `<div class="option-item" data-product="${product.name}" data-option="${opt.title}" data-price="${opt.price}">
-                <div class="option-title">${opt.title}</div>
-                <div class="option-desc">${opt.desc}</div>
-                <div class="price-row">${opt.originalPrice ? `<span class="price-original">${formatRupiah(opt.originalPrice)}</span>` : ""}<span class="price-sale">${formatRupiah(opt.price)}</span></div>
-            </div>`;
-        });
-        jokiHTML += `<div class="card"><div class="card-header"><div class="product-title">🎯 ${product.name}</div><div class="rating">⭐⭐⭐⭐⭐ <span>5 (4 ulasan)</span></div></div><div class="card-body">${optionsHTML}<input type="text" class="input-field nickname" placeholder="📝 Nickname kamu..."><div class="star-rating"><span class="star" data-value="1">★</span><span class="star" data-value="2">★</span><span class="star" data-value="3">★</span><span class="star" data-value="4">★</span><span class="star" data-value="5">★</span></div><button class="btn-buy">💳 BELI SEKARANG</button></div></div>`;
-    });
+    for (let p of jokiData) {
+        jokiHTML += `<div class="card">
+            <div class="card-header">
+                <div class="product-title">🎯 ${p.name}</div>
+                <div class="rating">⭐⭐⭐⭐⭐ <span>5 (4 ulasan)</span></div>
+            </div>
+            <div class="card-body">
+                <div class="option-item selected" data-product="${p.name}" data-price="${p.price}" style="cursor:default">
+                    <div class="option-title">⚡ NO DELAY</div>
+                    <div class="option-desc">VIA TRANSFER IN GAME SOUTH BRONX</div>
+                    <div class="price-row">
+                        <span class="price-sale">${formatRupiah(p.price)}</span>
+                    </div>
+                </div>
+                <input type="text" class="input-field nickname" placeholder="📝 Nickname kamu...">
+                <div class="star-rating">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <button class="btn-buy">💳 BELI SEKARANG</button>
+            </div>
+        </div>`;
+    }
     jokiContainer.innerHTML = jokiHTML;
 
-    // Render SCRIPT
+    // RENDER SCRIPT
     const scriptContainer = document.getElementById('scriptGrid');
     let scriptHTML = "";
-    scriptData.forEach(script => {
-        scriptHTML += `<div class="card"><div class="card-header"><div class="product-title">💻 SCRIPT ${script.name}</div><div class="rating">⭐⭐⭐⭐⭐ <span>${script.type === "LIFETIME" ? "5 (8 ulasan)" : "4 (3 ulasan)"}</span></div></div><div class="card-body"><div class="option-item" data-product="SCRIPT ${script.name}" data-option="${script.type}" data-price="${script.price}" style="cursor:default"><div class="option-title">${script.type === "HARIAN" ? "📆" : script.type === "BULANAN" ? "📅" : "♾️"} ${script.type}</div><div class="price-row">${script.originalPrice ? `<span class="price-original">${formatRupiah(script.originalPrice)}</span>` : ""}<span class="price-sale">${formatRupiah(script.price)}</span></div></div><input type="text" class="input-field nickname" placeholder="📝 Nickname kamu..."><div class="star-rating"><span class="star" data-value="1">★</span><span class="star" data-value="2">★</span><span class="star" data-value="3">★</span><span class="star" data-value="4">★</span><span class="star" data-value="5">★</span></div><button class="btn-buy">💳 BELI SEKARANG</button></div></div>`;
-    });
+    for (let s of scriptData) {
+        const typeIcon = s.type === "HARIAN" ? "📆" : (s.type === "BULANAN" ? "📅" : "♾️");
+        scriptHTML += `<div class="card">
+            <div class="card-header">
+                <div class="product-title">💻 SCRIPT ${s.name}</div>
+                <div class="rating">⭐⭐⭐⭐⭐ <span>${s.type === "LIFETIME" ? "5 (8 ulasan)" : "4 (3 ulasan)"}</span></div>
+            </div>
+            <div class="card-body">
+                <div class="option-item selected" data-product="SCRIPT ${s.name} - ${s.type}" data-price="${s.price}" style="cursor:default">
+                    <div class="option-title">${typeIcon} ${s.type}</div>
+                    <div class="price-row">
+                        ${s.originalPrice ? `<span class="price-original" style="color:#7e5a9e; text-decoration:line-through; margin-right:10px;">${formatRupiah(s.originalPrice)}</span>` : ""}
+                        <span class="price-sale">${formatRupiah(s.price)}</span>
+                    </div>
+                </div>
+                <input type="text" class="input-field nickname" placeholder="📝 Nickname kamu...">
+                <div class="star-rating">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <button class="btn-buy">💳 BELI SEKARANG</button>
+            </div>
+        </div>`;
+    }
     scriptContainer.innerHTML = scriptHTML;
 
-    // Render TIER
+    // RENDER TIER
     const tierContainer = document.getElementById('tierGrid');
     let tierHTML = "";
-    tierData.forEach(tier => {
-        tierHTML += `<div class="card"><div class="card-header"><div class="product-title">⭐ ${tier.name}</div><div class="rating">⭐⭐⭐⭐⭐ <span>5 (12 ulasan)</span></div></div><div class="card-body"><div class="option-item" data-product="${tier.name}" data-option="${tier.color}" data-price="${tier.price}" style="cursor:default"><div class="option-title">${tier.color}</div><div class="price-row"><span class="price-sale">${formatRupiah(tier.price)}</span></div></div><input type="text" class="input-field nickname" placeholder="📝 Nickname kamu..."><div class="star-rating"><span class="star" data-value="1">★</span><span class="star" data-value="2">★</span><span class="star" data-value="3">★</span><span class="star" data-value="4">★</span><span class="star" data-value="5">★</span></div><button class="btn-buy">💳 BELI SEKARANG</button></div></div>`;
-    });
+    for (let t of tierData) {
+        tierHTML += `<div class="card">
+            <div class="card-header">
+                <div class="product-title">⭐ ${t.name}</div>
+                <div class="rating">⭐⭐⭐⭐⭐ <span>5 (12 ulasan)</span></div>
+            </div>
+            <div class="card-body">
+                <div class="option-item selected" data-product="${t.name} (${t.color})" data-price="${t.price}" style="cursor:default">
+                    <div class="option-title">${t.color}</div>
+                    <div class="price-row">
+                        <span class="price-sale">${formatRupiah(t.price)}</span>
+                    </div>
+                </div>
+                <input type="text" class="input-field nickname" placeholder="📝 Nickname kamu...">
+                <div class="star-rating">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <button class="btn-buy">💳 BELI SEKARANG</button>
+            </div>
+        </div>`;
+    }
     tierContainer.innerHTML = tierHTML;
 
-    // Event Listeners
+    // TAB SWITCHING
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -368,34 +502,42 @@
         });
     });
 
-    document.querySelectorAll('.card').forEach(card => {
-        card.querySelectorAll('.option-item').forEach(opt => {
-            opt.addEventListener('click', () => {
-                card.querySelectorAll('.option-item').forEach(o => o.classList.remove('selected'));
-                opt.classList.add('selected');
+    // ATTACH EVENT LISTENERS
+    function attachCardListeners() {
+        document.querySelectorAll('.card').forEach(card => {
+            // Star rating
+            const stars = card.querySelectorAll('.star');
+            stars.forEach(star => {
+                star.addEventListener('click', () => {
+                    const val = parseInt(star.dataset.value);
+                    stars.forEach((s, i) => {
+                        if (i < val) s.classList.add('active');
+                        else s.classList.remove('active');
+                    });
+                });
             });
-        });
 
-        card.querySelectorAll('.star').forEach(star => {
-            star.addEventListener('click', function() {
-                const val = parseInt(this.dataset.value);
-                const stars = this.closest('.star-rating').querySelectorAll('.star');
-                stars.forEach((s, i) => i < val ? s.classList.add('active') : s.classList.remove('active'));
-            });
+            // Buy button
+            const buyBtn = card.querySelector('.btn-buy');
+            if (buyBtn) {
+                buyBtn.addEventListener('click', () => {
+                    const selected = card.querySelector('.option-item');
+                    if (!selected) {
+                        alert('Pilih metode terlebih dahulu!');
+                        return;
+                    }
+                    const product = selected.dataset.product;
+                    const price = parseInt(selected.dataset.price);
+                    const nickname = card.querySelector('.nickname')?.value || '';
+                    const starContainer = card.querySelector('.star-rating');
+                    const activeStars = starContainer.querySelectorAll('.star.active').length;
+                    openWhatsApp(product, price, nickname, activeStars || 5);
+                });
+            }
         });
+    }
 
-        card.querySelector('.btn-buy').addEventListener('click', () => {
-            const selected = card.querySelector('.option-item.selected');
-            if (!selected) { alert('Pilih metode dulu!'); return; }
-            const product = selected.dataset.product;
-            const option = selected.dataset.option;
-            const price = parseInt(selected.dataset.price);
-            const nickname = card.querySelector('.nickname')?.value || '';
-            const starContainer = card.querySelector('.star-rating');
-            const activeStars = starContainer.querySelectorAll('.star.active').length;
-            openWhatsApp(product, option, price, nickname, activeStars || 5);
-        });
-    });
+    attachCardListeners();
 </script>
 </body>
 </html>
