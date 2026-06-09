@@ -3,28 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>ELIXIR SB STORE</title>
+    <title>ELIXIR SB STORE - Premium Gaming Service</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Font Awesome (minimal) -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- AOS -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+        
+        // 🔥 GANTI DENGAN CONFIG FIREBASE LO!
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+        
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        window.db = db;
+    </script>
     
     <style>
         * { font-family: 'Inter', sans-serif; }
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #1a1a2e; }
         ::-webkit-scrollbar-thumb { background: #a855f7; border-radius: 10px; }
+        .review-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.2s;
+        }
+        .review-card:hover {
+            border-color: rgba(168,85,247,0.3);
+        }
     </style>
 </head>
-<body class="bg-gradient-to-br from-[#0a0a0f] to-[#120c1c]">
+<body class="bg-gradient-to-br from-[#0a0a0f] to-[#120c1c] min-h-screen">
 
     <!-- GLOW BACKGROUND -->
     <div class="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
@@ -33,7 +59,7 @@
     </div>
 
     <!-- HEADER -->
-    <div class="relative z-10 max-w-6xl mx-auto px-5 pt-8" data-aos="fade-down">
+    <div class="relative z-10 max-w-6xl mx-auto px-5 pt-8">
         <div class="text-center">
             <div class="inline-flex items-center gap-2 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl px-5 py-2.5 mb-5">
                 <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-700 rounded-lg flex items-center justify-center">
@@ -52,12 +78,15 @@
         </div>
     </div>
 
-    <!-- TABS -->
+    <!-- MAIN CONTENT -->
     <div class="relative z-10 max-w-6xl mx-auto px-5 mt-10">
+        
+        <!-- TABS -->
         <div class="flex justify-center gap-2 mb-10">
             <button data-tab="joki" class="tab-btn active-tab px-6 py-2.5 rounded-full text-sm font-medium transition-all bg-purple-600 text-white shadow-md shadow-purple-500/25">Joki SBC</button>
             <button data-tab="script" class="tab-btn px-6 py-2.5 rounded-full text-sm font-medium transition-all bg-white/5 text-white/60 hover:text-white">Script</button>
             <button data-tab="tier" class="tab-btn px-6 py-2.5 rounded-full text-sm font-medium transition-all bg-white/5 text-white/60 hover:text-white">Akun Tier</button>
+            <button data-tab="reviews" class="tab-btn px-6 py-2.5 rounded-full text-sm font-medium transition-all bg-white/5 text-white/60 hover:text-white"><i class="fas fa-star mr-1 text-yellow-500"></i> Ulasan</button>
         </div>
 
         <!-- JOKI TAB -->
@@ -74,6 +103,35 @@
         <div id="tierTab" class="tab-content hidden">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="tierGrid"></div>
         </div>
+
+        <!-- REVIEWS TAB -->
+        <div id="reviewsTab" class="tab-content hidden">
+            <div class="max-w-2xl mx-auto">
+                <!-- Form Kirim Review -->
+                <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 mb-8">
+                    <h3 class="text-white font-semibold text-lg mb-4 flex items-center gap-2">
+                        <i class="fas fa-pen text-purple-400"></i> Tulis Ulasan
+                    </h3>
+                    <input type="text" id="reviewName" class="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 text-white/80 text-sm placeholder:text-white/30 focus:outline-none focus:border-purple-500 mb-3" placeholder="Nickname kamu...">
+                    <div class="flex gap-1 mb-3" id="reviewStars">
+                        <i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="1"></i>
+                        <i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="2"></i>
+                        <i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="3"></i>
+                        <i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="4"></i>
+                        <i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="5"></i>
+                    </div>
+                    <textarea id="reviewComment" rows="3" class="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 text-white/80 text-sm placeholder:text-white/30 focus:outline-none focus:border-purple-500 mb-3" placeholder="Tulis ulasan kamu..."></textarea>
+                    <button id="submitReview" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-medium py-3 rounded-xl transition-all flex items-center justify-center gap-2">
+                        <i class="fas fa-paper-plane"></i> Kirim Review
+                    </button>
+                </div>
+
+                <!-- Daftar Ulasan -->
+                <div id="reviewsList" class="space-y-3">
+                    <div class="text-center text-white/40 py-8 text-sm">Loading ulasan...</div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- FOOTER -->
@@ -81,46 +139,49 @@
         © 2025 ELIXIR SB STORE
     </div>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({ duration: 500, once: true });
-
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+        
+        // 🔥 GANTI DENGAN CONFIG FIREBASE LO! 🔥
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        
+        // ========== FUNGSI ==========
         const waNumber = "62895385984764";
         const formatRp = (n) => "Rp" + n.toLocaleString('id-ID');
-
-        // DATA
-        const jokiList = [
-            "100K","200K","300K","400K","500K",
-            "600K","700K","800K","900K","1JT",
-            "1.1 JT","1.2 JT","1.3 JT","1.4 JT","1.5 JT","1.6 JT","1.7 JT"
-        ];
+        
+        // Data produk
+        const jokiList = ["100K","200K","300K","400K","500K","600K","700K","800K","900K","1JT","1.1 JT","1.2 JT","1.3 JT","1.4 JT","1.5 JT","1.6 JT","1.7 JT"];
         const jokiHarga = [12000,20000,30000,40000,50000,60000,70000,80000,90000,100000,110000,120000,130000,140000,150000,160000,170000];
-
         const scriptList = [
-            { name:"MARSHMALLOW - HARIAN", price:13000 },
-            { name:"MARSHMALLOW - BULANAN", price:60000 },
-            { name:"MARSHMALLOW - LIFETIME", price:150000 },
-            { name:"COMBAT - HARIAN", price:20000 },
-            { name:"COMBAT - BULANAN", price:80000 },
-            { name:"COMBAT - LIFETIME", price:200000 },
+            { name:"MARSHMALLOW - HARIAN", price:13000 }, { name:"MARSHMALLOW - BULANAN", price:60000 },
+            { name:"MARSHMALLOW - LIFETIME", price:150000 }, { name:"COMBAT - HARIAN", price:20000 },
+            { name:"COMBAT - BULANAN", price:80000 }, { name:"COMBAT - LIFETIME", price:200000 },
             { name:"FPS - LIFETIME", price:50000 }
         ];
-
         const tierList = [
-            { name:"TIER 1 - GREEN", price:150000 },
-            { name:"TIER 2 - PINK", price:250000 },
+            { name:"TIER 1 - GREEN", price:150000 }, { name:"TIER 2 - PINK", price:250000 },
             { name:"TIER 3 - BLUE", price:350000 }
         ];
-
+        
         function sendWA(product, price, nickname, rating) {
             const msg = `Halo ELIXIR SB STORE%0A%0AProduk: ${encodeURIComponent(product)}%0AHarga: ${encodeURIComponent(formatRp(price))}%0ANickname: ${encodeURIComponent(nickname || '-')}%0ARating: ${rating || 5}⭐%0A%0ABukti transfer: (kirim foto)`;
             window.open(`https://wa.me/${waNumber}?text=${msg}`, '_blank');
         }
-
+        
         function createCard(title, price) {
             const card = document.createElement('div');
             card.className = "bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300";
-            card.setAttribute('data-aos', 'fade-up');
             card.innerHTML = `
                 <div class="flex justify-between items-start mb-4">
                     <h3 class="text-white font-medium text-base">${title}</h3>
@@ -147,23 +208,18 @@
                     <i class="fab fa-whatsapp text-sm"></i> Order
                 </button>
             `;
-
-            // Star logic
+            
             const stars = card.querySelectorAll('.stars i');
             stars.forEach(star => {
                 star.addEventListener('click', () => {
                     const val = parseInt(star.dataset.val);
                     stars.forEach((s, i) => {
-                        if (i < val) {
-                            s.className = "fas fa-star text-yellow-500 text-lg cursor-pointer";
-                        } else {
-                            s.className = "far fa-star text-white/30 text-lg cursor-pointer hover:text-yellow-500 transition";
-                        }
+                        if (i < val) s.className = "fas fa-star text-yellow-500 text-lg cursor-pointer";
+                        else s.className = "far fa-star text-white/30 text-lg cursor-pointer hover:text-yellow-500 transition";
                     });
                 });
             });
-
-            // Buy logic
+            
             const buyBtn = card.querySelector('.buy');
             const nicknameInput = card.querySelector('.nickname');
             buyBtn.addEventListener('click', () => {
@@ -171,23 +227,114 @@
                 const active = card.querySelectorAll('.stars .fas').length;
                 sendWA(title, price, nickname, active || 5);
             });
-
             return card;
         }
-
-        // RENDER
+        
+        // Render produk
         const jokiGrid = document.getElementById('jokiGrid');
         jokiList.forEach((name, i) => jokiGrid.appendChild(createCard(`SBC ${name}`, jokiHarga[i])));
-
         const scriptGrid = document.getElementById('scriptGrid');
         scriptList.forEach(s => scriptGrid.appendChild(createCard(`SCRIPT ${s.name}`, s.price)));
-
         const tierGrid = document.getElementById('tierGrid');
         tierList.forEach(t => tierGrid.appendChild(createCard(t.name, t.price)));
-
-        // TAB SWITCH
+        
+        // ========== FITUR REVIEW ==========
+        let selectedRating = 5;
+        const starsSelect = document.querySelectorAll('#reviewStars .star-select');
+        starsSelect.forEach(star => {
+            star.addEventListener('click', () => {
+                const val = parseInt(star.dataset.val);
+                selectedRating = val;
+                starsSelect.forEach((s, i) => {
+                    if (i < val) s.className = "fas fa-star text-2xl text-yellow-500 cursor-pointer star-select";
+                    else s.className = "far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select";
+                });
+            });
+        });
+        
+        // Submit review
+        document.getElementById('submitReview').addEventListener('click', async () => {
+            const name = document.getElementById('reviewName').value.trim();
+            const comment = document.getElementById('reviewComment').value.trim();
+            if (!name) { alert('Masukkan nickname!'); return; }
+            if (!comment) { alert('Masukkan ulasan!'); return; }
+            
+            try {
+                await addDoc(collection(db, 'reviews'), {
+                    name: name,
+                    rating: selectedRating,
+                    comment: comment,
+                    createdAt: new Date()
+                });
+                document.getElementById('reviewName').value = '';
+                document.getElementById('reviewComment').value = '';
+                starsSelect.forEach((s, i) => {
+                    if (i < 5) s.className = "far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select";
+                });
+                selectedRating = 5;
+                alert('Review terkirim! Terima kasih 😊');
+            } catch (error) {
+                console.error(error);
+                alert('Gagal mengirim review. Pastikan Firebase sudah benar.');
+            }
+        });
+        
+        // Load reviews
+        function loadReviews() {
+            const q = query(collection(db, 'reviews'), orderBy('createdAt', 'desc'));
+            onSnapshot(q, (snapshot) => {
+                const container = document.getElementById('reviewsList');
+                if (snapshot.empty) {
+                    container.innerHTML = '<div class="text-center text-white/40 py-8 text-sm">Belum ada ulasan. Jadi yang pertama! ✨</div>';
+                    return;
+                }
+                let html = '';
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    const date = data.createdAt?.toDate() || new Date();
+                    const formattedDate = date.toLocaleDateString('id-ID', { day:'numeric', month:'short', year:'numeric' });
+                    html += `
+                        <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4 review-card">
+                            <div class="flex justify-between items-start mb-2 flex-wrap gap-2">
+                                <div>
+                                    <span class="text-white font-medium text-sm">${escapeHtml(data.name)}</span>
+                                    <div class="flex items-center gap-0.5 mt-1">
+                                        ${generateStars(data.rating)}
+                                    </div>
+                                </div>
+                                <span class="text-white/30 text-xs">${formattedDate}</span>
+                            </div>
+                            <p class="text-white/70 text-sm mt-2">${escapeHtml(data.comment)}</p>
+                        </div>
+                    `;
+                });
+                container.innerHTML = html;
+            });
+        }
+        
+        function generateStars(rating) {
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= rating) stars += '<i class="fas fa-star text-yellow-500 text-xs"></i>';
+                else stars += '<i class="far fa-star text-white/30 text-xs"></i>';
+            }
+            return stars;
+        }
+        
+        function escapeHtml(str) {
+            return str.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
+        }
+        
+        loadReviews();
+        
+        // TAB SWITCHING
         const tabs = document.querySelectorAll('.tab-btn');
-        const contents = { joki: document.getElementById('jokiTab'), script: document.getElementById('scriptTab'), tier: document.getElementById('tierTab') };
+        const contents = { joki: document.getElementById('jokiTab'), script: document.getElementById('scriptTab'), tier: document.getElementById('tierTab'), reviews: document.getElementById('reviewsTab') };
         
         tabs.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -198,9 +345,8 @@
                 });
                 btn.classList.remove('bg-white/5', 'text-white/60');
                 btn.classList.add('bg-purple-600', 'text-white', 'shadow-md', 'shadow-purple-500/25');
-                
                 Object.keys(contents).forEach(key => contents[key].classList.add('hidden'));
-                contents[target].classList.remove('hidden');
+                if (contents[target]) contents[target].classList.remove('hidden');
             });
         });
     </script>
