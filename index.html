@@ -4,12 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>ELIXIR SB STORE - Premium Store</title>
+    
+    <!-- ========== LIBRARY PREMIUM ========== -->
+    <!-- Google Fonts - Inter (Font Premium) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome 6 (Icon Library Terbaik) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- AOS Library (Scroll Animation) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
         }
 
         body {
@@ -37,11 +48,20 @@
             background-clip: text;
             color: transparent;
             font-size: 2rem;
+            letter-spacing: 2px;
+        }
+
+        .header h1 i {
+            background: none;
+            -webkit-background-clip: unset;
+            background-clip: unset;
+            color: #fbbf24;
         }
 
         .tagline {
             color: #c084fc;
             margin-top: 10px;
+            letter-spacing: 1px;
         }
 
         /* Social Buttons */
@@ -61,8 +81,13 @@
             border-radius: 60px;
             color: white;
             text-decoration: none;
-            font-weight: 700;
+            font-weight: 600;
             transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .social-icon i {
+            font-size: 1.1rem;
         }
 
         .social-icon.discord { background: linear-gradient(135deg, #5865F2, #4752c4); }
@@ -83,11 +108,19 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(168, 85, 247, 0.3);
             padding: 14px 32px;
-            font-weight: bold;
+            font-weight: 600;
+            font-size: 1rem;
             border-radius: 60px;
             color: #c084fc;
             cursor: pointer;
             transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tab-btn i {
+            font-size: 1.1rem;
         }
 
         .tab-btn.active {
@@ -113,13 +146,25 @@
 
         .section-title {
             text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .section-title i {
+            font-size: 2rem;
+            color: #fbbf24;
+        }
+
+        .section-title span {
             background: linear-gradient(135deg, #e9d5ff, #c084fc);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            font-size: 1.8rem;
-            margin-bottom: 30px;
-            font-weight: bold;
         }
 
         .grid {
@@ -130,7 +175,7 @@
             margin: 0 auto;
         }
 
-        /* ========== CARD JOKI SBC (Background Uang/Dolar) ========== */
+        /* ========== CARD JOKI ========== */
         .card-joki {
             background: linear-gradient(135deg, rgba(20, 10, 40, 0.95), rgba(40, 20, 60, 0.95));
             border-radius: 28px;
@@ -138,7 +183,6 @@
             border: 1px solid rgba(255, 215, 0, 0.3);
             transition: all 0.4s;
             position: relative;
-            backdrop-filter: blur(5px);
         }
 
         .card-joki::before {
@@ -148,7 +192,6 @@
             right: -10px;
             font-size: 80px;
             opacity: 0.1;
-            color: #ffd700;
             pointer-events: none;
         }
 
@@ -176,7 +219,7 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(255,215,0,0.3);
         }
 
-        /* ========== CARD SCRIPT (Background Binary/Hacker) ========== */
+        /* ========== CARD SCRIPT ========== */
         .card-script {
             background: linear-gradient(135deg, rgba(10, 20, 30, 0.95), rgba(0, 15, 25, 0.95));
             border-radius: 28px;
@@ -199,24 +242,13 @@
             pointer-events: none;
         }
 
-        .card-script::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(0deg, rgba(0,255,255,0.02) 0px, rgba(0,255,255,0.02) 2px, transparent 2px, transparent 6px);
-            pointer-events: none;
-        }
-
         .card-script:hover {
             transform: translateY(-8px);
             border-color: #00ffff;
             box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(0,255,255,0.3);
         }
 
-        /* ========== CARD TIER (Background Crown/Medali) ========== */
+        /* ========== CARD TIER ========== */
         .card-tier {
             background: linear-gradient(135deg, rgba(40, 20, 60, 0.95), rgba(60, 30, 80, 0.95));
             border-radius: 28px;
@@ -242,15 +274,25 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(255,215,0,0.3);
         }
 
-        /* Card Content Styles (sama untuk semua card) */
+        /* Card Content Styles */
         .card-header {
             padding: 20px 24px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         .product-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .product-title i {
             font-size: 1.4rem;
-            font-weight: bold;
+        }
+
+        .product-title span {
             background: linear-gradient(135deg, #e9d5ff, #c084fc);
             -webkit-background-clip: text;
             background-clip: text;
@@ -259,8 +301,15 @@
 
         .rating {
             color: #fbbf24;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .rating i {
+            font-size: 0.8rem;
         }
 
         .rating span {
@@ -280,22 +329,32 @@
         }
 
         .info-title {
-            font-weight: bold;
+            font-weight: 600;
             color: #e9d5ff;
-            font-size: 1.1rem;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
         }
 
         .info-desc {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #a78bfa;
-            margin-top: 6px;
         }
 
         .price {
             color: #fbbf24;
-            font-weight: bold;
-            font-size: 1.4rem;
-            margin-top: 12px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .price i {
+            font-size: 1.1rem;
         }
 
         .input-field {
@@ -306,6 +365,7 @@
             border-radius: 20px;
             color: #e9d5ff;
             margin: 16px 0;
+            font-size: 0.9rem;
         }
 
         .input-field:focus {
@@ -317,16 +377,18 @@
             display: flex;
             gap: 12px;
             margin: 16px 0;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             cursor: pointer;
             justify-content: center;
         }
 
-        .star {
+        .star-rating i {
             color: #4a2a6e;
+            transition: all 0.1s;
+            cursor: pointer;
         }
 
-        .star.active {
+        .star-rating i.active {
             color: #fbbf24;
         }
 
@@ -338,11 +400,20 @@
             text-align: center;
             padding: 16px;
             border-radius: 60px;
-            font-weight: bold;
+            font-weight: 600;
             border: none;
             cursor: pointer;
             transition: all 0.3s;
             margin-top: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1rem;
+        }
+
+        .btn-buy i {
+            font-size: 1.1rem;
         }
 
         .btn-buy:hover {
@@ -355,53 +426,74 @@
             margin-top: 60px;
             padding: 25px;
             color: #7e5a9e;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             border-top: 1px solid rgba(168,85,247,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
     </style>
 </head>
 <body>
 
-<div class="header">
-    <h1>⚡ ELIXIR SB STORE ⚡</h1>
+<div class="header" data-aos="fade-down">
+    <h1><i class="fas fa-bolt"></i> ELIXIR SB STORE <i class="fas fa-bolt"></i></h1>
     <div class="tagline">JOKI SBC • VTF • SOUTHBRONX | SCRIPT ELIXIRPROJECTION | AKUN TIER</div>
     <div class="social-header">
-        <a href="https://discord.gg/CxbDP6QmW" target="_blank" class="social-icon discord">🎮 Join Discord</a>
-        <a href="https://www.tiktok.com/@not_elixir" target="_blank" class="social-icon tiktok">📱 TikTok @not_elixir</a>
+        <a href="https://discord.gg/CxbDP6QmW" target="_blank" class="social-icon discord"><i class="fab fa-discord"></i> Join Discord</a>
+        <a href="https://www.tiktok.com/@not_elixir" target="_blank" class="social-icon tiktok"><i class="fab fa-tiktok"></i> TikTok @not_elixir</a>
     </div>
 </div>
 
 <div class="tab-container">
-    <div class="tab-buttons">
-        <button class="tab-btn active" data-tab="tab1">🎯 JOKI SBC</button>
-        <button class="tab-btn" data-tab="tab2">💻 SCRIPT</button>
-        <button class="tab-btn" data-tab="tab3">⭐ AKUN TIER</button>
+    <div class="tab-buttons" data-aos="fade-up">
+        <button class="tab-btn active" data-tab="tab1"><i class="fas fa-bullseye"></i> JOKI SBC</button>
+        <button class="tab-btn" data-tab="tab2"><i class="fas fa-laptop-code"></i> SCRIPT</button>
+        <button class="tab-btn" data-tab="tab3"><i class="fas fa-crown"></i> AKUN TIER</button>
     </div>
 
-    <!-- TAB 1: JOKI SBC -->
     <div id="tab1" class="tab-panel active-panel">
-        <h2 class="section-title">💰 LIST HARGA JOKI SBC 💰</h2>
+        <div class="section-title" data-aos="fade-up">
+            <i class="fas fa-money-bill-wave"></i>
+            <span>LIST HARGA JOKI SBC</span>
+            <i class="fas fa-money-bill-wave"></i>
+        </div>
         <div class="grid" id="jokiGrid"></div>
     </div>
 
-    <!-- TAB 2: SCRIPT -->
     <div id="tab2" class="tab-panel">
-        <h2 class="section-title">💻 SCRIPT ELIXIRPROJECTION 💻</h2>
+        <div class="section-title" data-aos="fade-up">
+            <i class="fas fa-terminal"></i>
+            <span>SCRIPT ELIXIRPROJECTION</span>
+            <i class="fas fa-terminal"></i>
+        </div>
         <div class="grid" id="scriptGrid"></div>
     </div>
 
-    <!-- TAB 3: AKUN TIER -->
     <div id="tab3" class="tab-panel">
-        <h2 class="section-title">⭐ AKUN TIER ⭐</h2>
+        <div class="section-title" data-aos="fade-up">
+            <i class="fas fa-trophy"></i>
+            <span>AKUN TIER</span>
+            <i class="fas fa-trophy"></i>
+        </div>
         <div class="grid" id="tierGrid"></div>
     </div>
 </div>
 
-<div class="footer">
-    © 2025 ELIXIR SB STORE | Order via WhatsApp | Fast & Trusted
+<div class="footer" data-aos="fade-up">
+    <i class="far fa-copyright"></i> 2025 ELIXIR SB STORE | Order via WhatsApp <i class="fab fa-whatsapp"></i> | Fast & Trusted
 </div>
 
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
+    // Initialize AOS
+    AOS.init({
+        duration: 800,
+        once: true,
+        offset: 50
+    });
+
     const waNumber = "62895385984764";
 
     // JOKI SBC (17 PRODUK)
@@ -452,87 +544,87 @@
         window.open(`https://wa.me/${waNumber}?text=${message}`, '_blank');
     }
 
-    // RENDER JOKI SBC (card-joki)
+    // RENDER JOKI
     const jokiContainer = document.getElementById('jokiGrid');
     let jokiHTML = "";
     for (let p of jokiData) {
-        jokiHTML += `<div class="card-joki">
+        jokiHTML += `<div class="card-joki" data-aos="fade-up">
             <div class="card-header">
-                <div class="product-title">🎯 ${p.name}</div>
-                <div class="rating">⭐⭐⭐⭐⭐ <span>5 (4 ulasan)</span></div>
+                <div class="product-title"><i class="fas fa-bullseye"></i><span>${p.name}</span></div>
+                <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><span>5 (4 ulasan)</span></div>
             </div>
             <div class="card-body">
                 <div class="info-item">
-                    <div class="info-title">⚡ NO DELAY</div>
+                    <div class="info-title"><i class="fas fa-bolt"></i> NO DELAY</div>
                     <div class="info-desc">VIA TRANSFER IN GAME SOUTH BRONX</div>
-                    <div class="price">${formatRupiah(p.price)}</div>
+                    <div class="price"><i class="fas fa-tag"></i> ${formatRupiah(p.price)}</div>
                 </div>
                 <input type="text" class="input-field nickname" placeholder="📝 Nickname kamu...">
                 <div class="star-rating">
-                    <span class="star" data-value="1">★</span>
-                    <span class="star" data-value="2">★</span>
-                    <span class="star" data-value="3">★</span>
-                    <span class="star" data-value="4">★</span>
-                    <span class="star" data-value="5">★</span>
+                    <i class="far fa-star" data-value="1"></i>
+                    <i class="far fa-star" data-value="2"></i>
+                    <i class="far fa-star" data-value="3"></i>
+                    <i class="far fa-star" data-value="4"></i>
+                    <i class="far fa-star" data-value="5"></i>
                 </div>
-                <button class="btn-buy" data-product="${p.name}" data-price="${p.price}">💳 BELI SEKARANG</button>
+                <button class="btn-buy" data-product="${p.name}" data-price="${p.price}"><i class="fab fa-whatsapp"></i> BELI SEKARANG</button>
             </div>
         </div>`;
     }
     jokiContainer.innerHTML = jokiHTML;
 
-    // RENDER SCRIPT (card-script)
+    // RENDER SCRIPT
     const scriptContainer = document.getElementById('scriptGrid');
     let scriptHTML = "";
     for (let s of scriptData) {
-        const typeIcon = s.type === "HARIAN" ? "📆" : (s.type === "BULANAN" ? "📅" : "♾️");
-        scriptHTML += `<div class="card-script">
+        const typeIcon = s.type === "HARIAN" ? "fa-calendar-day" : (s.type === "BULANAN" ? "fa-calendar-alt" : "fa-infinity");
+        scriptHTML += `<div class="card-script" data-aos="fade-up">
             <div class="card-header">
-                <div class="product-title">💻 SCRIPT ${s.name}</div>
-                <div class="rating">⭐⭐⭐⭐⭐ <span>${s.type === "LIFETIME" ? "5 (8 ulasan)" : "4 (3 ulasan)"}</span></div>
+                <div class="product-title"><i class="fas fa-laptop-code"></i><span>SCRIPT ${s.name}</span></div>
+                <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><span>${s.type === "LIFETIME" ? "5 (8 ulasan)" : "4 (3 ulasan)"}</span></div>
             </div>
             <div class="card-body">
                 <div class="info-item">
-                    <div class="info-title">${typeIcon} ${s.type}</div>
-                    <div class="price">${formatRupiah(s.price)}</div>
+                    <div class="info-title"><i class="fas ${typeIcon}"></i> ${s.type}</div>
+                    <div class="price"><i class="fas fa-tag"></i> ${formatRupiah(s.price)}</div>
                 </div>
                 <input type="text" class="input-field nickname" placeholder="📝 Nickname kamu...">
                 <div class="star-rating">
-                    <span class="star" data-value="1">★</span>
-                    <span class="star" data-value="2">★</span>
-                    <span class="star" data-value="3">★</span>
-                    <span class="star" data-value="4">★</span>
-                    <span class="star" data-value="5">★</span>
+                    <i class="far fa-star" data-value="1"></i>
+                    <i class="far fa-star" data-value="2"></i>
+                    <i class="far fa-star" data-value="3"></i>
+                    <i class="far fa-star" data-value="4"></i>
+                    <i class="far fa-star" data-value="5"></i>
                 </div>
-                <button class="btn-buy" data-product="SCRIPT ${s.name} - ${s.type}" data-price="${s.price}">💳 BELI SEKARANG</button>
+                <button class="btn-buy" data-product="SCRIPT ${s.name} - ${s.type}" data-price="${s.price}"><i class="fab fa-whatsapp"></i> BELI SEKARANG</button>
             </div>
         </div>`;
     }
     scriptContainer.innerHTML = scriptHTML;
 
-    // RENDER TIER (card-tier)
+    // RENDER TIER
     const tierContainer = document.getElementById('tierGrid');
     let tierHTML = "";
     for (let t of tierData) {
-        tierHTML += `<div class="card-tier">
+        tierHTML += `<div class="card-tier" data-aos="fade-up">
             <div class="card-header">
-                <div class="product-title">⭐ ${t.name}</div>
-                <div class="rating">⭐⭐⭐⭐⭐ <span>5 (12 ulasan)</span></div>
+                <div class="product-title"><i class="fas fa-crown"></i><span>${t.name}</span></div>
+                <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><span>5 (12 ulasan)</span></div>
             </div>
             <div class="card-body">
                 <div class="info-item">
-                    <div class="info-title">${t.color}</div>
-                    <div class="price">${formatRupiah(t.price)}</div>
+                    <div class="info-title"><i class="fas fa-palette"></i> ${t.color}</div>
+                    <div class="price"><i class="fas fa-tag"></i> ${formatRupiah(t.price)}</div>
                 </div>
                 <input type="text" class="input-field nickname" placeholder="📝 Nickname kamu...">
                 <div class="star-rating">
-                    <span class="star" data-value="1">★</span>
-                    <span class="star" data-value="2">★</span>
-                    <span class="star" data-value="3">★</span>
-                    <span class="star" data-value="4">★</span>
-                    <span class="star" data-value="5">★</span>
+                    <i class="far fa-star" data-value="1"></i>
+                    <i class="far fa-star" data-value="2"></i>
+                    <i class="far fa-star" data-value="3"></i>
+                    <i class="far fa-star" data-value="4"></i>
+                    <i class="far fa-star" data-value="5"></i>
                 </div>
-                <button class="btn-buy" data-product="${t.name} (${t.color})" data-price="${t.price}">💳 BELI SEKARANG</button>
+                <button class="btn-buy" data-product="${t.name} (${t.color})" data-price="${t.price}"><i class="fab fa-whatsapp"></i> BELI SEKARANG</button>
             </div>
         </div>`;
     }
@@ -552,13 +644,18 @@
     function attachCardListeners() {
         document.querySelectorAll('.card-joki, .card-script, .card-tier').forEach(card => {
             // Star rating
-            const stars = card.querySelectorAll('.star');
+            const stars = card.querySelectorAll('.star-rating i');
             stars.forEach(star => {
                 star.addEventListener('click', () => {
                     const val = parseInt(star.dataset.value);
                     stars.forEach((s, i) => {
-                        if (i < val) s.classList.add('active');
-                        else s.classList.remove('active');
+                        if (i < val) {
+                            s.classList.remove('far');
+                            s.classList.add('fas', 'active');
+                        } else {
+                            s.classList.remove('fas', 'active');
+                            s.classList.add('far');
+                        }
                     });
                 });
             });
@@ -571,7 +668,7 @@
                     const price = parseInt(buyBtn.dataset.price);
                     const nickname = card.querySelector('.nickname')?.value || '';
                     const starContainer = card.querySelector('.star-rating');
-                    const activeStars = starContainer.querySelectorAll('.star.active').length;
+                    const activeStars = starContainer.querySelectorAll('.fas.active').length;
                     openWhatsApp(product, price, nickname, activeStars || 5);
                 });
             }
