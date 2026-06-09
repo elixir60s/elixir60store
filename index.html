@@ -29,38 +29,18 @@
             100% { background-position: 0% 50%; }
         }
         
-        /* Animasi Meteor / Komet Jatuh */
-        @keyframes meteor {
-            0% {
-                transform: translateX(-100px) translateY(-100px) rotate(45deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateX(400px) translateY(400px) rotate(45deg);
-                opacity: 0;
-            }
+        /* Animasi Meteor */
+        @keyframes meteor1 {
+            0% { transform: translateX(-100px) translateY(-100px) rotate(45deg); opacity: 1; }
+            100% { transform: translateX(400px) translateY(400px) rotate(45deg); opacity: 0; }
         }
-        
         @keyframes meteor2 {
-            0% {
-                transform: translateX(-50px) translateY(-150px) rotate(35deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateX(500px) translateY(500px) rotate(35deg);
-                opacity: 0;
-            }
+            0% { transform: translateX(-50px) translateY(-150px) rotate(35deg); opacity: 1; }
+            100% { transform: translateX(500px) translateY(500px) rotate(35deg); opacity: 0; }
         }
-        
         @keyframes meteor3 {
-            0% {
-                transform: translateX(-200px) translateY(-50px) rotate(50deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateX(600px) translateY(600px) rotate(50deg);
-                opacity: 0;
-            }
+            0% { transform: translateX(-200px) translateY(-50px) rotate(50deg); opacity: 1; }
+            100% { transform: translateX(600px) translateY(600px) rotate(50deg); opacity: 0; }
         }
         
         @keyframes floatSlow {
@@ -69,8 +49,18 @@
         }
         
         @keyframes starTwinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.3); }
+        }
+        
+        @keyframes borderPulse {
+            0%, 100% { border-color: rgba(168,85,247,0.3); box-shadow: 0 0 0px rgba(168,85,247,0); }
+            50% { border-color: rgba(168,85,247,0.8); box-shadow: 0 0 20px rgba(168,85,247,0.3); }
+        }
+        
+        @keyframes glowPulse {
+            0%, 100% { text-shadow: 0 0 5px rgba(168,85,247,0.3); }
+            50% { text-shadow: 0 0 20px rgba(168,85,247,0.6); }
         }
         
         .animated-bg {
@@ -79,13 +69,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(125deg, #0a0a0f 0%, #0a0a1a 25%, #0f0a1a 50%, #0a0a1a 75%, #0a0a0f 100%);
-            background-size: 300% 300%;
-            animation: gradientFlow 15s ease infinite;
+            background: radial-gradient(ellipse at 20% 30%, #0a0a1a, #050510);
             z-index: -3;
         }
         
-        /* Bintang Background */
+        /* Stars */
         .stars {
             position: fixed;
             top: 0;
@@ -103,71 +91,24 @@
             animation: starTwinkle 3s infinite ease-in-out;
         }
         
-        /* Meteor / Komet Jatuh */
-        .meteor {
-            position: fixed;
-            width: 2px;
-            height: 2px;
-            background: linear-gradient(135deg, #fff, rgba(255,255,255,0));
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: -1;
-        }
-        
+        /* Meteors */
+        .meteor { position: fixed; pointer-events: none; z-index: -1; }
         .meteor::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 80px;
+            width: 100px;
             height: 2px;
             background: linear-gradient(90deg, rgba(168,85,247,0.8), rgba(168,85,247,0.2), transparent);
-            transform: translateX(-80px);
+            transform: translateX(-100px);
             border-radius: 2px;
         }
-        
-        .meteor-1 {
-            top: -100px;
-            left: 20%;
-            animation: meteor 4s infinite linear;
-            animation-delay: 0s;
-        }
-        
-        .meteor-2 {
-            top: -150px;
-            left: 50%;
-            animation: meteor2 5s infinite linear;
-            animation-delay: 2s;
-        }
-        
-        .meteor-3 {
-            top: -80px;
-            left: 70%;
-            animation: meteor3 3.5s infinite linear;
-            animation-delay: 1s;
-        }
-        
-        .meteor-4 {
-            top: -120px;
-            left: 85%;
-            animation: meteor 4.5s infinite linear;
-            animation-delay: 3s;
-            width: 1.5px;
-        }
-        
-        .meteor-5 {
-            top: -200px;
-            left: 10%;
-            animation: meteor2 6s infinite linear;
-            animation-delay: 1.5s;
-        }
-        
-        .meteor-6 {
-            top: -60px;
-            left: 35%;
-            animation: meteor3 4.2s infinite linear;
-            animation-delay: 2.5s;
-        }
+        .meteor-1 { top: -100px; left: 20%; animation: meteor1 4s infinite linear; animation-delay: 0s; }
+        .meteor-2 { top: -150px; left: 50%; animation: meteor2 5s infinite linear; animation-delay: 2s; }
+        .meteor-3 { top: -80px; left: 70%; animation: meteor3 3.5s infinite linear; animation-delay: 1s; }
+        .meteor-4 { top: -120px; left: 85%; animation: meteor1 4.5s infinite linear; animation-delay: 3s; }
+        .meteor-5 { top: -200px; left: 10%; animation: meteor2 6s infinite linear; animation-delay: 1.5s; }
         
         .floating-orb {
             position: fixed;
@@ -175,7 +116,7 @@
             right: 10%;
             width: 400px;
             height: 400px;
-            background: radial-gradient(circle, rgba(168,85,247,0.08), transparent 70%);
+            background: radial-gradient(circle, rgba(168,85,247,0.1), transparent 70%);
             border-radius: 50%;
             filter: blur(60px);
             animation: floatSlow 12s infinite ease-in-out;
@@ -189,7 +130,7 @@
             left: 5%;
             width: 350px;
             height: 350px;
-            background: radial-gradient(circle, rgba(59,130,246,0.06), transparent 70%);
+            background: radial-gradient(circle, rgba(59,130,246,0.08), transparent 70%);
             border-radius: 50%;
             filter: blur(50px);
             animation: floatSlow 15s infinite ease-in-out reverse;
@@ -203,63 +144,96 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                linear-gradient(rgba(168,85,247,0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(168,85,247,0.02) 1px, transparent 1px);
-            background-size: 40px 40px;
+            background-image: linear-gradient(rgba(168,85,247,0.02) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(168,85,247,0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
             pointer-events: none;
             z-index: -1;
         }
         
-        ::-webkit-scrollbar {
-            width: 4px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0a0a0f;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #a855f7, #7e22ce);
-            border-radius: 10px;
-        }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #0a0a0f; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #a855f7, #7e22ce); border-radius: 10px; }
         
         .glass-nav {
-            background: rgba(10, 10, 15, 0.5);
+            background: rgba(10, 10, 15, 0.4);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(168,85,247,0.2);
         }
         
+        /* PREMIUM 3D CARD WITH TILT EFFECT */
         .premium-card {
-            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             position: relative;
+            background: rgba(15, 15, 25, 0.4);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            border: 1px solid rgba(168,85,247,0.3);
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            transform-style: preserve-3d;
+            perspective: 1000px;
             overflow: hidden;
         }
         
         .premium-card::before {
             content: '';
             position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, #a855f7, #7e22ce, #c084fc, #a855f7);
+            background-size: 300% 300%;
+            border-radius: 26px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        
+        .premium-card:hover::before {
+            opacity: 0.15;
+        }
+        
+        .premium-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(168,85,247,0.6);
+            box-shadow: 0 30px 45px -20px rgba(168,85,247,0.5), 0 0 30px rgba(168,85,247,0.2);
+        }
+        
+        /* Card inner shine */
+        .premium-card .card-shine {
+            position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
             transition: left 0.6s;
             pointer-events: none;
         }
         
-        .premium-card:hover::before {
+        .premium-card:hover .card-shine {
             left: 100%;
         }
         
-        .premium-card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(168,85,247,0.5);
-            box-shadow: 0 25px 40px -18px rgba(168,85,247,0.4);
+        /* Neon Glow Text */
+        .neon-text {
+            animation: glowPulse 3s infinite ease-in-out;
+        }
+        
+        .hero-text {
+            background: linear-gradient(135deg, #ffffff 0%, #c084fc 30%, #a855f7 60%, #e9d5ff 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradientFlow 5s linear infinite, glowPulse 3s infinite;
         }
         
         .btn-primary {
             position: relative;
             overflow: hidden;
             transition: all 0.3s ease;
+            z-index: 1;
         }
         
         .btn-primary::before {
@@ -269,70 +243,73 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
             transition: left 0.5s;
+            z-index: -1;
         }
         
         .btn-primary:hover::before {
             left: 100%;
         }
         
-        .hero-text {
-            background: linear-gradient(135deg, #ffffff 0%, #c084fc 30%, #a855f7 60%, #e9d5ff 100%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: gradientFlow 5s linear infinite;
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(168,85,247,0.4);
         }
         
-        .glow-border {
+        /* Ripple effect for buttons */
+        .ripple-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ripple-btn .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
+        }
+        
+        @keyframes ripple {
+            to { transform: scale(4); opacity: 0; }
+        }
+        
+        .stat-card {
             transition: all 0.3s ease;
         }
         
-        .glow-border:hover {
-            box-shadow: 0 0 20px rgba(168,85,247,0.3);
+        .stat-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(168,85,247,0.5);
+            box-shadow: 0 10px 30px rgba(168,85,247,0.2);
         }
         
         .footer-link {
             transition: all 0.2s;
         }
+        .footer-link:hover { color: #a855f7; transform: translateX(3px); }
         
-        .footer-link:hover {
-            color: #a855f7;
-            transform: translateX(3px);
-        }
-        
-        .contact-item {
-            transition: all 0.2s;
-        }
-        
-        .contact-item:hover {
-            transform: translateX(3px);
-        }
+        .contact-item { transition: all 0.2s; }
+        .contact-item:hover { transform: translateX(3px); }
     </style>
 </head>
-<body class="bg-[#0a0a0f]">
+<body class="bg-[#050510]">
 
-    <!-- BACKGROUND PREMIUM + METEOR -->
+    <!-- BACKGROUND -->
     <div class="animated-bg"></div>
-    
-    <!-- Stars -->
     <div class="stars" id="starsContainer"></div>
-    
-    <!-- Meteor / Komet Jatuh -->
     <div class="meteor meteor-1"></div>
     <div class="meteor meteor-2"></div>
     <div class="meteor meteor-3"></div>
     <div class="meteor meteor-4"></div>
     <div class="meteor meteor-5"></div>
-    <div class="meteor meteor-6"></div>
-    
     <div class="floating-orb"></div>
     <div class="floating-orb-2"></div>
     <div class="grid-pattern"></div>
 
-    <!-- NAVBAR PREMIUM -->
+    <!-- NAVBAR -->
     <nav class="glass-nav fixed top-0 left-0 w-full z-50">
         <div class="max-w-7xl mx-auto px-6 py-4">
             <div class="flex justify-between items-center">
@@ -343,88 +320,45 @@
                     <div class="text-[9px] text-purple-400/40 tracking-[0.2em]">PROJECTION</div>
                 </div>
                 <div class="flex gap-6">
-                    <a href="#marketplace" class="text-white/50 hover:text-purple-400 transition text-sm">
-                        <i class="fas fa-store"></i> MARKET
-                    </a>
-                    <a href="#reviews" class="text-white/50 hover:text-purple-400 transition text-sm">
-                        <i class="fas fa-star"></i> ULASAN
-                    </a>
-                    <a href="#footer" class="text-white/50 hover:text-purple-400 transition text-sm">
-                        <i class="fas fa-headset"></i> CONTACT
-                    </a>
+                    <a href="#marketplace" class="text-white/50 hover:text-purple-400 transition text-sm"><i class="fas fa-store"></i> MARKET</a>
+                    <a href="#reviews" class="text-white/50 hover:text-purple-400 transition text-sm"><i class="fas fa-star"></i> ULASAN</a>
+                    <a href="#footer" class="text-white/50 hover:text-purple-400 transition text-sm"><i class="fas fa-headset"></i> CONTACT</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
+    <!-- HERO -->
     <div class="relative z-10 max-w-6xl mx-auto px-6 pt-32 pb-16 text-center" data-aos="fade-up" data-aos-duration="1000">
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 mb-6 backdrop-blur-sm">
-            <span class="text-purple-300 text-[10px] font-medium tracking-wider">PREMIUM SOUTHBRONX STORE</span>
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/30 mb-6 backdrop-blur-sm">
+            <span class="text-purple-300 text-[10px] font-medium tracking-wider neon-text">PREMIUM SOUTHBRONX STORE</span>
         </div>
-        
-        <h1 class="text-6xl md:text-7xl font-extrabold mb-5">
-            <span class="hero-text">ELIXIR60S</span>
-        </h1>
-        
-        <p class="text-white/50 max-w-lg mx-auto text-base mb-9 leading-relaxed">
-            Joki SBC • Script Premium • Akun Tier<br>
-            Fast Response & 24/7 Support
-        </p>
-        
+        <h1 class="text-6xl md:text-7xl font-extrabold mb-5"><span class="hero-text">ELIXIR60S</span></h1>
+        <p class="text-white/50 max-w-lg mx-auto text-base mb-9 leading-relaxed">Joki SBC • Script Premium • Akun Tier<br>Fast Response & 24/7 Support</p>
         <div class="flex justify-center gap-4 flex-wrap">
-            <a href="#marketplace" class="btn-primary px-8 py-3.5 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white rounded-xl font-semibold flex items-center gap-2 shadow-lg shadow-purple-500/30 transition-all text-sm">
-                <i class="fas fa-crown"></i> Explore Items
-                <i class="fas fa-arrow-right text-xs"></i>
-            </a>
-            <a href="https://discord.gg/CxbDP6QmW" target="_blank" class="px-8 py-3.5 bg-white/5 backdrop-blur-sm border border-white/10 hover:border-purple-500/50 text-white/80 rounded-xl font-semibold flex items-center gap-2 transition-all text-sm">
-                <i class="fab fa-discord"></i> Join Discord
-            </a>
-            <a href="https://wa.me/62895385984764?text=Halo%20ELIXIRSTORE%2C%20saya%20mau%20order" target="_blank" class="px-8 py-3.5 bg-white/5 backdrop-blur-sm border border-white/10 hover:border-green-500/50 text-white/80 rounded-xl font-semibold flex items-center gap-2 transition-all text-sm">
-                <i class="fab fa-whatsapp"></i> WhatsApp
-            </a>
+            <a href="#marketplace" class="btn-primary px-8 py-3.5 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white rounded-xl font-semibold flex items-center gap-2 shadow-lg shadow-purple-500/30 transition-all text-sm"><i class="fas fa-crown"></i> Explore Items <i class="fas fa-arrow-right text-xs"></i></a>
+            <a href="https://discord.gg/CxbDP6QmW" target="_blank" class="px-8 py-3.5 bg-white/5 backdrop-blur-sm border border-white/10 hover:border-purple-500/50 text-white/80 rounded-xl font-semibold flex items-center gap-2 transition-all text-sm"><i class="fab fa-discord"></i> Join Discord</a>
+            <a href="https://wa.me/62895385984764?text=Halo%20ELIXIRSTORE%2C%20saya%20mau%20order" target="_blank" class="px-8 py-3.5 bg-white/5 backdrop-blur-sm border border-white/10 hover:border-green-500/50 text-white/80 rounded-xl font-semibold flex items-center gap-2 transition-all text-sm"><i class="fab fa-whatsapp"></i> WhatsApp</a>
         </div>
     </div>
 
     <!-- STATS -->
     <div class="relative z-10 max-w-5xl mx-auto px-6 py-10">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-5 text-center">
-            <div class="bg-white/5 backdrop-blur-sm rounded-2xl py-6 border border-white/10 transition-all hover:border-purple-500/30 hover:bg-white/10">
-                <div class="text-4xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent">17</div>
-                <div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">PRODUK</div>
-            </div>
-            <div class="bg-white/5 backdrop-blur-sm rounded-2xl py-6 border border-white/10 transition-all hover:border-purple-500/30 hover:bg-white/10">
-                <div class="text-4xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent">100+</div>
-                <div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">TERJUAL</div>
-            </div>
-            <div class="bg-white/5 backdrop-blur-sm rounded-2xl py-6 border border-white/10 transition-all hover:border-purple-500/30 hover:bg-white/10">
-                <div class="text-4xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent">12</div>
-                <div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">ULASAN</div>
-            </div>
-            <div class="bg-white/5 backdrop-blur-sm rounded-2xl py-6 border border-white/10 transition-all hover:border-purple-500/30 hover:bg-white/10">
-                <div class="text-4xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent">24/7</div>
-                <div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">SUPPORT</div>
-            </div>
+            <div class="stat-card bg-white/5 backdrop-blur-sm rounded-2xl py-6 border border-white/10 transition-all hover:bg-white/10 hover:border-purple-500/40"><div class="text-4xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent">17</div><div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">PRODUK</div></div>
+            <div class="stat-card bg-white/5 backdrop-blur-sm rounded-2xl py-6 border border-white/10 transition-all hover:bg-white/10 hover:border-purple-500/40"><div class="text-4xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent">100+</div><div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">TERJUAL</div></div>
+            <div class="stat-card bg-white/5 backdrop-blur-sm rounded-2xl py-6 border border-white/10 transition-all hover:bg-white/10 hover:border-purple-500/40"><div class="text-4xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent">12</div><div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">ULASAN</div></div>
+            <div class="stat-card bg-white/5 backdrop-blur-sm rounded-2xl py-6 border border-white/10 transition-all hover:bg-white/10 hover:border-purple-500/40"><div class="text-4xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent">24/7</div><div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">SUPPORT</div></div>
         </div>
     </div>
 
     <!-- MARKETPLACE -->
     <div id="marketplace" class="relative z-10 max-w-7xl mx-auto px-6 py-12">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-5 mb-10">
-            <div data-aos="fade-right">
-                <h2 class="text-2xl font-bold text-white flex items-center gap-2">
-                    <i class="fas fa-cubes text-purple-400"></i>
-                    Koleksi Item
-                </h2>
-                <p class="text-white/30 text-sm mt-1">17 item premium tersedia</p>
-            </div>
-            <div class="relative w-full md:w-80" data-aos="fade-left">
-                <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-white/30 text-sm"></i>
-                <input type="text" id="searchInput" placeholder="Cari item..." class="w-full bg-white/5 border border-white/10 rounded-full py-3 pl-11 pr-5 text-white/80 text-sm focus:outline-none focus:border-purple-500/50 transition-all backdrop-blur-sm">
-            </div>
+            <div data-aos="fade-right"><h2 class="text-2xl font-bold text-white flex items-center gap-2"><i class="fas fa-cubes text-purple-400"></i>Koleksi Item</h2><p class="text-white/30 text-sm mt-1">17 item premium tersedia</p></div>
+            <div class="relative w-full md:w-80" data-aos="fade-left"><i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-white/30 text-sm"></i><input type="text" id="searchInput" placeholder="Cari item..." class="w-full bg-white/5 border border-white/10 rounded-full py-3 pl-11 pr-5 text-white/80 text-sm focus:outline-none focus:border-purple-500/50 transition-all backdrop-blur-sm"></div>
         </div>
 
-        <!-- FILTER -->
         <div class="flex flex-wrap gap-3 mb-12" data-aos="fade-up">
             <button data-filter="all" class="filter-btn active-filter px-6 py-2.5 rounded-full text-xs font-medium transition-all bg-gradient-to-r from-purple-600 to-purple-700 text-white shadow-md shadow-purple-500/25">Semua</button>
             <button data-filter="sbc" class="filter-btn px-6 py-2.5 rounded-full text-xs font-medium transition-all bg-white/5 text-white/50 hover:text-white hover:bg-white/10">SBC</button>
@@ -432,94 +366,25 @@
             <button data-filter="tier" class="filter-btn px-6 py-2.5 rounded-full text-xs font-medium transition-all bg-white/5 text-white/50 hover:text-white hover:bg-white/10">Akun Tier</button>
         </div>
 
-        <!-- PRODUCT GRID -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="productGrid"></div>
     </div>
 
-    <!-- SECTION ULASAN (REVIEWS) -->
+    <!-- REVIEWS -->
     <div id="reviews" class="relative z-10 max-w-4xl mx-auto px-6 py-16">
-        <div class="text-center mb-10" data-aos="fade-up">
-            <h2 class="text-2xl font-bold text-white flex items-center justify-center gap-2">
-                <i class="fas fa-star text-yellow-500"></i>
-                Ulasan Pelanggan
-                <i class="fas fa-star text-yellow-500"></i>
-            </h2>
-            <p class="text-white/30 text-sm mt-2">Apa kata mereka tentang ELIXIRSTORE</p>
-        </div>
-        
+        <div class="text-center mb-10" data-aos="fade-up"><h2 class="text-2xl font-bold text-white flex items-center justify-center gap-2"><i class="fas fa-star text-yellow-500"></i>Ulasan Pelanggan<i class="fas fa-star text-yellow-500"></i></h2><p class="text-white/30 text-sm mt-2">Apa kata mereka tentang ELIXIRSTORE</p></div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="reviewsGrid"></div>
     </div>
 
-    <!-- FOOTER PREMIUM -->
+    <!-- FOOTER -->
     <footer id="footer" class="relative z-10 border-t border-white/10 bg-black/20 backdrop-blur-sm">
         <div class="max-w-7xl mx-auto px-6 py-12">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
-                <div>
-                    <div class="text-white font-bold text-xl tracking-tight mb-2">
-                        ELIXIR<span class="text-purple-400">STORE</span>
-                    </div>
-                    <p class="text-white/40 text-sm leading-relaxed">
-                        Premium Shop Southbronx<br>
-                        Trusted Southbronx Marketplace
-                    </p>
-                </div>
-
-                <div>
-                    <h3 class="text-white/70 text-sm font-semibold uppercase tracking-wider mb-4">Quick Links</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#marketplace" class="footer-link text-white/40 text-sm hover:text-purple-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[8px]"></i> Marketplace</a></li>
-                        <li><a href="#reviews" class="footer-link text-white/40 text-sm hover:text-purple-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[8px]"></i> Ulasan</a></li>
-                        <li><a href="#footer" class="footer-link text-white/40 text-sm hover:text-purple-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[8px]"></i> Contact</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h3 class="text-white/70 text-sm font-semibold uppercase tracking-wider mb-4">Contact</h3>
-                    <ul class="space-y-3">
-                        <li>
-                            <a href="https://wa.me/62895385984764" target="_blank" class="contact-item flex items-center gap-3 text-white/40 text-sm hover:text-green-400 transition group">
-                                <i class="fab fa-whatsapp text-green-500"></i>
-                                <span>Owner 1 - WhatsApp</span>
-                                <i class="fas fa-external-link-alt text-[8px] opacity-0 group-hover:opacity-100 transition"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://discord.gg/CxbDP6QmW" target="_blank" class="contact-item flex items-center gap-3 text-white/40 text-sm hover:text-purple-400 transition group">
-                                <i class="fab fa-discord text-[#5865F2]"></i>
-                                <span>Owner 2 - Discord</span>
-                                <i class="fas fa-external-link-alt text-[8px] opacity-0 group-hover:opacity-100 transition"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h3 class="text-white/70 text-sm font-semibold uppercase tracking-wider mb-4">Powered By</h3>
-                    <div class="space-y-2">
-                        <div class="flex items-center gap-2 text-white/30 text-xs">
-                            <i class="fab fa-html5 text-orange-500"></i>
-                            <span>HTML5 + Tailwind CSS</span>
-                        </div>
-                        <div class="flex items-center gap-2 text-white/30 text-xs">
-                            <i class="fab fa-js text-yellow-500"></i>
-                            <span>JavaScript + AOS</span>
-                        </div>
-                        <div class="flex items-center gap-2 text-white/30 text-xs">
-                            <i class="fas fa-fire text-orange-400"></i>
-                            <span>Firebase + FontAwesome</span>
-                        </div>
-                        <div class="mt-3 pt-2 border-t border-white/10">
-                            <span class="text-[10px] text-white/20 tracking-wider">SECURED | 24/7</span>
-                        </div>
-                    </div>
-                </div>
+                <div><div class="text-white font-bold text-xl tracking-tight mb-2">ELIXIR<span class="text-purple-400">STORE</span></div><p class="text-white/40 text-sm leading-relaxed">Premium Shop Southbronx<br>Trusted Southbronx Marketplace</p></div>
+                <div><h3 class="text-white/70 text-sm font-semibold uppercase tracking-wider mb-4">Quick Links</h3><ul class="space-y-2"><li><a href="#marketplace" class="footer-link text-white/40 text-sm hover:text-purple-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[8px]"></i> Marketplace</a></li><li><a href="#reviews" class="footer-link text-white/40 text-sm hover:text-purple-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[8px]"></i> Ulasan</a></li><li><a href="#footer" class="footer-link text-white/40 text-sm hover:text-purple-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[8px]"></i> Contact</a></li></ul></div>
+                <div><h3 class="text-white/70 text-sm font-semibold uppercase tracking-wider mb-4">Contact</h3><ul class="space-y-3"><li><a href="https://wa.me/62895385984764" target="_blank" class="contact-item flex items-center gap-3 text-white/40 text-sm hover:text-green-400 transition group"><i class="fab fa-whatsapp text-green-500"></i><span>Owner 1 - WhatsApp</span><i class="fas fa-external-link-alt text-[8px] opacity-0 group-hover:opacity-100 transition"></i></a></li><li><a href="https://discord.gg/CxbDP6QmW" target="_blank" class="contact-item flex items-center gap-3 text-white/40 text-sm hover:text-purple-400 transition group"><i class="fab fa-discord text-[#5865F2]"></i><span>Owner 2 - Discord</span><i class="fas fa-external-link-alt text-[8px] opacity-0 group-hover:opacity-100 transition"></i></a></li></ul></div>
+                <div><h3 class="text-white/70 text-sm font-semibold uppercase tracking-wider mb-4">Powered By</h3><div class="space-y-2"><div class="flex items-center gap-2 text-white/30 text-xs"><i class="fab fa-html5 text-orange-500"></i><span>HTML5 + Tailwind CSS</span></div><div class="flex items-center gap-2 text-white/30 text-xs"><i class="fab fa-js text-yellow-500"></i><span>JavaScript + AOS</span></div><div class="flex items-center gap-2 text-white/30 text-xs"><i class="fas fa-fire text-orange-400"></i><span>FontAwesome + GSAP</span></div><div class="mt-3 pt-2 border-t border-white/10"><span class="text-[10px] text-white/20 tracking-wider">SECURED | 24/7</span></div></div></div>
             </div>
-            
-            <div class="border-t border-white/10 mt-10 pt-6 text-center">
-                <p class="text-white/20 text-[10px] tracking-wider">
-                    © 2025 ELIXIRSTORE. All rights reserved. | TRUSTED SOUTHBRONX MARKETPLACE
-                </p>
-            </div>
+            <div class="border-t border-white/10 mt-10 pt-6 text-center"><p class="text-white/20 text-[10px] tracking-wider">© 2025 ELIXIRSTORE. All rights reserved. | TRUSTED SOUTHBRONX MARKETPLACE</p></div>
         </div>
     </footer>
 
@@ -527,9 +392,9 @@
     <script>
         AOS.init({ duration: 600, once: true });
 
-        // Generate Stars
+        // Stars
         const starsContainer = document.getElementById('starsContainer');
-        for (let i = 0; i < 150; i++) {
+        for (let i = 0; i < 200; i++) {
             const star = document.createElement('div');
             star.classList.add('star');
             const size = Math.random() * 2 + 1;
@@ -547,13 +412,7 @@
         const formatRp = (n) => "Rp" + n.toLocaleString('id-ID');
 
         const products = [
-            ...["100K","200K","300K","400K","500K","600K","700K","800K","900K","1JT","1.1 JT","1.2 JT","1.3 JT","1.4 JT","1.5 JT","1.6 JT","1.7 JT"].map((name, idx) => ({
-                name: `SBC ${name}`,
-                price: [12000,20000,30000,40000,50000,60000,70000,80000,90000,100000,110000,120000,130000,140000,150000,160000,170000][idx],
-                category: "sbc",
-                needNickname: true,
-                icon: "fa-bolt"
-            })),
+            ...["100K","200K","300K","400K","500K","600K","700K","800K","900K","1JT","1.1 JT","1.2 JT","1.3 JT","1.4 JT","1.5 JT","1.6 JT","1.7 JT"].map((name, idx) => ({ name: `SBC ${name}`, price: [12000,20000,30000,40000,50000,60000,70000,80000,90000,100000,110000,120000,130000,140000,150000,160000,170000][idx], category: "sbc", needNickname: true, icon: "fa-bolt" })),
             { name: "SCRIPT MARSHMALLOW - HARIAN", price: 13000, category: "script", needNickname: false, icon: "fa-calendar-day" },
             { name: "SCRIPT MARSHMALLOW - BULANAN", price: 60000, category: "script", needNickname: false, icon: "fa-calendar-alt" },
             { name: "SCRIPT MARSHMALLOW - LIFETIME", price: 150000, category: "script", needNickname: false, icon: "fa-infinity" },
@@ -582,44 +441,19 @@
 
         function createCard(product) {
             const card = document.createElement('div');
-            card.className = 'premium-card bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-5 transition-all duration-300';
-            
-            let nicknameHtml = '';
-            if (product.needNickname) {
-                nicknameHtml = `<input type="text" class="nickname w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2.5 text-white/60 text-sm placeholder:text-white/20 focus:outline-none focus:border-purple-500 transition-all mb-3" placeholder="Nickname">`;
-            }
-            
-            card.innerHTML = `
-                <div class="flex items-center gap-2 mb-3">
-                    <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-purple-500/20 to-purple-600/10 flex items-center justify-center">
-                        <i class="fas ${product.icon} text-purple-400 text-sm"></i>
-                    </div>
-                    <h3 class="text-white font-semibold text-sm flex-1">${product.name}</h3>
-                </div>
-                <div class="mb-4">
-                    <span class="text-2xl font-bold text-white">${formatRp(product.price)}</span>
-                </div>
-                ${nicknameHtml}
-                <div class="flex justify-center gap-2 mb-3 stars">
-                    <i class="far fa-star text-white/30 text-base cursor-pointer hover:text-yellow-500 transition" data-val="1"></i>
-                    <i class="far fa-star text-white/30 text-base cursor-pointer hover:text-yellow-500 transition" data-val="2"></i>
-                    <i class="far fa-star text-white/30 text-base cursor-pointer hover:text-yellow-500 transition" data-val="3"></i>
-                    <i class="far fa-star text-white/30 text-base cursor-pointer hover:text-yellow-500 transition" data-val="4"></i>
-                    <i class="far fa-star text-white/30 text-base cursor-pointer hover:text-yellow-500 transition" data-val="5"></i>
-                </div>
-                <button class="buy w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white font-semibold py-2.5 rounded-xl transition-all text-sm flex items-center justify-center gap-2 shadow-md">
-                    <i class="fab fa-whatsapp text-sm"></i> Order Now
-                </button>
-            `;
+            card.className = 'premium-card p-5 transition-all duration-300';
+            card.innerHTML = `<div class="card-shine"></div>
+                <div class="flex items-center gap-2 mb-3"><div class="w-8 h-8 rounded-xl bg-gradient-to-br from-purple-500/30 to-purple-600/20 flex items-center justify-center"><i class="fas ${product.icon} text-purple-400 text-sm"></i></div><h3 class="text-white font-semibold text-sm flex-1">${product.name}</h3></div>
+                <div class="mb-4"><span class="text-2xl font-bold text-white">${formatRp(product.price)}</span></div>
+                ${product.needNickname ? '<input type="text" class="nickname w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2.5 text-white/60 text-sm placeholder:text-white/20 focus:outline-none focus:border-purple-500 transition-all mb-3" placeholder="Nickname">' : ''}
+                <div class="flex justify-center gap-2 mb-3 stars"><i class="far fa-star text-white/30 text-base cursor-pointer hover:text-yellow-500 transition" data-val="1"></i><i class="far fa-star text-white/30 text-base cursor-pointer hover:text-yellow-500 transition" data-val="2"></i><i class="far fa-star text-white/30 text-base cursor-pointer hover:text-yellow-500 transition" data-val="3"></i><i class="far fa-star text-white/30 text-base cursor-pointer hover:text-yellow-500 transition" data-val="4"></i><i class="far fa-star text-white/30 text-base cursor-pointer hover:text-yellow-500 transition" data-val="5"></i></div>
+                <button class="buy w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white font-semibold py-2.5 rounded-xl transition-all text-sm flex items-center justify-center gap-2 shadow-md"><i class="fab fa-whatsapp text-sm"></i> Order Now</button>`;
 
             const stars = card.querySelectorAll('.stars i');
             stars.forEach(star => {
                 star.addEventListener('click', () => {
                     const val = parseInt(star.dataset.val);
-                    stars.forEach((s, i) => {
-                        if (i < val) s.className = "fas fa-star text-yellow-500 text-base cursor-pointer";
-                        else s.className = "far fa-star text-white/30 text-base cursor-pointer hover:text-yellow-500 transition";
-                    });
+                    stars.forEach((s, i) => { if (i < val) s.className = "fas fa-star text-yellow-500 text-base cursor-pointer"; else s.className = "far fa-star text-white/30 text-base cursor-pointer hover:text-yellow-500 transition"; });
                 });
             });
 
@@ -630,42 +464,24 @@
                 const active = card.querySelectorAll('.stars .fas').length;
                 sendWA(product.name, product.price, nickname, active || 5);
             });
-
             return card;
         }
 
         function createReviewCard(review) {
             const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
             const div = document.createElement('div');
-            div.className = 'bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 transition-all hover:border-purple-500/30';
-            div.innerHTML = `
-                <div class="flex justify-between items-start mb-2">
-                    <div>
-                        <span class="text-white font-semibold text-sm">${review.name}</span>
-                        <div class="text-yellow-500 text-xs mt-1">${stars}</div>
-                    </div>
-                    <span class="text-white/30 text-[10px]">${review.date}</span>
-                </div>
-                <p class="text-white/60 text-sm mt-2">"${review.comment}"</p>
-            `;
+            div.className = 'bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 transition-all hover:border-purple-500/30 hover:bg-white/5';
+            div.innerHTML = `<div class="flex justify-between items-start mb-2"><div><span class="text-white font-semibold text-sm">${review.name}</span><div class="text-yellow-500 text-xs mt-1">${stars}</div></div><span class="text-white/30 text-[10px]">${review.date}</span></div><p class="text-white/60 text-sm mt-2">"${review.comment}"</p>`;
             return div;
         }
 
         const productGrid = document.getElementById('productGrid');
-        let currentFilter = 'all';
-        let searchQuery = '';
+        let currentFilter = 'all', searchQuery = '';
 
         function renderProducts() {
-            const filtered = products.filter(p => {
-                if (currentFilter !== 'all' && p.category !== currentFilter) return false;
-                if (searchQuery && !p.name.toLowerCase().includes(searchQuery.toLowerCase())) return false;
-                return true;
-            });
+            const filtered = products.filter(p => { if (currentFilter !== 'all' && p.category !== currentFilter) return false; if (searchQuery && !p.name.toLowerCase().includes(searchQuery.toLowerCase())) return false; return true; });
             productGrid.innerHTML = '';
-            if (filtered.length === 0) {
-                productGrid.innerHTML = '<div class="col-span-full text-center text-white/30 py-16 text-sm">✨ Item tidak ditemukan</div>';
-                return;
-            }
+            if (filtered.length === 0) { productGrid.innerHTML = '<div class="col-span-full text-center text-white/30 py-16 text-sm">✨ Item tidak ditemukan</div>'; return; }
             filtered.forEach(p => productGrid.appendChild(createCard(p)));
         }
 
@@ -674,10 +490,7 @@
 
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                document.querySelectorAll('.filter-btn').forEach(b => {
-                    b.classList.remove('bg-gradient-to-r', 'from-purple-600', 'to-purple-700', 'text-white', 'shadow-md', 'shadow-purple-500/25');
-                    b.classList.add('bg-white/5', 'text-white/50');
-                });
+                document.querySelectorAll('.filter-btn').forEach(b => { b.classList.remove('bg-gradient-to-r', 'from-purple-600', 'to-purple-700', 'text-white', 'shadow-md', 'shadow-purple-500/25'); b.classList.add('bg-white/5', 'text-white/50'); });
                 btn.classList.remove('bg-white/5', 'text-white/50');
                 btn.classList.add('bg-gradient-to-r', 'from-purple-600', 'to-purple-700', 'text-white', 'shadow-md', 'shadow-purple-500/25');
                 currentFilter = btn.dataset.filter;
@@ -685,11 +498,7 @@
             });
         });
 
-        document.getElementById('searchInput').addEventListener('input', (e) => {
-            searchQuery = e.target.value;
-            renderProducts();
-        });
-
+        document.getElementById('searchInput').addEventListener('input', (e) => { searchQuery = e.target.value; renderProducts(); });
         renderProducts();
     </script>
 </body>
