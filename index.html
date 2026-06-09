@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>ELIXIR SB STORE - Premium Gaming Service</title>
+    <title>ELIXIR SB STORE - Premium Gaming Marketplace</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -12,343 +12,339 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Firebase SDK -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
-        
-        // 🔥 GANTI DENGAN CONFIG FIREBASE LO!
-        const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_AUTH_DOMAIN",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_STORAGE_BUCKET",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
-        };
-        
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        window.db = db;
-    </script>
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
         * { font-family: 'Inter', sans-serif; }
+        
+        /* Animasi Background Bergerak */
+        @keyframes moveBg {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(50px, 50px) rotate(5deg); }
+        }
+        @keyframes moveBgSlow {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(-30px, -30px) scale(1.1); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+        
+        .bg-animate-1 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(168,85,247,0.15), transparent 70%);
+            animation: moveBg 20s infinite alternate ease-in-out;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .bg-animate-2 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 70% 80%, rgba(236,72,153,0.1), transparent 70%);
+            animation: moveBgSlow 25s infinite alternate ease-in-out;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .bg-animate-3 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(45deg, rgba(168,85,247,0.02) 0px, rgba(168,85,247,0.02) 2px, transparent 2px, transparent 8px);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* Floating orbs */
+        .floating-orb {
+            position: fixed;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(168,85,247,0.4), transparent);
+            filter: blur(40px);
+            pointer-events: none;
+            z-index: 0;
+            animation: float 8s infinite ease-in-out;
+        }
+        
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #1a1a2e; }
         ::-webkit-scrollbar-thumb { background: #a855f7; border-radius: 10px; }
-        .review-card {
+        
+        .glass-card {
             background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.05);
-            transition: all 0.2s;
         }
-        .review-card:hover {
-            border-color: rgba(168,85,247,0.3);
+        
+        .stat-card:hover {
+            border-color: rgba(168,85,247,0.4);
+            transform: translateY(-2px);
+        }
+        
+        .search-input:focus {
+            border-color: #a855f7;
+            box-shadow: 0 0 15px rgba(168,85,247,0.2);
+        }
+        
+        .product-card {
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(168,85,247,0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-[#0a0a0f] to-[#120c1c] min-h-screen">
+<body class="bg-gradient-to-br from-[#0a0a0f] to-[#050510] min-h-screen">
 
-    <!-- GLOW BACKGROUND -->
-    <div class="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
-        <div class="absolute top-20 left-1/4 w-96 h-96 bg-purple-700 rounded-full blur-[120px] opacity-20"></div>
-        <div class="absolute bottom-20 right-1/4 w-80 h-80 bg-pink-600 rounded-full blur-[100px] opacity-10"></div>
+    <!-- BACKGROUND BERGERAK -->
+    <div class="bg-animate-1"></div>
+    <div class="bg-animate-2"></div>
+    <div class="bg-animate-3"></div>
+    <div class="floating-orb w-96 h-96 top-20 -left-48" style="animation-delay: 0s;"></div>
+    <div class="floating-orb w-80 h-80 bottom-20 -right-48 bg-purple-500/20" style="animation-delay: 2s;"></div>
+    <div class="floating-orb w-64 h-64 top-1/2 left-1/2 bg-pink-500/10" style="animation-delay: 4s; filter: blur(60px);"></div>
+
+    <!-- HEADER / NAVIGATION -->
+    <div class="relative z-20 max-w-7xl mx-auto px-5 pt-6">
+        <div class="flex justify-between items-center flex-wrap gap-4">
+            <div class="flex items-center gap-2">
+                <div class="w-9 h-9 bg-gradient-to-br from-purple-500 to-purple-700 rounded-xl flex items-center justify-center shadow-lg">
+                    <i class="fas fa-crown text-yellow-400 text-sm"></i>
+                </div>
+                <span class="text-white font-bold text-xl tracking-tight">ELIXIR<span class="text-purple-400">SB</span></span>
+            </div>
+            <div class="flex gap-4">
+                <a href="#" class="text-white/60 hover:text-white text-sm transition">MARKET</a>
+                <a href="#" class="text-white/60 hover:text-white text-sm transition">CONTACT</a>
+                <a href="#" class="text-white/60 hover:text-white text-sm transition"><i class="fab fa-discord"></i> Discord</a>
+            </div>
+        </div>
     </div>
 
-    <!-- HEADER -->
-    <div class="relative z-10 max-w-6xl mx-auto px-5 pt-8">
-        <div class="text-center">
-            <div class="inline-flex items-center gap-2 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl px-5 py-2.5 mb-5">
-                <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-700 rounded-lg flex items-center justify-center">
-                    <i class="fas fa-bolt text-yellow-400 text-xs"></i>
-                </div>
-                <span class="text-white font-semibold tracking-wide text-sm">ELIXIR SB STORE</span>
+    <!-- HERO SECTION -->
+    <div class="relative z-20 max-w-7xl mx-auto px-5 pt-16 pb-12 text-center" data-aos="fade-up">
+        <div class="inline-block px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-purple-300 text-xs mb-6">
+            <i class="fas fa-bolt mr-1"></i> PREMIUM GAMING MARKETPLACE
+        </div>
+        <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-5 leading-tight">
+            Level Up Your<br>
+            <span class="bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">Gaming Experience</span>
+        </h1>
+        <p class="text-white/50 max-w-lg mx-auto text-sm mb-8">
+            Premium Scripts, Exploits & In-Game Items for Serious Gamers
+        </p>
+        <div class="flex justify-center gap-4 flex-wrap">
+            <button class="px-6 py-3 bg-purple-600 hover:bg-purple-500 text-white rounded-xl font-semibold transition-all flex items-center gap-2 shadow-lg shadow-purple-500/25">
+                <i class="fas fa-store"></i> SHOP NOW
+            </button>
+            <button class="px-6 py-3 bg-white/5 border border-white/10 hover:border-purple-500 text-white/80 rounded-xl font-semibold transition-all flex items-center gap-2">
+                <i class="fab fa-discord"></i> CONTACT
+            </button>
+        </div>
+    </div>
+
+    <!-- STATS SECTION -->
+    <div class="relative z-20 max-w-5xl mx-auto px-5 py-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="glass-card rounded-2xl p-5 text-center stat-card transition-all">
+                <div class="text-3xl font-bold text-white">17+</div>
+                <div class="text-white/40 text-xs mt-1">PRODUCTS</div>
             </div>
-            <div class="flex justify-center gap-3 flex-wrap">
-                <a href="https://discord.gg/CxbDP6QmW" target="_blank" class="flex items-center gap-2 px-5 py-2 bg-white/5 border border-white/10 rounded-full text-white/60 hover:text-white hover:border-purple-500/50 transition-all text-sm">
-                    <i class="fab fa-discord text-[#5865F2]"></i> Discord
-                </a>
-                <a href="https://www.tiktok.com/@not_elixir" target="_blank" class="flex items-center gap-2 px-5 py-2 bg-white/5 border border-white/10 rounded-full text-white/60 hover:text-white hover:border-purple-500/50 transition-all text-sm">
-                    <i class="fab fa-tiktok text-pink-400"></i> TikTok
-                </a>
+            <div class="glass-card rounded-2xl p-5 text-center stat-card transition-all">
+                <div class="text-3xl font-bold text-white">100+</div>
+                <div class="text-white/40 text-xs mt-1">SOLD</div>
+            </div>
+            <div class="glass-card rounded-2xl p-5 text-center stat-card transition-all">
+                <div class="text-3xl font-bold text-white">10+</div>
+                <div class="text-white/40 text-xs mt-1">REVIEWS</div>
+            </div>
+            <div class="glass-card rounded-2xl p-5 text-center stat-card transition-all">
+                <div class="text-3xl font-bold text-white">24/7</div>
+                <div class="text-white/40 text-xs mt-1">SUPPORT</div>
             </div>
         </div>
     </div>
 
-    <!-- MAIN CONTENT -->
-    <div class="relative z-10 max-w-6xl mx-auto px-5 mt-10">
-        
-        <!-- TABS -->
-        <div class="flex justify-center gap-2 mb-10">
-            <button data-tab="joki" class="tab-btn active-tab px-6 py-2.5 rounded-full text-sm font-medium transition-all bg-purple-600 text-white shadow-md shadow-purple-500/25">Joki SBC</button>
-            <button data-tab="script" class="tab-btn px-6 py-2.5 rounded-full text-sm font-medium transition-all bg-white/5 text-white/60 hover:text-white">Script</button>
-            <button data-tab="tier" class="tab-btn px-6 py-2.5 rounded-full text-sm font-medium transition-all bg-white/5 text-white/60 hover:text-white">Akun Tier</button>
-            <button data-tab="reviews" class="tab-btn px-6 py-2.5 rounded-full text-sm font-medium transition-all bg-white/5 text-white/60 hover:text-white"><i class="fas fa-star mr-1 text-yellow-500"></i> Ulasan</button>
-        </div>
-
-        <!-- JOKI TAB -->
-        <div id="jokiTab" class="tab-content">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="jokiGrid"></div>
-        </div>
-
-        <!-- SCRIPT TAB -->
-        <div id="scriptTab" class="tab-content hidden">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="scriptGrid"></div>
-        </div>
-
-        <!-- TIER TAB -->
-        <div id="tierTab" class="tab-content hidden">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="tierGrid"></div>
-        </div>
-
-        <!-- REVIEWS TAB -->
-        <div id="reviewsTab" class="tab-content hidden">
-            <div class="max-w-2xl mx-auto">
-                <!-- Form Kirim Review -->
-                <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 mb-8">
-                    <h3 class="text-white font-semibold text-lg mb-4 flex items-center gap-2">
-                        <i class="fas fa-pen text-purple-400"></i> Tulis Ulasan
-                    </h3>
-                    <input type="text" id="reviewName" class="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 text-white/80 text-sm placeholder:text-white/30 focus:outline-none focus:border-purple-500 mb-3" placeholder="Nickname kamu...">
-                    <div class="flex gap-1 mb-3" id="reviewStars">
-                        <i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="1"></i>
-                        <i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="2"></i>
-                        <i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="3"></i>
-                        <i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="4"></i>
-                        <i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="5"></i>
-                    </div>
-                    <textarea id="reviewComment" rows="3" class="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 text-white/80 text-sm placeholder:text-white/30 focus:outline-none focus:border-purple-500 mb-3" placeholder="Tulis ulasan kamu..."></textarea>
-                    <button id="submitReview" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-medium py-3 rounded-xl transition-all flex items-center justify-center gap-2">
-                        <i class="fas fa-paper-plane"></i> Kirim Review
-                    </button>
-                </div>
-
-                <!-- Daftar Ulasan -->
-                <div id="reviewsList" class="space-y-3">
-                    <div class="text-center text-white/40 py-8 text-sm">Loading ulasan...</div>
-                </div>
+    <!-- MARKETPLACE SECTION -->
+    <div class="relative z-20 max-w-7xl mx-auto px-5 py-12">
+        <div class="flex justify-between items-center flex-wrap gap-4 mb-8">
+            <div>
+                <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                    <i class="fas fa-store text-purple-400"></i> MARKETPLACE
+                </h2>
+                <p class="text-white/40 text-sm mt-1">17 ITEMS AVAILABLE</p>
+            </div>
+            <!-- SEARCH BAR -->
+            <div class="relative">
+                <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-white/30 text-sm"></i>
+                <input type="text" id="searchInput" placeholder="Search scripts, exploits, items..." class="search-input w-64 md:w-80 bg-white/5 border border-white/10 rounded-full py-2.5 pl-10 pr-4 text-white/80 text-sm focus:outline-none transition-all">
             </div>
         </div>
+
+        <!-- CATEGORY TABS -->
+        <div class="flex gap-2 mb-8 flex-wrap">
+            <button data-filter="all" class="filter-btn active-filter px-5 py-2 rounded-full text-sm font-medium transition-all bg-purple-600 text-white shadow-md shadow-purple-500/25">ALL</button>
+            <button data-filter="sbc" class="filter-btn px-5 py-2 rounded-full text-sm font-medium transition-all bg-white/5 text-white/60 hover:text-white">SBC</button>
+            <button data-filter="script" class="filter-btn px-5 py-2 rounded-full text-sm font-medium transition-all bg-white/5 text-white/60 hover:text-white">SCRIPT</button>
+            <button data-filter="tier" class="filter-btn px-5 py-2 rounded-full text-sm font-medium transition-all bg-white/5 text-white/60 hover:text-white">AKUN TIER</button>
+        </div>
+
+        <!-- PRODUCT GRID -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5" id="productGrid"></div>
     </div>
 
     <!-- FOOTER -->
-    <div class="relative z-10 text-center py-8 mt-12 border-t border-white/5 text-white/30 text-xs">
-        © 2025 ELIXIR SB STORE
+    <div class="relative z-20 text-center py-8 mt-8 border-t border-white/5 text-white/30 text-xs">
+        <i class="far fa-copyright"></i> 2025 ELIXIR SB STORE | PREMIUM GAMING MARKETPLACE
     </div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
-        
-        // 🔥 GANTI DENGAN CONFIG FIREBASE LO! 🔥
-        const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_AUTH_DOMAIN",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_STORAGE_BUCKET",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
-        };
-        
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        
-        // ========== FUNGSI ==========
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 600, once: true });
+
         const waNumber = "62895385984764";
         const formatRp = (n) => "Rp" + n.toLocaleString('id-ID');
-        
-        // Data produk
-        const jokiList = ["100K","200K","300K","400K","500K","600K","700K","800K","900K","1JT","1.1 JT","1.2 JT","1.3 JT","1.4 JT","1.5 JT","1.6 JT","1.7 JT"];
-        const jokiHarga = [12000,20000,30000,40000,50000,60000,70000,80000,90000,100000,110000,120000,130000,140000,150000,160000,170000];
-        const scriptList = [
-            { name:"MARSHMALLOW - HARIAN", price:13000 }, { name:"MARSHMALLOW - BULANAN", price:60000 },
-            { name:"MARSHMALLOW - LIFETIME", price:150000 }, { name:"COMBAT - HARIAN", price:20000 },
-            { name:"COMBAT - BULANAN", price:80000 }, { name:"COMBAT - LIFETIME", price:200000 },
-            { name:"FPS - LIFETIME", price:50000 }
+
+        // DATA PRODUK
+        const products = [
+            // SBC (17 produk)
+            ...["100K","200K","300K","400K","500K","600K","700K","800K","900K","1JT","1.1 JT","1.2 JT","1.3 JT","1.4 JT","1.5 JT","1.6 JT","1.7 JT"].map((name, idx) => ({
+                name: `SBC ${name}`,
+                price: [12000,20000,30000,40000,50000,60000,70000,80000,90000,100000,110000,120000,130000,140000,150000,160000,170000][idx],
+                category: "sbc",
+                icon: "fa-bolt"
+            })),
+            // SCRIPT
+            { name: "SCRIPT MARSHMALLOW - HARIAN", price: 13000, category: "script", icon: "fa-code" },
+            { name: "SCRIPT MARSHMALLOW - BULANAN", price: 60000, category: "script", icon: "fa-code" },
+            { name: "SCRIPT MARSHMALLOW - LIFETIME", price: 150000, category: "script", icon: "fa-infinity" },
+            { name: "SCRIPT COMBAT - HARIAN", price: 20000, category: "script", icon: "fa-code" },
+            { name: "SCRIPT COMBAT - BULANAN", price: 80000, category: "script", icon: "fa-code" },
+            { name: "SCRIPT COMBAT - LIFETIME", price: 200000, category: "script", icon: "fa-infinity" },
+            { name: "SCRIPT FPS - LIFETIME", price: 50000, category: "script", icon: "fa-infinity" },
+            // TIER
+            { name: "TIER 1 - GREEN NAME", price: 150000, category: "tier", icon: "fa-gem" },
+            { name: "TIER 2 - PINK NAME", price: 250000, category: "tier", icon: "fa-gem" },
+            { name: "TIER 3 - BLUE NAME", price: 350000, category: "tier", icon: "fa-gem" }
         ];
-        const tierList = [
-            { name:"TIER 1 - GREEN", price:150000 }, { name:"TIER 2 - PINK", price:250000 },
-            { name:"TIER 3 - BLUE", price:350000 }
-        ];
-        
+
         function sendWA(product, price, nickname, rating) {
             const msg = `Halo ELIXIR SB STORE%0A%0AProduk: ${encodeURIComponent(product)}%0AHarga: ${encodeURIComponent(formatRp(price))}%0ANickname: ${encodeURIComponent(nickname || '-')}%0ARating: ${rating || 5}⭐%0A%0ABukti transfer: (kirim foto)`;
             window.open(`https://wa.me/${waNumber}?text=${msg}`, '_blank');
         }
-        
-        function createCard(title, price) {
+
+        function createProductCard(product) {
             const card = document.createElement('div');
-            card.className = "bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300";
+            card.className = `product-card bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 transition-all product-${product.category}`;
             card.innerHTML = `
-                <div class="flex justify-between items-start mb-4">
-                    <h3 class="text-white font-medium text-base">${title}</h3>
-                    <div class="flex items-center gap-0.5">
-                        <i class="fas fa-star text-yellow-500 text-[10px]"></i>
-                        <i class="fas fa-star text-yellow-500 text-[10px]"></i>
-                        <i class="fas fa-star text-yellow-500 text-[10px]"></i>
-                        <i class="fas fa-star text-yellow-500 text-[10px]"></i>
-                        <i class="fas fa-star text-yellow-500 text-[10px]"></i>
+                <div class="flex items-center gap-2 mb-3">
+                    <div class="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center">
+                        <i class="fas ${product.icon} text-purple-400 text-sm"></i>
                     </div>
+                    <h3 class="text-white font-semibold text-sm flex-1">${product.name}</h3>
                 </div>
-                <div class="mb-4">
-                    <span class="text-2xl font-bold text-white">${formatRp(price)}</span>
+                <div class="mb-3">
+                    <span class="text-xl font-bold text-white">${formatRp(product.price)}</span>
                 </div>
-                <input type="text" class="nickname w-full bg-black/30 border border-white/10 rounded-xl px-4 py-2.5 text-white/80 text-sm placeholder:text-white/30 focus:outline-none focus:border-purple-500 transition-all mb-3" placeholder="Nickname">
-                <div class="flex justify-center gap-3 mb-4 stars">
-                    <i class="far fa-star text-white/30 text-lg cursor-pointer hover:text-yellow-500 transition" data-val="1"></i>
-                    <i class="far fa-star text-white/30 text-lg cursor-pointer hover:text-yellow-500 transition" data-val="2"></i>
-                    <i class="far fa-star text-white/30 text-lg cursor-pointer hover:text-yellow-500 transition" data-val="3"></i>
-                    <i class="far fa-star text-white/30 text-lg cursor-pointer hover:text-yellow-500 transition" data-val="4"></i>
-                    <i class="far fa-star text-white/30 text-lg cursor-pointer hover:text-yellow-500 transition" data-val="5"></i>
+                <input type="text" class="nickname w-full bg-black/30 border border-white/10 rounded-xl px-3 py-2 text-white/70 text-xs placeholder:text-white/30 focus:outline-none focus:border-purple-500 transition-all mb-3" placeholder="Nickname">
+                <div class="flex justify-center gap-2 mb-3 stars">
+                    <i class="far fa-star text-white/30 text-base cursor-pointer hover:text-yellow-500 transition" data-val="1"></i>
+                    <i class="far fa-star text-white/30 text-base cursor-pointer hover:text-yellow-500 transition" data-val="2"></i>
+                    <i class="far fa-star text-white/30 text-base cursor-pointer hover:text-yellow-500 transition" data-val="3"></i>
+                    <i class="far fa-star text-white/30 text-base cursor-pointer hover:text-yellow-500 transition" data-val="4"></i>
+                    <i class="far fa-star text-white/30 text-base cursor-pointer hover:text-yellow-500 transition" data-val="5"></i>
                 </div>
-                <button class="buy w-full bg-purple-600 hover:bg-purple-500 text-white font-medium py-2.5 rounded-xl transition-all flex items-center justify-center gap-2">
+                <button class="buy w-full bg-purple-600/80 hover:bg-purple-600 text-white font-medium py-2 rounded-xl transition-all flex items-center justify-center gap-2 text-sm">
                     <i class="fab fa-whatsapp text-sm"></i> Order
                 </button>
             `;
-            
+
+            // Star logic
             const stars = card.querySelectorAll('.stars i');
             stars.forEach(star => {
                 star.addEventListener('click', () => {
                     const val = parseInt(star.dataset.val);
                     stars.forEach((s, i) => {
-                        if (i < val) s.className = "fas fa-star text-yellow-500 text-lg cursor-pointer";
-                        else s.className = "far fa-star text-white/30 text-lg cursor-pointer hover:text-yellow-500 transition";
+                        if (i < val) s.className = "fas fa-star text-yellow-500 text-base cursor-pointer";
+                        else s.className = "far fa-star text-white/30 text-base cursor-pointer hover:text-yellow-500 transition";
                     });
                 });
             });
-            
+
+            // Buy logic
             const buyBtn = card.querySelector('.buy');
             const nicknameInput = card.querySelector('.nickname');
             buyBtn.addEventListener('click', () => {
                 const nickname = nicknameInput.value;
                 const active = card.querySelectorAll('.stars .fas').length;
-                sendWA(title, price, nickname, active || 5);
+                sendWA(product.name, product.price, nickname, active || 5);
             });
+
             return card;
         }
-        
-        // Render produk
-        const jokiGrid = document.getElementById('jokiGrid');
-        jokiList.forEach((name, i) => jokiGrid.appendChild(createCard(`SBC ${name}`, jokiHarga[i])));
-        const scriptGrid = document.getElementById('scriptGrid');
-        scriptList.forEach(s => scriptGrid.appendChild(createCard(`SCRIPT ${s.name}`, s.price)));
-        const tierGrid = document.getElementById('tierGrid');
-        tierList.forEach(t => tierGrid.appendChild(createCard(t.name, t.price)));
-        
-        // ========== FITUR REVIEW ==========
-        let selectedRating = 5;
-        const starsSelect = document.querySelectorAll('#reviewStars .star-select');
-        starsSelect.forEach(star => {
-            star.addEventListener('click', () => {
-                const val = parseInt(star.dataset.val);
-                selectedRating = val;
-                starsSelect.forEach((s, i) => {
-                    if (i < val) s.className = "fas fa-star text-2xl text-yellow-500 cursor-pointer star-select";
-                    else s.className = "far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select";
-                });
+
+        // Render products
+        const productGrid = document.getElementById('productGrid');
+        let currentFilter = 'all';
+        let searchQuery = '';
+
+        function renderProducts() {
+            const filtered = products.filter(p => {
+                if (currentFilter !== 'all' && p.category !== currentFilter) return false;
+                if (searchQuery && !p.name.toLowerCase().includes(searchQuery.toLowerCase())) return false;
+                return true;
             });
-        });
-        
-        // Submit review
-        document.getElementById('submitReview').addEventListener('click', async () => {
-            const name = document.getElementById('reviewName').value.trim();
-            const comment = document.getElementById('reviewComment').value.trim();
-            if (!name) { alert('Masukkan nickname!'); return; }
-            if (!comment) { alert('Masukkan ulasan!'); return; }
             
-            try {
-                await addDoc(collection(db, 'reviews'), {
-                    name: name,
-                    rating: selectedRating,
-                    comment: comment,
-                    createdAt: new Date()
-                });
-                document.getElementById('reviewName').value = '';
-                document.getElementById('reviewComment').value = '';
-                starsSelect.forEach((s, i) => {
-                    if (i < 5) s.className = "far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select";
-                });
-                selectedRating = 5;
-                alert('Review terkirim! Terima kasih 😊');
-            } catch (error) {
-                console.error(error);
-                alert('Gagal mengirim review. Pastikan Firebase sudah benar.');
+            productGrid.innerHTML = '';
+            if (filtered.length === 0) {
+                productGrid.innerHTML = '<div class="col-span-full text-center text-white/40 py-12">Tidak ada produk yang ditemukan 😢</div>';
+                return;
             }
-        });
-        
-        // Load reviews
-        function loadReviews() {
-            const q = query(collection(db, 'reviews'), orderBy('createdAt', 'desc'));
-            onSnapshot(q, (snapshot) => {
-                const container = document.getElementById('reviewsList');
-                if (snapshot.empty) {
-                    container.innerHTML = '<div class="text-center text-white/40 py-8 text-sm">Belum ada ulasan. Jadi yang pertama! ✨</div>';
-                    return;
-                }
-                let html = '';
-                snapshot.forEach(doc => {
-                    const data = doc.data();
-                    const date = data.createdAt?.toDate() || new Date();
-                    const formattedDate = date.toLocaleDateString('id-ID', { day:'numeric', month:'short', year:'numeric' });
-                    html += `
-                        <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4 review-card">
-                            <div class="flex justify-between items-start mb-2 flex-wrap gap-2">
-                                <div>
-                                    <span class="text-white font-medium text-sm">${escapeHtml(data.name)}</span>
-                                    <div class="flex items-center gap-0.5 mt-1">
-                                        ${generateStars(data.rating)}
-                                    </div>
-                                </div>
-                                <span class="text-white/30 text-xs">${formattedDate}</span>
-                            </div>
-                            <p class="text-white/70 text-sm mt-2">${escapeHtml(data.comment)}</p>
-                        </div>
-                    `;
-                });
-                container.innerHTML = html;
-            });
+            filtered.forEach(p => productGrid.appendChild(createProductCard(p)));
         }
-        
-        function generateStars(rating) {
-            let stars = '';
-            for (let i = 1; i <= 5; i++) {
-                if (i <= rating) stars += '<i class="fas fa-star text-yellow-500 text-xs"></i>';
-                else stars += '<i class="far fa-star text-white/30 text-xs"></i>';
-            }
-            return stars;
-        }
-        
-        function escapeHtml(str) {
-            return str.replace(/[&<>]/g, function(m) {
-                if (m === '&') return '&amp;';
-                if (m === '<') return '&lt;';
-                if (m === '>') return '&gt;';
-                return m;
-            });
-        }
-        
-        loadReviews();
-        
-        // TAB SWITCHING
-        const tabs = document.querySelectorAll('.tab-btn');
-        const contents = { joki: document.getElementById('jokiTab'), script: document.getElementById('scriptTab'), tier: document.getElementById('tierTab'), reviews: document.getElementById('reviewsTab') };
-        
-        tabs.forEach(btn => {
+
+        // Filter buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                const target = btn.dataset.tab;
-                tabs.forEach(b => {
+                document.querySelectorAll('.filter-btn').forEach(b => {
                     b.classList.remove('bg-purple-600', 'text-white', 'shadow-md', 'shadow-purple-500/25');
                     b.classList.add('bg-white/5', 'text-white/60');
                 });
                 btn.classList.remove('bg-white/5', 'text-white/60');
                 btn.classList.add('bg-purple-600', 'text-white', 'shadow-md', 'shadow-purple-500/25');
-                Object.keys(contents).forEach(key => contents[key].classList.add('hidden'));
-                if (contents[target]) contents[target].classList.remove('hidden');
+                currentFilter = btn.dataset.filter;
+                renderProducts();
             });
         });
+
+        // Search
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            renderProducts();
+        });
+
+        // Initial render
+        renderProducts();
     </script>
 </body>
 </html>
