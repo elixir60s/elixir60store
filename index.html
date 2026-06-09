@@ -5,14 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>ELIXIR SB STORE - Premium Store</title>
     
-    <!-- ========== LIBRARY PREMIUM ========== -->
-    <!-- Google Fonts - Inter (Font Premium) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome 6 (Icon Library Terbaik) -->
+    <!-- PREMIUM LIBRARIES -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-    <!-- AOS Library (Scroll Animation) -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
@@ -20,98 +15,134 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, #0a0a0f 0%, #1a0f2e 50%, #0b0716 100%);
+            background: radial-gradient(circle at 20% 50%, #0a0a1a, #05050f);
             padding: 20px;
             padding-bottom: 60px;
             min-height: 100vh;
         }
 
-        /* Header Premium */
+        /* GLOW ORB BACKGROUND */
+        .glow-orb {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(168,85,247,0.15), transparent);
+            border-radius: 50%;
+            filter: blur(60px);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .orb1 { top: 10%; left: -5%; }
+        .orb2 { bottom: 20%; right: -5%; background: radial-gradient(circle, rgba(255,215,0,0.1), transparent); }
+
+        /* HEADER PREMIUM */
         .header {
+            position: relative;
+            z-index: 2;
             text-align: center;
-            padding: 35px 20px;
-            background: rgba(88, 28, 135, 0.3);
+            padding: 40px 20px;
+            background: rgba(10, 10, 20, 0.6);
             backdrop-filter: blur(20px);
             border-radius: 48px;
-            margin-bottom: 35px;
-            border: 1px solid rgba(168, 85, 247, 0.4);
-            box-shadow: 0 8px 32px rgba(88, 28, 135, 0.3);
+            margin-bottom: 40px;
+            border: 1px solid rgba(168, 85, 247, 0.25);
+            box-shadow: 0 25px 45px -12px rgba(0,0,0,0.5);
         }
 
-        .header h1 {
-            background: linear-gradient(135deg, #c084fc, #a855f7, #7e22ce);
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
+            padding: 12px 32px;
+            border-radius: 100px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(168,85,247,0.3);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #a855f7, #7e22ce);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon i {
+            font-size: 1.3rem;
+            color: white;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, #c084fc);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            font-size: 2rem;
-            letter-spacing: 2px;
-        }
-
-        .header h1 i {
-            background: none;
-            -webkit-background-clip: unset;
-            background-clip: unset;
-            color: #fbbf24;
-        }
-
-        .tagline {
-            color: #c084fc;
-            margin-top: 10px;
             letter-spacing: 1px;
         }
 
-        /* Social Buttons */
+        .tagline {
+            color: #7e5a9e;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            margin-top: 10px;
+        }
+
+        /* SOCIAL BUTTONS */
         .social-header {
             display: flex;
             justify-content: center;
-            gap: 18px;
+            gap: 16px;
             margin-top: 25px;
             flex-wrap: wrap;
         }
 
-        .social-icon {
+        .social-btn {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            padding: 12px 28px;
-            border-radius: 60px;
+            padding: 10px 24px;
+            border-radius: 40px;
             color: white;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 500;
+            font-size: 0.85rem;
             transition: all 0.3s;
-            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
         }
 
-        .social-icon i {
-            font-size: 1.1rem;
-        }
+        .social-btn.discord { background: rgba(88, 101, 242, 0.2); border: 1px solid rgba(88, 101, 242, 0.5); }
+        .social-btn.tiktok { background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(254, 44, 85, 0.5); }
+        .social-btn:hover { transform: translateY(-3px); background: rgba(255,255,255,0.1); }
 
-        .social-icon.discord { background: linear-gradient(135deg, #5865F2, #4752c4); }
-        .social-icon.tiktok { background: linear-gradient(135deg, #000000, #1a1a2e); border: 1px solid #fe2c55; }
-        .social-icon:hover { transform: translateY(-3px); filter: brightness(1.1); }
-
-        /* Tab Buttons */
+        /* TAB BUTTONS */
         .tab-buttons {
             display: flex;
             justify-content: center;
-            gap: 18px;
-            margin-bottom: 35px;
+            gap: 12px;
+            margin-bottom: 40px;
             flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
         }
 
         .tab-btn {
-            background: rgba(88, 28, 135, 0.3);
+            background: rgba(20, 20, 40, 0.6);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(168, 85, 247, 0.3);
-            padding: 14px 32px;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            padding: 12px 28px;
             font-weight: 600;
-            font-size: 1rem;
-            border-radius: 60px;
-            color: #c084fc;
+            font-size: 0.9rem;
+            border-radius: 50px;
+            color: #a78bfa;
             cursor: pointer;
             transition: all 0.3s;
             display: inline-flex;
@@ -119,48 +150,32 @@
             gap: 10px;
         }
 
-        .tab-btn i {
-            font-size: 1.1rem;
-        }
+        .tab-btn i { font-size: 1rem; }
 
         .tab-btn.active {
             background: linear-gradient(135deg, #a855f7, #7e22ce);
             color: white;
             border-color: transparent;
-            box-shadow: 0 4px 20px rgba(168,85,247,0.5);
+            box-shadow: 0 4px 20px rgba(168,85,247,0.4);
         }
 
-        .tab-panel {
-            display: none;
-            animation: fadeIn 0.4s ease;
-        }
-
-        .tab-panel.active-panel {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        /* PANELS */
+        .tab-panel { display: none; animation: fadeIn 0.5s ease; }
+        .tab-panel.active-panel { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         .section-title {
             text-align: center;
-            margin-bottom: 30px;
-            font-size: 1.8rem;
-            font-weight: 700;
+            margin-bottom: 35px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 15px;
         }
-
-        .section-title i {
-            font-size: 2rem;
-            color: #fbbf24;
-        }
-
+        .section-title i { font-size: 1.8rem; color: #fbbf24; }
         .section-title span {
+            font-size: 1.6rem;
+            font-weight: 700;
             background: linear-gradient(135deg, #e9d5ff, #c084fc);
             -webkit-background-clip: text;
             background-clip: text;
@@ -169,265 +184,90 @@
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 28px;
             max-width: 1400px;
             margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
 
-        /* ========== CARD JOKI ========== */
-        .card-joki {
-            background: linear-gradient(135deg, rgba(20, 10, 40, 0.95), rgba(40, 20, 60, 0.95));
+        /* CARD STYLES */
+        .card {
+            background: rgba(15, 15, 25, 0.6);
+            backdrop-filter: blur(12px);
             border-radius: 28px;
             overflow: hidden;
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            transition: all 0.4s;
-            position: relative;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
+        .card:hover { transform: translateY(-8px); border-color: rgba(168,85,247,0.4); box-shadow: 0 20px 35px -15px rgba(0,0,0,0.5); }
 
-        .card-joki::before {
-            content: "💰💰💰";
-            position: absolute;
-            bottom: -10px;
-            right: -10px;
-            font-size: 80px;
-            opacity: 0.1;
-            pointer-events: none;
-        }
-
-        .card-joki::after {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,215,0,0.08), transparent);
-            transform: rotate(45deg);
-            animation: shine 3s infinite;
-            pointer-events: none;
-        }
-
-        @keyframes shine {
-            0% { transform: translateX(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) rotate(45deg); }
-        }
-
-        .card-joki:hover {
-            transform: translateY(-8px);
-            border-color: #ffd700;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(255,215,0,0.3);
-        }
-
-        /* ========== CARD SCRIPT ========== */
-        .card-script {
-            background: linear-gradient(135deg, rgba(10, 20, 30, 0.95), rgba(0, 15, 25, 0.95));
-            border-radius: 28px;
-            overflow: hidden;
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            transition: all 0.4s;
-            position: relative;
-        }
-
-        .card-script::before {
-            content: "010011 101010 110100";
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            font-family: monospace;
-            font-size: 10px;
-            opacity: 0.15;
-            color: #00ffff;
-            white-space: pre-wrap;
-            pointer-events: none;
-        }
-
-        .card-script:hover {
-            transform: translateY(-8px);
-            border-color: #00ffff;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(0,255,255,0.3);
-        }
-
-        /* ========== CARD TIER ========== */
-        .card-tier {
-            background: linear-gradient(135deg, rgba(40, 20, 60, 0.95), rgba(60, 30, 80, 0.95));
-            border-radius: 28px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 215, 0, 0.4);
-            transition: all 0.4s;
-            position: relative;
-        }
-
-        .card-tier::before {
-            content: "👑🏆⭐";
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            font-size: 70px;
-            opacity: 0.1;
-            pointer-events: none;
-        }
-
-        .card-tier:hover {
-            transform: translateY(-8px);
-            border-color: #ffd700;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(255,215,0,0.3);
-        }
-
-        /* Card Content Styles */
         .card-header {
             padding: 20px 24px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .product-title {
-            font-size: 1.3rem;
-            font-weight: 700;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 10px;
         }
+        .product-title { font-size: 1.25rem; font-weight: 700; display: flex; align-items: center; gap: 10px; color: white; }
+        .product-title i { color: #c084fc; font-size: 1.2rem; }
+        .rating { display: flex; align-items: center; gap: 6px; color: #fbbf24; font-size: 0.8rem; }
+        .rating span { color: #7e5a9e; }
 
-        .product-title i {
-            font-size: 1.4rem;
-        }
-
-        .product-title span {
-            background: linear-gradient(135deg, #e9d5ff, #c084fc);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .rating {
-            color: #fbbf24;
-            font-size: 0.85rem;
-            margin-top: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .rating i {
-            font-size: 0.8rem;
-        }
-
-        .rating span {
-            color: #a78bfa;
-        }
-
-        .card-body {
-            padding: 24px;
-        }
-
-        .info-item {
-            background: rgba(0,0,0,0.3);
-            border-radius: 20px;
-            padding: 16px;
-            margin-bottom: 16px;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .info-title {
-            font-weight: 600;
-            color: #e9d5ff;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 8px;
-        }
-
-        .info-desc {
-            font-size: 0.7rem;
-            color: #a78bfa;
-        }
-
-        .price {
-            color: #fbbf24;
-            font-weight: 700;
-            font-size: 1.3rem;
-            margin-top: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .price i {
-            font-size: 1.1rem;
-        }
+        .card-body { padding: 24px; }
+        .price-info { background: rgba(0,0,0,0.3); border-radius: 20px; padding: 16px; margin-bottom: 20px; }
+        .price-label { font-size: 0.7rem; color: #a78bfa; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; display: flex; align-items: center; gap: 6px; }
+        .price-value { font-size: 1.6rem; font-weight: 700; color: #fbbf24; display: flex; align-items: baseline; gap: 4px; }
+        .price-value small { font-size: 0.8rem; font-weight: 400; color: #7e5a9e; }
 
         .input-field {
             width: 100%;
             padding: 14px 16px;
-            background: rgba(0,0,0,0.4);
-            border: 1px solid rgba(168,85,247,0.3);
-            border-radius: 20px;
-            color: #e9d5ff;
-            margin: 16px 0;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(168,85,247,0.2);
+            border-radius: 18px;
+            color: white;
             font-size: 0.9rem;
+            margin-bottom: 16px;
+            transition: 0.2s;
         }
-
-        .input-field:focus {
-            outline: none;
-            border-color: #a855f7;
-        }
+        .input-field:focus { outline: none; border-color: #a855f7; }
 
         .star-rating {
             display: flex;
-            gap: 12px;
-            margin: 16px 0;
-            font-size: 1.5rem;
-            cursor: pointer;
+            gap: 10px;
+            margin-bottom: 20px;
             justify-content: center;
         }
-
-        .star-rating i {
-            color: #4a2a6e;
-            transition: all 0.1s;
-            cursor: pointer;
-        }
-
-        .star-rating i.active {
-            color: #fbbf24;
-        }
+        .star-rating i { font-size: 1.3rem; color: #3a2a5a; cursor: pointer; transition: 0.1s; }
+        .star-rating i.active { color: #fbbf24; }
 
         .btn-buy {
-            display: block;
-            width: 100%;
-            background: linear-gradient(135deg, #a855f7, #7e22ce);
-            color: white;
-            text-align: center;
-            padding: 16px;
-            border-radius: 60px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            font-size: 1rem;
+            width: 100%;
+            background: linear-gradient(135deg, #a855f7, #7e22ce);
+            border: none;
+            padding: 14px;
+            border-radius: 40px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
         }
-
-        .btn-buy i {
-            font-size: 1.1rem;
-        }
-
-        .btn-buy:hover {
-            transform: scale(0.98);
-            box-shadow: 0 4px 20px rgba(168,85,247,0.5);
-        }
+        .btn-buy:hover { transform: scale(0.98); box-shadow: 0 5px 20px rgba(168,85,247,0.4); }
 
         .footer {
             text-align: center;
             margin-top: 60px;
             padding: 25px;
-            color: #7e5a9e;
-            font-size: 0.75rem;
-            border-top: 1px solid rgba(168,85,247,0.2);
+            color: #5a4a7a;
+            font-size: 0.7rem;
+            border-top: 1px solid rgba(255,255,255,0.03);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -437,200 +277,128 @@
 </head>
 <body>
 
+<div class="glow-orb orb1"></div>
+<div class="glow-orb orb2"></div>
+
 <div class="header" data-aos="fade-down">
-    <h1><i class="fas fa-bolt"></i> ELIXIR SB STORE <i class="fas fa-bolt"></i></h1>
-    <div class="tagline">JOKI SBC • VTF • SOUTHBRONX | SCRIPT ELIXIRPROJECTION | AKUN TIER</div>
+    <div class="logo">
+        <div class="logo-icon"><i class="fas fa-crown"></i></div>
+        <div class="logo-text">ELIXIR SB STORE</div>
+    </div>
+    <div class="tagline">PREMIUM GAMING SERVICE</div>
     <div class="social-header">
-        <a href="https://discord.gg/CxbDP6QmW" target="_blank" class="social-icon discord"><i class="fab fa-discord"></i> Join Discord</a>
-        <a href="https://www.tiktok.com/@not_elixir" target="_blank" class="social-icon tiktok"><i class="fab fa-tiktok"></i> TikTok @not_elixir</a>
+        <a href="https://discord.gg/CxbDP6QmW" target="_blank" class="social-btn discord"><i class="fab fa-discord"></i> Discord</a>
+        <a href="https://www.tiktok.com/@not_elixir" target="_blank" class="social-btn tiktok"><i class="fab fa-tiktok"></i> TikTok</a>
     </div>
 </div>
 
 <div class="tab-container">
     <div class="tab-buttons" data-aos="fade-up">
-        <button class="tab-btn active" data-tab="tab1"><i class="fas fa-bullseye"></i> JOKI SBC</button>
-        <button class="tab-btn" data-tab="tab2"><i class="fas fa-laptop-code"></i> SCRIPT</button>
-        <button class="tab-btn" data-tab="tab3"><i class="fas fa-crown"></i> AKUN TIER</button>
+        <button class="tab-btn active" data-tab="tab1"><i class="fas fa-bolt"></i> JOKI SBC</button>
+        <button class="tab-btn" data-tab="tab2"><i class="fas fa-code"></i> SCRIPT</button>
+        <button class="tab-btn" data-tab="tab3"><i class="fas fa-gem"></i> AKUN TIER</button>
     </div>
 
     <div id="tab1" class="tab-panel active-panel">
-        <div class="section-title" data-aos="fade-up">
-            <i class="fas fa-money-bill-wave"></i>
-            <span>LIST HARGA JOKI SBC</span>
-            <i class="fas fa-money-bill-wave"></i>
-        </div>
+        <div class="section-title" data-aos="fade-up"><i class="fas fa-coins"></i><span>JOKI SBC</span><i class="fas fa-coins"></i></div>
         <div class="grid" id="jokiGrid"></div>
     </div>
-
     <div id="tab2" class="tab-panel">
-        <div class="section-title" data-aos="fade-up">
-            <i class="fas fa-terminal"></i>
-            <span>SCRIPT ELIXIRPROJECTION</span>
-            <i class="fas fa-terminal"></i>
-        </div>
+        <div class="section-title" data-aos="fade-up"><i class="fas fa-terminal"></i><span>SCRIPT</span><i class="fas fa-terminal"></i></div>
         <div class="grid" id="scriptGrid"></div>
     </div>
-
     <div id="tab3" class="tab-panel">
-        <div class="section-title" data-aos="fade-up">
-            <i class="fas fa-trophy"></i>
-            <span>AKUN TIER</span>
-            <i class="fas fa-trophy"></i>
-        </div>
+        <div class="section-title" data-aos="fade-up"><i class="fas fa-trophy"></i><span>AKUN TIER</span><i class="fas fa-trophy"></i></div>
         <div class="grid" id="tierGrid"></div>
     </div>
 </div>
 
 <div class="footer" data-aos="fade-up">
-    <i class="far fa-copyright"></i> 2025 ELIXIR SB STORE | Order via WhatsApp <i class="fab fa-whatsapp"></i> | Fast & Trusted
+    <i class="far fa-copyright"></i> 2025 ELIXIR SB STORE
 </div>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-    // Initialize AOS
-    AOS.init({
-        duration: 800,
-        once: true,
-        offset: 50
-    });
+    AOS.init({ duration: 600, once: true });
 
     const waNumber = "62895385984764";
 
-    // JOKI SBC (17 PRODUK)
     const jokiData = [
-        { name: "SBC 100K", price: 12000 },
-        { name: "SBC 200K", price: 20000 },
-        { name: "SBC 300K", price: 30000 },
-        { name: "SBC 400K", price: 40000 },
-        { name: "SBC 500K", price: 50000 },
-        { name: "SBC 600K", price: 60000 },
-        { name: "SBC 700K", price: 70000 },
-        { name: "SBC 800K", price: 80000 },
-        { name: "SBC 900K", price: 90000 },
-        { name: "SBC 1JT", price: 100000 },
-        { name: "SBC 1.1 JT", price: 110000 },
-        { name: "SBC 1.2 JT", price: 120000 },
-        { name: "SBC 1.3 JT", price: 130000 },
-        { name: "SBC 1.4 JT", price: 140000 },
-        { name: "SBC 1.5 JT", price: 150000 },
-        { name: "SBC 1.6 JT", price: 160000 },
-        { name: "SBC 1.7 JT", price: 170000 }
+        "SBC 100K","SBC 200K","SBC 300K","SBC 400K","SBC 500K",
+        "SBC 600K","SBC 700K","SBC 800K","SBC 900K","SBC 1JT",
+        "SBC 1.1 JT","SBC 1.2 JT","SBC 1.3 JT","SBC 1.4 JT","SBC 1.5 JT","SBC 1.6 JT","SBC 1.7 JT"
     ];
-
-    // SCRIPT DATA
     const scriptData = [
-        { name: "MARSHMALLOW", type: "HARIAN", price: 13000 },
-        { name: "MARSHMALLOW", type: "BULANAN", price: 60000 },
-        { name: "MARSHMALLOW", type: "LIFETIME", price: 150000 },
-        { name: "COMBAT", type: "HARIAN", price: 20000 },
-        { name: "COMBAT", type: "BULANAN", price: 80000 },
-        { name: "COMBAT", type: "LIFETIME", price: 200000 },
-        { name: "FPS", type: "LIFETIME", price: 50000 }
+        { name:"MARSHMALLOW", type:"HARIAN", price:13000 },
+        { name:"MARSHMALLOW", type:"BULANAN", price:60000 },
+        { name:"MARSHMALLOW", type:"LIFETIME", price:150000 },
+        { name:"COMBAT", type:"HARIAN", price:20000 },
+        { name:"COMBAT", type:"BULANAN", price:80000 },
+        { name:"COMBAT", type:"LIFETIME", price:200000 },
+        { name:"FPS", type:"LIFETIME", price:50000 }
     ];
-
-    // TIER DATA
     const tierData = [
-        { name: "TIER 1", color: "GREEN NAME", price: 150000 },
-        { name: "TIER 2", color: "PINK NAME", price: 250000 },
-        { name: "TIER 3", color: "BLUE NAME", price: 350000 }
+        { name:"TIER 1", color:"GREEN NAME", price:150000 },
+        { name:"TIER 2", color:"PINK NAME", price:250000 },
+        { name:"TIER 3", color:"BLUE NAME", price:350000 }
     ];
 
-    function formatRupiah(amount) {
-        return "Rp" + amount.toLocaleString('id-ID');
-    }
+    const formatRupiah = (n) => "Rp" + n.toLocaleString('id-ID');
+    const openWA = (product, price, nickname, rating) => {
+        const msg = `Halo%20ELIXIR%20SB%20STORE%0A📦%20Produk%3A%20${encodeURIComponent(product)}%0A💰%20Total%3A%20${encodeURIComponent(formatRupiah(price))}%0A👤%20Nickname%3A%20${encodeURIComponent(nickname||'-')}%0A⭐%20Rating%3A%20${rating||'-'}`;
+        window.open(`https://wa.me/${waNumber}?text=${msg}`, '_blank');
+    };
 
-    function openWhatsApp(productName, price, nickname, rating) {
-        const message = `Halo%20ELIXIR%20SB%20STORE%0A%0A📦%20*PESANAN%20BARU*%0A━━━━━━━━━━━━━━━━━━%0A📍%20Produk%3A%20${encodeURIComponent(productName)}%0A💰%20Total%3A%20${encodeURIComponent(formatRupiah(price))}%0A👤%20Nickname%3A%20${encodeURIComponent(nickname || '-')}%0A⭐%20Rating%3A%20${encodeURIComponent(rating || '-')}%0A━━━━━━━━━━━━━━━━━━%0A%0A✅%20Saya%20sudah%20transfer.%20Berikut%20bukti%20transfernya%3A`;
-        window.open(`https://wa.me/${waNumber}?text=${message}`, '_blank');
-    }
+    const renderCards = (container, items, type) => {
+        let html = "";
+        if (type === 'joki') {
+            items.forEach((name, idx) => {
+                const price = [12000,20000,30000,40000,50000,60000,70000,80000,90000,100000,110000,120000,130000,140000,150000,160000,170000][idx];
+                html += `<div class="card" data-aos="fade-up"><div class="card-header"><div class="product-title"><i class="fas fa-bolt"></i> ${name}</div><div class="rating"><i class="fas fa-star"></i><span>5.0</span></div></div><div class="card-body"><div class="price-info"><div class="price-label"><i class="fas fa-tachometer-alt"></i> NO DELAY</div><div class="price-value">${formatRupiah(price)}<small>/SBC</small></div></div><input type="text" class="input-field nickname" placeholder="Nickname"><div class="star-rating"><i class="far fa-star" data-val="1"></i><i class="far fa-star" data-val="2"></i><i class="far fa-star" data-val="3"></i><i class="far fa-star" data-val="4"></i><i class="far fa-star" data-val="5"></i></div><button class="btn-buy" data-product="${name}" data-price="${price}"><i class="fab fa-whatsapp"></i> ORDER NOW</button></div></div>`;
+            });
+        } else if (type === 'script') {
+            items.forEach(s => {
+                const icon = s.type === "HARIAN" ? "fa-calendar-day" : (s.type === "BULANAN" ? "fa-calendar-alt" : "fa-infinity");
+                html += `<div class="card" data-aos="fade-up"><div class="card-header"><div class="product-title"><i class="fas fa-code"></i> ${s.name}</div><div class="rating"><i class="fas fa-star"></i><span>5.0</span></div></div><div class="card-body"><div class="price-info"><div class="price-label"><i class="fas ${icon}"></i> ${s.type}</div><div class="price-value">${formatRupiah(s.price)}</div></div><input type="text" class="input-field nickname" placeholder="Nickname"><div class="star-rating"><i class="far fa-star" data-val="1"></i><i class="far fa-star" data-val="2"></i><i class="far fa-star" data-val="3"></i><i class="far fa-star" data-val="4"></i><i class="far fa-star" data-val="5"></i></div><button class="btn-buy" data-product="SCRIPT ${s.name} - ${s.type}" data-price="${s.price}"><i class="fab fa-whatsapp"></i> ORDER NOW</button></div></div>`;
+            });
+        } else if (type === 'tier') {
+            items.forEach(t => {
+                html += `<div class="card" data-aos="fade-up"><div class="card-header"><div class="product-title"><i class="fas fa-gem"></i> ${t.name}</div><div class="rating"><i class="fas fa-star"></i><span>5.0</span></div></div><div class="card-body"><div class="price-info"><div class="price-label"><i class="fas fa-palette"></i> ${t.color}</div><div class="price-value">${formatRupiah(t.price)}</div></div><input type="text" class="input-field nickname" placeholder="Nickname"><div class="star-rating"><i class="far fa-star" data-val="1"></i><i class="far fa-star" data-val="2"></i><i class="far fa-star" data-val="3"></i><i class="far fa-star" data-val="4"></i><i class="far fa-star" data-val="5"></i></div><button class="btn-buy" data-product="${t.name} (${t.color})" data-price="${t.price}"><i class="fab fa-whatsapp"></i> ORDER NOW</button></div></div>`;
+            });
+        }
+        container.innerHTML = html;
+        attachCardEvents(container);
+    };
 
-    // RENDER JOKI
-    const jokiContainer = document.getElementById('jokiGrid');
-    let jokiHTML = "";
-    for (let p of jokiData) {
-        jokiHTML += `<div class="card-joki" data-aos="fade-up">
-            <div class="card-header">
-                <div class="product-title"><i class="fas fa-bullseye"></i><span>${p.name}</span></div>
-                <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><span>5 (4 ulasan)</span></div>
-            </div>
-            <div class="card-body">
-                <div class="info-item">
-                    <div class="info-title"><i class="fas fa-bolt"></i> NO DELAY</div>
-                    <div class="info-desc">VIA TRANSFER IN GAME SOUTH BRONX</div>
-                    <div class="price"><i class="fas fa-tag"></i> ${formatRupiah(p.price)}</div>
-                </div>
-                <input type="text" class="input-field nickname" placeholder="📝 Nickname kamu...">
-                <div class="star-rating">
-                    <i class="far fa-star" data-value="1"></i>
-                    <i class="far fa-star" data-value="2"></i>
-                    <i class="far fa-star" data-value="3"></i>
-                    <i class="far fa-star" data-value="4"></i>
-                    <i class="far fa-star" data-value="5"></i>
-                </div>
-                <button class="btn-buy" data-product="${p.name}" data-price="${p.price}"><i class="fab fa-whatsapp"></i> BELI SEKARANG</button>
-            </div>
-        </div>`;
-    }
-    jokiContainer.innerHTML = jokiHTML;
+    const attachCardEvents = (container) => {
+        container.querySelectorAll('.card').forEach(card => {
+            const stars = card.querySelectorAll('.star-rating i');
+            stars.forEach(star => {
+                star.onclick = () => {
+                    const val = parseInt(star.dataset.val);
+                    stars.forEach((s, i) => {
+                        if (i < val) s.className = "fas fa-star active";
+                        else s.className = "far fa-star";
+                    });
+                };
+            });
+            const btn = card.querySelector('.btn-buy');
+            if (btn) {
+                btn.onclick = () => {
+                    const product = btn.dataset.product;
+                    const price = parseInt(btn.dataset.price);
+                    const nickname = card.querySelector('.nickname')?.value || '';
+                    const activeStars = card.querySelectorAll('.star-rating .fas.active').length;
+                    openWA(product, price, nickname, activeStars || 5);
+                };
+            }
+        });
+    };
 
-    // RENDER SCRIPT
-    const scriptContainer = document.getElementById('scriptGrid');
-    let scriptHTML = "";
-    for (let s of scriptData) {
-        const typeIcon = s.type === "HARIAN" ? "fa-calendar-day" : (s.type === "BULANAN" ? "fa-calendar-alt" : "fa-infinity");
-        scriptHTML += `<div class="card-script" data-aos="fade-up">
-            <div class="card-header">
-                <div class="product-title"><i class="fas fa-laptop-code"></i><span>SCRIPT ${s.name}</span></div>
-                <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><span>${s.type === "LIFETIME" ? "5 (8 ulasan)" : "4 (3 ulasan)"}</span></div>
-            </div>
-            <div class="card-body">
-                <div class="info-item">
-                    <div class="info-title"><i class="fas ${typeIcon}"></i> ${s.type}</div>
-                    <div class="price"><i class="fas fa-tag"></i> ${formatRupiah(s.price)}</div>
-                </div>
-                <input type="text" class="input-field nickname" placeholder="📝 Nickname kamu...">
-                <div class="star-rating">
-                    <i class="far fa-star" data-value="1"></i>
-                    <i class="far fa-star" data-value="2"></i>
-                    <i class="far fa-star" data-value="3"></i>
-                    <i class="far fa-star" data-value="4"></i>
-                    <i class="far fa-star" data-value="5"></i>
-                </div>
-                <button class="btn-buy" data-product="SCRIPT ${s.name} - ${s.type}" data-price="${s.price}"><i class="fab fa-whatsapp"></i> BELI SEKARANG</button>
-            </div>
-        </div>`;
-    }
-    scriptContainer.innerHTML = scriptHTML;
+    renderCards(document.getElementById('jokiGrid'), jokiData, 'joki');
+    renderCards(document.getElementById('scriptGrid'), scriptData, 'script');
+    renderCards(document.getElementById('tierGrid'), tierData, 'tier');
 
-    // RENDER TIER
-    const tierContainer = document.getElementById('tierGrid');
-    let tierHTML = "";
-    for (let t of tierData) {
-        tierHTML += `<div class="card-tier" data-aos="fade-up">
-            <div class="card-header">
-                <div class="product-title"><i class="fas fa-crown"></i><span>${t.name}</span></div>
-                <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><span>5 (12 ulasan)</span></div>
-            </div>
-            <div class="card-body">
-                <div class="info-item">
-                    <div class="info-title"><i class="fas fa-palette"></i> ${t.color}</div>
-                    <div class="price"><i class="fas fa-tag"></i> ${formatRupiah(t.price)}</div>
-                </div>
-                <input type="text" class="input-field nickname" placeholder="📝 Nickname kamu...">
-                <div class="star-rating">
-                    <i class="far fa-star" data-value="1"></i>
-                    <i class="far fa-star" data-value="2"></i>
-                    <i class="far fa-star" data-value="3"></i>
-                    <i class="far fa-star" data-value="4"></i>
-                    <i class="far fa-star" data-value="5"></i>
-                </div>
-                <button class="btn-buy" data-product="${t.name} (${t.color})" data-price="${t.price}"><i class="fab fa-whatsapp"></i> BELI SEKARANG</button>
-            </div>
-        </div>`;
-    }
-    tierContainer.innerHTML = tierHTML;
-
-    // TAB SWITCHING
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -639,43 +407,6 @@
             document.getElementById(btn.dataset.tab).classList.add('active-panel');
         });
     });
-
-    // ATTACH EVENT LISTENERS
-    function attachCardListeners() {
-        document.querySelectorAll('.card-joki, .card-script, .card-tier').forEach(card => {
-            // Star rating
-            const stars = card.querySelectorAll('.star-rating i');
-            stars.forEach(star => {
-                star.addEventListener('click', () => {
-                    const val = parseInt(star.dataset.value);
-                    stars.forEach((s, i) => {
-                        if (i < val) {
-                            s.classList.remove('far');
-                            s.classList.add('fas', 'active');
-                        } else {
-                            s.classList.remove('fas', 'active');
-                            s.classList.add('far');
-                        }
-                    });
-                });
-            });
-
-            // Buy button
-            const buyBtn = card.querySelector('.btn-buy');
-            if (buyBtn) {
-                buyBtn.addEventListener('click', () => {
-                    const product = buyBtn.dataset.product;
-                    const price = parseInt(buyBtn.dataset.price);
-                    const nickname = card.querySelector('.nickname')?.value || '';
-                    const starContainer = card.querySelector('.star-rating');
-                    const activeStars = starContainer.querySelectorAll('.fas.active').length;
-                    openWhatsApp(product, price, nickname, activeStars || 5);
-                });
-            }
-        });
-    }
-
-    attachCardListeners();
 </script>
 </body>
 </html>
