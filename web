@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>ELIXIRSBSTORE - Official Store</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            padding: 20px;
+            padding-bottom: 60px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 25px 0;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            border-radius: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            color: #ffd700;
+            font-size: 28px;
+            letter-spacing: 2px;
+        }
+
+        .header p {
+            color: #ccc;
+            margin-top: 8px;
+            font-size: 14px;
+        }
+
+        .produk-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
+        .gambar-produk {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: #eee;
+        }
+
+        .info-produk {
+            padding: 16px;
+        }
+
+        .nama-produk {
+            font-size: 18px;
+            font-weight: bold;
+            color: #203a43;
+            margin-bottom: 8px;
+        }
+
+        .harga {
+            font-size: 22px;
+            font-weight: bold;
+            color: #2e7d32;
+            margin-bottom: 12px;
+        }
+
+        .harga small {
+            font-size: 12px;
+            font-weight: normal;
+            color: #888;
+        }
+
+        .deskripsi {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+
+        .tombol-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .btn {
+            flex: 1;
+            text-align: center;
+            padding: 10px 12px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: scale(0.97);
+            opacity: 0.9;
+        }
+
+        .btn-wa {
+            background-color: #25D366;
+            color: white;
+        }
+
+        .btn-dc {
+            background-color: #5865F2;
+            color: white;
+        }
+
+        .btn-tt {
+            background-color: #000000;
+            color: white;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            color: #888;
+            font-size: 12px;
+            border-top: 1px solid #ddd;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            .produk-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .btn {
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+            .header h1 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>✨ ELIXIRSBSTORE ✨</h1>
+    <p>Klik tombol di bawah untuk order langsung via WhatsApp</p>
+</div>
+
+<div class="produk-grid" id="daftar-produk">
+    <!-- Semua produk akan muncul di sini dari JavaScript -->
+</div>
+
+<div class="footer">
+    © 2026 ELIXIRSBSTORE | Harga bisa berubah sewaktu-waktu
+</div>
+
+<script>
+    // ==================================================
+    // 🔧 EDIT BAGIAN INI SESUAI PRODUK LO 🔧
+    // ==================================================
+    
+    const produk = [
+        {
+            nama: "Contoh Produk 1",
+            harga: 100000,
+            deskripsi: "Deskripsi produk lo di sini. Bisa tulis bahan, ukuran, varian, dll.",
+            gambar: "https://via.placeholder.com/400x300?text=Produk+1",
+            wa: "https://wa.me/6281234567890?text=Halo%20ELIXIRSBSTORE%2C%20saya%20mau%20order%20Contoh%20Produk%201"
+        },
+        {
+            nama: "Contoh Produk 2",
+            harga: 150000,
+            deskripsi: "Contoh: Ready stock, cod jakarta, quality guaranteed.",
+            gambar: "https://via.placeholder.com/400x300?text=Produk+2",
+            wa: "https://wa.me/6281234567890?text=Halo%20ELIXIRSBSTORE%2C%20saya%20mau%20order%20Contoh%20Produk%202"
+        },
+        {
+            nama: "Contoh Produk 3",
+            harga: 200000,
+            deskripsi: "Free gift untuk pembelian pertama!",
+            gambar: "https://via.placeholder.com/400x300?text=Produk+3",
+            wa: "https://wa.me/6281234567890?text=Halo%20ELIXIRSBSTORE%2C%20saya%20mau%20order%20Contoh%20Produk%203"
+        }
+    ];
+
+    // KALO MAU TAMBAHIN DISCORD ATAU TIKTOK, PAKE FORMAT DI BAWAH
+    // Contoh produk pake Discord & TikTok (copy dan hapus tanda // di depan):
+    /*
+    {
+        nama: "Produk Special",
+        harga: 500000,
+        deskripsi: "Limited edition!",
+        gambar: "https://via.placeholder.com/400x300?text=Special",
+        wa: "https://wa.me/6281234567890?text=Order%20Special",
+        discord: "https://discord.gg/invite-lo",
+        tiktok: "https://tiktok.com/@username-lo"
+    }
+    */
+
+    // ==================================================
+    // SAMPAI SINI DOANG YANG LO EDIT
+    // ==================================================
+
+    function formatRupiah(angka) {
+        return new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 0
+        }).format(angka);
+    }
+
+    function tampilkanProduk() {
+        const container = document.getElementById('daftar-produk');
+        container.innerHTML = '';
+        
+        produk.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            
+            let waBtn = `<a href="${item.wa}" class="btn btn-wa" target="_blank">💬 Pesan via WA</a>`;
+            
+            let dcBtn = '';
+            if (item.discord && item.discord !== '') {
+                dcBtn = `<a href="${item.discord}" class="btn btn-dc" target="_blank">🎮 Join Discord</a>`;
+            }
+            
+            let ttBtn = '';
+            if (item.tiktok && item.tiktok !== '') {
+                ttBtn = `<a href="${item.tiktok}" class="btn btn-tt" target="_blank">📱 TikTok Shop</a>`;
+            }
+            
+            let gambarSrc = item.gambar || 'https://via.placeholder.com/400x300?text=ELIXIRSBSTORE';
+            
+            card.innerHTML = `
+                <img class="gambar-produk" src="${gambarSrc}" alt="${item.nama}" onerror="this.src='https://via.placeholder.com/400x300?text=Gambar+Tidak+Tersedia'">
+                <div class="info-produk">
+                    <div class="nama-produk">${item.nama}</div>
+                    <div class="harga">${formatRupiah(item.harga)}</div>
+                    <div class="deskripsi">${item.deskripsi}</div>
+                    <div class="tombol-group">
+                        ${waBtn}
+                        ${dcBtn}
+                        ${ttBtn}
+                    </div>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    tampilkanProduk();
+</script>
+
+</body>
+</html>
