@@ -2,8 +2,8 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ELIXIR SB STORE - Joki SBC VTF Southbronx</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>ELIXIR SB STORE - Joki & Script</title>
     <style>
         * {
             margin: 0;
@@ -11,106 +11,198 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
         body {
-            background: linear-gradient(135deg, #0a0f1e, #0f172a);
+            background: linear-gradient(135deg, #0a0f1e 0%, #0f172a 100%);
             padding: 20px;
+            padding-bottom: 60px;
             min-height: 100vh;
         }
+
+        /* Header */
         .header {
             text-align: center;
+            padding: 25px 20px;
             background: rgba(15, 23, 42, 0.8);
-            padding: 30px;
+            backdrop-filter: blur(10px);
             border-radius: 28px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             border: 1px solid rgba(255, 215, 0, 0.2);
         }
+
         .header h1 {
             color: #ffd700;
-            font-size: 28px;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
         }
+
         .tagline {
             color: #94a3b8;
-            margin-top: 8px;
+            margin-top: 6px;
+            font-size: 0.85rem;
         }
+
+        /* Social Media Buttons */
         .social-header {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 12px;
+            margin-top: 18px;
             flex-wrap: wrap;
         }
+
         .social-icon {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 8px 20px;
+            background: rgba(255,255,255,0.1);
+            padding: 8px 18px;
             border-radius: 40px;
             color: white;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: all 0.2s;
         }
+
         .social-icon.discord { background: #5865F2; }
         .social-icon.tiktok { background: #000000; border: 1px solid #fe2c55; }
+        .social-icon:hover { transform: translateY(-2px); opacity: 0.9; }
+
+        /* Tab Styling */
+        .tab-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: rgba(30, 41, 59, 0.8);
+            border: none;
+            padding: 12px 28px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 40px;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: all 0.2s;
+            backdrop-filter: blur(4px);
+        }
+
+        .tab-btn.active {
+            background: #ffd700;
+            color: #0f172a;
+            box-shadow: 0 0 15px rgba(255,215,0,0.3);
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: rgba(255,215,0,0.2);
+            color: #ffd700;
+        }
+
+        /* Content Panels */
+        .tab-panel {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-panel.active-panel {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Grid & Cards */
         .section-title {
             text-align: center;
             color: #ffd700;
-            font-size: 24px;
-            margin: 30px 0 20px;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
         }
+
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
         }
+
         .card {
             background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(4px);
             border-radius: 20px;
             padding: 20px;
             text-align: center;
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            transition: 0.2s;
+            transition: transform 0.2s;
+            border: 1px solid rgba(255,215,0,0.2);
         }
+
         .card:hover {
             transform: translateY(-5px);
-            border-color: rgba(255, 215, 0, 0.5);
+            border-color: rgba(255,215,0,0.5);
         }
-        .rp-value {
-            font-size: 24px;
+
+        .product-name {
+            font-size: 1.2rem;
             font-weight: bold;
             color: #ffd700;
+            margin-bottom: 8px;
         }
+
+        .rp-value {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 5px;
+        }
+
         .price {
-            font-size: 28px;
+            font-size: 1.6rem;
             font-weight: bold;
             color: #4ade80;
-            margin: 12px 0;
+            margin-bottom: 12px;
         }
+
         .btn-order {
-            display: block;
+            display: inline-block;
             background: #25D366;
             color: white;
-            padding: 12px;
+            padding: 10px 20px;
             border-radius: 40px;
             text-decoration: none;
             font-weight: bold;
-            margin-top: 10px;
+            width: 100%;
+            transition: 0.2s;
         }
+
         .btn-order:hover {
             background: #128C7E;
         }
+
         .footer {
             text-align: center;
             margin-top: 50px;
             padding: 20px;
             color: #64748b;
-            font-size: 12px;
+            font-size: 0.75rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
+
         @media (max-width: 640px) {
-            .header h1 { font-size: 22px; }
-            .rp-value { font-size: 20px; }
-            .price { font-size: 24px; }
+            body { padding: 15px; }
+            .tab-btn { padding: 8px 16px; font-size: 0.85rem; }
+            .product-name { font-size: 1rem; }
+            .rp-value { font-size: 1.2rem; }
+            .price { font-size: 1.3rem; }
         }
     </style>
 </head>
@@ -118,60 +210,134 @@
 
 <div class="header">
     <h1>⚡ ELIXIR SB STORE ⚡</h1>
-    <div class="tagline">JOKI SBC • VTF • SOUTHBRONX | Fast & Trusted</div>
+    <div class="tagline">JOKI SBC • VTF • SOUTHBRONX | SCRIPT ELIXIRPROJECTION</div>
     <div class="social-header">
         <a href="https://discord.gg/CxbDP6QmW" target="_blank" class="social-icon discord">🎮 Join Discord</a>
         <a href="https://www.tiktok.com/@not_elixir" target="_blank" class="social-icon tiktok">📱 TikTok @not_elixir</a>
     </div>
 </div>
 
-<h2 class="section-title">💰 LIST HARGA JOKI 💰</h2>
-<div class="grid" id="priceGrid"></div>
+<div class="tab-container">
+    <!-- Tab Buttons -->
+    <div class="tab-buttons">
+        <button class="tab-btn active" data-tab="tab1">🎯 JOKI SBC / VTF / SB</button>
+        <button class="tab-btn" data-tab="tab2">💻 SCRIPT ELIXIRPROJECTION</button>
+    </div>
+
+    <!-- Tab 1: JOKI -->
+    <div id="tab1" class="tab-panel active-panel">
+        <h2 class="section-title">💰 LIST HARGA JOKI 💰</h2>
+        <div class="grid" id="priceGrid"></div>
+    </div>
+
+    <!-- Tab 2: SCRIPT -->
+    <div id="tab2" class="tab-panel">
+        <h2 class="section-title">💻 SCRIPT ELIXIRPROJECTION 💻</h2>
+        <div class="grid" id="scriptGrid"></div>
+    </div>
+</div>
 
 <div class="footer">
-    © 2025 ELIXIR SB STORE | Order via WhatsApp
+    © 2025 ELIXIR SB STORE | Order via WhatsApp | Harga dapat berubah
 </div>
 
 <script>
-    const hargaList = [
-        { rp: "100K", harga: 10000 },
-        { rp: "200K", harga: 20000 },
-        { rp: "300K", harga: 30000 },
-        { rp: "400K", harga: 40000 },
-        { rp: "500K", harga: 50000 },
-        { rp: "600K", harga: 60000 },
-        { rp: "700K", harga: 70000 },
-        { rp: "800K", harga: 80000 },
-        { rp: "900K", harga: 90000 },
-        { rp: "1JT", harga: 100000 },
-        { rp: "1.1 JT", harga: 110000 },
-        { rp: "1.2 JT", harga: 120000 },
-        { rp: "1.3 JT", harga: 130000 },
-        { rp: "1.4 JT", harga: 140000 },
-        { rp: "1.5 JT", harga: 150000 },
-        { rp: "1.6 JT", harga: 160000 },
-        { rp: "1.7 JT", harga: 170000 }
+    // ==================== DATA JOKI (TAB 1) ====================
+    const priceData = [
+        { rp: "100K", price: 10000 },
+        { rp: "200K", price: 20000 },
+        { rp: "300K", price: 30000 },
+        { rp: "400K", price: 40000 },
+        { rp: "500K", price: 50000 },
+        { rp: "600K", price: 60000 },
+        { rp: "700K", price: 70000 },
+        { rp: "800K", price: 80000 },
+        { rp: "900K", price: 90000 },
+        { rp: "1JT", price: 100000 },
+        { rp: "1.1 JT", price: 110000 },
+        { rp: "1.2 JT", price: 120000 },
+        { rp: "1.3 JT", price: 130000 },
+        { rp: "1.4 JT", price: 140000 },
+        { rp: "1.5 JT", price: 150000 },
+        { rp: "1.6 JT", price: 160000 },
+        { rp: "1.7 JT", price: 170000 }
     ];
 
-    function formatRupiah(angka) {
-        return "Rp" + angka.toLocaleString('id-ID');
+    // ==================== DATA SCRIPT (TAB 2) ====================
+    const scriptData = [
+        { name: "MARSHMALLOW", type: "HARI", price: 13000, displayPrice: "13K" },
+        { name: "MARSHMALLOW", type: "BULAN", price: 60000, displayPrice: "60K" },
+        { name: "MARSHMALLOW", type: "LIFETIME", price: 150000, displayPrice: "150K" },
+        { name: "COMBAT", type: "HARI", price: 20000, displayPrice: "20K" },
+        { name: "COMBAT", type: "BULAN", price: 80000, displayPrice: "80K" },
+        { name: "COMBAT", type: "LIFETIME", price: 200000, displayPrice: "200K" },
+        { name: "FPS", type: "LIFETIME", price: 50000, displayPrice: "50K" }
+    ];
+
+    // Nomor WhatsApp (sama untuk semua)
+    const waNumber = "62895385984764";
+
+    // Format Rupiah
+    function formatRupiah(amount) {
+        return "Rp" + amount.toLocaleString('id-ID');
     }
 
-    const container = document.getElementById('priceGrid');
-    let htmlKartu = "";
-
-    for (let i = 0; i < hargaList.length; i++) {
-        const item = hargaList[i];
-        const linkWA = "https://wa.me/62895385984764?text=Halo%20ELIXIR%20SB%20STORE%2C%20saya%20mau%20order%20joki%20" + item.rp + "%20RP%20dengan%20harga%20" + formatRupiah(item.harga).replace(/\./g, '%2E');
+    // ==================== RENDER TAB 1 (JOKI) ====================
+    const gridContainer = document.getElementById('priceGrid');
+    let jokiHTML = "";
+    
+    for (let i = 0; i < priceData.length; i++) {
+        const item = priceData[i];
+        const waLink = `https://wa.me/${waNumber}?text=Halo%20ELIXIR%20SB%20STORE%2C%20saya%20mau%20order%20joki%20SBC%2FVTF%2FSouthbronx%20untuk%20${item.rp}%20RP%20dengan%20harga%20${formatRupiah(item.price).replace(/\./g, '%2E')}.%20Apakah%20tersedia%3F`;
         
-        htmlKartu += '<div class="card">' +
-            '<div class="rp-value">🎯 ' + item.rp + ' RP</div>' +
-            '<div class="price">' + formatRupiah(item.harga) + '</div>' +
-            '<a href="' + linkWA + '" class="btn-order" target="_blank">💬 Order via WhatsApp</a>' +
-            '</div>';
+        jokiHTML += `<div class="card">
+            <div class="rp-value">🎯 ${item.rp} RP</div>
+            <div class="price">${formatRupiah(item.price)}</div>
+            <a href="${waLink}" class="btn-order" target="_blank">💬 Order via WhatsApp</a>
+        </div>`;
     }
+    gridContainer.innerHTML = jokiHTML;
 
-    container.innerHTML = htmlKartu;
+    // ==================== RENDER TAB 2 (SCRIPT) ====================
+    const scriptContainer = document.getElementById('scriptGrid');
+    let scriptHTML = "";
+    
+    for (let i = 0; i < scriptData.length; i++) {
+        const item = scriptData[i];
+        const waLink = `https://wa.me/${waNumber}?text=Halo%20ELIXIR%20SB%20STORE%2C%20saya%20mau%20beli%20SCRIPT%20${item.name}%20paket%20${item.type}%20harga%20${formatRupiah(item.price).replace(/\./g, '%2E')}.%20Apakah%20tersedia%3F`;
+        
+        let typeLabel = "";
+        if (item.type === "HARI") typeLabel = "📆 HARIAN";
+        else if (item.type === "BULAN") typeLabel = "📅 BULANAN";
+        else typeLabel = "♾️ LIFETIME";
+        
+        scriptHTML += `<div class="card">
+            <div class="product-name">💻 SCRIPT ${item.name}</div>
+            <div class="rp-value">${typeLabel}</div>
+            <div class="price">${formatRupiah(item.price)}</div>
+            <a href="${waLink}" class="btn-order" target="_blank">💬 Beli via WhatsApp</a>
+        </div>`;
+    }
+    scriptContainer.innerHTML = scriptHTML;
+
+    // ==================== TAB SWITCHING FUNCTION ====================
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Remove active class from all buttons and panels
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabPanels.forEach(panel => panel.classList.remove('active-panel'));
+            
+            // Add active class to clicked button
+            button.classList.add('active');
+            
+            // Show corresponding panel
+            const tabId = button.getAttribute('data-tab');
+            document.getElementById(tabId).classList.add('active-panel');
+        });
+    });
 </script>
 
 </body>
