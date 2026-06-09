@@ -8,8 +8,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    <!-- PREMIUM FONT -->
+    <!-- PREMIUM FONT COMBO: Clash Display + Unbounded + Satoshi -->
     <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
@@ -18,33 +19,66 @@
             font-family: 'Satoshi', sans-serif;
         }
         
+        /* Nama Produk - Clash Display + Unbounded backup */
         .product-name {
-            font-family: 'Clash Display', sans-serif;
+            font-family: 'Clash Display', 'Unbounded', sans-serif;
             font-weight: 700;
             letter-spacing: -0.02em;
             background: linear-gradient(135deg, #ffffff, #e9d5ff, #c084fc);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            text-transform: uppercase;
+            font-size: 1.1rem;
         }
         
+        /* Harga - Unbounded (futuristic, gaming vibe) */
         .price-text {
-            font-family: 'Clash Display', sans-serif;
+            font-family: 'Unbounded', 'Clash Display', sans-serif;
             font-weight: 800;
-            letter-spacing: -0.03em;
-            background: linear-gradient(135deg, #fbbf24, #ffd700, #f59e0b);
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #fbbf24, #ffd700, #f59e0b, #fbbf24);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            text-shadow: 0 0 15px rgba(251,191,36,0.2);
         }
         
+        /* Deskripsi - Satoshi uppercase */
         .product-desc {
             font-family: 'Satoshi', monospace;
-            font-weight: 500;
-            letter-spacing: 0.5px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
             color: #a78bfa;
             text-transform: uppercase;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
+        }
+        
+        /* Button font */
+        .premium-btn {
+            font-family: 'Satoshi', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Hero text */
+        .hero-text {
+            font-family: 'Clash Display', 'Unbounded', sans-serif;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff 0%, #c084fc 30%, #a855f7 60%, #e9d5ff 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradientFlow 5s linear infinite;
+        }
+        
+        /* Title lainnya */
+        .elixir-title {
+            font-family: 'Clash Display', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.02em;
         }
         
         /* Animations */
@@ -182,7 +216,6 @@
             border-bottom: 1px solid rgba(168,85,247,0.2);
         }
         
-        /* PREMIUM CARD */
         .premium-card {
             position: relative;
             background: linear-gradient(145deg, rgba(12, 12, 25, 0.7), rgba(8, 8, 20, 0.6));
@@ -260,7 +293,6 @@
             pointer-events: none;
         }
         
-        /* PREMIUM BUTTON */
         .premium-btn {
             position: relative;
             width: 100%;
@@ -357,17 +389,6 @@
             pointer-events: none;
         }
         
-        .hero-text {
-            font-family: 'Clash Display', sans-serif;
-            font-weight: 800;
-            background: linear-gradient(135deg, #ffffff 0%, #c084fc 30%, #a855f7 60%, #e9d5ff 100%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: gradientFlow 5s linear infinite;
-        }
-        
         .stat-card {
             transition: all 0.3s ease;
         }
@@ -402,13 +423,6 @@
             box-shadow: 0 0 15px rgba(168,85,247,0.2);
         }
         
-        .elixir-title {
-            font-family: 'Clash Display', sans-serif;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
-        
-        /* Review Card */
         .review-card {
             transition: all 0.3s ease;
         }
@@ -419,7 +433,6 @@
             box-shadow: 0 10px 25px -12px rgba(168,85,247,0.2);
         }
         
-        /* Form Review */
         .review-input, .review-textarea {
             transition: all 0.2s;
         }
@@ -473,12 +486,13 @@
         </div>
     </div>
 
+    <!-- STATS -->
     <div class="relative z-10 max-w-5xl mx-auto px-6 py-10">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-5 text-center">
             <div class="stat-card bg-white/5 backdrop-blur-sm rounded-2xl py-6 border border-white/10"><div class="text-4xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent elixir-title">17</div><div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">PRODUK</div></div>
             <div class="stat-card bg-white/5 backdrop-blur-sm rounded-2xl py-6 border border-white/10"><div class="text-4xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent elixir-title">100+</div><div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">TERJUAL</div></div>
             <div class="stat-card bg-white/5 backdrop-blur-sm rounded-2xl py-6 border border-white/10"><div class="text-4xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent elixir-title">12</div><div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">ULASAN</div></div>
-            <div class="stat-card bg-white/5 backdrop-blur-sm rounded-2xl py-6 border border-white/10"><div class="text-4xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent elixir-title">24/7</div><div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">SUPPORT</div></div>
+            <div class="stat-card bg-white/5 backdrop-blur-sm rounded-2xl py-6 border border-white/10"><div class="text-4xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent elixir-title">100+</div><div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">CUSTOMER</div></div>
         </div>
     </div>
 
@@ -508,7 +522,6 @@
             <p class="text-white/30 text-sm mt-2">Apa kata mereka tentang ELIXIRSTORE</p>
         </div>
         
-        <!-- Form Kirim Review -->
         <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 mb-8" data-aos="fade-up">
             <h3 class="text-white font-semibold mb-4 flex items-center gap-2"><i class="fas fa-pen"></i> Tulis Ulasan</h3>
             <input type="text" id="reviewName" class="review-input w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 text-white/80 text-sm mb-3" placeholder="Nickname kamu">
@@ -525,7 +538,6 @@
             </button>
         </div>
         
-        <!-- Daftar Ulasan -->
         <div id="reviewsList" class="space-y-4"></div>
     </div>
 
@@ -545,7 +557,6 @@
     <script>
         AOS.init({ duration: 600, once: true });
 
-        // Stars background
         const starsContainer = document.getElementById('starsContainer');
         for (let i = 0; i < 200; i++) {
             const star = document.createElement('div');
@@ -563,7 +574,6 @@
         const waNumber = "62895385984764";
         const formatRp = (n) => "Rp" + n.toLocaleString('id-ID');
 
-        // Products data
         const products = [
             ...["100K","200K","300K","400K","500K","600K","700K","800K","900K","1JT","1.1 JT","1.2 JT","1.3 JT","1.4 JT","1.5 JT","1.6 JT","1.7 JT"].map((name, idx) => ({ name: `SBC ${name}`, price: [10000,20000,30000,40000,50000,60000,70000,80000,90000,100000,110000,120000,130000,140000,150000,160000,170000][idx], category: "sbc", needNickname: true, hasDesc: true })),
             { name: "SCRIPT MARSHMALLOW - HARIAN", price: 13000, category: "script", needNickname: false, hasDesc: false },
@@ -578,7 +588,6 @@
             { name: "TIER 3 - BLUE NAME", price: 350000, category: "tier", needNickname: false, hasDesc: false }
         ];
 
-        // Sample reviews
         let reviews = [
             { name: "Verns", rating: 5, comment: "Gacor banget! Jokinya cepet dan terpercaya", date: "31 May 2026" },
             { name: "RIP_BOUNTYY177", rating: 5, comment: "Pengen beli SBC lagi nih, recommended!", date: "28 May 2026" },
@@ -599,9 +608,9 @@
             card.innerHTML = `
                 <div class="card-glow"></div>
                 <div class="card-gloss"></div>
-                <div class="product-name text-lg text-center mb-2">${product.name}</div>
+                <div class="product-name text-center mb-3">${product.name}</div>
                 ${descHtml}
-                <span class="price-text text-3xl text-center block my-4">${formatRp(product.price)}</span>
+                <div class="price-text text-3xl text-center block my-4">${formatRp(product.price)}</div>
                 ${product.needNickname ? '<input type="text" class="nickname-input" placeholder="🎮 Masukkan nickname">' : ''}
                 <button class="premium-btn w-full py-3 rounded-full flex items-center justify-center gap-2">
                     <i class="fab fa-whatsapp"></i> Order Now
@@ -658,7 +667,6 @@
             });
         }
 
-        // Submit review
         let selectedRating = 5;
         document.querySelectorAll('#ratingStars .star-select').forEach(star => {
             star.addEventListener('click', () => {
@@ -695,7 +703,6 @@
             alert('Ulasan terkirim! Terima kasih 😊');
         });
 
-        // Render products
         const productGrid = document.getElementById('productGrid');
         let currentFilter = 'all', searchQuery = '';
         function renderProducts() {
@@ -705,7 +712,6 @@
             filtered.forEach(p => productGrid.appendChild(createCard(p)));
         }
 
-        // Filter buttons
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.filter-btn').forEach(b => { b.classList.remove('bg-gradient-to-r', 'from-purple-600', 'to-purple-700', 'text-white', 'shadow-md', 'shadow-purple-500/25'); b.classList.add('bg-white/5', 'text-white/50'); });
