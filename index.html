@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELIXIR SB STORE - Joki SBC VTF Southbronx</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #0a0f1e, #0f172a);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .header {
+            text-align: center;
+            background: rgba(15, 23, 42, 0.8);
+            padding: 30px;
+            border-radius: 28px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        .header h1 {
+            color: #ffd700;
+            font-size: 28px;
+        }
+        .tagline {
+            color: #94a3b8;
+            margin-top: 8px;
+        }
+        .social-header {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            border-radius: 40px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .social-icon.discord { background: #5865F2; }
+        .social-icon.tiktok { background: #000000; border: 1px solid #fe2c55; }
+        .section-title {
+            text-align: center;
+            color: #ffd700;
+            font-size: 24px;
+            margin: 30px 0 20px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .card {
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            transition: 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 215, 0, 0.5);
+        }
+        .rp-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffd700;
+        }
+        .price {
+            font-size: 28px;
+            font-weight: bold;
+            color: #4ade80;
+            margin: 12px 0;
+        }
+        .btn-order {
+            display: block;
+            background: #25D366;
+            color: white;
+            padding: 12px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .btn-order:hover {
+            background: #128C7E;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #64748b;
+            font-size: 12px;
+        }
+        @media (max-width: 640px) {
+            .header h1 { font-size: 22px; }
+            .rp-value { font-size: 20px; }
+            .price { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>⚡ ELIXIR SB STORE ⚡</h1>
+    <div class="tagline">JOKI SBC • VTF • SOUTHBRONX | Fast & Trusted</div>
+    <div class="social-header">
+        <a href="https://discord.gg/CxbDP6QmW" target="_blank" class="social-icon discord">🎮 Join Discord</a>
+        <a href="https://www.tiktok.com/@not_elixir" target="_blank" class="social-icon tiktok">📱 TikTok @not_elixir</a>
+    </div>
+</div>
+
+<h2 class="section-title">💰 LIST HARGA JOKI 💰</h2>
+<div class="grid" id="priceGrid"></div>
+
+<div class="footer">
+    © 2025 ELIXIR SB STORE | Order via WhatsApp
+</div>
+
+<script>
+    const hargaList = [
+        { rp: "100K", harga: 10000 },
+        { rp: "200K", harga: 20000 },
+        { rp: "300K", harga: 30000 },
+        { rp: "400K", harga: 40000 },
+        { rp: "500K", harga: 50000 },
+        { rp: "600K", harga: 60000 },
+        { rp: "700K", harga: 70000 },
+        { rp: "800K", harga: 80000 },
+        { rp: "900K", harga: 90000 },
+        { rp: "1JT", harga: 100000 },
+        { rp: "1.1 JT", harga: 110000 },
+        { rp: "1.2 JT", harga: 120000 },
+        { rp: "1.3 JT", harga: 130000 },
+        { rp: "1.4 JT", harga: 140000 },
+        { rp: "1.5 JT", harga: 150000 },
+        { rp: "1.6 JT", harga: 160000 },
+        { rp: "1.7 JT", harga: 170000 }
+    ];
+
+    function formatRupiah(angka) {
+        return "Rp" + angka.toLocaleString('id-ID');
+    }
+
+    const container = document.getElementById('priceGrid');
+    let htmlKartu = "";
+
+    for (let i = 0; i < hargaList.length; i++) {
+        const item = hargaList[i];
+        const linkWA = "https://wa.me/62895385984764?text=Halo%20ELIXIR%20SB%20STORE%2C%20saya%20mau%20order%20joki%20" + item.rp + "%20RP%20dengan%20harga%20" + formatRupiah(item.harga).replace(/\./g, '%2E');
+        
+        htmlKartu += '<div class="card">' +
+            '<div class="rp-value">🎯 ' + item.rp + ' RP</div>' +
+            '<div class="price">' + formatRupiah(item.harga) + '</div>' +
+            '<a href="' + linkWA + '" class="btn-order" target="_blank">💬 Order via WhatsApp</a>' +
+            '</div>';
+    }
+
+    container.innerHTML = htmlKartu;
+</script>
+
+</body>
+</html>
