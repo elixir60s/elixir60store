@@ -66,7 +66,6 @@
         .price-wrapper { background: rgba(0,0,0,0.4); border-radius: 40px; padding: 10px 20px; display: inline-block; margin: 16px 0; border: 1px solid rgba(168,85,247,0.3); transition: all 0.3s; position: relative; z-index: 2; backdrop-filter: blur(4px); }
         .premium-card:hover .price-wrapper { border-color: rgba(168,85,247,0.8); box-shadow: 0 0 20px rgba(139,92,246,0.3); transform: scale(1.02); }
         .price-text { font-size: 1.8rem; background: linear-gradient(135deg, #fbbf24, #ffd700, #f59e0b, #ffd700); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 900; }
-        .product-desc { font-size: 0.6rem; letter-spacing: 2px; color: #a78bfa; text-transform: uppercase; font-weight: 600; position: relative; z-index: 2; }
         .premium-btn { position: relative; width: 100%; background: linear-gradient(135deg, #1a0b2e, #2d1b4e, #3b1e6d); border: 1px solid rgba(168,85,247,0.3); padding: 14px 20px; border-radius: 50px; font-weight: 700; font-size: 0.85rem; color: white; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 12px; overflow: hidden; z-index: 2; }
         .premium-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(168,85,247,0.4), rgba(192,132,252,0.4), rgba(139,92,246,0.4), transparent); transition: left 0.5s; }
         .premium-btn:hover::before { left: 100%; }
@@ -86,25 +85,25 @@
         .review-input, .review-textarea { transition: all 0.2s; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px; color: white; width: 100%; }
         .review-input:focus, .review-textarea:focus { outline: none; border-color: #a855f7; box-shadow: 0 0 15px rgba(168,85,247,0.2); }
         
-        /* Modal QRIS Styles */
-        .modal-qris { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 1000; align-items: center; justify-content: center; padding: 1rem; }
-        .modal-qris.active { display: flex; animation: fadeIn 0.2s ease; }
-        .modal-content { background: linear-gradient(145deg, #11111f, #0a0a18); border-radius: 32px; max-width: 420px; width: 100%; border: 1px solid rgba(168,85,247,0.4); box-shadow: 0 25px 45px rgba(0,0,0,0.5), 0 0 0 1px rgba(168,85,247,0.2); overflow: hidden; transform: scale(0.95); transition: transform 0.2s ease; }
-        .modal-qris.active .modal-content { transform: scale(1); }
-        .modal-header { padding: 1.5rem 1.5rem 0.5rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        /* QRIS Modal Styles */
+        .modal-qris { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); backdrop-filter: blur(12px); z-index: 1000; align-items: center; justify-content: center; padding: 1rem; }
+        .modal-qris.active { display: flex; animation: fadeIn 0.3s ease; }
+        .modal-content { background: linear-gradient(145deg, #11111f, #0a0a18); border-radius: 32px; max-width: 480px; width: 100%; border: 1px solid rgba(168,85,247,0.4); box-shadow: 0 25px 45px rgba(0,0,0,0.5), 0 0 0 1px rgba(168,85,247,0.2); overflow: hidden; }
+        .modal-header { padding: 1.5rem 1.5rem 0.5rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); position: relative; }
         .modal-body { padding: 1.5rem; }
-        .qris-option { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 1rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; cursor: pointer; transition: all 0.2s; }
-        .qris-option:hover { background: rgba(168,85,247,0.15); border-color: rgba(168,85,247,0.5); transform: translateX(5px); }
-        .qris-option.selected { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(168,85,247,0.1)); border-color: #a855f7; box-shadow: 0 0 12px rgba(168,85,247,0.3); }
-        .qris-icon { width: 48px; height: 48px; background: #0a0a18; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; }
-        .qris-info { flex: 1; }
-        .qris-name { font-weight: 700; color: white; font-size: 1rem; }
-        .qris-desc { font-size: 0.7rem; color: #a78bfa; }
-        .total-price { background: rgba(0,0,0,0.4); border-radius: 20px; padding: 12px 16px; margin-bottom: 1.5rem; text-align: center; border: 1px solid rgba(168,85,247,0.3); }
-        .total-price span { font-size: 1.6rem; font-weight: 800; background: linear-gradient(135deg, #ffd700, #fbbf24); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .qris-container { background: white; border-radius: 24px; padding: 20px; text-align: center; margin-bottom: 20px; }
+        #qrcode img { width: 200px !important; height: 200px !important; border-radius: 16px; }
+        .payment-amount { background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 20px; padding: 16px; text-align: center; margin-bottom: 20px; border: 1px solid rgba(168,85,247,0.3); }
+        .payment-amount .label { font-size: 0.75rem; color: #a78bfa; letter-spacing: 1px; text-transform: uppercase; }
+        .payment-amount .amount { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, #ffd700, #fbbf24); -webkit-background-clip: text; background-clip: text; color: transparent; font-family: 'Unbounded', monospace; }
+        .copy-amount { background: rgba(168,85,247,0.2); border: 1px solid rgba(168,85,247,0.4); border-radius: 12px; padding: 8px 12px; font-size: 0.8rem; color: #c084fc; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+        .copy-amount:hover { background: rgba(168,85,247,0.4); color: white; }
+        .payment-method-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(0,0,0,0.4); padding: 6px 12px; border-radius: 50px; font-size: 0.7rem; color: #a78bfa; margin-bottom: 12px; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .close-modal { position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,0.1); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s; }
         .close-modal:hover { background: rgba(255,255,255,0.2); transform: rotate(90deg); }
+        .instruction-text { font-size: 0.7rem; color: #888; text-align: center; margin-top: 16px; }
+        .confirm-wa-btn { background: linear-gradient(135deg, #25D366, #128C7E); border: none; margin-top: 16px; }
     </style>
 </head>
 <body class="bg-[#050510]">
@@ -194,15 +193,36 @@
         </div>
     </footer>
 
-    <!-- QRIS MODAL -->
+    <!-- QRIS MODAL dengan QR Code -->
     <div id="qrisModal" class="modal-qris">
         <div class="modal-content">
             <div class="close-modal" id="closeModalBtn"><i class="fas fa-times text-white/70"></i></div>
-            <div class="modal-header"><h3 class="text-white text-xl font-bold elixir-title"><i class="fas fa-qrcode text-purple-400 mr-2"></i>Pilih Metode QRIS</h3></div>
+            <div class="modal-header">
+                <h3 class="text-white text-xl font-bold elixir-title text-center"><i class="fas fa-qrcode text-purple-400 mr-2"></i>Scan QRIS untuk Membayar</h3>
+            </div>
             <div class="modal-body">
-                <div class="total-price mb-4">Total: <span id="modalTotalPrice">Rp0</span></div>
-                <div id="qrisOptionsList"></div>
-                <button id="confirmPaymentBtn" class="premium-btn w-full mt-5 !bg-gradient-to-r !from-green-600 !to-green-700 hover:!from-green-500"><i class="fab fa-whatsapp"></i> Lanjut ke WhatsApp</button>
+                <div class="payment-method-badge mx-auto w-fit">
+                    <i class="fas fa-university"></i> <span>QRIS (Semua E-Wallet & Mobile Banking)</span>
+                </div>
+                
+                <div class="qris-container" id="qrcode">
+                    <!-- QR image will appear here -->
+                </div>
+                
+                <div class="payment-amount">
+                    <div class="label">Total Pembayaran</div>
+                    <div class="amount" id="modalAmount">Rp0</div>
+                    <button class="copy-amount mt-2 mx-auto" id="copyAmountBtn"><i class="fas fa-copy"></i> Salin Nominal</button>
+                </div>
+                
+                <div class="instruction-text">
+                    <i class="fas fa-mobile-alt"></i> Buka GoPay, OVO, DANA, LinkAja, atau Mobile Banking<br>
+                    Pilih QRIS → Scan kode di atas → Transfer <span id="instructionAmount">Rp0</span>
+                </div>
+                
+                <button id="confirmWaBtn" class="premium-btn confirm-wa-btn w-full mt-4">
+                    <i class="fab fa-whatsapp"></i> Konfirmasi Pembayaran via WhatsApp
+                </button>
             </div>
         </div>
     </div>
@@ -210,6 +230,8 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 600, once: true });
+        
+        // Stars background
         for (let i = 0; i < 200; i++) {
             const star = document.createElement('div');
             star.classList.add('star');
@@ -271,68 +293,69 @@
         function getCategoryIcon(cat){ if(cat==='sbc') return 'fa-crown'; if(cat==='script') return 'fa-code'; return 'fa-gem'; }
         function getCategoryBadge(cat){ if(cat==='sbc') return 'SBC PRO'; if(cat==='script') return 'SCRIPT'; return 'TIER'; }
 
-        // QRIS Modal Logic
+        // ========== QRIS INTEGRATION ==========
+        // GANTI DENGAN LINK QRIS KAMU (sudah diisi dengan link yang kamu berikan)
+        const QRIS_IMAGE_URL = "https://i.ibb.co.com/Cp2N3cf8/IMG-9954.jpg";
+        
         let currentPendingProduct = null;
         let currentPendingNickname = null;
-        let currentSelectedPayment = null;
-        const qrisOptions = [
-            { id: 'gopay', name: 'GoPay', icon: 'fab fa-google-pay', desc: 'Scan QRIS GoPay' },
-            { id: 'ovo', name: 'OVO', icon: 'fas fa-mobile-alt', desc: 'Scan QRIS OVO' },
-            { id: 'dana', name: 'DANA', icon: 'fas fa-wallet', desc: 'Scan QRIS DANA' },
-            { id: 'linkaja', name: 'LinkAja', icon: 'fas fa-link', desc: 'Scan QRIS LinkAja' }
-        ];
 
         function openPaymentModal(product, price, nickname) {
             currentPendingProduct = { name: product, price: price };
             currentPendingNickname = nickname || '';
-            currentSelectedPayment = null;
-            document.getElementById('modalTotalPrice').innerHTML = formatRp(price);
-            const container = document.getElementById('qrisOptionsList');
-            container.innerHTML = '';
-            qrisOptions.forEach(opt => {
-                const div = document.createElement('div');
-                div.className = 'qris-option';
-                div.dataset.id = opt.id;
-                div.innerHTML = `<div class="qris-icon"><i class="${opt.icon} text-purple-400"></i></div><div class="qris-info"><div class="qris-name">${opt.name}</div><div class="qris-desc">${opt.desc}</div></div><i class="fas fa-chevron-right text-white/30 ml-auto"></i>`;
-                div.addEventListener('click', () => {
-                    document.querySelectorAll('.qris-option').forEach(el => el.classList.remove('selected'));
-                    div.classList.add('selected');
-                    currentSelectedPayment = opt.id;
-                });
-                container.appendChild(div);
-            });
+            
+            const formattedPrice = formatRp(price);
+            document.getElementById('modalAmount').innerHTML = formattedPrice;
+            document.getElementById('instructionAmount').innerHTML = formattedPrice;
+            
+            // Tampilkan gambar QRIS statis
+            const qrContainer = document.getElementById('qrcode');
+            qrContainer.innerHTML = `<img src="${QRIS_IMAGE_URL}" alt="QRIS ELIXIR STORE" style="width:200px; height:200px; border-radius:16px;">`;
+            
             document.getElementById('qrisModal').classList.add('active');
         }
 
-        function closeModal() { document.getElementById('qrisModal').classList.remove('active'); currentSelectedPayment=null; currentPendingProduct=null; }
+        function closeModal() { 
+            document.getElementById('qrisModal').classList.remove('active'); 
+            currentPendingProduct = null;
+        }
+        
         document.getElementById('closeModalBtn').addEventListener('click', closeModal);
         document.getElementById('qrisModal').addEventListener('click', (e) => { if(e.target === document.getElementById('qrisModal')) closeModal(); });
-
-        document.getElementById('confirmPaymentBtn').addEventListener('click', () => {
+        
+        // Copy amount button
+        document.getElementById('copyAmountBtn').addEventListener('click', () => {
+            if(currentPendingProduct) {
+                const nominal = currentPendingProduct.price.toString();
+                navigator.clipboard.writeText(nominal);
+                alert('Nominal ' + formatRp(currentPendingProduct.price) + ' disalin!');
+            }
+        });
+        
+        // Konfirmasi via WhatsApp
+        document.getElementById('confirmWaBtn').addEventListener('click', () => {
             if(!currentPendingProduct) { closeModal(); return; }
-            if(!currentSelectedPayment) { alert('Silakan pilih metode QRIS terlebih dahulu!'); return; }
-            const paymentName = qrisOptions.find(o=>o.id===currentSelectedPayment)?.name || 'QRIS';
-            let msg = `Halo ELIXIRSTORE%0A%0AProduk: ${encodeURIComponent(currentPendingProduct.name)}%0AHarga: ${encodeURIComponent(formatRp(currentPendingProduct.price))}%0AMetode Pembayaran: ${encodeURIComponent(paymentName)} (QRIS)`;
+            
+            let msg = `Halo ELIXIRSTORE%0A%0A*KONFIRMASI PEMBAYARAN*%0A%0AProduk: ${encodeURIComponent(currentPendingProduct.name)}%0AHarga: ${encodeURIComponent(formatRp(currentPendingProduct.price))}%0AMetode: QRIS (Scan QR)`;
             if(currentPendingNickname) msg += `%0ANickname: ${encodeURIComponent(currentPendingNickname)}`;
-            msg += `%0A%0A*Mohon kirimkan bukti scan QRIS ${paymentName} setelah transfer.*`;
+            msg += `%0A%0A*Saya sudah melakukan pembayaran via QRIS.*%0ABerikut bukti transfer saya: (kirim foto)`;
+            
             window.open(`https://wa.me/${waNumber}?text=${msg}`, '_blank');
             closeModal();
         });
-
-        function sendWA(product, price, nickname) { openPaymentModal(product, price, nickname); }
 
         function createCard(product) {
             const card = document.createElement('div');
             card.className = 'premium-card';
             const iconClass = getCategoryIcon(product.category);
             const badgeText = getCategoryBadge(product.category);
-            card.innerHTML = `<div class="holographic-bg"></div><div class="gloss"></div><div class="particles"></div><div class="card-badge">${badgeText}</div><div class="category-icon"><i class="fas ${iconClass}"></i></div><div class="product-name text-center">${product.name}</div><div class="flex justify-center"><div class="price-wrapper"><div class="price-text">${formatRp(product.price)}</div></div></div>${product.needNickname ? '<input type="text" class="nickname-input" placeholder="Masukkan nickname kamu">' : ''}<button class="premium-btn"><i class="fab fa-whatsapp"></i> ORDER NOW <i class="fas fa-arrow-right"></i></button>`;
+            card.innerHTML = `<div class="holographic-bg"></div><div class="gloss"></div><div class="particles"></div><div class="card-badge">${badgeText}</div><div class="category-icon"><i class="fas ${iconClass}"></i></div><div class="product-name text-center">${product.name}</div><div class="flex justify-center"><div class="price-wrapper"><div class="price-text">${formatRp(product.price)}</div></div></div>${product.needNickname ? '<input type="text" class="nickname-input" placeholder="Masukkan nickname kamu">' : ''}<button class="premium-btn"><i class="fas fa-qrcode"></i> BAYAR VIA QRIS <i class="fas fa-arrow-right"></i></button>`;
             const btn = card.querySelector('.premium-btn');
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const ripple = document.createElement('span'); ripple.classList.add('ripple'); const rect=btn.getBoundingClientRect(); const x=e.clientX-rect.left; const y=e.clientY-rect.top; ripple.style.left=x+'px'; ripple.style.top=y+'px'; btn.appendChild(ripple); setTimeout(()=>ripple.remove(),600);
                 const nickname = card.querySelector('.nickname-input')?.value || '';
-                sendWA(product.name, product.price, nickname);
+                openPaymentModal(product.name, product.price, nickname);
             });
             return card;
         }
@@ -348,6 +371,7 @@
         }
         document.querySelectorAll('.filter-btn').forEach(btn=>{ btn.addEventListener('click',()=>{ document.querySelectorAll('.filter-btn').forEach(b=>{ b.classList.remove('bg-gradient-to-r','from-purple-600','to-purple-700','text-white','shadow-md'); b.classList.add('bg-white/5','text-white/50'); }); btn.classList.remove('bg-white/5','text-white/50'); btn.classList.add('bg-gradient-to-r','from-purple-600','to-purple-700','text-white','shadow-md','shadow-purple-500/25'); currentFilter=btn.dataset.filter; renderProducts(); }); });
         document.getElementById('searchInput').addEventListener('input',(e)=>{ searchQuery=e.target.value; renderProducts(); });
+        
         loadReviews();
         renderProducts();
     </script>
