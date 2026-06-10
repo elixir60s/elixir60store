@@ -211,7 +211,7 @@
             border: 1px solid rgba(168,85,247,0.2);
         }
         
-        /* MODAL 2 KOLOM - UKURAN PAS, NGGAK GEPENG */
+        /* MODAL YANG BENER - PROPORTIONAL, GA GEPENG */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -221,14 +221,14 @@
             z-index: 1000;
             align-items: center;
             justify-content: center;
-            padding: 16px;
+            padding: 20px;
         }
         .modal-overlay.active { display: flex; }
         .modal-container {
             background: linear-gradient(145deg, #0f0f1a, #0a0a12);
             border-radius: 24px;
-            max-width: 520px;
             width: 100%;
+            max-width: 750px;
             border: 1px solid rgba(168,85,247,0.3);
             box-shadow: 0 25px 50px rgba(0,0,0,0.5);
             animation: modalFadeIn 0.3s ease;
@@ -236,23 +236,23 @@
         }
         .modal-header {
             background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(168,85,247,0.1));
-            padding: 14px 16px;
+            padding: 16px 20px;
             text-align: center;
             border-bottom: 1px solid rgba(168,85,247,0.2);
             position: relative;
         }
         .modal-header h3 {
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: white;
         }
         .modal-close {
             position: absolute;
-            top: 10px;
-            right: 14px;
+            top: 12px;
+            right: 16px;
             background: rgba(255,255,255,0.1);
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -260,37 +260,37 @@
             cursor: pointer;
             transition: all 0.2s;
             color: white;
-            font-size: 16px;
+            font-size: 18px;
         }
         .modal-close:hover {
             background: rgba(255,255,255,0.2);
             transform: rotate(90deg);
         }
         .modal-body {
-            padding: 16px;
+            padding: 24px;
             display: flex;
-            gap: 16px;
+            gap: 24px;
             flex-wrap: wrap;
         }
-        /* KOLOM KIRI - DETAIL PESANAN */
+        /* KOLOM KIRI - DETAIL (60%) */
         .modal-left {
-            flex: 1;
-            min-width: 180px;
+            flex: 1.5;
+            min-width: 200px;
         }
         .modal-row {
             display: flex;
             justify-content: space-between;
-            padding: 8px 0;
+            padding: 10px 0;
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         .modal-row-label {
             color: rgba(255,255,255,0.5);
-            font-size: 0.7rem;
+            font-size: 0.8rem;
         }
         .modal-row-value {
             color: white;
             font-weight: 600;
-            font-size: 0.75rem;
+            font-size: 0.9rem;
         }
         .modal-price {
             color: #fbbf24;
@@ -298,58 +298,58 @@
         }
         .modal-username-input {
             width: 100%;
-            padding: 8px 10px;
+            padding: 10px 12px;
             background: rgba(0,0,0,0.5);
             border: 1px solid rgba(168,85,247,0.3);
-            border-radius: 10px;
+            border-radius: 12px;
             color: white;
-            font-size: 0.7rem;
-            margin-top: 4px;
+            font-size: 0.8rem;
+            margin-top: 6px;
         }
         .modal-username-input:focus {
             outline: none;
             border-color: #a855f7;
         }
-        /* KOLOM KANAN - QRIS */
+        /* KOLOM KANAN - QRIS (40%) */
         .modal-right {
-            flex: 0.7;
-            min-width: 140px;
+            flex: 1;
+            min-width: 180px;
             text-align: center;
         }
         .modal-qr {
             background: white;
             border-radius: 16px;
-            padding: 10px;
+            padding: 16px;
             text-align: center;
         }
         .modal-qr img {
-            width: 110px;
-            height: 110px;
+            width: 160px;
+            height: 160px;
             margin: 0 auto;
             display: block;
-            border-radius: 10px;
+            border-radius: 12px;
         }
         .modal-qr-text {
-            font-size: 0.55rem;
+            font-size: 0.65rem;
             color: #888;
-            margin-top: 6px;
+            margin-top: 8px;
         }
         .modal-btn-wa {
             background: linear-gradient(135deg, #25D366, #128C7E);
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             border-radius: 40px;
             color: white;
             font-weight: bold;
             border: none;
             cursor: pointer;
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 8px;
             transition: all 0.3s;
-            margin-top: 10px;
+            margin-top: 16px;
         }
         .modal-btn-wa:hover {
             transform: scale(1.02);
@@ -412,7 +412,8 @@
         .review-card { background: rgba(255,255,255,0.05); border-radius: 14px; padding: 12px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 8px; }
         .review-input, .review-textarea { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 10px; color: white; width: 100%; font-size: 0.8rem; }
         
-        @media (max-width: 480px) {
+        /* RESPONSIVE HP */
+        @media (max-width: 768px) {
             .product-card { max-width: 155px; }
             .product-name { font-size: 0.75rem; }
             .product-price { font-size: 0.85rem; }
@@ -423,12 +424,11 @@
             .step-item { font-size: 0.65rem; padding: 4px 12px; }
             .cara-steps { gap: 8px; }
             .splash-logo { font-size: 36px; }
-            .modal-body { flex-direction: column; gap: 12px; }
+            .modal-body { flex-direction: column; gap: 16px; }
             .modal-left { min-width: auto; }
             .modal-right { min-width: auto; }
-            .modal-qr img { width: 100px; height: 100px; }
+            .modal-qr img { width: 130px; height: 130px; }
             .modal-container { max-width: 95%; }
-            .modal-row { padding: 6px 0; }
         }
     </style>
 </head>
@@ -508,7 +508,7 @@
             <div id="caraStepsContainer" class="cara-steps"></div>
         </div>
         
-        <!-- GRID PRODUK - TENGAH -->
+        <!-- GRID PRODUK -->
         <div class="grid-wrapper">
             <h3 class="text-white/60 text-[10px] font-semibold uppercase tracking-wider mb-3 text-center">SEMUA PRODUK</h3>
             <div id="productGrid">
@@ -530,7 +530,7 @@
         </div>
     </div>
 
-    <!-- MODAL 2 KOLOM - UKURAN PAS, NGGAK GEPENG -->
+    <!-- MODAL YANG BENER - PROPORTIONAL -->
     <div id="paymentModal" class="modal-overlay">
         <div class="modal-container">
             <div class="modal-header">
@@ -549,7 +549,7 @@
                         <span class="modal-row-value modal-price" id="modalProductPrice">Rp 0</span>
                     </div>
                     <div id="modalUsernameRow" style="display: none;">
-                        <div style="padding: 4px 0;">
+                        <div style="padding: 5px 0;">
                             <span class="modal-row-label">USERNAME</span>
                             <input type="text" id="modalUsernameInput" class="modal-username-input" placeholder="Masukkan username kamu">
                         </div>
@@ -683,7 +683,7 @@
             { name: "TIER 3 - BLUE NAME", price: 350000, category: "tier", icon: "fa-gem", desc: "PREMIUM TIER" }
         ];
         
-        let currentFilter = null;
+        let currentFilter = 'all';
         let selectedProduct = null;
         const infoLayanan = document.getElementById('infoLayanan');
         const productGrid = document.getElementById('productGrid');
@@ -712,29 +712,7 @@
             caraOrderBox.classList.add('show');
         }
         
-        function openModal(product) {
-            selectedProduct = product;
-            modalProductName.textContent = product.name;
-            modalProductPrice.textContent = formatRp(product.price);
-            modalTotalPrice.textContent = formatRp(product.price);
-            if (currentFilter === 'sbc' || product.category === 'sbc') {
-                modalUsernameRow.style.display = 'block';
-                modalUsernameInput.value = '';
-            } else {
-                modalUsernameRow.style.display = 'none';
-            }
-            modal.classList.add('active');
-        }
-        
-        function closeModal() { modal.classList.remove('active'); selectedProduct = null; }
-        
         function renderProducts() {
-            if (!currentFilter) {
-                productGrid.innerHTML = `<div style="width:100%; text-align:center; padding:60px 20px; color:rgba(255,255,255,0.4);"><i class="fas fa-hand-pointer text-4xl mb-3 block text-purple-400"></i><p class="text-sm">Pilih kategori terlebih dahulu</p><p class="text-[11px] mt-1">Klik ALL / SBC / SCRIPT / TIER</p></div>`;
-                infoLayanan.style.display = 'none';
-                caraOrderBox.classList.remove('show');
-                return;
-            }
             let filtered = currentFilter === 'all' ? products : products.filter(p => p.category === currentFilter);
             productGrid.innerHTML = '';
             if (filtered.length === 0) {
@@ -750,7 +728,17 @@
                 card.onclick = () => {
                     document.querySelectorAll('.product-card').forEach(c => c.classList.remove('selected'));
                     card.classList.add('selected');
-                    openModal(product);
+                    selectedProduct = product;
+                    modalProductName.textContent = product.name;
+                    modalProductPrice.textContent = formatRp(product.price);
+                    modalTotalPrice.textContent = formatRp(product.price);
+                    if (currentFilter === 'sbc' || product.category === 'sbc') {
+                        modalUsernameRow.style.display = 'block';
+                        modalUsernameInput.value = '';
+                    } else {
+                        modalUsernameRow.style.display = 'none';
+                    }
+                    modal.classList.add('active');
                 };
                 productGrid.appendChild(card);
             });
@@ -765,28 +753,28 @@
                 currentFilter = tab.dataset.filter;
                 selectedProduct = null;
                 renderProducts();
-                closeModal();
+                modal.classList.remove('active');
             };
         });
         
-        closeModalBtn.onclick = closeModal;
-        modal.onclick = (e) => { if (e.target === modal) closeModal(); };
+        closeModalBtn.onclick = () => modal.classList.remove('active');
+        modal.onclick = (e) => { if (e.target === modal) modal.classList.remove('active'); };
         
         modalConfirmBtn.onclick = () => {
-            if (!selectedProduct) { closeModal(); return; }
+            if (!selectedProduct) { modal.classList.remove('active'); return; }
             let username = modalUsernameInput.value.trim();
             let msg = `Halo ELIXIRSTORE%0A%0A*KONFIRMASI PEMBAYARAN*%0A%0AProduk: ${encodeURIComponent(selectedProduct.name)}%0AHarga: ${encodeURIComponent(formatRp(selectedProduct.price))}%0ATotal: ${encodeURIComponent(formatRp(selectedProduct.price))}%0AMetode: QRIS`;
             if (username && (currentFilter === 'sbc' || selectedProduct.category === 'sbc')) msg += `%0AUsername: ${encodeURIComponent(username)}`;
             msg += `%0A%0ASaya sudah melakukan pembayaran. Berikut bukti transfer saya.`;
             window.open(`https://wa.me/${waNumber}?text=${msg}`, '_blank');
-            closeModal();
+            modal.classList.remove('active');
         };
         
         let reviews = [];
         let selectedRating = 5;
         
         function loadReviews() {
-            const saved = localStorage.getItem('elixir_reviews_fix_gepeng');
+            const saved = localStorage.getItem('elixir_reviews_final_fix');
             if (saved) try { reviews = JSON.parse(saved); } catch(e) { reviews = []; }
             if (reviews.length === 0) reviews = [
                 { name: "Verns", rating: 5, comment: "Gacor banget Jokinya cepet dan terpercaya", date: "31 May 2026" },
@@ -822,7 +810,7 @@
             const comment = document.getElementById('reviewComment').value.trim();
             if (!name || !comment) { alert('Isi nickname & ulasan!'); return; }
             reviews.unshift({ name, rating: selectedRating, comment, date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) });
-            localStorage.setItem('elixir_reviews_fix_gepeng', JSON.stringify(reviews));
+            localStorage.setItem('elixir_reviews_final_fix', JSON.stringify(reviews));
             renderReviews();
             document.getElementById('reviewName').value = '';
             document.getElementById('reviewComment').value = '';
