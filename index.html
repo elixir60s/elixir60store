@@ -8,7 +8,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    <!-- PREMIUM FONT COMBO: Clash Display + Unbounded + Satoshi -->
     <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
@@ -40,7 +39,6 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 0 15px rgba(251,191,36,0.2);
         }
         
         .product-desc {
@@ -109,9 +107,17 @@
             100% { background-position: 200% 0; }
         }
         
-        @keyframes borderPulse {
-            0%, 100% { border-color: rgba(168,85,247,0.3); box-shadow: 0 0 0 0 rgba(168,85,247,0.1); }
-            50% { border-color: rgba(168,85,247,0.8); box-shadow: 0 0 20px 5px rgba(168,85,247,0.3); }
+        @keyframes borderRotate {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+        
+        @keyframes holographicShift {
+            0% { background-position: 0% 0%; }
+            25% { background-position: 100% 0%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+            100% { background-position: 0% 0%; }
         }
         
         @keyframes rippleEffect {
@@ -214,93 +220,117 @@
             border-bottom: 1px solid rgba(168,85,247,0.2);
         }
         
-        /* ========== PREMIUM CARD DESIGN v2 ========== */
+        /* HOLOGRAPHIC PREMIUM CARD */
         .premium-card {
             position: relative;
-            background: linear-gradient(135deg, rgba(15, 15, 30, 0.9), rgba(8, 8, 20, 0.8));
-            backdrop-filter: blur(20px);
+            background: rgba(8, 8, 20, 0.6);
+            backdrop-filter: blur(16px);
             border-radius: 28px;
             padding: 28px 24px;
             overflow: hidden;
-            border: 1px solid rgba(168,85,247,0.25);
             transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             cursor: pointer;
+            isolation: isolate;
         }
         
-        /* Animated gradient border */
+        /* Holographic gradient border */
         .premium-card::before {
             content: '';
             position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
+            inset: 0;
+            border-radius: 28px;
+            padding: 2px;
             background: linear-gradient(135deg, 
-                rgba(168,85,247,0.5), 
-                rgba(192,132,252,0.3), 
-                rgba(139,92,246,0.5), 
-                rgba(168,85,247,0.5));
-            background-size: 300% 300%;
-            border-radius: 30px;
+                #a855f7, #ec4899, #f43f5e, #f97316, #eab308, 
+                #84cc16, #06b6d4, #3b82f6, #a855f7);
+            background-size: 400% 400%;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
             opacity: 0;
-            transition: opacity 0.4s;
-            z-index: -1;
-            animation: gradientFlow 3s ease infinite;
+            transition: opacity 0.5s ease;
+            animation: borderRotate 4s linear infinite;
+            pointer-events: none;
         }
         
         .premium-card:hover::before {
-            opacity: 0.6;
+            opacity: 1;
         }
         
-        /* Glow effect on hover */
-        .premium-card::after {
-            content: '';
+        /* Holographic shimmer overlay */
+        .premium-card .holographic-overlay {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at 50% 0%, rgba(168,85,247,0.2), transparent 70%);
+            background: linear-gradient(135deg,
+                transparent 0%,
+                rgba(168,85,247,0.05) 25%,
+                rgba(236,72,153,0.05) 50%,
+                rgba(168,85,247,0.05) 75%,
+                transparent 100%);
+            background-size: 400% 400%;
             opacity: 0;
-            transition: opacity 0.5s;
+            transition: opacity 0.4s;
             pointer-events: none;
             border-radius: 28px;
         }
         
-        .premium-card:hover::after {
+        .premium-card:hover .holographic-overlay {
             opacity: 1;
+            animation: holographicShift 3s ease infinite;
         }
         
-        /* Shimmer effect on card */
-        .card-shimmer {
+        /* Rainbow reflection on hover */
+        .premium-card .rainbow-reflection {
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255,255,255,0.05), 
-                rgba(168,85,247,0.1), 
-                rgba(255,255,255,0.05), 
-                transparent);
-            animation: shimmer 6s infinite;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                from 0deg,
+                rgba(168,85,247,0),
+                rgba(236,72,153,0.08),
+                rgba(251,191,36,0.08),
+                rgba(34,197,94,0.08),
+                rgba(6,182,212,0.08),
+                rgba(168,85,247,0),
+                rgba(236,72,153,0.08),
+                rgba(168,85,247,0)
+            );
+            animation: rotate 8s linear infinite;
+            opacity: 0;
+            transition: opacity 0.4s;
             pointer-events: none;
+            border-radius: 28px;
         }
         
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .premium-card:hover .rainbow-reflection {
+            opacity: 0.4;
+        }
+        
+        /* Hover transform */
         .premium-card:hover {
             transform: translateY(-10px) scale(1.02);
-            border-color: rgba(168,85,247,0.6);
-            box-shadow: 0 30px 50px -25px rgba(168,85,247,0.5), 0 0 0 1px rgba(168,85,247,0.2) inset;
+            box-shadow: 0 30px 50px -25px rgba(168,85,247,0.5), 
+                        0 0 0 1px rgba(168,85,247,0.2) inset;
         }
         
-        /* Premium badge */
+        /* Premium badge holographic */
         .card-badge {
             position: absolute;
             top: 16px;
             right: 16px;
-            background: linear-gradient(135deg, #a855f7, #7e22ce);
-            padding: 4px 12px;
+            background: linear-gradient(135deg, #a855f7, #ec4899, #f97316);
+            background-size: 200% 200%;
+            padding: 5px 14px;
             border-radius: 40px;
             font-size: 0.6rem;
             font-weight: 700;
@@ -310,76 +340,90 @@
             backdrop-filter: blur(4px);
             box-shadow: 0 2px 10px rgba(168,85,247,0.3);
             z-index: 2;
+            animation: gradientFlow 3s ease infinite;
         }
         
-        /* Category icon */
+        /* Category icon holographic */
         .category-icon {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, rgba(168,85,247,0.15), rgba(139,92,246,0.05));
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, rgba(168,85,247,0.2), rgba(236,72,153,0.1));
             border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 20px;
-            border: 1px solid rgba(168,85,247,0.2);
-            transition: all 0.3s;
+            border: 1px solid rgba(168,85,247,0.3);
+            transition: all 0.4s;
         }
         
         .premium-card:hover .category-icon {
-            transform: scale(1.05);
-            border-color: rgba(168,85,247,0.5);
-            box-shadow: 0 0 20px rgba(168,85,247,0.2);
+            transform: scale(1.08);
+            border-color: rgba(236,72,153,0.5);
+            box-shadow: 0 0 25px rgba(168,85,247,0.3);
+            background: linear-gradient(135deg, rgba(168,85,247,0.3), rgba(236,72,153,0.15));
         }
         
         .category-icon i {
-            font-size: 1.5rem;
-            background: linear-gradient(135deg, #c084fc, #a855f7);
+            font-size: 1.6rem;
+            background: linear-gradient(135deg, #c084fc, #ec4899, #f97316);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
         
-        /* Gradient text for product name */
+        /* Product name holographic */
         .product-name {
             font-family: 'Clash Display', 'Unbounded', sans-serif;
             font-weight: 700;
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             letter-spacing: -0.02em;
-            background: linear-gradient(135deg, #ffffff 0%, #e9d5ff 50%, #c084fc 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #e9d5ff 40%, #c084fc 70%, #f0abfc 100%);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             margin-bottom: 8px;
+            transition: all 0.3s;
         }
         
-        /* Price with premium style */
+        .premium-card:hover .product-name {
+            background-position: 100% 0;
+        }
+        
+        /* Price wrapper holographic */
         .price-wrapper {
-            background: linear-gradient(135deg, rgba(251,191,36,0.1), rgba(245,158,11,0.05));
+            background: linear-gradient(135deg, rgba(251,191,36,0.12), rgba(245,158,11,0.06));
             border-radius: 60px;
-            padding: 8px 16px;
+            padding: 10px 18px;
             display: inline-block;
             margin: 16px 0;
-            border: 1px solid rgba(251,191,36,0.2);
+            border: 1px solid rgba(251,191,36,0.25);
+            transition: all 0.3s;
+        }
+        
+        .premium-card:hover .price-wrapper {
+            border-color: rgba(251,191,36,0.5);
+            box-shadow: 0 0 20px rgba(251,191,36,0.15);
         }
         
         .price-text {
             font-family: 'Unbounded', 'Clash Display', sans-serif;
             font-weight: 800;
             font-size: 1.8rem;
-            background: linear-gradient(135deg, #fbbf24, #ffd700, #f59e0b);
+            background: linear-gradient(135deg, #fbbf24, #ffd700, #f59e0b, #fbbf24);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: none;
         }
         
-        /* Premium button v2 */
+        /* Premium button holographic */
         .premium-btn {
             position: relative;
             width: 100%;
-            background: linear-gradient(135deg, #6b21a5, #9333ea, #a855f7);
-            background-size: 200% auto;
+            background: linear-gradient(135deg, #6b21a5, #9333ea, #ec4899, #a855f7);
+            background-size: 300% auto;
             border: none;
             padding: 14px 20px;
             border-radius: 50px;
@@ -404,8 +448,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, #9333ea, #c084fc, #a855f7);
-            background-size: 200% auto;
+            background: linear-gradient(135deg, #9333ea, #ec4899, #c084fc, #a855f7);
+            background-size: 300% auto;
             opacity: 0;
             transition: opacity 0.4s;
             z-index: -1;
@@ -453,7 +497,7 @@
             pointer-events: none;
         }
         
-        /* Nickname input premium */
+        /* Nickname input */
         .nickname-input {
             background: rgba(0,0,0,0.5);
             border: 1px solid rgba(168,85,247,0.3);
@@ -557,7 +601,6 @@
         </div>
     </div>
 
-    <!-- STATS -->
     <div class="relative z-10 max-w-5xl mx-auto px-6 py-10">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-5 text-center">
             <div class="stat-card bg-white/5 backdrop-blur-sm rounded-2xl py-6 border border-white/10"><div class="text-4xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent elixir-title">17</div><div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">PRODUK</div></div>
@@ -567,7 +610,6 @@
         </div>
     </div>
 
-    <!-- MARKETPLACE -->
     <div id="marketplace" class="relative z-10 max-w-7xl mx-auto px-6 py-12">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-5 mb-10">
             <div data-aos="fade-right"><h2 class="text-2xl font-bold text-white flex items-center gap-2 elixir-title"><i class="fas fa-cubes text-purple-400"></i>Koleksi Item</h2><p class="text-white/30 text-sm mt-1">17 item premium tersedia</p></div>
@@ -584,7 +626,6 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="productGrid"></div>
     </div>
 
-    <!-- HALAMAN ULASAN -->
     <div id="reviews" class="relative z-10 max-w-4xl mx-auto px-6 py-16">
         <div class="text-center mb-10" data-aos="fade-up">
             <h2 class="text-2xl font-bold text-white flex items-center justify-center gap-2 elixir-title">
@@ -678,9 +719,9 @@
         }
 
         let reviews = [
-            { name: "Verns", rating: 5, comment: "Gacor banget! Jokinya cepet dan terpercaya", date: "31 May 2026" },
-            { name: "RIP_BOUNTYY177", rating: 5, comment: "Pengen beli SBC lagi nih, recommended!", date: "28 May 2026" },
-            { name: "aww", rating: 4, comment: "Mantap, fast response!", date: "24 Apr 2026" }
+            { name: "Verns", rating: 5, comment: "Gacor banget Jokinya cepet dan terpercaya", date: "31 May 2026" },
+            { name: "RIP_BOUNTYY177", rating: 5, comment: "Pengen beli SBC lagi nih recommended", date: "28 May 2026" },
+            { name: "aww", rating: 4, comment: "Mantap fast response", date: "24 Apr 2026" }
         ];
 
         function sendWA(product, price, nickname) {
@@ -701,7 +742,8 @@
             const descHtml = product.hasDesc ? '<div class="product-desc text-center">VIA TF ON SOUTHBRONX</div>' : '';
             
             card.innerHTML = `
-                <div class="card-shimmer"></div>
+                <div class="holographic-overlay"></div>
+                <div class="rainbow-reflection"></div>
                 <div class="card-badge">${badgeText}</div>
                 <div class="category-icon">
                     <i class="fas ${iconClass}"></i>
@@ -713,7 +755,7 @@
                         <div class="price-text">${formatRp(product.price)}</div>
                     </div>
                 </div>
-                ${product.needNickname ? '<input type="text" class="nickname-input" placeholder="🎮 Masukkan nickname kamu">' : ''}
+                ${product.needNickname ? '<input type="text" class="nickname-input" placeholder="Masukkan nickname kamu">' : ''}
                 <button class="premium-btn">
                     <i class="fab fa-whatsapp"></i> ORDER NOW
                     <i class="fas fa-arrow-right"></i>
@@ -755,7 +797,7 @@
             if (!container) return;
             
             if (reviews.length === 0) {
-                container.innerHTML = '<div class="text-center text-white/40 py-8">Belum ada ulasan. Jadi yang pertama! ✨</div>';
+                container.innerHTML = '<div class="text-center text-white/40 py-8">Belum ada ulasan. Jadi yang pertama</div>';
                 return;
             }
             
@@ -784,7 +826,7 @@
             }
             
             if (html === '') {
-                container.innerHTML = '<div class="text-center text-white/40 py-8">Belum ada ulasan. Jadi yang pertama! ✨</div>';
+                container.innerHTML = '<div class="text-center text-white/40 py-8">Belum ada ulasan. Jadi yang pertama</div>';
             } else {
                 container.innerHTML = html;
             }
@@ -811,11 +853,11 @@
             const comment = document.getElementById('reviewComment').value.trim();
             
             if (!name) { 
-                alert('Masukkan nickname!'); 
+                alert('Masukkan nickname'); 
                 return; 
             }
             if (!comment) { 
-                alert('Masukkan ulasan!'); 
+                alert('Masukkan ulasan'); 
                 return; 
             }
             
@@ -837,7 +879,7 @@
             });
             selectedRating = 5;
             
-            alert('Ulasan terkirim! Terima kasih 😊');
+            alert('Ulasan terkirim Terima kasih');
         });
 
         const productGrid = document.getElementById('productGrid');
@@ -851,12 +893,11 @@
             });
             productGrid.innerHTML = '';
             if (filtered.length === 0) { 
-                productGrid.innerHTML = '<div class="col-span-full text-center text-white/30 py-16 text-sm">✨ Item tidak ditemukan</div>'; 
+                productGrid.innerHTML = '<div class="col-span-full text-center text-white/30 py-16 text-sm">Item tidak ditemukan</div>'; 
                 return; 
             }
             filtered.forEach(p => productGrid.appendChild(createCard(p)));
             
-            // Re-init AOS for new elements
             AOS.refresh();
         }
 
