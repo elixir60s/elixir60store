@@ -19,6 +19,7 @@
         .price-text { font-family: 'Unbounded', 'Clash Display', sans-serif; font-weight: 800; letter-spacing: -0.02em; }
         .hero-text { font-family: 'Clash Display', 'Unbounded', sans-serif; font-weight: 800; background: linear-gradient(135deg, #ffffff 0%, #c084fc 30%, #a855f7 60%, #e9d5ff 100%); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gradientFlow 5s linear infinite; }
         .elixir-title { font-family: 'Clash Display', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+        
         @keyframes gradientFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         @keyframes meteor1 { 0% { transform: translateX(-100px) translateY(-100px) rotate(45deg); opacity: 1; } 100% { transform: translateX(400px) translateY(400px) rotate(45deg); opacity: 0; } }
         @keyframes meteor2 { 0% { transform: translateX(-50px) translateY(-150px) rotate(35deg); opacity: 1; } 100% { transform: translateX(500px) translateY(500px) rotate(35deg); opacity: 0; } }
@@ -46,34 +47,141 @@
         ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #a855f7, #7e22ce); border-radius: 10px; }
         .glass-nav { background: rgba(10,10,15,0.4); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(168,85,247,0.2); position: fixed; top: 0; width: 100%; z-index: 50; }
         
-        .premium-card { position: relative; background: linear-gradient(145deg, #0a0a18, #0d0d1f); border-radius: 24px; padding: 28px 24px; overflow: hidden; transition: all 0.4s ease; border: 1px solid rgba(168,85,247,0.2); animation: cardFloat 3s ease-in-out infinite; }
+        /* CARD YANG SUDAH DIPERBAIKI - TIDAK GEPENG */
+        .premium-card { 
+            position: relative; 
+            background: linear-gradient(145deg, #0a0a18, #0d0d1f); 
+            border-radius: 24px; 
+            padding: 20px 16px; 
+            overflow: hidden; 
+            transition: all 0.4s ease; 
+            border: 1px solid rgba(168,85,247,0.2); 
+            animation: cardFloat 3s ease-in-out infinite;
+            min-height: 380px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
         .premium-card::before { content: ''; position: absolute; inset: -2px; background: linear-gradient(135deg, #a855f7, #c084fc, #d8b4fe, #7e22ce, #a855f7, #c084fc, #d8b4fe); background-size: 400% 400%; border-radius: 24px; opacity: 0; transition: opacity 0.3s; z-index: -1; }
         .premium-card:hover::before { opacity: 1; animation: rainbowMove 3s ease infinite; }
         .premium-card .holographic-bg { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(139,92,246,0.05), rgba(168,85,247,0.08), rgba(192,132,252,0.05), rgba(139,92,246,0.08), rgba(168,85,247,0.05), rgba(126,34,206,0.08), rgba(139,92,246,0.05)); background-size: 600% 600%; opacity: 0.2; animation: rainbowMove 6s ease infinite; pointer-events: none; border-radius: 24px; }
         .premium-card:hover .holographic-bg { opacity: 0.35; }
         .premium-card .gloss { position: absolute; top: 0; left: 0; right: 0; height: 50%; background: linear-gradient(180deg, rgba(168,85,247,0.12) 0%, rgba(255,255,255,0) 100%); pointer-events: none; border-radius: 24px 24px 0 0; }
-        .premium-card .particles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; border-radius: 24px; }
-        .premium-card .particles span { position: absolute; width: 3px; height: 3px; background: radial-gradient(circle, #c084fc, #a855f7); border-radius: 50%; opacity: 0; }
-        .premium-card:hover .particles span { animation: particleFloat 1.5s ease-out forwards; }
-        .card-badge { position: absolute; top: 16px; right: 16px; background: linear-gradient(135deg, #6b21a5, #9333ea, #a855f7); background-size: 200% 100%; padding: 5px 14px; border-radius: 30px; font-size: 0.6rem; font-weight: 800; letter-spacing: 1.5px; color: white; text-transform: uppercase; z-index: 3; box-shadow: 0 0 15px rgba(139,92,246,0.3); animation: gradientFlow 2s ease infinite; }
-        .category-icon { width: 56px; height: 56px; background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 18px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; border: 1px solid rgba(168,85,247,0.3); transition: all 0.3s; position: relative; z-index: 2; }
-        .category-icon::before { content: ''; position: absolute; inset: -2px; background: linear-gradient(135deg, #a855f7, #c084fc, #d8b4fe, #7e22ce); background-size: 400% 400%; border-radius: 20px; opacity: 0; transition: opacity 0.3s; z-index: -1; }
-        .premium-card:hover .category-icon::before { opacity: 1; animation: rainbowMove 2s ease infinite; }
-        .category-icon i { font-size: 1.6rem; color: #c084fc; transition: all 0.3s; }
+        
+        .card-badge { 
+            position: absolute; 
+            top: 12px; 
+            right: 12px; 
+            background: linear-gradient(135deg, #6b21a5, #9333ea, #a855f7); 
+            background-size: 200% 100%; 
+            padding: 4px 10px; 
+            border-radius: 30px; 
+            font-size: 0.55rem; 
+            font-weight: 800; 
+            letter-spacing: 1px; 
+            color: white; 
+            text-transform: uppercase; 
+            z-index: 3; 
+            box-shadow: 0 0 15px rgba(139,92,246,0.3); 
+        }
+        .category-icon { 
+            width: 48px; 
+            height: 48px; 
+            background: linear-gradient(135deg, #1a1a2e, #16213e); 
+            border-radius: 16px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            margin-bottom: 14px; 
+            border: 1px solid rgba(168,85,247,0.3); 
+            transition: all 0.3s; 
+            position: relative; 
+            z-index: 2; 
+        }
+        .category-icon i { font-size: 1.3rem; color: #c084fc; transition: all 0.3s; }
         .premium-card:hover .category-icon i { transform: scale(1.1); filter: drop-shadow(0 0 8px #a855f7); color: #e9d5ff; }
-        .product-name { font-size: 1.2rem; margin-bottom: 8px; background: linear-gradient(135deg, #ffffff, #e9d5ff, #c084fc, #d8b4fe); background-size: 300% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 800; position: relative; z-index: 2; }
-        .premium-card:hover .product-name { animation: gradientFlow 1.5s ease infinite; }
-        .price-wrapper { background: rgba(0,0,0,0.4); border-radius: 40px; padding: 10px 20px; display: inline-block; margin: 16px 0; border: 1px solid rgba(168,85,247,0.3); transition: all 0.3s; position: relative; z-index: 2; backdrop-filter: blur(4px); }
-        .premium-card:hover .price-wrapper { border-color: rgba(168,85,247,0.8); box-shadow: 0 0 20px rgba(139,92,246,0.3); transform: scale(1.02); }
-        .price-text { font-size: 1.8rem; background: linear-gradient(135deg, #fbbf24, #ffd700, #f59e0b, #ffd700); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 900; }
-        .premium-btn { position: relative; width: 100%; background: linear-gradient(135deg, #1a0b2e, #2d1b4e, #3b1e6d); border: 1px solid rgba(168,85,247,0.3); padding: 14px 20px; border-radius: 50px; font-weight: 700; font-size: 0.85rem; color: white; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 12px; overflow: hidden; z-index: 2; }
+        .product-name { 
+            font-size: 1rem; 
+            margin-bottom: 6px; 
+            background: linear-gradient(135deg, #ffffff, #e9d5ff, #c084fc, #d8b4fe); 
+            background-size: 300% 100%; 
+            -webkit-background-clip: text; 
+            background-clip: text; 
+            color: transparent; 
+            font-weight: 800; 
+            line-height: 1.3;
+            position: relative; 
+            z-index: 2; 
+        }
+        .price-wrapper { 
+            background: rgba(0,0,0,0.4); 
+            border-radius: 40px; 
+            padding: 6px 12px; 
+            display: inline-block; 
+            margin: 10px 0; 
+            border: 1px solid rgba(168,85,247,0.3); 
+            transition: all 0.3s; 
+            position: relative; 
+            z-index: 2; 
+            backdrop-filter: blur(4px); 
+        }
+        .price-text { 
+            font-size: 1.3rem; 
+            background: linear-gradient(135deg, #fbbf24, #ffd700, #f59e0b, #ffd700); 
+            background-size: 200% auto; 
+            -webkit-background-clip: text; 
+            background-clip: text; 
+            color: transparent; 
+            font-weight: 900; 
+        }
+        .premium-btn { 
+            position: relative; 
+            width: 100%; 
+            background: linear-gradient(135deg, #1a0b2e, #2d1b4e, #3b1e6d); 
+            border: 1px solid rgba(168,85,247,0.3); 
+            padding: 10px 12px; 
+            border-radius: 50px; 
+            font-weight: 700; 
+            font-size: 0.75rem; 
+            color: white; 
+            cursor: pointer; 
+            transition: all 0.3s; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 8px; 
+            overflow: hidden; 
+            z-index: 2; 
+            margin-top: auto;
+        }
         .premium-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(168,85,247,0.4), rgba(192,132,252,0.4), rgba(139,92,246,0.4), transparent); transition: left 0.5s; }
         .premium-btn:hover::before { left: 100%; }
         .premium-btn:hover { transform: translateY(-2px); border-color: rgba(168,85,247,0.8); box-shadow: 0 5px 20px rgba(139,92,246,0.4); }
-        .premium-btn .ripple { position: absolute; border-radius: 50%; background: rgba(192,132,252,0.6); transform: scale(0); animation: rippleEffect 0.6s linear; pointer-events: none; }
-        .nickname-input { background: rgba(0,0,0,0.5); border: 1px solid rgba(168,85,247,0.3); border-radius: 50px; padding: 12px 18px; width: 100%; color: white; font-size: 0.8rem; transition: all 0.3s; margin-bottom: 16px; text-align: center; }
-        .nickname-input:focus { outline: none; border-color: #a855f7; box-shadow: 0 0 15px rgba(139,92,246,0.3); }
-        .premium-card:hover { transform: translateY(-10px) scale(1.03); box-shadow: 0 30px 50px -25px rgba(139,92,246,0.4), 0 0 0 1px rgba(168,85,247,0.1); border-color: rgba(168,85,247,0.4); }
+        .nickname-input { 
+            background: rgba(0,0,0,0.5); 
+            border: 1px solid rgba(168,85,247,0.3); 
+            border-radius: 50px; 
+            padding: 8px 12px; 
+            width: 100%; 
+            color: white; 
+            font-size: 0.7rem; 
+            transition: all 0.3s; 
+            margin-bottom: 12px; 
+            text-align: center; 
+        }
+        .premium-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 30px 50px -25px rgba(139,92,246,0.4); }
+        
+        /* RESPONSIVE HP */
+        @media (max-width: 640px) {
+            .premium-card { padding: 14px 12px; min-height: 340px; }
+            .product-name { font-size: 0.85rem; }
+            .price-text { font-size: 1.1rem; }
+            .premium-btn { font-size: 0.65rem; padding: 8px 10px; }
+            .category-icon { width: 40px; height: 40px; margin-bottom: 10px; }
+            .category-icon i { font-size: 1.1rem; }
+            .grid { gap: 12px; }
+        }
+        
         .stat-card { transition: all 0.3s ease; background: rgba(255,255,255,0.05); backdrop-filter: blur(4px); border-radius: 16px; padding: 20px; text-align: center; border: 1px solid rgba(255,255,255,0.1); }
         .stat-card:hover { transform: translateY(-3px); border-color: rgba(168,85,247,0.4); background: rgba(255,255,255,0.08); }
         .footer-link { transition: all 0.2s; }
@@ -81,29 +189,29 @@
         .contact-item { transition: all 0.2s; }
         .contact-item:hover { transform: translateX(3px); }
         .review-card { transition: all 0.3s ease; background: rgba(255,255,255,0.05); backdrop-filter: blur(4px); border-radius: 16px; padding: 16px; border: 1px solid rgba(255,255,255,0.1); }
-        .review-card:hover { transform: translateY(-2px); border-color: rgba(168,85,247,0.4); box-shadow: 0 10px 25px -12px rgba(168,85,247,0.2); }
+        .review-card:hover { transform: translateY(-2px); border-color: rgba(168,85,247,0.4); }
         .review-input, .review-textarea { transition: all 0.2s; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px; color: white; width: 100%; }
         .review-input:focus, .review-textarea:focus { outline: none; border-color: #a855f7; box-shadow: 0 0 15px rgba(168,85,247,0.2); }
         
-        /* QRIS Modal Styles */
-        .modal-qris { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); backdrop-filter: blur(12px); z-index: 1000; align-items: center; justify-content: center; padding: 1rem; }
+        /* QRIS MODAL YANG BAGUS & RAPI */
+        .modal-qris { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(12px); z-index: 1000; align-items: center; justify-content: center; padding: 1rem; }
         .modal-qris.active { display: flex; animation: fadeIn 0.3s ease; }
-        .modal-content { background: linear-gradient(145deg, #11111f, #0a0a18); border-radius: 32px; max-width: 480px; width: 100%; border: 1px solid rgba(168,85,247,0.4); box-shadow: 0 25px 45px rgba(0,0,0,0.5), 0 0 0 1px rgba(168,85,247,0.2); overflow: hidden; }
-        .modal-header { padding: 1.5rem 1.5rem 0.5rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); position: relative; }
-        .modal-body { padding: 1.5rem; }
-        .qris-container { background: white; border-radius: 24px; padding: 20px; text-align: center; margin-bottom: 20px; }
-        #qrcode img { width: 200px !important; height: 200px !important; border-radius: 16px; }
-        .payment-amount { background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 20px; padding: 16px; text-align: center; margin-bottom: 20px; border: 1px solid rgba(168,85,247,0.3); }
-        .payment-amount .label { font-size: 0.75rem; color: #a78bfa; letter-spacing: 1px; text-transform: uppercase; }
-        .payment-amount .amount { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, #ffd700, #fbbf24); -webkit-background-clip: text; background-clip: text; color: transparent; font-family: 'Unbounded', monospace; }
-        .copy-amount { background: rgba(168,85,247,0.2); border: 1px solid rgba(168,85,247,0.4); border-radius: 12px; padding: 8px 12px; font-size: 0.8rem; color: #c084fc; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+        .modal-content { background: linear-gradient(145deg, #11111f, #0a0a18); border-radius: 32px; max-width: 400px; width: 100%; border: 1px solid rgba(168,85,247,0.4); box-shadow: 0 25px 45px rgba(0,0,0,0.5); overflow: hidden; }
+        .modal-header { padding: 1.2rem 1.5rem 0.5rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); position: relative; }
+        .modal-body { padding: 1.2rem; }
+        .qris-container { background: white; border-radius: 20px; padding: 16px; text-align: center; margin-bottom: 16px; }
+        #qrcode img { width: 160px !important; height: 160px !important; border-radius: 16px; margin: 0 auto; display: block; }
+        .payment-amount { background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 20px; padding: 14px; text-align: center; margin-bottom: 16px; border: 1px solid rgba(168,85,247,0.3); }
+        .payment-amount .label { font-size: 0.7rem; color: #a78bfa; letter-spacing: 1px; text-transform: uppercase; }
+        .payment-amount .amount { font-size: 1.8rem; font-weight: 800; background: linear-gradient(135deg, #ffd700, #fbbf24); -webkit-background-clip: text; background-clip: text; color: transparent; font-family: 'Unbounded', monospace; }
+        .copy-amount { background: rgba(168,85,247,0.2); border: 1px solid rgba(168,85,247,0.4); border-radius: 12px; padding: 6px 10px; font-size: 0.7rem; color: #c084fc; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; }
         .copy-amount:hover { background: rgba(168,85,247,0.4); color: white; }
-        .payment-method-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(0,0,0,0.4); padding: 6px 12px; border-radius: 50px; font-size: 0.7rem; color: #a78bfa; margin-bottom: 12px; }
+        .payment-method-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(0,0,0,0.4); padding: 5px 10px; border-radius: 50px; font-size: 0.65rem; color: #a78bfa; margin-bottom: 12px; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .close-modal { position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,0.1); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s; }
+        .close-modal { position: absolute; top: 0.8rem; right: 0.8rem; background: rgba(255,255,255,0.1); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s; }
         .close-modal:hover { background: rgba(255,255,255,0.2); transform: rotate(90deg); }
-        .instruction-text { font-size: 0.7rem; color: #888; text-align: center; margin-top: 16px; }
-        .confirm-wa-btn { background: linear-gradient(135deg, #25D366, #128C7E); border: none; margin-top: 16px; }
+        .instruction-text { font-size: 0.65rem; color: #888; text-align: center; margin-top: 12px; line-height: 1.4; }
+        .confirm-wa-btn { background: linear-gradient(135deg, #25D366, #128C7E); border: none; margin-top: 12px; }
     </style>
 </head>
 <body class="bg-[#050510]">
@@ -130,84 +238,88 @@
         </div>
     </nav>
 
-    <div class="relative z-10 max-w-6xl mx-auto px-6 pt-32 pb-16 text-center" data-aos="fade-up">
+    <div class="relative z-10 max-w-6xl mx-auto px-6 pt-28 pb-12 text-center" data-aos="fade-up">
         <div class="inline-flex px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/30 mb-6 backdrop-blur-sm"><span class="text-purple-300 text-[10px] font-medium tracking-wider">PREMIUM SOUTHBRONX STORE</span></div>
-        <h1 class="text-6xl md:text-7xl font-extrabold mb-5"><span class="hero-text">ELIXIR60S</span></h1>
-        <p class="text-white/50 max-w-lg mx-auto text-base mb-9">Joki SBC • Script Premium • Akun Tier<br>Fast Response & 24/7 Support</p>
+        <h1 class="text-5xl md:text-7xl font-extrabold mb-4"><span class="hero-text">ELIXIR60S</span></h1>
+        <p class="text-white/50 max-w-lg mx-auto text-base mb-8">Joki SBC • Script Premium • Akun Tier<br>Fast Response & 24/7 Support</p>
         <div class="flex justify-center gap-4 flex-wrap">
-            <a href="#marketplace" class="premium-btn !w-auto px-8 py-3.5 text-sm"><i class="fas fa-crown"></i> Explore Items <i class="fas fa-arrow-right text-xs"></i></a>
-            <a href="https://discord.gg/CxbDP6QmW" target="_blank" class="px-8 py-3.5 bg-white/5 backdrop-blur-sm border border-white/10 hover:border-purple-500/50 text-white/80 rounded-full font-semibold flex items-center gap-2 transition-all text-sm"><i class="fab fa-discord"></i> Join Discord</a>
-            <a href="https://wa.me/62895385984764?text=Halo%20ELIXIRSTORE%2C%20saya%20mau%20order" target="_blank" class="px-8 py-3.5 bg-white/5 backdrop-blur-sm border border-white/10 hover:border-green-500/50 text-white/80 rounded-full font-semibold flex items-center gap-2 transition-all text-sm"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <a href="#marketplace" class="premium-btn !w-auto px-8 py-3 text-sm"><i class="fas fa-crown"></i> Explore Items <i class="fas fa-arrow-right text-xs"></i></a>
+            <a href="https://discord.gg/CxbDP6QmW" target="_blank" class="px-8 py-3 bg-white/5 backdrop-blur-sm border border-white/10 hover:border-purple-500/50 text-white/80 rounded-full font-semibold flex items-center gap-2 transition-all text-sm"><i class="fab fa-discord"></i> Join Discord</a>
+            <a href="https://wa.me/62895385984764?text=Halo%20ELIXIRSTORE%2C%20saya%20mau%20order" target="_blank" class="px-8 py-3 bg-white/5 backdrop-blur-sm border border-white/10 hover:border-green-500/50 text-white/80 rounded-full font-semibold flex items-center gap-2 transition-all text-sm"><i class="fab fa-whatsapp"></i> WhatsApp</a>
         </div>
     </div>
 
-    <div class="relative z-10 max-w-5xl mx-auto px-6 py-10">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-5 text-center">
-            <div class="stat-card"><div class="text-4xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent elixir-title">17</div><div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">PRODUK</div></div>
-            <div class="stat-card"><div class="text-4xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent elixir-title">100+</div><div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">TERJUAL</div></div>
-            <div class="stat-card"><div class="text-4xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent elixir-title">12</div><div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">ULASAN</div></div>
-            <div class="stat-card"><div class="text-4xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent elixir-title">100+</div><div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">CUSTOMER</div></div>
+    <div class="relative z-10 max-w-5xl mx-auto px-6 py-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+            <div class="stat-card"><div class="text-3xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent elixir-title">17</div><div class="text-white/40 text-[10px] uppercase tracking-wider mt-1">PRODUK</div></div>
+            <div class="stat-card"><div class="text-3xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent elixir-title">100+</div><div class="text-white/40 text-[10px] uppercase tracking-wider mt-1">TERJUAL</div></div>
+            <div class="stat-card"><div class="text-3xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent elixir-title">12</div><div class="text-white/40 text-[10px] uppercase tracking-wider mt-1">ULASAN</div></div>
+            <div class="stat-card"><div class="text-3xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent elixir-title">100+</div><div class="text-white/40 text-[10px] uppercase tracking-wider mt-1">CUSTOMER</div></div>
         </div>
     </div>
 
-    <div id="marketplace" class="relative z-10 max-w-7xl mx-auto px-6 py-12">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-5 mb-10">
-            <div data-aos="fade-right"><h2 class="text-2xl font-bold text-white flex items-center gap-2 elixir-title"><i class="fas fa-cubes text-purple-400"></i>Koleksi Item</h2><p class="text-white/30 text-sm mt-1">17 item premium tersedia</p></div>
-            <div class="relative w-full md:w-80" data-aos="fade-left"><i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-white/30 text-sm"></i><input type="text" id="searchInput" placeholder="Cari item..." class="w-full bg-white/5 border border-white/10 rounded-full py-3 pl-11 pr-5 text-white/80 text-sm focus:outline-none focus:border-purple-500/50 transition-all backdrop-blur-sm"></div>
+    <div id="marketplace" class="relative z-10 max-w-7xl mx-auto px-6 py-10">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+            <div data-aos="fade-right"><h2 class="text-2xl font-bold text-white flex items-center gap-2 elixir-title"><i class="fas fa-cubes text-purple-400"></i>Koleksi Item</h2><p class="text-white/30 text-xs mt-1">17 item premium tersedia</p></div>
+            <div class="relative w-full md:w-72" data-aos="fade-left"><i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-white/30 text-sm"></i><input type="text" id="searchInput" placeholder="Cari item..." class="w-full bg-white/5 border border-white/10 rounded-full py-2 pl-10 pr-4 text-white/80 text-sm focus:outline-none focus:border-purple-500/50 transition-all backdrop-blur-sm"></div>
         </div>
-        <div class="flex flex-wrap gap-3 mb-12" data-aos="fade-up">
-            <button data-filter="all" class="filter-btn px-6 py-2.5 rounded-full text-xs font-medium transition-all bg-gradient-to-r from-purple-600 to-purple-700 text-white shadow-md shadow-purple-500/25">Semua</button>
-            <button data-filter="sbc" class="filter-btn px-6 py-2.5 rounded-full text-xs font-medium transition-all bg-white/5 text-white/50 hover:text-white hover:bg-white/10">SBC</button>
-            <button data-filter="script" class="filter-btn px-6 py-2.5 rounded-full text-xs font-medium transition-all bg-white/5 text-white/50 hover:text-white hover:bg-white/10">Script</button>
-            <button data-filter="tier" class="filter-btn px-6 py-2.5 rounded-full text-xs font-medium transition-all bg-white/5 text-white/50 hover:text-white hover:bg-white/10">Akun Tier</button>
+        <div class="flex flex-wrap gap-2 mb-10" data-aos="fade-up">
+            <button data-filter="all" class="filter-btn px-5 py-2 rounded-full text-xs font-medium transition-all bg-gradient-to-r from-purple-600 to-purple-700 text-white shadow-md shadow-purple-500/25">Semua</button>
+            <button data-filter="sbc" class="filter-btn px-5 py-2 rounded-full text-xs font-medium transition-all bg-white/5 text-white/50 hover:text-white hover:bg-white/10">SBC</button>
+            <button data-filter="script" class="filter-btn px-5 py-2 rounded-full text-xs font-medium transition-all bg-white/5 text-white/50 hover:text-white hover:bg-white/10">Script</button>
+            <button data-filter="tier" class="filter-btn px-5 py-2 rounded-full text-xs font-medium transition-all bg-white/5 text-white/50 hover:text-white hover:bg-white/10">Akun Tier</button>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="productGrid"></div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="productGrid"></div>
     </div>
 
-    <div id="reviews" class="relative z-10 max-w-4xl mx-auto px-6 py-16">
-        <div class="text-center mb-10" data-aos="fade-up">
+    <div id="reviews" class="relative z-10 max-w-4xl mx-auto px-6 py-12">
+        <div class="text-center mb-8" data-aos="fade-up">
             <h2 class="text-2xl font-bold text-white flex items-center justify-center gap-2 elixir-title"><i class="fas fa-star text-yellow-500"></i> Ulasan Pelanggan <i class="fas fa-star text-yellow-500"></i></h2>
-            <p class="text-white/30 text-sm mt-2">Apa kata mereka tentang ELIXIRSTORE</p>
+            <p class="text-white/30 text-xs mt-1">Apa kata mereka tentang ELIXIRSTORE</p>
         </div>
         
-        <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 mb-8" data-aos="fade-up">
-            <h3 class="text-white font-semibold mb-4 flex items-center gap-2"><i class="fas fa-pen"></i> Tulis Ulasan</h3>
-            <input type="text" id="reviewName" class="review-input mb-3" placeholder="Nickname kamu">
-            <div class="flex gap-2 mb-3" id="ratingStars"><i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="1"></i><i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="2"></i><i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="3"></i><i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="4"></i><i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="5"></i></div>
-            <textarea id="reviewComment" rows="3" class="review-textarea mb-3" placeholder="Tulis ulasan kamu..."></textarea>
-            <button id="submitReviewBtn" class="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white font-semibold py-3 rounded-xl transition-all flex items-center justify-center gap-2"><i class="fas fa-paper-plane"></i> Kirim Ulasan</button>
+        <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-5 mb-6" data-aos="fade-up">
+            <h3 class="text-white font-semibold mb-3 flex items-center gap-2 text-sm"><i class="fas fa-pen"></i> Tulis Ulasan</h3>
+            <input type="text" id="reviewName" class="review-input mb-2" placeholder="Nickname kamu">
+            <div class="flex gap-1 mb-2" id="ratingStars">
+                <i class="far fa-star text-xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="1"></i>
+                <i class="far fa-star text-xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="2"></i>
+                <i class="far fa-star text-xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="3"></i>
+                <i class="far fa-star text-xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="4"></i>
+                <i class="far fa-star text-xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="5"></i>
+            </div>
+            <textarea id="reviewComment" rows="2" class="review-textarea mb-2" placeholder="Tulis ulasan kamu..."></textarea>
+            <button id="submitReviewBtn" class="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white font-semibold py-2 rounded-xl transition-all flex items-center justify-center gap-2 text-sm"><i class="fas fa-paper-plane"></i> Kirim Ulasan</button>
         </div>
         
-        <div id="reviewsList" class="space-y-4"></div>
+        <div id="reviewsList" class="space-y-3"></div>
     </div>
 
     <footer id="footer" class="relative z-10 border-t border-white/10 bg-black/20 backdrop-blur-sm">
-        <div class="max-w-7xl mx-auto px-6 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
-                <div><div class="text-white font-bold text-xl tracking-tight mb-2 elixir-title">ELIXIR<span class="text-purple-400">STORE</span></div><p class="text-white/40 text-sm leading-relaxed">Premium Shop Southbronx<br>Trusted Southbronx Marketplace</p></div>
-                <div><h3 class="text-white/70 text-sm font-semibold uppercase tracking-wider mb-4">Quick Links</h3><ul class="space-y-2"><li><a href="#marketplace" class="footer-link text-white/40 text-sm hover:text-purple-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[8px]"></i> Marketplace</a></li><li><a href="#reviews" class="footer-link text-white/40 text-sm hover:text-purple-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[8px]"></i> Ulasan</a></li></ul></div>
-                <div><h3 class="text-white/70 text-sm font-semibold uppercase tracking-wider mb-4">Contact</h3><ul class="space-y-3"><li><a href="https://wa.me/62895385984764" target="_blank" class="contact-item flex items-center gap-3 text-white/40 text-sm hover:text-green-400 transition"><i class="fab fa-whatsapp text-green-500"></i><span>WhatsApp</span></a></li><li><a href="https://discord.gg/CxbDP6QmW" target="_blank" class="contact-item flex items-center gap-3 text-white/40 text-sm hover:text-purple-400 transition"><i class="fab fa-discord text-[#5865F2]"></i><span>Discord</span></a></li></ul></div>
-                <div><h3 class="text-white/70 text-sm font-semibold uppercase tracking-wider mb-4">Powered By</h3><div class="space-y-2"><div class="flex items-center gap-2 text-white/30 text-xs"><i class="fab fa-html5 text-orange-500"></i><span>HTML5 + Tailwind CSS</span></div><div class="mt-3 pt-2 border-t border-white/10"><span class="text-[10px] text-white/20 tracking-wider">SECURED | 24/7</span></div></div></div>
+        <div class="max-w-7xl mx-auto px-6 py-10">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div><div class="text-white font-bold text-xl tracking-tight mb-2 elixir-title">ELIXIR<span class="text-purple-400">STORE</span></div><p class="text-white/40 text-xs leading-relaxed">Premium Shop Southbronx<br>Trusted Southbronx Marketplace</p></div>
+                <div><h3 class="text-white/70 text-xs font-semibold uppercase tracking-wider mb-3">Quick Links</h3><ul class="space-y-1"><li><a href="#marketplace" class="footer-link text-white/40 text-xs hover:text-purple-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[6px]"></i> Marketplace</a></li><li><a href="#reviews" class="footer-link text-white/40 text-xs hover:text-purple-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[6px]"></i> Ulasan</a></li></ul></div>
+                <div><h3 class="text-white/70 text-xs font-semibold uppercase tracking-wider mb-3">Contact</h3><ul class="space-y-2"><li><a href="https://wa.me/62895385984764" target="_blank" class="contact-item flex items-center gap-2 text-white/40 text-xs hover:text-green-400 transition"><i class="fab fa-whatsapp text-green-500"></i><span>WhatsApp</span></a></li><li><a href="https://discord.gg/CxbDP6QmW" target="_blank" class="contact-item flex items-center gap-2 text-white/40 text-xs hover:text-purple-400 transition"><i class="fab fa-discord text-[#5865F2]"></i><span>Discord</span></a></li></ul></div>
+                <div><h3 class="text-white/70 text-xs font-semibold uppercase tracking-wider mb-3">Powered By</h3><div class="space-y-1"><div class="flex items-center gap-1 text-white/30 text-[10px]"><i class="fab fa-html5 text-orange-500"></i><span>HTML5 + Tailwind CSS</span></div><div class="mt-2 pt-1 border-t border-white/10"><span class="text-[9px] text-white/20 tracking-wider">SECURED | 24/7</span></div></div></div>
             </div>
-            <div class="border-t border-white/10 mt-10 pt-6 text-center"><p class="text-white/20 text-[10px] tracking-wider">2025 ELIXIRSTORE. All rights reserved.</p></div>
+            <div class="border-t border-white/10 mt-8 pt-5 text-center"><p class="text-white/20 text-[9px] tracking-wider">2025 ELIXIRSTORE. All rights reserved.</p></div>
         </div>
     </footer>
 
-    <!-- QRIS MODAL dengan QR Code -->
+    <!-- QRIS MODAL -->
     <div id="qrisModal" class="modal-qris">
         <div class="modal-content">
-            <div class="close-modal" id="closeModalBtn"><i class="fas fa-times text-white/70"></i></div>
+            <div class="close-modal" id="closeModalBtn"><i class="fas fa-times text-white/70 text-sm"></i></div>
             <div class="modal-header">
-                <h3 class="text-white text-xl font-bold elixir-title text-center"><i class="fas fa-qrcode text-purple-400 mr-2"></i>Scan QRIS untuk Membayar</h3>
+                <h3 class="text-white text-lg font-bold elixir-title text-center"><i class="fas fa-qrcode text-purple-400 mr-2"></i>Scan QRIS untuk Membayar</h3>
             </div>
             <div class="modal-body">
                 <div class="payment-method-badge mx-auto w-fit">
                     <i class="fas fa-university"></i> <span>QRIS (Semua E-Wallet & Mobile Banking)</span>
                 </div>
                 
-                <div class="qris-container" id="qrcode">
-                    <!-- QR image will appear here -->
-                </div>
+                <div class="qris-container" id="qrcode"></div>
                 
                 <div class="payment-amount">
                     <div class="label">Total Pembayaran</div>
@@ -217,10 +329,10 @@
                 
                 <div class="instruction-text">
                     <i class="fas fa-mobile-alt"></i> Buka GoPay, OVO, DANA, LinkAja, atau Mobile Banking<br>
-                    Pilih QRIS → Scan kode di atas → Transfer <span id="instructionAmount">Rp0</span>
+                    Pilih QRIS → Scan kode di atas → Transfer
                 </div>
                 
-                <button id="confirmWaBtn" class="premium-btn confirm-wa-btn w-full mt-4">
+                <button id="confirmWaBtn" class="premium-btn confirm-wa-btn w-full mt-3">
                     <i class="fab fa-whatsapp"></i> Konfirmasi Pembayaran via WhatsApp
                 </button>
             </div>
@@ -232,7 +344,7 @@
         AOS.init({ duration: 600, once: true });
         
         // Stars background
-        for (let i = 0; i < 200; i++) {
+        for (let i = 0; i < 150; i++) {
             const star = document.createElement('div');
             star.classList.add('star');
             star.style.width = (Math.random() * 2 + 1) + 'px';
@@ -253,25 +365,29 @@
         function loadReviews() {
             const saved = localStorage.getItem('elixir_reviews_formspree');
             if (saved) try { reviews = JSON.parse(saved); } catch(e) { reviews = []; }
-            if (reviews.length === 0) reviews = [ { name: "Verns", rating: 5, comment: "Gacor banget Jokinya cepet dan terpercaya", date: "31 May 2026" }, { name: "RIP_BOUNTYY177", rating: 5, comment: "Pengen beli SBC lagi nih recommended", date: "28 May 2026" }, { name: "aww", rating: 4, comment: "Mantap fast response", date: "24 Apr 2026" } ];
+            if (reviews.length === 0) reviews = [ 
+                { name: "Verns", rating: 5, comment: "Gacor banget Jokinya cepet dan terpercaya", date: "31 May 2026" }, 
+                { name: "RIP_BOUNTYY177", rating: 5, comment: "Pengen beli SBC lagi nih recommended", date: "28 May 2026" }, 
+                { name: "aww", rating: 4, comment: "Mantap fast response", date: "24 Apr 2026" } 
+            ];
             saveReviews(); renderReviews();
         }
         function saveReviews() { localStorage.setItem('elixir_reviews_formspree', JSON.stringify(reviews)); }
         function renderReviews() {
             const container = document.getElementById('reviewsList');
             if(!container) return;
-            if(reviews.length===0){ container.innerHTML='<div class="text-center text-white/40 py-8">✨ Belum ada ulasan.</div>'; return; }
+            if(reviews.length===0){ container.innerHTML='<div class="text-center text-white/40 py-6 text-sm">✨ Belum ada ulasan.</div>'; return; }
             let html='';
             for(let r of reviews){
                 const stars='★'.repeat(r.rating)+'☆'.repeat(5-r.rating);
-                html+=`<div class="review-card"><div class="flex justify-between items-start flex-wrap gap-2"><div><span class="text-white font-semibold text-sm">${escapeHtml(r.name)}</span><div class="text-yellow-500 text-[10px] mt-1">${stars}</div></div><span class="text-white/30 text-[10px]">${r.date||''}</span></div><p class="text-white/60 text-sm mt-2">"${escapeHtml(r.comment)}"</p></div>`;
+                html+=`<div class="review-card"><div class="flex justify-between items-start flex-wrap gap-2"><div><span class="text-white font-semibold text-xs">${escapeHtml(r.name)}</span><div class="text-yellow-500 text-[9px] mt-1">${stars}</div></div><span class="text-white/30 text-[9px]">${r.date||''}</span></div><p class="text-white/60 text-xs mt-1">"${escapeHtml(r.comment)}"</p></div>`;
             }
             container.innerHTML=html;
         }
         function escapeHtml(str){ if(!str) return ''; return str.replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'})[m]); }
         async function submitToFormspree(name, rating, comment) { try{ const res=await fetch(FORMSPREE_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,rating,comment,_subject:`⭐ Review dari ${name} - ELIXIRSTORE`})}); return res.ok; }catch(e){ return false; } }
-        document.querySelectorAll('#ratingStars .star-select').forEach(star=>{ star.addEventListener('click',()=>{ const val=parseInt(star.dataset.val); selectedRating=val; document.querySelectorAll('#ratingStars .star-select').forEach((s,idx)=>{ if(idx<val) s.className="fas fa-star text-2xl text-yellow-500 cursor-pointer star-select"; else s.className="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select"; }); }); });
-        document.getElementById('submitReviewBtn').addEventListener('click',async()=>{ const name=document.getElementById('reviewName').value.trim(); const comment=document.getElementById('reviewComment').value.trim(); if(!name||!comment){ alert('Isi nickname & ulasan!'); return; } const btn=document.getElementById('submitReviewBtn'); const original=btn.innerHTML; btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Mengirim...'; btn.disabled=true; const sent=await submitToFormspree(name,selectedRating,comment); if(sent){ reviews.unshift({name,rating:selectedRating,comment,date:new Date().toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'})}); saveReviews(); renderReviews(); document.getElementById('reviewName').value=''; document.getElementById('reviewComment').value=''; document.querySelectorAll('#ratingStars .star-select').forEach((s,idx)=>{ s.className="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select"; }); selectedRating=5; alert('✅ Ulasan terkirim!'); } else alert('❌ Gagal mengirim.'); btn.innerHTML=original; btn.disabled=false; });
+        document.querySelectorAll('#ratingStars .star-select').forEach(star=>{ star.addEventListener('click',()=>{ const val=parseInt(star.dataset.val); selectedRating=val; document.querySelectorAll('#ratingStars .star-select').forEach((s,idx)=>{ if(idx<val) s.className="fas fa-star text-xl text-yellow-500 cursor-pointer star-select"; else s.className="far fa-star text-xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select"; }); }); });
+        document.getElementById('submitReviewBtn').addEventListener('click',async()=>{ const name=document.getElementById('reviewName').value.trim(); const comment=document.getElementById('reviewComment').value.trim(); if(!name||!comment){ alert('Isi nickname & ulasan!'); return; } const btn=document.getElementById('submitReviewBtn'); const original=btn.innerHTML; btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Mengirim...'; btn.disabled=true; const sent=await submitToFormspree(name,selectedRating,comment); if(sent){ reviews.unshift({name,rating:selectedRating,comment,date:new Date().toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'})}); saveReviews(); renderReviews(); document.getElementById('reviewName').value=''; document.getElementById('reviewComment').value=''; document.querySelectorAll('#ratingStars .star-select').forEach((s,idx)=>{ s.className="far fa-star text-xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select"; }); selectedRating=5; alert('✅ Ulasan terkirim!'); } else alert('❌ Gagal mengirim.'); btn.innerHTML=original; btn.disabled=false; });
 
         // ========== PRODUCTS ==========
         const formatRp = (n) => "Rp" + n.toLocaleString('id-ID');
@@ -293,8 +409,7 @@
         function getCategoryIcon(cat){ if(cat==='sbc') return 'fa-crown'; if(cat==='script') return 'fa-code'; return 'fa-gem'; }
         function getCategoryBadge(cat){ if(cat==='sbc') return 'SBC PRO'; if(cat==='script') return 'SCRIPT'; return 'TIER'; }
 
-        // ========== QRIS INTEGRATION ==========
-        // GANTI DENGAN LINK QRIS KAMU (sudah diisi dengan link yang kamu berikan)
+        // QRIS INTEGRATION
         const QRIS_IMAGE_URL = "https://i.ibb.co.com/Cp2N3cf8/IMG-9954.jpg";
         
         let currentPendingProduct = null;
@@ -306,11 +421,9 @@
             
             const formattedPrice = formatRp(price);
             document.getElementById('modalAmount').innerHTML = formattedPrice;
-            document.getElementById('instructionAmount').innerHTML = formattedPrice;
             
-            // Tampilkan gambar QRIS statis
             const qrContainer = document.getElementById('qrcode');
-            qrContainer.innerHTML = `<img src="${QRIS_IMAGE_URL}" alt="QRIS ELIXIR STORE" style="width:200px; height:200px; border-radius:16px;">`;
+            qrContainer.innerHTML = `<img src="${QRIS_IMAGE_URL}" alt="QRIS ELIXIR STORE" style="width:160px; height:160px; border-radius:16px; margin:0 auto; display:block;">`;
             
             document.getElementById('qrisModal').classList.add('active');
         }
@@ -323,7 +436,6 @@
         document.getElementById('closeModalBtn').addEventListener('click', closeModal);
         document.getElementById('qrisModal').addEventListener('click', (e) => { if(e.target === document.getElementById('qrisModal')) closeModal(); });
         
-        // Copy amount button
         document.getElementById('copyAmountBtn').addEventListener('click', () => {
             if(currentPendingProduct) {
                 const nominal = currentPendingProduct.price.toString();
@@ -332,7 +444,6 @@
             }
         });
         
-        // Konfirmasi via WhatsApp
         document.getElementById('confirmWaBtn').addEventListener('click', () => {
             if(!currentPendingProduct) { closeModal(); return; }
             
@@ -349,7 +460,18 @@
             card.className = 'premium-card';
             const iconClass = getCategoryIcon(product.category);
             const badgeText = getCategoryBadge(product.category);
-            card.innerHTML = `<div class="holographic-bg"></div><div class="gloss"></div><div class="particles"></div><div class="card-badge">${badgeText}</div><div class="category-icon"><i class="fas ${iconClass}"></i></div><div class="product-name text-center">${product.name}</div><div class="flex justify-center"><div class="price-wrapper"><div class="price-text">${formatRp(product.price)}</div></div></div>${product.needNickname ? '<input type="text" class="nickname-input" placeholder="Masukkan nickname kamu">' : ''}<button class="premium-btn"><i class="fas fa-qrcode"></i> BAYAR VIA QRIS <i class="fas fa-arrow-right"></i></button>`;
+            card.innerHTML = `
+                <div class="holographic-bg"></div>
+                <div class="gloss"></div>
+                <div class="card-badge">${badgeText}</div>
+                <div>
+                    <div class="category-icon"><i class="fas ${iconClass}"></i></div>
+                    <div class="product-name text-center">${product.name}</div>
+                    <div class="flex justify-center"><div class="price-wrapper"><div class="price-text">${formatRp(product.price)}</div></div></div>
+                    ${product.needNickname ? '<input type="text" class="nickname-input" placeholder="Masukkan nickname kamu">' : ''}
+                </div>
+                <button class="premium-btn"><i class="fas fa-qrcode"></i> BAYAR VIA QRIS <i class="fas fa-arrow-right"></i></button>
+            `;
             const btn = card.querySelector('.premium-btn');
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -365,7 +487,7 @@
         function renderProducts(){
             const filtered=products.filter(p=>{ if(currentFilter!=='all' && p.category!==currentFilter) return false; if(searchQuery && !p.name.toLowerCase().includes(searchQuery.toLowerCase())) return false; return true; });
             productGrid.innerHTML='';
-            if(filtered.length===0){ productGrid.innerHTML='<div class="col-span-full text-center text-white/30 py-16 text-sm">Item tidak ditemukan</div>'; return; }
+            if(filtered.length===0){ productGrid.innerHTML='<div class="col-span-full text-center text-white/30 py-12 text-sm">Item tidak ditemukan</div>'; return; }
             filtered.forEach(p=>productGrid.appendChild(createCard(p)));
             if(typeof AOS!=='undefined' && AOS.refresh) AOS.refresh();
         }
