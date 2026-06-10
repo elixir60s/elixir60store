@@ -211,7 +211,7 @@
             border: 1px solid rgba(168,85,247,0.2);
         }
         
-        /* MODAL PREMIUM (TANPA ICON $) */
+        /* MODAL 2 KOLOM - KIRI DETAIL, KANAN QRIS */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -229,7 +229,7 @@
         .modal-container {
             background: linear-gradient(145deg, #0f0f1a, #0a0a12);
             border-radius: 28px;
-            max-width: 450px;
+            max-width: 700px;
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
@@ -239,7 +239,7 @@
         }
         .modal-header {
             background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(168,85,247,0.1));
-            padding: 18px 20px;
+            padding: 16px 20px;
             text-align: center;
             border-bottom: 1px solid rgba(168,85,247,0.2);
             position: relative;
@@ -251,11 +251,11 @@
         }
         .modal-close {
             position: absolute;
-            top: 14px;
-            right: 18px;
+            top: 12px;
+            right: 16px;
             background: rgba(255,255,255,0.1);
-            width: 32px;
-            height: 32px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -271,11 +271,19 @@
         }
         .modal-body {
             padding: 20px;
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        /* KOLOM KIRI - DETAIL PESANAN */
+        .modal-left {
+            flex: 1;
+            min-width: 200px;
         }
         .modal-row {
             display: flex;
             justify-content: space-between;
-            padding: 12px 0;
+            padding: 10px 0;
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         .modal-row-label {
@@ -293,28 +301,33 @@
         }
         .modal-username-input {
             width: 100%;
-            padding: 12px;
+            padding: 10px 12px;
             background: rgba(0,0,0,0.5);
             border: 1px solid rgba(168,85,247,0.3);
             border-radius: 12px;
             color: white;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             margin-top: 8px;
         }
         .modal-username-input:focus {
             outline: none;
             border-color: #a855f7;
         }
+        /* KOLOM KANAN - QRIS */
+        .modal-right {
+            flex: 0.8;
+            min-width: 180px;
+            text-align: center;
+        }
         .modal-qr {
             background: white;
             border-radius: 20px;
             padding: 16px;
             text-align: center;
-            margin: 16px 0;
         }
         .modal-qr img {
-            width: 180px;
-            height: 180px;
+            width: 160px;
+            height: 160px;
             margin: 0 auto;
             display: block;
             border-radius: 12px;
@@ -322,23 +335,24 @@
         .modal-qr-text {
             font-size: 0.65rem;
             color: #888;
-            margin-top: 8px;
+            margin-top: 10px;
         }
         .modal-btn-wa {
             background: linear-gradient(135deg, #25D366, #128C7E);
             width: 100%;
-            padding: 14px;
+            padding: 12px;
             border-radius: 40px;
             color: white;
             font-weight: bold;
             border: none;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
             transition: all 0.3s;
+            margin-top: 16px;
         }
         .modal-btn-wa:hover {
             transform: scale(1.02);
@@ -412,8 +426,10 @@
             .step-item { font-size: 0.65rem; padding: 4px 12px; }
             .cara-steps { gap: 8px; }
             .splash-logo { font-size: 36px; }
-            .modal-qr img { width: 140px; height: 140px; }
-            .modal-container { max-width: 95%; }
+            .modal-qr img { width: 130px; height: 130px; }
+            .modal-body { flex-direction: column; gap: 16px; }
+            .modal-left { min-width: auto; }
+            .modal-right { min-width: auto; }
         }
     </style>
 </head>
@@ -515,7 +531,7 @@
         </div>
     </div>
 
-    <!-- MODAL PREMIUM (TANPA ICON $) -->
+    <!-- MODAL 2 KOLOM (KIRI DETAIL | KANAN QRIS) -->
     <div id="paymentModal" class="modal-overlay">
         <div class="modal-container">
             <div class="modal-header">
@@ -523,38 +539,42 @@
                 <div class="modal-close" id="closeModalBtn">&times;</div>
             </div>
             <div class="modal-body">
-                <div class="modal-row">
-                    <span class="modal-row-label">PRODUK</span>
-                    <span class="modal-row-value" id="modalProductName">-</span>
-                </div>
-                <div class="modal-row">
-                    <span class="modal-row-label">HARGA</span>
-                    <span class="modal-row-value modal-price" id="modalProductPrice">Rp 0</span>
-                </div>
-                <div id="modalUsernameRow" style="display: none;">
-                    <div class="modal-row" style="flex-direction: column; align-items: flex-start; gap: 8px;">
-                        <span class="modal-row-label">USERNAME</span>
-                        <input type="text" id="modalUsernameInput" class="modal-username-input" placeholder="Masukkan username kamu">
+                <!-- KOLOM KIRI - DETAIL PESANAN -->
+                <div class="modal-left">
+                    <div class="modal-row">
+                        <span class="modal-row-label">PRODUK</span>
+                        <span class="modal-row-value" id="modalProductName">-</span>
+                    </div>
+                    <div class="modal-row">
+                        <span class="modal-row-label">HARGA</span>
+                        <span class="modal-row-value modal-price" id="modalProductPrice">Rp 0</span>
+                    </div>
+                    <div id="modalUsernameRow" style="display: none;">
+                        <div style="padding: 10px 0;">
+                            <span class="modal-row-label">USERNAME</span>
+                            <input type="text" id="modalUsernameInput" class="modal-username-input" placeholder="Masukkan username kamu">
+                        </div>
+                    </div>
+                    <div class="modal-row">
+                        <span class="modal-row-label">METODE</span>
+                        <span class="modal-row-value"><i class="fas fa-qrcode text-purple-400"></i> QRIS</span>
+                    </div>
+                    <div class="modal-row">
+                        <span class="modal-row-label">TOTAL</span>
+                        <span class="modal-row-value modal-price" id="modalTotalPrice">Rp 0</span>
                     </div>
                 </div>
-                <div class="modal-row">
-                    <span class="modal-row-label">METODE</span>
-                    <span class="modal-row-value"><i class="fas fa-qrcode text-purple-400"></i> QRIS</span>
-                </div>
-                <div class="modal-row">
-                    <span class="modal-row-label">TOTAL</span>
-                    <span class="modal-row-value modal-price" id="modalTotalPrice">Rp 0</span>
-                </div>
                 
-                <!-- QRIS DISPLAY -->
-                <div class="modal-qr">
-                    <img id="modalQrImage" src="https://i.ibb.co.com/Cp2N3cf8/IMG-9954.jpg" alt="QRIS">
-                    <div class="modal-qr-text">Scan QRIS untuk membayar</div>
+                <!-- KOLOM KANAN - QRIS -->
+                <div class="modal-right">
+                    <div class="modal-qr">
+                        <img id="modalQrImage" src="https://i.ibb.co.com/Cp2N3cf8/IMG-9954.jpg" alt="QRIS">
+                        <div class="modal-qr-text">Scan QRIS untuk membayar</div>
+                    </div>
+                    <button id="modalConfirmBtn" class="modal-btn-wa">
+                        <i class="fab fa-whatsapp"></i> KONFIRMASI VIA WA
+                    </button>
                 </div>
-                
-                <button id="modalConfirmBtn" class="modal-btn-wa">
-                    <i class="fab fa-whatsapp"></i> KONFIRMASI PEMBAYARAN VIA WA
-                </button>
             </div>
         </div>
     </div>
@@ -711,7 +731,6 @@
             modalProductPrice.textContent = formatRp(product.price);
             modalTotalPrice.textContent = formatRp(product.price);
             
-            // Tampilkan username hanya untuk SBC
             if (currentFilter === 'sbc' || product.category === 'sbc') {
                 modalUsernameRow.style.display = 'block';
                 modalUsernameInput.value = '';
@@ -759,7 +778,6 @@
                     <div class="product-price">${formatRp(product.price)}</div>
                 `;
                 card.onclick = () => {
-                    // Hapus selected dari semua card
                     document.querySelectorAll('.product-card').forEach(c => c.classList.remove('selected'));
                     card.classList.add('selected');
                     openModal(product);
@@ -805,7 +823,7 @@
         let selectedRating = 5;
         
         function loadReviews() {
-            const saved = localStorage.getItem('elixir_reviews_modal_final');
+            const saved = localStorage.getItem('elixir_reviews_2col_final');
             if (saved) try { reviews = JSON.parse(saved); } catch(e) { reviews = []; }
             if (reviews.length === 0) reviews = [
                 { name: "Verns", rating: 5, comment: "Gacor banget Jokinya cepet dan terpercaya", date: "31 May 2026" },
@@ -844,7 +862,7 @@
             const comment = document.getElementById('reviewComment').value.trim();
             if (!name || !comment) { alert('Isi nickname & ulasan!'); return; }
             reviews.unshift({ name, rating: selectedRating, comment, date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) });
-            localStorage.setItem('elixir_reviews_modal_final', JSON.stringify(reviews));
+            localStorage.setItem('elixir_reviews_2col_final', JSON.stringify(reviews));
             renderReviews();
             document.getElementById('reviewName').value = '';
             document.getElementById('reviewComment').value = '';
