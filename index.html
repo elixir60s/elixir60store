@@ -63,7 +63,7 @@
             justify-content: center;
             align-items: center;
             gap: 10px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             width: 100%;
         }
         .premium-tab {
@@ -92,6 +92,55 @@
             border-color: transparent;
             box-shadow: 0 0 20px rgba(139,92,246,0.5);
             animation: glowPulse 2s infinite;
+        }
+        
+        /* TATA CARA ORDER BOX */
+        .cara-order-box {
+            background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(168,85,247,0.05));
+            border-radius: 16px;
+            padding: 16px 20px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(168,85,247,0.25);
+            display: none;
+        }
+        .cara-order-box.show {
+            display: block;
+        }
+        .cara-title {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #a78bfa;
+            margin-bottom: 10px;
+        }
+        .cara-steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0,0,0,0.3);
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            color: #ddd;
+        }
+        .step-num {
+            width: 22px;
+            height: 22px;
+            background: linear-gradient(135deg, #6b21a5, #9333ea);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: white;
         }
         
         /* PRODUCT CARD */
@@ -145,7 +194,7 @@
             min-height: 300px;
         }
         
-        /* INFO LAYANAN - AWALNYA HILANG */
+        /* INFO LAYANAN */
         .info-layanan {
             display: none;
             background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(168,85,247,0.05));
@@ -171,6 +220,21 @@
             justify-content: space-between;
             padding: 14px 16px;
             border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .username-input-field {
+            width: 100%;
+            padding: 10px 12px;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(168,85,247,0.3);
+            border-radius: 12px;
+            color: white;
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: none;
+        }
+        .username-input-field:focus {
+            outline: none;
+            border-color: #a855f7;
         }
         .btn-bayar {
             background: linear-gradient(135deg, #f59e0b, #d97706);
@@ -232,6 +296,20 @@
         .review-card { background: rgba(255,255,255,0.05); border-radius: 14px; padding: 12px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 8px; }
         .review-input, .review-textarea { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 10px; color: white; width: 100%; font-size: 0.8rem; }
         
+        /* FOOTER LENGKAP */
+        .footer-brand {
+            font-family: 'Clash Display', sans-serif;
+            font-weight: 700;
+        }
+        .footer-link {
+            transition: all 0.2s;
+            display: inline-block;
+        }
+        .footer-link:hover {
+            color: #a855f7;
+            transform: translateX(3px);
+        }
+        
         @media (max-width: 768px) {
             .summary-panel { position: relative; top: 0; margin-top: 20px; }
             .product-name { font-size: 0.75rem; }
@@ -241,10 +319,9 @@
             .premium-tab { padding: 6px 16px; font-size: 0.7rem; }
             .product-card { width: 155px; }
             #productGrid { gap: 12px; }
+            .step-item { font-size: 0.65rem; padding: 5px 12px; }
+            .cara-steps { gap: 8px; }
         }
-        
-        .footer-link { transition: all 0.2s; }
-        .footer-link:hover { color: #a855f7; transform: translateX(3px); }
     </style>
 </head>
 <body>
@@ -314,6 +391,12 @@
                     <button data-filter="tier" class="premium-tab">💎 TIER</button>
                 </div>
                 
+                <!-- TATA CARA ORDER BOX (di ATAS grid) -->
+                <div id="caraOrderBox" class="cara-order-box">
+                    <div class="cara-title"><i class="fas fa-info-circle mr-1"></i> TATA CARA ORDER</div>
+                    <div id="caraStepsContainer" class="cara-steps"></div>
+                </div>
+                
                 <!-- GRID PRODUK -->
                 <div class="grid-wrapper">
                     <h3 class="text-white/60 text-[10px] font-semibold uppercase tracking-wider mb-3 text-center">SEMUA PRODUK</h3>
@@ -326,7 +409,7 @@
                     </div>
                 </div>
                 
-                <!-- INFO LAYANAN - AWALNYA HILANG, MUNCUL SETELAH PILIH TAB -->
+                <!-- INFO LAYANAN -->
                 <div class="info-layanan" id="infoLayanan">
                     <div class="flex justify-center gap-8 text-center flex-wrap">
                         <div><i class="fas fa-bolt text-purple-400 text-xl"></i><p class="text-white/70 text-xs mt-1 font-medium">FAST RESPON</p></div>
@@ -351,6 +434,11 @@
                         <div class="summary-row">
                             <span class="text-white/50 text-xs">HARGA</span>
                             <span class="text-yellow-400 font-bold" id="selectedProductPrice">Rp 0</span>
+                        </div>
+                        <!-- INPUT USERNAME (hanya untuk SBC) -->
+                        <div class="summary-row" id="usernameRow" style="display: none;">
+                            <span class="text-white/50 text-xs">USERNAME</span>
+                            <input type="text" id="usernameInput" class="username-input-field" placeholder="Masukkan username kamu">
                         </div>
                         <div class="summary-row">
                             <span class="text-white/50 text-xs">METODE</span>
@@ -400,10 +488,50 @@
         <div id="reviewsList" class="space-y-2"></div>
     </div>
 
-    <!-- FOOTER -->
-    <footer id="footer" class="relative z-10 border-t border-white/10 bg-black/20 py-8">
-        <div class="max-w-7xl mx-auto px-5 text-center">
-            <p class="text-white/20 text-[9px]">2025 ELIXIRSTORE • PREMIUM SOUTHBRONX • All rights reserved</p>
+    <!-- FOOTER LENGKAP -->
+    <footer id="footer" class="relative z-10 border-t border-white/10 bg-black/30 backdrop-blur-sm py-10">
+        <div class="max-w-7xl mx-auto px-5">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                
+                <!-- Brand -->
+                <div>
+                    <div class="text-white font-bold text-xl tracking-tight footer-brand mb-2">ELIXIR<span class="text-purple-400">STORE</span></div>
+                    <p class="text-white/40 text-xs leading-relaxed">Premium Southbronx Store<br>Trusted Southbronx Marketplace</p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-white/70 text-xs font-semibold uppercase tracking-wider mb-3">QUICK LINKS</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#shop" class="footer-link text-white/40 text-xs hover:text-purple-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[8px]"></i> Marketplace</a></li>
+                        <li><a href="#reviews" class="footer-link text-white/40 text-xs hover:text-purple-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[8px]"></i> Ulasan</a></li>
+                        <li><a href="#footer" class="footer-link text-white/40 text-xs hover:text-purple-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[8px]"></i> Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h3 class="text-white/70 text-xs font-semibold uppercase tracking-wider mb-3">CONTACT</h3>
+                    <ul class="space-y-2">
+                        <li><a href="https://wa.me/62895385984764" target="_blank" class="footer-link text-white/40 text-xs hover:text-green-400 transition flex items-center gap-2"><i class="fab fa-whatsapp text-green-500"></i> WhatsApp</a></li>
+                        <li><a href="https://discord.gg/CxbDP6QmW" target="_blank" class="footer-link text-white/40 text-xs hover:text-purple-400 transition flex items-center gap-2"><i class="fab fa-discord text-[#5865F2]"></i> Discord</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Powered By -->
+                <div>
+                    <h3 class="text-white/70 text-xs font-semibold uppercase tracking-wider mb-3">POWERED BY</h3>
+                    <div class="space-y-1">
+                        <div class="flex items-center gap-2 text-white/30 text-xs"><i class="fab fa-html5 text-orange-500"></i><span>HTML5 + Tailwind CSS</span></div>
+                        <div class="flex items-center gap-2 text-white/30 text-xs"><i class="fab fa-js text-yellow-500"></i><span>JavaScript</span></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 mt-8 pt-6 text-center">
+                <p class="text-white/20 text-[10px] tracking-wider">© 2025 ELIXIRSTORE • PREMIUM SOUTHBRONX • All rights reserved</p>
+                <p class="text-white/20 text-[9px] mt-1">SECURED | 24/7 SUPPORT</p>
+            </div>
         </div>
     </footer>
 
@@ -476,9 +604,49 @@
         const summaryPanel = document.getElementById('summaryPanel');
         const infoLayanan = document.getElementById('infoLayanan');
         const productGrid = document.getElementById('productGrid');
+        const caraOrderBox = document.getElementById('caraOrderBox');
+        const caraStepsContainer = document.getElementById('caraStepsContainer');
+        const usernameRow = document.getElementById('usernameRow');
+        const usernameInput = document.getElementById('usernameInput');
+        
+        // TATA CARA STEPS
+        const caraStepsMap = {
+            sbc: [
+                { num: 1, text: "Pilih produk SBC" },
+                { num: 2, text: "Isi username" },
+                { num: 3, text: "Bayar via QRIS" },
+                { num: 4, text: "Konfirmasi ke WhatsApp" }
+            ],
+            script: [
+                { num: 1, text: "Pilih produk Script" },
+                { num: 2, text: "Bayar via QRIS" },
+                { num: 3, text: "Konfirmasi ke WhatsApp" }
+            ],
+            tier: [
+                { num: 1, text: "Pilih produk Tier" },
+                { num: 2, text: "Bayar via QRIS" },
+                { num: 3, text: "Konfirmasi ke WhatsApp" }
+            ],
+            all: [
+                { num: 1, text: "Pilih kategori terlebih dahulu" },
+                { num: 2, text: "Pilih produk yang diinginkan" },
+                { num: 3, text: "Bayar via QRIS" },
+                { num: 4, text: "Konfirmasi ke WhatsApp" }
+            ]
+        };
+        
+        function updateCaraOrder(category) {
+            let steps = caraStepsMap[category] || caraStepsMap.all;
+            caraStepsContainer.innerHTML = steps.map(step => `
+                <div class="step-item">
+                    <div class="step-num">${step.num}</div>
+                    <span>${step.text}</span>
+                </div>
+            `).join('');
+            caraOrderBox.classList.add('show');
+        }
         
         function renderProducts() {
-            // KALAU BELUM PILIH TAB
             if (!currentFilter) {
                 productGrid.innerHTML = `
                     <div style="width:100%; text-align:center; padding:60px 20px; color:rgba(255,255,255,0.4);">
@@ -488,10 +656,10 @@
                     </div>
                 `;
                 infoLayanan.style.display = 'none';
+                caraOrderBox.classList.remove('show');
                 return;
             }
             
-            // KALAU SUDAH PILIH TAB
             let filtered = currentFilter === 'all' ? products : products.filter(p => p.category === currentFilter);
             
             productGrid.innerHTML = '';
@@ -499,6 +667,7 @@
             if (filtered.length === 0) {
                 productGrid.innerHTML = `<div style="width:100%; text-align:center; padding:40px; color:rgba(255,255,255,0.4);">Tidak ada produk di kategori ini</div>`;
                 infoLayanan.style.display = 'flex';
+                updateCaraOrder(currentFilter);
                 return;
             }
             
@@ -517,12 +686,21 @@
                     updateSummary();
                     renderProducts();
                     summaryPanel.style.display = 'block';
+                    
+                    // TAMPILIN ATAU SEMBUNYIKAN USERNAME
+                    if (currentFilter === 'sbc' || product.category === 'sbc') {
+                        usernameRow.style.display = 'flex';
+                        usernameInput.style.display = 'block';
+                    } else {
+                        usernameRow.style.display = 'none';
+                        usernameInput.style.display = 'none';
+                    }
                 };
                 productGrid.appendChild(card);
             });
             
-            // TAMPILKAN INFO LAYANAN
             infoLayanan.style.display = 'flex';
+            updateCaraOrder(currentFilter);
         }
         
         function updateSummary() {
@@ -534,6 +712,8 @@
                 document.getElementById('selectedProductName').innerHTML = '-';
                 document.getElementById('selectedProductPrice').innerHTML = 'Rp 0';
                 document.getElementById('totalPrice').innerHTML = 'Rp 0';
+                usernameRow.style.display = 'none';
+                usernameInput.style.display = 'none';
             }
         }
         
@@ -547,6 +727,8 @@
                 renderProducts();
                 updateSummary();
                 summaryPanel.style.display = 'none';
+                usernameRow.style.display = 'none';
+                usernameInput.style.display = 'none';
             };
         });
         
@@ -572,7 +754,12 @@
         };
         
         document.getElementById('confirmWaBtn').onclick = () => {
-            let msg = `Halo ELIXIRSTORE%0A%0A*KONFIRMASI PEMBAYARAN*%0A%0AProduk: ${encodeURIComponent(selectedProduct.name)}%0AHarga: ${encodeURIComponent(formatRp(selectedProduct.price))}%0ATotal: ${encodeURIComponent(formatRp(currentTotal))}%0AMetode: QRIS%0A%0ASaya sudah melakukan pembayaran. Berikut bukti transfer saya.`;
+            let username = usernameInput.value.trim();
+            let msg = `Halo ELIXIRSTORE%0A%0A*KONFIRMASI PEMBAYARAN*%0A%0AProduk: ${encodeURIComponent(selectedProduct.name)}%0AHarga: ${encodeURIComponent(formatRp(selectedProduct.price))}%0ATotal: ${encodeURIComponent(formatRp(currentTotal))}%0AMetode: QRIS`;
+            if (username && (currentFilter === 'sbc' || selectedProduct.category === 'sbc')) {
+                msg += `%0AUsername: ${encodeURIComponent(username)}`;
+            }
+            msg += `%0A%0ASaya sudah melakukan pembayaran. Berikut bukti transfer saya.`;
             window.open(`https://wa.me/${waNumber}?text=${msg}`, '_blank');
             closeModal();
         };
@@ -584,7 +771,7 @@
         let selectedRating = 5;
         
         function loadReviews() {
-            const saved = localStorage.getItem('elixir_reviews_final_oke');
+            const saved = localStorage.getItem('elixir_reviews_final_footer');
             if (saved) try { reviews = JSON.parse(saved); } catch(e) { reviews = []; }
             if (reviews.length === 0) reviews = [
                 { name: "Verns", rating: 5, comment: "Gacor banget Jokinya cepet dan terpercaya", date: "31 May 2026" },
@@ -623,7 +810,7 @@
             const comment = document.getElementById('reviewComment').value.trim();
             if (!name || !comment) { alert('Isi nickname & ulasan!'); return; }
             reviews.unshift({ name, rating: selectedRating, comment, date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) });
-            localStorage.setItem('elixir_reviews_final_oke', JSON.stringify(reviews));
+            localStorage.setItem('elixir_reviews_final_footer', JSON.stringify(reviews));
             renderReviews();
             document.getElementById('reviewName').value = '';
             document.getElementById('reviewComment').value = '';
