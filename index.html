@@ -29,6 +29,9 @@
         @keyframes starTwinkle { 0%, 100% { opacity: 0.2; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.2); } }
         @keyframes cardFloat { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-5px); } }
         @keyframes glowPulse { 0%, 100% { box-shadow: 0 0 5px rgba(168,85,247,0.3); } 50% { box-shadow: 0 0 20px rgba(168,85,247,0.6); } }
+        @keyframes fadeInScale { 0% { opacity: 0; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1); } }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes loadingBar { 0% { width: 0%; } 100% { width: 100%; } }
         
         /* Background */
         .animated-bg { position: fixed; inset: 0; background: radial-gradient(ellipse at 20% 30%, #0a0a1a, #050510); z-index: -3; }
@@ -313,6 +316,53 @@
             transform: translateX(3px);
         }
         
+        /* SPLASH SCREEN PREMIUM */
+        #splashScreen {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(ellipse at 20% 30%, #0a0a1a, #050510);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: opacity 0.6s ease;
+        }
+        .splash-logo {
+            font-size: 56px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, #c084fc, #a855f7, #e9d5ff);
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: fadeInScale 0.8s ease, gradientFlow 3s linear infinite;
+            font-family: 'Clash Display', sans-serif;
+            letter-spacing: -0.02em;
+        }
+        .splash-sub {
+            color: rgba(255,255,255,0.4);
+            font-size: 11px;
+            letter-spacing: 3px;
+            margin-top: 12px;
+            text-transform: uppercase;
+        }
+        .loading-bar-container {
+            width: 200px;
+            height: 2px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            margin-top: 30px;
+            overflow: hidden;
+        }
+        .loading-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #a855f7, #c084fc);
+            border-radius: 10px;
+            animation: loadingBar 2.2s ease forwards;
+        }
+        
         @media (max-width: 768px) {
             .summary-panel { position: relative; top: 0; margin-top: 20px; }
             .product-name { font-size: 0.75rem; }
@@ -324,10 +374,20 @@
             #productGrid { gap: 12px; }
             .step-item { font-size: 0.65rem; padding: 4px 12px; }
             .cara-steps { gap: 8px; }
+            .splash-logo { font-size: 40px; }
         }
     </style>
 </head>
 <body>
+
+    <!-- SPLASH SCREEN PREMIUM -->
+    <div id="splashScreen">
+        <div class="splash-logo">ELIXIR<span style="color: #c084fc;">60S</span></div>
+        <div class="splash-sub">PREMIUM SOUTHBRONX STORE</div>
+        <div class="loading-bar-container">
+            <div class="loading-bar"></div>
+        </div>
+    </div>
 
     <div class="animated-bg"></div>
     <div class="stars" id="starsContainer"></div>
@@ -564,6 +624,15 @@
     <script>
         AOS.init({ duration: 600, once: true });
         
+        // HILANGIN SPLASH SCREEN SETELAH LOADING
+        setTimeout(function() {
+            const splash = document.getElementById('splashScreen');
+            splash.style.opacity = '0';
+            setTimeout(function() {
+                splash.style.display = 'none';
+            }, 600);
+        }, 2500);
+        
         // BINTANG BACKGROUND
         for (let i = 0; i < 200; i++) {
             const star = document.createElement('div');
@@ -687,7 +756,6 @@
                     renderProducts();
                     summaryPanel.style.display = 'block';
                     
-                    // TAMPILIN ATAU SEMBUNYIKAN USERNAME
                     if (currentFilter === 'sbc' || product.category === 'sbc') {
                         usernameRow.style.display = 'flex';
                         usernameInput.style.display = 'block';
@@ -771,7 +839,7 @@
         let selectedRating = 5;
         
         function loadReviews() {
-            const saved = localStorage.getItem('elixir_reviews_final_rapi');
+            const saved = localStorage.getItem('elixir_reviews_final_premium');
             if (saved) try { reviews = JSON.parse(saved); } catch(e) { reviews = []; }
             if (reviews.length === 0) reviews = [
                 { name: "Verns", rating: 5, comment: "Gacor banget Jokinya cepet dan terpercaya", date: "31 May 2026" },
@@ -810,7 +878,7 @@
             const comment = document.getElementById('reviewComment').value.trim();
             if (!name || !comment) { alert('Isi nickname & ulasan!'); return; }
             reviews.unshift({ name, rating: selectedRating, comment, date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) });
-            localStorage.setItem('elixir_reviews_final_rapi', JSON.stringify(reviews));
+            localStorage.setItem('elixir_reviews_final_premium', JSON.stringify(reviews));
             renderReviews();
             document.getElementById('reviewName').value = '';
             document.getElementById('reviewComment').value = '';
