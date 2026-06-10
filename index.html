@@ -31,6 +31,7 @@
         @keyframes glowPulse { 0%, 100% { box-shadow: 0 0 5px rgba(168,85,247,0.3); } 50% { box-shadow: 0 0 20px rgba(168,85,247,0.6); } }
         @keyframes fadeInScale { 0% { opacity: 0; transform: scale(0.9); } 100% { opacity: 1; transform: scale(1); } }
         @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes modalFadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
         
         /* Background */
         .animated-bg { position: fixed; inset: 0; background: radial-gradient(ellipse at 20% 30%, #0a0a1a, #050510); z-index: -3; }
@@ -200,89 +201,6 @@
             min-height: 300px;
         }
         
-        /* DETAIL PESANAN & QRIS - MUNCUL SETELAH KLIK PRODUK */
-        .order-detail-section {
-            background: linear-gradient(145deg, #0f0f1a, #0a0a12);
-            border-radius: 24px;
-            border: 1px solid rgba(168,85,247,0.2);
-            overflow: hidden;
-            margin-top: 30px;
-            display: none;
-        }
-        .detail-header {
-            background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(168,85,247,0.1));
-            padding: 16px 20px;
-            text-align: center;
-            border-bottom: 1px solid rgba(168,85,247,0.2);
-        }
-        .detail-header h3 {
-            font-size: 1rem;
-            font-weight: 700;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        .detail-header .premium-icon {
-            font-size: 1.2rem;
-            background: linear-gradient(135deg, #ffd700, #fbbf24);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        .detail-sub {
-            font-size: 0.6rem;
-            color: #a78bfa;
-            text-align: center;
-            margin-top: 4px;
-            letter-spacing: 1px;
-        }
-        .detail-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 14px 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        .username-input-field {
-            width: 100%;
-            padding: 10px 12px;
-            background: rgba(0,0,0,0.5);
-            border: 1px solid rgba(168,85,247,0.3);
-            border-radius: 12px;
-            color: white;
-            font-size: 0.8rem;
-            margin-top: 5px;
-            display: none;
-        }
-        .qr-display {
-            background: white;
-            border-radius: 20px;
-            padding: 16px;
-            text-align: center;
-            margin: 16px 20px;
-        }
-        .qr-display img {
-            width: 180px;
-            height: 180px;
-            border-radius: 12px;
-            margin: 0 auto;
-            display: block;
-        }
-        .confirm-btn {
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            transition: all 0.3s;
-            width: calc(100% - 40px);
-            margin: 0 20px 20px 20px;
-            padding: 14px;
-            border-radius: 40px;
-            color: white;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-        }
-        .confirm-btn:hover { transform: scale(1.02); box-shadow: 0 5px 20px rgba(37,211,102,0.3); }
-        
         /* INFO LAYANAN */
         .info-layanan {
             display: none;
@@ -291,6 +209,140 @@
             padding: 16px 20px;
             margin-top: 30px;
             border: 1px solid rgba(168,85,247,0.2);
+        }
+        
+        /* MODAL PREMIUM (TANPA ICON $) */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-container {
+            background: linear-gradient(145deg, #0f0f1a, #0a0a12);
+            border-radius: 28px;
+            max-width: 450px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid rgba(168,85,247,0.3);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            animation: modalFadeIn 0.3s ease;
+        }
+        .modal-header {
+            background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(168,85,247,0.1));
+            padding: 18px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(168,85,247,0.2);
+            position: relative;
+        }
+        .modal-header h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+        }
+        .modal-close {
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            background: rgba(255,255,255,0.1);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: white;
+            font-size: 18px;
+        }
+        .modal-close:hover {
+            background: rgba(255,255,255,0.2);
+            transform: rotate(90deg);
+        }
+        .modal-body {
+            padding: 20px;
+        }
+        .modal-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .modal-row-label {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.75rem;
+        }
+        .modal-row-value {
+            color: white;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        .modal-price {
+            color: #fbbf24;
+            font-weight: 800;
+        }
+        .modal-username-input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(168,85,247,0.3);
+            border-radius: 12px;
+            color: white;
+            font-size: 0.85rem;
+            margin-top: 8px;
+        }
+        .modal-username-input:focus {
+            outline: none;
+            border-color: #a855f7;
+        }
+        .modal-qr {
+            background: white;
+            border-radius: 20px;
+            padding: 16px;
+            text-align: center;
+            margin: 16px 0;
+        }
+        .modal-qr img {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto;
+            display: block;
+            border-radius: 12px;
+        }
+        .modal-qr-text {
+            font-size: 0.65rem;
+            color: #888;
+            margin-top: 8px;
+        }
+        .modal-btn-wa {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            width: 100%;
+            padding: 14px;
+            border-radius: 40px;
+            color: white;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+        .modal-btn-wa:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 20px rgba(37,211,102,0.3);
         }
         
         /* FOOTER */
@@ -317,7 +369,7 @@
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
+            transition: opacity 0.5s ease;
         }
         .splash-logo {
             font-size: 48px;
@@ -360,7 +412,8 @@
             .step-item { font-size: 0.65rem; padding: 4px 12px; }
             .cara-steps { gap: 8px; }
             .splash-logo { font-size: 36px; }
-            .qr-display img { width: 140px; height: 140px; }
+            .modal-qr img { width: 140px; height: 140px; }
+            .modal-container { max-width: 95%; }
         }
     </style>
 </head>
@@ -452,55 +505,56 @@
             </div>
         </div>
         
-        <!-- DETAIL PESANAN + QRIS (MUNCUL SETELAH KLIK PRODUK) -->
-        <div id="orderDetailSection" class="order-detail-section">
-            <div class="detail-header">
-                <h3>
-                    <span class="premium-icon">💎💲</span>
-                    DETAIL PESANAN
-                </h3>
-                <div class="detail-sub">Secure Transaction • Instant Process</div>
-            </div>
-            <div class="detail-row">
-                <span class="text-white/50 text-xs">PRODUK</span>
-                <span class="text-white font-semibold text-sm" id="selectedProductName">-</span>
-            </div>
-            <div class="detail-row">
-                <span class="text-white/50 text-xs">HARGA</span>
-                <span class="text-yellow-400 font-bold" id="selectedProductPrice">Rp 0</span>
-            </div>
-            <div id="usernameRow" style="display: none;">
-                <div class="detail-row">
-                    <span class="text-white/50 text-xs">USERNAME</span>
-                    <input type="text" id="usernameInput" class="username-input-field" placeholder="Masukkan username kamu">
-                </div>
-            </div>
-            <div class="detail-row">
-                <span class="text-white/50 text-xs">METODE</span>
-                <span class="text-white text-sm"><i class="fas fa-qrcode text-purple-400"></i> QRIS</span>
-            </div>
-            <div class="detail-row">
-                <span class="text-white/70 text-sm font-semibold">TOTAL</span>
-                <span class="text-yellow-400 font-black text-xl" id="totalPrice">Rp 0</span>
-            </div>
-            
-            <!-- QRIS DISPLAY -->
-            <div class="qr-display">
-                <img id="qrImage" src="https://i.ibb.co.com/Cp2N3cf8/IMG-9954.jpg" alt="QRIS">
-                <p class="text-gray-500 text-[10px] mt-2">Scan QRIS untuk membayar</p>
-            </div>
-            
-            <button id="confirmWaBtn" class="confirm-btn">
-                <i class="fab fa-whatsapp"></i> KONFIRMASI PEMBAYARAN VIA WA
-            </button>
-        </div>
-        
         <!-- INFO LAYANAN -->
         <div class="info-layanan" id="infoLayanan">
             <div class="flex justify-center gap-8 text-center flex-wrap">
                 <div><i class="fas fa-bolt text-purple-400 text-xl"></i><p class="text-white/70 text-xs mt-1 font-medium">FAST RESPON</p></div>
                 <div><i class="fas fa-clock text-purple-400 text-xl"></i><p class="text-white/70 text-xs mt-1 font-medium">PROSES INSTAN</p></div>
                 <div><i class="fas fa-shield-alt text-purple-400 text-xl"></i><p class="text-white/70 text-xs mt-1 font-medium">AMAN TERPERCAYA</p></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL PREMIUM (TANPA ICON $) -->
+    <div id="paymentModal" class="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3>DETAIL PESANAN</h3>
+                <div class="modal-close" id="closeModalBtn">&times;</div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-row">
+                    <span class="modal-row-label">PRODUK</span>
+                    <span class="modal-row-value" id="modalProductName">-</span>
+                </div>
+                <div class="modal-row">
+                    <span class="modal-row-label">HARGA</span>
+                    <span class="modal-row-value modal-price" id="modalProductPrice">Rp 0</span>
+                </div>
+                <div id="modalUsernameRow" style="display: none;">
+                    <div class="modal-row" style="flex-direction: column; align-items: flex-start; gap: 8px;">
+                        <span class="modal-row-label">USERNAME</span>
+                        <input type="text" id="modalUsernameInput" class="modal-username-input" placeholder="Masukkan username kamu">
+                    </div>
+                </div>
+                <div class="modal-row">
+                    <span class="modal-row-label">METODE</span>
+                    <span class="modal-row-value"><i class="fas fa-qrcode text-purple-400"></i> QRIS</span>
+                </div>
+                <div class="modal-row">
+                    <span class="modal-row-label">TOTAL</span>
+                    <span class="modal-row-value modal-price" id="modalTotalPrice">Rp 0</span>
+                </div>
+                
+                <!-- QRIS DISPLAY -->
+                <div class="modal-qr">
+                    <img id="modalQrImage" src="https://i.ibb.co.com/Cp2N3cf8/IMG-9954.jpg" alt="QRIS">
+                    <div class="modal-qr-text">Scan QRIS untuk membayar</div>
+                </div>
+                
+                <button id="modalConfirmBtn" class="modal-btn-wa">
+                    <i class="fab fa-whatsapp"></i> KONFIRMASI PEMBAYARAN VIA WA
+                </button>
             </div>
         </div>
     </div>
@@ -624,9 +678,16 @@
         const productGrid = document.getElementById('productGrid');
         const caraOrderBox = document.getElementById('caraOrderBox');
         const caraStepsContainer = document.getElementById('caraStepsContainer');
-        const orderDetailSection = document.getElementById('orderDetailSection');
-        const usernameRow = document.getElementById('usernameRow');
-        const usernameInput = document.getElementById('usernameInput');
+        
+        // MODAL ELEMENTS
+        const modal = document.getElementById('paymentModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const modalProductName = document.getElementById('modalProductName');
+        const modalProductPrice = document.getElementById('modalProductPrice');
+        const modalTotalPrice = document.getElementById('modalTotalPrice');
+        const modalUsernameRow = document.getElementById('modalUsernameRow');
+        const modalUsernameInput = document.getElementById('modalUsernameInput');
+        const modalConfirmBtn = document.getElementById('modalConfirmBtn');
         
         // TATA CARA STEPS
         const caraStepsMap = {
@@ -644,6 +705,28 @@
             caraOrderBox.classList.add('show');
         }
         
+        function openModal(product) {
+            selectedProduct = product;
+            modalProductName.textContent = product.name;
+            modalProductPrice.textContent = formatRp(product.price);
+            modalTotalPrice.textContent = formatRp(product.price);
+            
+            // Tampilkan username hanya untuk SBC
+            if (currentFilter === 'sbc' || product.category === 'sbc') {
+                modalUsernameRow.style.display = 'block';
+                modalUsernameInput.value = '';
+            } else {
+                modalUsernameRow.style.display = 'none';
+            }
+            
+            modal.classList.add('active');
+        }
+        
+        function closeModal() {
+            modal.classList.remove('active');
+            selectedProduct = null;
+        }
+        
         function renderProducts() {
             if (!currentFilter) {
                 productGrid.innerHTML = `<div style="width:100%; text-align:center; padding:60px 20px; color:rgba(255,255,255,0.4);">
@@ -653,7 +736,6 @@
                 </div>`;
                 infoLayanan.style.display = 'none';
                 caraOrderBox.classList.remove('show');
-                orderDetailSection.style.display = 'none';
                 return;
             }
             
@@ -664,14 +746,12 @@
                 productGrid.innerHTML = `<div style="width:100%; text-align:center; padding:40px; color:rgba(255,255,255,0.4);">Tidak ada produk di kategori ini</div>`;
                 infoLayanan.style.display = 'flex';
                 updateCaraOrder(currentFilter);
-                orderDetailSection.style.display = 'none';
                 return;
             }
             
             filtered.forEach(product => {
-                const isSelected = selectedProduct && selectedProduct.name === product.name;
                 const card = document.createElement('div');
-                card.className = `product-card ${isSelected ? 'selected' : ''}`;
+                card.className = 'product-card';
                 card.innerHTML = `
                     <div class="product-icon"><i class="fas ${product.icon}"></i></div>
                     <div class="product-name">${product.name}</div>
@@ -679,45 +759,16 @@
                     <div class="product-price">${formatRp(product.price)}</div>
                 `;
                 card.onclick = () => {
-                    // Hapus class selected dari semua card
+                    // Hapus selected dari semua card
                     document.querySelectorAll('.product-card').forEach(c => c.classList.remove('selected'));
                     card.classList.add('selected');
-                    
-                    selectedProduct = product;
-                    updateSummary();
-                    
-                    // Tampilkan detail section
-                    orderDetailSection.style.display = 'block';
-                    
-                    // Tampilkan username hanya untuk SBC
-                    if (currentFilter === 'sbc' || product.category === 'sbc') {
-                        usernameRow.style.display = 'block';
-                        usernameInput.style.display = 'block';
-                    } else {
-                        usernameRow.style.display = 'none';
-                        usernameInput.style.display = 'none';
-                    }
-                    
-                    // Scroll ke detail section
-                    orderDetailSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    openModal(product);
                 };
                 productGrid.appendChild(card);
             });
             
             infoLayanan.style.display = 'flex';
             updateCaraOrder(currentFilter);
-        }
-        
-        function updateSummary() {
-            if (selectedProduct) {
-                document.getElementById('selectedProductName').innerHTML = selectedProduct.name;
-                document.getElementById('selectedProductPrice').innerHTML = formatRp(selectedProduct.price);
-                document.getElementById('totalPrice').innerHTML = formatRp(selectedProduct.price);
-            } else {
-                document.getElementById('selectedProductName').innerHTML = '-';
-                document.getElementById('selectedProductPrice').innerHTML = 'Rp 0';
-                document.getElementById('totalPrice').innerHTML = 'Rp 0';
-            }
         }
         
         // EVENT TAB
@@ -728,23 +779,25 @@
                 currentFilter = tab.dataset.filter;
                 selectedProduct = null;
                 renderProducts();
-                updateSummary();
-                orderDetailSection.style.display = 'none';
-                usernameRow.style.display = 'none';
-                usernameInput.style.display = 'none';
+                closeModal();
             };
         });
         
-        // KONFIRMASI WA
-        document.getElementById('confirmWaBtn').onclick = () => {
-            if (!selectedProduct) { alert('Pilih produk dulu!'); return; }
-            let username = usernameInput.value.trim();
+        // MODAL CLOSE
+        closeModalBtn.onclick = closeModal;
+        modal.onclick = (e) => { if (e.target === modal) closeModal(); };
+        
+        // KONFIRMASI PEMBAYARAN
+        modalConfirmBtn.onclick = () => {
+            if (!selectedProduct) { closeModal(); return; }
+            let username = modalUsernameInput.value.trim();
             let msg = `Halo ELIXIRSTORE%0A%0A*KONFIRMASI PEMBAYARAN*%0A%0AProduk: ${encodeURIComponent(selectedProduct.name)}%0AHarga: ${encodeURIComponent(formatRp(selectedProduct.price))}%0ATotal: ${encodeURIComponent(formatRp(selectedProduct.price))}%0AMetode: QRIS`;
             if (username && (currentFilter === 'sbc' || selectedProduct.category === 'sbc')) {
                 msg += `%0AUsername: ${encodeURIComponent(username)}`;
             }
             msg += `%0A%0ASaya sudah melakukan pembayaran. Berikut bukti transfer saya.`;
             window.open(`https://wa.me/${waNumber}?text=${msg}`, '_blank');
+            closeModal();
         };
         
         // REVIEW SYSTEM
@@ -752,7 +805,7 @@
         let selectedRating = 5;
         
         function loadReviews() {
-            const saved = localStorage.getItem('elixir_reviews_stack_final');
+            const saved = localStorage.getItem('elixir_reviews_modal_final');
             if (saved) try { reviews = JSON.parse(saved); } catch(e) { reviews = []; }
             if (reviews.length === 0) reviews = [
                 { name: "Verns", rating: 5, comment: "Gacor banget Jokinya cepet dan terpercaya", date: "31 May 2026" },
@@ -791,7 +844,7 @@
             const comment = document.getElementById('reviewComment').value.trim();
             if (!name || !comment) { alert('Isi nickname & ulasan!'); return; }
             reviews.unshift({ name, rating: selectedRating, comment, date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) });
-            localStorage.setItem('elixir_reviews_stack_final', JSON.stringify(reviews));
+            localStorage.setItem('elixir_reviews_modal_final', JSON.stringify(reviews));
             renderReviews();
             document.getElementById('reviewName').value = '';
             document.getElementById('reviewComment').value = '';
@@ -799,7 +852,6 @@
         };
         
         renderProducts();
-        updateSummary();
         loadReviews();
     </script>
 </body>
