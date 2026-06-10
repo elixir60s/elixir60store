@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>ELIXIRSTORE | Topup Honor of Kings</title>
+    <title>ELIXIRSTORE | Premium Southbronx Store</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -28,18 +28,18 @@
         /* Animasi */
         @keyframes gradientFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         @keyframes floatSlow { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+        @keyframes starTwinkle { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.7; } }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
         
         /* Background */
         .animated-bg { position: fixed; inset: 0; background: radial-gradient(ellipse at 20% 30%, #0a0a1a, #050510); z-index: -3; }
         .stars { position: fixed; inset: 0; pointer-events: none; z-index: -2; }
         .star { position: absolute; background: white; border-radius: 50%; animation: starTwinkle 3s infinite; }
-        @keyframes starTwinkle { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.7; } }
         
         .glass-nav { background: rgba(10,10,15,0.8); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(168,85,247,0.2); position: fixed; top: 0; width: 100%; z-index: 50; }
         
-        /* Token Card */
-        .token-card {
+        /* Product Card - Style Toko Topup */
+        .product-card {
             background: linear-gradient(145deg, #0f0f1a, #0a0a12);
             border-radius: 20px;
             padding: 16px 12px;
@@ -50,17 +50,17 @@
             position: relative;
             overflow: hidden;
         }
-        .token-card:hover {
+        .product-card:hover {
             transform: translateY(-5px);
             border-color: rgba(168,85,247,0.6);
             box-shadow: 0 10px 30px rgba(139,92,246,0.2);
         }
-        .token-card.selected {
+        .product-card.selected {
             border-color: #a855f7;
             background: linear-gradient(145deg, #1a1a2e, #12122a);
             box-shadow: 0 0 20px rgba(168,85,247,0.3);
         }
-        .token-card.selected::before {
+        .product-card.selected::before {
             content: '✓';
             position: absolute;
             top: 8px;
@@ -69,20 +69,35 @@
             font-weight: bold;
             font-size: 14px;
         }
-        .token-amount {
-            font-size: 18px;
+        .product-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            border: 1px solid rgba(168,85,247,0.3);
+        }
+        .product-icon i {
+            font-size: 1.5rem;
+            color: #c084fc;
+        }
+        .product-name {
+            font-size: 14px;
             font-weight: 800;
             color: white;
-            font-family: 'Unbounded', monospace;
+            margin-bottom: 4px;
         }
-        .token-label {
-            font-size: 10px;
+        .product-desc {
+            font-size: 9px;
             color: #a78bfa;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin: 4px 0;
+            margin-bottom: 6px;
         }
-        .token-price {
+        .product-price {
             font-size: 14px;
             font-weight: 700;
             background: linear-gradient(135deg, #fbbf24, #ffd700);
@@ -91,7 +106,7 @@
             color: transparent;
         }
         
-        /* Summary Panel */
+        /* Summary Panel - Kayak Detail Pesanan */
         .summary-panel {
             background: linear-gradient(145deg, #0f0f1a, #0a0a12);
             border-radius: 24px;
@@ -103,41 +118,35 @@
         .summary-row {
             display: flex;
             justify-content: space-between;
-            padding: 12px 16px;
+            padding: 14px 16px;
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-        .payment-method-btn {
-            flex: 1;
-            padding: 10px;
-            text-align: center;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .payment-method-btn.active {
-            background: linear-gradient(135deg, #6b21a5, #9333ea);
-            border-color: #a855f7;
-        }
         
-        /* Input ID Game */
-        .game-id-input {
+        /* Input Nickname */
+        .nickname-input {
             background: rgba(0,0,0,0.5);
             border: 1px solid rgba(168,85,247,0.3);
             border-radius: 16px;
             padding: 14px 18px;
             width: 100%;
             color: white;
-            font-size: 16px;
-            font-weight: 500;
+            font-size: 14px;
             text-align: center;
-            letter-spacing: 2px;
         }
-        .game-id-input:focus {
+        .nickname-input:focus {
             outline: none;
             border-color: #a855f7;
             box-shadow: 0 0 15px rgba(139,92,246,0.3);
+        }
+        
+        /* Filter Tab */
+        .filter-tab {
+            transition: all 0.2s;
+        }
+        .filter-tab.active {
+            background: linear-gradient(135deg, #6b21a5, #9333ea);
+            color: white;
+            box-shadow: 0 0 10px rgba(139,92,246,0.3);
         }
         
         /* QRIS Modal */
@@ -184,12 +193,6 @@
         .copy-btn { background: rgba(255,255,255,0.2); border: none; padding: 6px 14px; border-radius: 30px; color: white; font-size: 12px; cursor: pointer; margin-top: 8px; }
         .confirm-btn { width: 100%; background: #25D366; border: none; padding: 14px; border-radius: 40px; color: white; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; }
         
-        @media (max-width: 768px) {
-            .summary-panel { position: relative; top: 0; margin-top: 20px; }
-            .token-amount { font-size: 14px; }
-            .token-price { font-size: 11px; }
-        }
-        
         .btn-bayar {
             background: linear-gradient(135deg, #f59e0b, #d97706);
             transition: all 0.3s;
@@ -199,9 +202,19 @@
             box-shadow: 0 5px 20px rgba(245,158,11,0.4);
         }
         
+        @media (max-width: 768px) {
+            .summary-panel { position: relative; top: 0; margin-top: 20px; }
+            .product-name { font-size: 12px; }
+            .product-price { font-size: 11px; }
+            .product-icon { width: 40px; height: 40px; }
+            .product-icon i { font-size: 1.2rem; }
+        }
+        
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #0a0a0f; }
         ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #a855f7, #7e22ce); border-radius: 10px; }
+        
+        .review-card { background: rgba(255,255,255,0.05); border-radius: 14px; padding: 12px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 8px; }
     </style>
 </head>
 <body>
@@ -215,10 +228,10 @@
             <div class="flex justify-between items-center">
                 <div>
                     <div class="text-white font-bold text-xl tracking-tight elixir-title">ELIXIR<span class="text-purple-400">STORE</span></div>
-                    <div class="text-[8px] text-purple-400/40 tracking-[0.2em]">HONOR OF KINGS</div>
+                    <div class="text-[8px] text-purple-400/40 tracking-[0.2em]">PREMIUM SOUTHBRONX</div>
                 </div>
                 <div class="flex gap-4">
-                    <a href="#shop" class="text-white/50 hover:text-purple-400 transition text-xs"><i class="fas fa-gamepad"></i> TOPUP</a>
+                    <a href="#shop" class="text-white/50 hover:text-purple-400 transition text-xs"><i class="fas fa-store"></i> MARKET</a>
                     <a href="#reviews" class="text-white/50 hover:text-purple-400 transition text-xs"><i class="fas fa-star"></i> ULASAN</a>
                     <a href="#footer" class="text-white/50 hover:text-purple-400 transition text-xs"><i class="fas fa-headset"></i> CONTACT</a>
                 </div>
@@ -226,49 +239,48 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <div class="relative z-10 max-w-7xl mx-auto px-5 pt-28 pb-8" data-aos="fade-up">
-        <div class="text-center">
-            <div class="inline-flex px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 mb-4">
-                <span class="text-purple-300 text-[9px] font-medium tracking-wider">TOP UP HONOR OF KINGS</span>
-            </div>
-            <h1 class="text-3xl md:text-5xl font-extrabold text-white mb-2">Top Up <span class="text-purple-400">Honor of Kings</span></h1>
-            <p class="text-white/40 text-sm max-w-md mx-auto">Fast Response • Proses Instan • 24/7 Support</p>
+    <!-- Hero -->
+    <div class="relative z-10 max-w-7xl mx-auto px-5 pt-28 pb-8 text-center" data-aos="fade-up">
+        <div class="inline-flex px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 mb-4">
+            <span class="text-purple-300 text-[9px] font-medium tracking-wider">PREMIUM SOUTHBRONX STORE</span>
         </div>
+        <h1 class="text-3xl md:text-5xl font-extrabold text-white mb-2">ELIXIR<span class="text-purple-400">60S</span></h1>
+        <p class="text-white/40 text-sm max-w-md mx-auto">Joki SBC • Script Premium • Akun Tier<br>Fast Response & 24/7 Support</p>
     </div>
 
-    <!-- Main Content -->
+    <!-- Main Content - Layout Toko Topup -->
     <div id="shop" class="relative z-10 max-w-7xl mx-auto px-5 py-5">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             
-            <!-- KOLOM KIRI & TENGAH: Input ID + Grid Produk -->
+            <!-- KOLOM KIRI & TENGAH: Nickname + Grid Produk -->
             <div class="lg:col-span-2">
-                <!-- Input Game ID -->
+                <!-- Input Nickname (opsional) -->
                 <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-5 border border-white/10 mb-6" data-aos="fade-up">
-                    <label class="text-white/70 text-xs font-semibold uppercase tracking-wider mb-2 block">MASUKKAN GAME ID</label>
+                    <label class="text-white/70 text-xs font-semibold uppercase tracking-wider mb-2 block">MASUKKAN NICKNAME (OPSIONAL)</label>
                     <div class="flex gap-3">
-                        <input type="text" id="gameId" class="game-id-input flex-1" placeholder="10268558" value="10268558">
-                        <button id="gantiIdBtn" class="px-5 py-3 bg-purple-600/50 hover:bg-purple-600 rounded-2xl text-white text-sm font-semibold transition">GANTI</button>
+                        <input type="text" id="nicknameInput" class="nickname-input flex-1" placeholder="Nickname kamu">
+                        <button id="gantiNickBtn" class="px-5 py-3 bg-purple-600/50 hover:bg-purple-600 rounded-2xl text-white text-sm font-semibold transition">GANTI</button>
                     </div>
-                    <p class="text-white/30 text-[10px] mt-2"><i class="fas fa-info-circle"></i> Masukkan ID Honor of Kings kamu</p>
+                    <p class="text-white/30 text-[10px] mt-2"><i class="fas fa-info-circle"></i> Masukkan nickname kamu (opsional untuk produk SBC)</p>
                 </div>
                 
                 <!-- Filter Tab -->
-                <div class="flex gap-2 mb-5" data-aos="fade-up">
-                    <button data-filter="all" class="filter-tab px-5 py-2 rounded-full text-xs font-semibold bg-purple-600 text-white shadow-md">ALL</button>
-                    <button data-filter="special" class="filter-tab px-5 py-2 rounded-full text-xs font-semibold bg-white/5 text-white/70 hover:bg-white/10">SPECIAL ITEM</button>
-                    <button data-filter="flash" class="filter-tab px-5 py-2 rounded-full text-xs font-semibold bg-white/5 text-white/70 hover:bg-white/10">FLASH SALE</button>
+                <div class="flex flex-wrap gap-2 mb-6" data-aos="fade-up">
+                    <button data-filter="all" class="filter-tab active px-5 py-2 rounded-full text-xs font-semibold bg-purple-600 text-white shadow-md">ALL</button>
+                    <button data-filter="sbc" class="filter-tab px-5 py-2 rounded-full text-xs font-semibold bg-white/5 text-white/70 hover:bg-white/10">SBC</button>
+                    <button data-filter="script" class="filter-tab px-5 py-2 rounded-full text-xs font-semibold bg-white/5 text-white/70 hover:bg-white/10">SCRIPT</button>
+                    <button data-filter="tier" class="filter-tab px-5 py-2 rounded-full text-xs font-semibold bg-white/5 text-white/70 hover:bg-white/10">AKUN TIER</button>
                 </div>
                 
-                <!-- Grid Produk Token -->
+                <!-- Grid Produk -->
                 <div class="mb-4">
                     <h3 class="text-white/60 text-xs font-semibold uppercase tracking-wider mb-3">SEMUA PRODUK</h3>
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="productGrid"></div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3" id="productGrid"></div>
                 </div>
                 
                 <!-- Info Layanan -->
                 <div class="bg-gradient-to-r from-purple-900/20 to-pink-900/20 rounded-2xl p-4 mt-6 border border-purple-500/20">
-                    <div class="flex justify-center gap-8 text-center">
+                    <div class="flex justify-center gap-6 text-center">
                         <div><i class="fas fa-bolt text-purple-400 text-xl"></i><p class="text-white/60 text-xs mt-1">FAST RESPON</p></div>
                         <div><i class="fas fa-clock text-purple-400 text-xl"></i><p class="text-white/60 text-xs mt-1">PROSES INSTAN</p></div>
                         <div><i class="fas fa-shield-alt text-purple-400 text-xl"></i><p class="text-white/60 text-xs mt-1">AMAN TERPERCAYA</p></div>
@@ -276,7 +288,7 @@
                 </div>
             </div>
             
-            <!-- KOLOM KANAN: Detail Pesanan -->
+            <!-- KOLOM KANAN: Detail Pesanan (Summary Panel) -->
             <div data-aos="fade-left">
                 <div class="summary-panel">
                     <div class="bg-gradient-to-r from-purple-800 to-purple-600 px-5 py-4">
@@ -294,30 +306,15 @@
                             <span class="text-white/50 text-xs">HARGA</span>
                             <span class="text-yellow-400 font-bold" id="selectedProductPrice">Rp 0</span>
                         </div>
-                        <!-- Jumlah -->
+                        <!-- Metode Pembayaran -->
                         <div class="summary-row">
-                            <span class="text-white/50 text-xs">JUMLAH</span>
-                            <div class="flex items-center gap-3">
-                                <button id="decrementQty" class="w-7 h-7 rounded-full bg-white/10 text-white hover:bg-purple-600 transition">-</button>
-                                <span id="quantity" class="text-white font-bold text-base w-8 text-center">1</span>
-                                <button id="incrementQty" class="w-7 h-7 rounded-full bg-white/10 text-white hover:bg-purple-600 transition">+</button>
-                            </div>
+                            <span class="text-white/50 text-xs">METODE</span>
+                            <span class="text-white text-sm"><i class="fas fa-qrcode text-purple-400"></i> QRIS</span>
                         </div>
                         <!-- Total -->
                         <div class="summary-row border-b-0">
                             <span class="text-white/70 text-sm font-semibold">TOTAL</span>
                             <span class="text-yellow-400 font-black text-xl" id="totalPrice">Rp 0</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Metode Pembayaran -->
-                    <div class="px-4 pb-2">
-                        <p class="text-white/50 text-[10px] uppercase tracking-wider mb-2">METODE PEMBAYARAN</p>
-                        <div class="flex gap-2">
-                            <div class="payment-method-btn active" data-method="qris">
-                                <i class="fas fa-qrcode text-purple-400"></i>
-                                <span class="text-white text-[10px] block">QRIS</span>
-                            </div>
                         </div>
                     </div>
                     
@@ -364,7 +361,7 @@
     <!-- Footer -->
     <footer id="footer" class="relative z-10 border-t border-white/10 bg-black/20 py-8">
         <div class="max-w-7xl mx-auto px-5 text-center">
-            <p class="text-white/20 text-[10px]">2025 ELIXIRSTORE • HONOR OF KINGS TOPUP • All rights reserved</p>
+            <p class="text-white/20 text-[10px]">2025 ELIXIRSTORE • PREMIUM SOUTHBRONX • All rights reserved</p>
         </div>
     </footer>
 
@@ -407,24 +404,35 @@
             document.getElementById('starsContainer').appendChild(star);
         }
         
-        // Data Produk Token
+        // Data Produk
+        const formatRp = (n) => "Rp" + n.toLocaleString('id-ID');
+        
         const products = [
-            { name: "16 TOKENS", price: 2982, tokens: 16, category: "all" },
-            { name: "80 TOKENS", price: 15010, tokens: 80, category: "all" },
-            { name: "240 TOKENS", price: 46636, tokens: 240, category: "all" },
-            { name: "400 TOKENS", price: 77239, tokens: 400, category: "all" },
-            { name: "560 TOKENS", price: 109389, tokens: 560, category: "all" },
-            { name: "800 TOKENS", price: 156944, tokens: 800, category: "all" },
-            { name: "1,200 TOKENS", price: 233150, tokens: 1200, category: "all" },
-            { name: "2,400 TOKENS", price: 466229, tokens: 2400, category: "all" }
+            // SBC
+            ...["100K","200K","300K","400K","500K","600K","700K","800K","900K","1JT","1.1 JT","1.2 JT","1.3 JT","1.4 JT","1.5 JT","1.6 JT","1.7 JT"].map((name, idx) => ({ 
+                name: `SBC ${name}`, 
+                price: [10000,20000,30000,40000,50000,60000,70000,80000,90000,100000,110000,120000,130000,140000,150000,160000,170000][idx], 
+                category: "sbc", 
+                icon: "fa-crown",
+                desc: "VIA TF ON SOUTHBRONX"
+            })),
+            // Script
+            { name: "SCRIPT MARSHMALLOW - HARIAN", price: 13000, category: "script", icon: "fa-code", desc: "PREMIUM SCRIPT" },
+            { name: "SCRIPT MARSHMALLOW - BULANAN", price: 60000, category: "script", icon: "fa-code", desc: "PREMIUM SCRIPT" },
+            { name: "SCRIPT MARSHMALLOW - LIFETIME", price: 150000, category: "script", icon: "fa-code", desc: "PREMIUM SCRIPT" },
+            { name: "SCRIPT COMBAT - HARIAN", price: 20000, category: "script", icon: "fa-code", desc: "PREMIUM SCRIPT" },
+            { name: "SCRIPT COMBAT - BULANAN", price: 80000, category: "script", icon: "fa-code", desc: "PREMIUM SCRIPT" },
+            { name: "SCRIPT COMBAT - LIFETIME", price: 200000, category: "script", icon: "fa-code", desc: "PREMIUM SCRIPT" },
+            { name: "SCRIPT FPS - LIFETIME", price: 50000, category: "script", icon: "fa-code", desc: "PREMIUM SCRIPT" },
+            // Tier
+            { name: "TIER 1 - GREEN NAME", price: 150000, category: "tier", icon: "fa-gem", desc: "PREMIUM TIER" },
+            { name: "TIER 2 - PINK NAME", price: 250000, category: "tier", icon: "fa-gem", desc: "PREMIUM TIER" },
+            { name: "TIER 3 - BLUE NAME", price: 350000, category: "tier", icon: "fa-gem", desc: "PREMIUM TIER" }
         ];
         
-        const formatRp = (n) => "Rp" + n.toLocaleString('id-ID');
-        const waNumber = "62895385984764";
-        
-        let selectedProduct = products[1]; // default 80 tokens
-        let quantity = 1;
+        let selectedProduct = products[0];
         let currentFilter = 'all';
+        const waNumber = "62895385984764";
         
         // Render produk grid
         function renderProducts() {
@@ -434,15 +442,15 @@
             filtered.forEach(product => {
                 const isSelected = selectedProduct && selectedProduct.name === product.name;
                 const card = document.createElement('div');
-                card.className = `token-card ${isSelected ? 'selected' : ''}`;
+                card.className = `product-card ${isSelected ? 'selected' : ''}`;
                 card.innerHTML = `
-                    <div class="token-amount">${product.tokens}</div>
-                    <div class="token-label">TOKENS</div>
-                    <div class="token-price">${formatRp(product.price)}</div>
+                    <div class="product-icon"><i class="fas ${product.icon}"></i></div>
+                    <div class="product-name">${product.name}</div>
+                    <div class="product-desc">${product.desc || ''}</div>
+                    <div class="product-price">${formatRp(product.price)}</div>
                 `;
                 card.onclick = () => {
                     selectedProduct = product;
-                    quantity = 1;
                     updateSummary();
                     renderProducts();
                 };
@@ -454,43 +462,31 @@
             if (selectedProduct) {
                 document.getElementById('selectedProductName').innerHTML = selectedProduct.name;
                 document.getElementById('selectedProductPrice').innerHTML = formatRp(selectedProduct.price);
-                const total = selectedProduct.price * quantity;
-                document.getElementById('totalPrice').innerHTML = formatRp(total);
-                document.getElementById('quantity').innerHTML = quantity;
+                document.getElementById('totalPrice').innerHTML = formatRp(selectedProduct.price);
             }
         }
-        
-        document.getElementById('decrementQty').onclick = () => {
-            if (quantity > 1) {
-                quantity--;
-                updateSummary();
-            }
-        };
-        document.getElementById('incrementQty').onclick = () => {
-            quantity++;
-            updateSummary();
-        };
-        document.getElementById('gantiIdBtn').onclick = () => {
-            const newId = prompt('Masukkan Game ID Honor of Kings:', document.getElementById('gameId').value);
-            if (newId && newId.trim()) {
-                document.getElementById('gameId').value = newId.trim();
-                alert('ID Game berhasil diubah!');
-            }
-        };
         
         // Filter tabs
         document.querySelectorAll('.filter-tab').forEach(btn => {
             btn.onclick = () => {
                 document.querySelectorAll('.filter-tab').forEach(b => {
-                    b.classList.remove('bg-purple-600', 'text-white');
+                    b.classList.remove('active', 'bg-purple-600', 'text-white');
                     b.classList.add('bg-white/5', 'text-white/70');
                 });
                 btn.classList.remove('bg-white/5', 'text-white/70');
-                btn.classList.add('bg-purple-600', 'text-white');
+                btn.classList.add('active', 'bg-purple-600', 'text-white');
                 currentFilter = btn.dataset.filter;
                 renderProducts();
             };
         });
+        
+        document.getElementById('gantiNickBtn').onclick = () => {
+            const newNick = prompt('Masukkan nickname kamu:', document.getElementById('nicknameInput').value);
+            if (newNick && newNick.trim()) {
+                document.getElementById('nicknameInput').value = newNick.trim();
+                alert('Nickname berhasil diubah!');
+            }
+        };
         
         // QRIS Modal
         const qrisModal = document.getElementById('qrisModal');
@@ -501,13 +497,8 @@
                 alert('Pilih produk terlebih dahulu!');
                 return;
             }
-            const gameId = document.getElementById('gameId').value;
-            if (!gameId || gameId.length < 5) {
-                alert('Masukkan Game ID yang valid!');
-                return;
-            }
             
-            currentTotal = selectedProduct.price * quantity;
+            currentTotal = selectedProduct.price;
             document.getElementById('modalAmount').innerHTML = formatRp(currentTotal);
             qrisModal.classList.add('active');
         }
@@ -523,8 +514,10 @@
         };
         
         document.getElementById('confirmWaBtn').onclick = () => {
-            const gameId = document.getElementById('gameId').value;
-            const msg = `Halo ELIXIRSTORE%0A%0A*KONFIRMASI PEMBAYARAN*%0A%0AProduk: ${encodeURIComponent(selectedProduct.name)}%0AHarga: ${encodeURIComponent(formatRp(selectedProduct.price))}%0AJumlah: ${quantity}%0ATotal: ${encodeURIComponent(formatRp(currentTotal))}%0AGame ID: ${encodeURIComponent(gameId)}%0AMetode: QRIS%0A%0ASaya sudah melakukan pembayaran. Berikut bukti transfer saya.`;
+            const nickname = document.getElementById('nicknameInput').value;
+            let msg = `Halo ELIXIRSTORE%0A%0A*KONFIRMASI PEMBAYARAN*%0A%0AProduk: ${encodeURIComponent(selectedProduct.name)}%0AHarga: ${encodeURIComponent(formatRp(selectedProduct.price))}%0ATotal: ${encodeURIComponent(formatRp(currentTotal))}%0AMetode: QRIS`;
+            if (nickname && nickname.trim()) msg += `%0ANickname: ${encodeURIComponent(nickname.trim())}`;
+            msg += `%0A%0ASaya sudah melakukan pembayaran. Berikut bukti transfer saya.`;
             window.open(`https://wa.me/${waNumber}?text=${msg}`, '_blank');
             closeModal();
         };
@@ -536,12 +529,12 @@
         let selectedRating = 5;
         
         function loadReviews() {
-            const saved = localStorage.getItem('elixir_reviews_topup');
+            const saved = localStorage.getItem('elixir_reviews_toko');
             if (saved) try { reviews = JSON.parse(saved); } catch(e) { reviews = []; }
             if (reviews.length === 0) reviews = [
-                { name: "Verns", rating: 5, comment: "Topup cepet banget, recomended!", date: "31 May 2026" },
-                { name: "RIP_BOUNTYY177", rating: 5, comment: "Langsung masuk tokennnya", date: "28 May 2026" },
-                { name: "aww", rating: 4, comment: "Fast response, mantap", date: "24 Apr 2026" }
+                { name: "Verns", rating: 5, comment: "Gacor banget Jokinya cepet dan terpercaya", date: "31 May 2026" },
+                { name: "RIP_BOUNTYY177", rating: 5, comment: "Pengen beli SBC lagi nih recommended", date: "28 May 2026" },
+                { name: "aww", rating: 4, comment: "Mantap fast response", date: "24 Apr 2026" }
             ];
             renderReviews();
         }
@@ -553,7 +546,7 @@
             let html = '';
             for (let r of reviews) {
                 const stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
-                html += `<div class="bg-white/5 rounded-xl p-3 border border-white/10"><div class="flex justify-between"><div><span class="text-white text-sm font-semibold">${escapeHtml(r.name)}</span><div class="text-yellow-500 text-[10px]">${stars}</div></div><span class="text-white/30 text-[10px]">${r.date || ''}</span></div><p class="text-white/60 text-xs mt-1">"${escapeHtml(r.comment)}"</p></div>`;
+                html += `<div class="review-card"><div class="flex justify-between"><div><span class="text-white text-sm font-semibold">${escapeHtml(r.name)}</span><div class="text-yellow-500 text-[10px]">${stars}</div></div><span class="text-white/30 text-[10px]">${r.date || ''}</span></div><p class="text-white/60 text-xs mt-1">"${escapeHtml(r.comment)}"</p></div>`;
             }
             container.innerHTML = html;
         }
@@ -575,7 +568,7 @@
             const comment = document.getElementById('reviewComment').value.trim();
             if (!name || !comment) { alert('Isi nickname & ulasan!'); return; }
             reviews.unshift({ name, rating: selectedRating, comment, date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) });
-            localStorage.setItem('elixir_reviews_topup', JSON.stringify(reviews));
+            localStorage.setItem('elixir_reviews_toko', JSON.stringify(reviews));
             renderReviews();
             document.getElementById('reviewName').value = '';
             document.getElementById('reviewComment').value = '';
