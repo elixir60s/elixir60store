@@ -14,514 +14,77 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
-        * {
-            font-family: 'Satoshi', sans-serif;
-        }
+        * { font-family: 'Satoshi', sans-serif; }
+        .product-name { font-family: 'Clash Display', 'Unbounded', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+        .price-text { font-family: 'Unbounded', 'Clash Display', sans-serif; font-weight: 800; letter-spacing: -0.02em; }
+        .hero-text { font-family: 'Clash Display', 'Unbounded', sans-serif; font-weight: 800; background: linear-gradient(135deg, #ffffff 0%, #c084fc 30%, #a855f7 60%, #e9d5ff 100%); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gradientFlow 5s linear infinite; }
+        .elixir-title { font-family: 'Clash Display', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+        @keyframes gradientFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        @keyframes meteor1 { 0% { transform: translateX(-100px) translateY(-100px) rotate(45deg); opacity: 1; } 100% { transform: translateX(400px) translateY(400px) rotate(45deg); opacity: 0; } }
+        @keyframes meteor2 { 0% { transform: translateX(-50px) translateY(-150px) rotate(35deg); opacity: 1; } 100% { transform: translateX(500px) translateY(500px) rotate(35deg); opacity: 0; } }
+        @keyframes meteor3 { 0% { transform: translateX(-200px) translateY(-50px) rotate(50deg); opacity: 1; } 100% { transform: translateX(600px) translateY(600px) rotate(50deg); opacity: 0; } }
+        @keyframes floatSlow { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(5deg); } }
+        @keyframes starTwinkle { 0%, 100% { opacity: 0.2; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.2); } }
+        @keyframes rainbowMove { 0% { background-position: 0% 0%; } 25% { background-position: 100% 0%; } 50% { background-position: 100% 100%; } 75% { background-position: 0% 100%; } 100% { background-position: 0% 0%; } }
+        @keyframes rippleEffect { to { transform: scale(5); opacity: 0; } }
+        @keyframes cardFloat { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-5px); } }
+        @keyframes particleFloat { 0% { transform: translateY(0) scale(1); opacity: 0.8; } 100% { transform: translateY(-50px) scale(0); opacity: 0; } }
         
-        .product-name {
-            font-family: 'Clash Display', 'Unbounded', sans-serif;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
-        
-        .price-text {
-            font-family: 'Unbounded', 'Clash Display', sans-serif;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-        }
-        
-        .hero-text {
-            font-family: 'Clash Display', 'Unbounded', sans-serif;
-            font-weight: 800;
-            background: linear-gradient(135deg, #ffffff 0%, #c084fc 30%, #a855f7 60%, #e9d5ff 100%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: gradientFlow 5s linear infinite;
-        }
-        
-        .elixir-title {
-            font-family: 'Clash Display', sans-serif;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
-        
-        @keyframes gradientFlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        @keyframes meteor1 {
-            0% { transform: translateX(-100px) translateY(-100px) rotate(45deg); opacity: 1; }
-            100% { transform: translateX(400px) translateY(400px) rotate(45deg); opacity: 0; }
-        }
-        @keyframes meteor2 {
-            0% { transform: translateX(-50px) translateY(-150px) rotate(35deg); opacity: 1; }
-            100% { transform: translateX(500px) translateY(500px) rotate(35deg); opacity: 0; }
-        }
-        @keyframes meteor3 {
-            0% { transform: translateX(-200px) translateY(-50px) rotate(50deg); opacity: 1; }
-            100% { transform: translateX(600px) translateY(600px) rotate(50deg); opacity: 0; }
-        }
-        
-        @keyframes floatSlow {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-        }
-        
-        @keyframes starTwinkle {
-            0%, 100% { opacity: 0.2; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.2); }
-        }
-        
-        @keyframes rainbowMove {
-            0% { background-position: 0% 0%; }
-            25% { background-position: 100% 0%; }
-            50% { background-position: 100% 100%; }
-            75% { background-position: 0% 100%; }
-            100% { background-position: 0% 0%; }
-        }
-        
-        @keyframes rippleEffect {
-            to { transform: scale(5); opacity: 0; }
-        }
-        
-        @keyframes cardFloat {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-5px); }
-        }
-        
-        @keyframes particleFloat {
-            0% { transform: translateY(0) scale(1); opacity: 0.8; }
-            100% { transform: translateY(-50px) scale(0); opacity: 0; }
-        }
-        
-        .animated-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(ellipse at 20% 30%, #0a0a1a, #050510);
-            z-index: -3;
-        }
-        
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -2;
-        }
-        
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            animation: starTwinkle 3s infinite ease-in-out;
-        }
-        
+        .animated-bg { position: fixed; inset: 0; background: radial-gradient(ellipse at 20% 30%, #0a0a1a, #050510); z-index: -3; }
+        .stars { position: fixed; inset: 0; pointer-events: none; z-index: -2; }
+        .star { position: absolute; background: white; border-radius: 50%; animation: starTwinkle 3s infinite ease-in-out; }
         .meteor { position: fixed; pointer-events: none; z-index: -1; }
-        .meteor::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100px;
-            height: 2px;
-            background: linear-gradient(90deg, rgba(168,85,247,0.8), rgba(168,85,247,0.2), transparent);
-            transform: translateX(-100px);
-            border-radius: 2px;
-        }
+        .meteor::before { content: ''; position: absolute; top: 0; left: 0; width: 100px; height: 2px; background: linear-gradient(90deg, rgba(168,85,247,0.8), rgba(168,85,247,0.2), transparent); transform: translateX(-100px); border-radius: 2px; }
         .meteor-1 { top: -100px; left: 20%; animation: meteor1 4s infinite linear; animation-delay: 0s; }
         .meteor-2 { top: -150px; left: 50%; animation: meteor2 5s infinite linear; animation-delay: 2s; }
         .meteor-3 { top: -80px; left: 70%; animation: meteor3 3.5s infinite linear; animation-delay: 1s; }
-        
-        .floating-orb {
-            position: fixed;
-            top: 20%;
-            right: 10%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(168,85,247,0.1), transparent 70%);
-            border-radius: 50%;
-            filter: blur(60px);
-            animation: floatSlow 12s infinite ease-in-out;
-            pointer-events: none;
-            z-index: -1;
-        }
-        
-        .floating-orb-2 {
-            position: fixed;
-            bottom: 10%;
-            left: 5%;
-            width: 350px;
-            height: 350px;
-            background: radial-gradient(circle, rgba(59,130,246,0.08), transparent 70%);
-            border-radius: 50%;
-            filter: blur(50px);
-            animation: floatSlow 15s infinite ease-in-out reverse;
-            pointer-events: none;
-            z-index: -1;
-        }
-        
-        .grid-pattern {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: linear-gradient(rgba(168,85,247,0.02) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(168,85,247,0.02) 1px, transparent 1px);
-            background-size: 50px 50px;
-            pointer-events: none;
-            z-index: -1;
-        }
-        
+        .floating-orb { position: fixed; top: 20%; right: 10%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(168,85,247,0.1), transparent 70%); border-radius: 50%; filter: blur(60px); animation: floatSlow 12s infinite ease-in-out; pointer-events: none; z-index: -1; }
+        .floating-orb-2 { position: fixed; bottom: 10%; left: 5%; width: 350px; height: 350px; background: radial-gradient(circle, rgba(59,130,246,0.08), transparent 70%); border-radius: 50%; filter: blur(50px); animation: floatSlow 15s infinite ease-in-out reverse; pointer-events: none; z-index: -1; }
+        .grid-pattern { position: fixed; inset: 0; background-image: linear-gradient(rgba(168,85,247,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(168,85,247,0.02) 1px, transparent 1px); background-size: 50px 50px; pointer-events: none; z-index: -1; }
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #0a0a0f; }
         ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #a855f7, #7e22ce); border-radius: 10px; }
+        .glass-nav { background: rgba(10,10,15,0.4); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(168,85,247,0.2); position: fixed; top: 0; width: 100%; z-index: 50; }
         
-        .glass-nav {
-            background: rgba(10, 10, 15, 0.4);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(168,85,247,0.2);
-        }
-        
-        .premium-card {
-            position: relative;
-            background: linear-gradient(145deg, #0a0a18, #0d0d1f);
-            border-radius: 24px;
-            padding: 28px 24px;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            border: 1px solid rgba(168,85,247,0.2);
-            animation: cardFloat 3s ease-in-out infinite;
-        }
-        
-        .premium-card::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            background: linear-gradient(135deg, 
-                #a855f7, #c084fc, #d8b4fe, #7e22ce, #a855f7, #c084fc, #d8b4fe);
-            background-size: 400% 400%;
-            border-radius: 24px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            z-index: -1;
-        }
-        
-        .premium-card:hover::before {
-            opacity: 1;
-            animation: rainbowMove 3s ease infinite;
-        }
-        
-        .premium-card .holographic-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg,
-                rgba(139,92,246,0.05),
-                rgba(168,85,247,0.08),
-                rgba(192,132,252,0.05),
-                rgba(139,92,246,0.08),
-                rgba(168,85,247,0.05),
-                rgba(126,34,206,0.08),
-                rgba(139,92,246,0.05));
-            background-size: 600% 600%;
-            opacity: 0.2;
-            animation: rainbowMove 6s ease infinite;
-            pointer-events: none;
-            border-radius: 24px;
-        }
-        
-        .premium-card:hover .holographic-bg {
-            opacity: 0.35;
-        }
-        
-        .premium-card .gloss {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 50%;
-            background: linear-gradient(180deg, 
-                rgba(168,85,247,0.12) 0%, 
-                rgba(255,255,255,0) 100%);
-            pointer-events: none;
-            border-radius: 24px 24px 0 0;
-        }
-        
-        .premium-card .particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            pointer-events: none;
-            overflow: hidden;
-            border-radius: 24px;
-        }
-        
-        .premium-card .particles span {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: radial-gradient(circle, #c084fc, #a855f7);
-            border-radius: 50%;
-            opacity: 0;
-        }
-        
-        .premium-card:hover .particles span {
-            animation: particleFloat 1.5s ease-out forwards;
-        }
-        
-        .card-badge {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            background: linear-gradient(135deg, #6b21a5, #9333ea, #a855f7);
-            background-size: 200% 100%;
-            padding: 5px 14px;
-            border-radius: 30px;
-            font-size: 0.6rem;
-            font-weight: 800;
-            letter-spacing: 1.5px;
-            color: white;
-            text-transform: uppercase;
-            z-index: 3;
-            box-shadow: 0 0 15px rgba(139,92,246,0.3);
-            animation: gradientFlow 2s ease infinite;
-        }
-        
-        .category-icon {
-            width: 56px;
-            height: 56px;
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            border: 1px solid rgba(168,85,247,0.3);
-            transition: all 0.3s;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .category-icon::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            background: linear-gradient(135deg, #a855f7, #c084fc, #d8b4fe, #7e22ce);
-            background-size: 400% 400%;
-            border-radius: 20px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            z-index: -1;
-        }
-        
-        .premium-card:hover .category-icon::before {
-            opacity: 1;
-            animation: rainbowMove 2s ease infinite;
-        }
-        
-        .category-icon i {
-            font-size: 1.6rem;
-            color: #c084fc;
-            transition: all 0.3s;
-        }
-        
-        .premium-card:hover .category-icon i {
-            transform: scale(1.1);
-            filter: drop-shadow(0 0 8px #a855f7);
-            color: #e9d5ff;
-        }
-        
-        .product-name {
-            font-size: 1.2rem;
-            margin-bottom: 8px;
-            background: linear-gradient(135deg, #ffffff, #e9d5ff, #c084fc, #d8b4fe);
-            background-size: 300% 100%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            font-weight: 800;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .premium-card:hover .product-name {
-            animation: gradientFlow 1.5s ease infinite;
-        }
-        
-        .price-wrapper {
-            background: rgba(0,0,0,0.4);
-            border-radius: 40px;
-            padding: 10px 20px;
-            display: inline-block;
-            margin: 16px 0;
-            border: 1px solid rgba(168,85,247,0.3);
-            transition: all 0.3s;
-            position: relative;
-            z-index: 2;
-            backdrop-filter: blur(4px);
-        }
-        
-        .premium-card:hover .price-wrapper {
-            border-color: rgba(168,85,247,0.8);
-            box-shadow: 0 0 20px rgba(139,92,246,0.3);
-            transform: scale(1.02);
-        }
-        
-        .price-text {
-            font-size: 1.8rem;
-            background: linear-gradient(135deg, #fbbf24, #ffd700, #f59e0b, #ffd700);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            font-weight: 900;
-        }
-        
-        .product-desc {
-            font-size: 0.6rem;
-            letter-spacing: 2px;
-            color: #a78bfa;
-            text-transform: uppercase;
-            font-weight: 600;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .premium-btn {
-            position: relative;
-            width: 100%;
-            background: linear-gradient(135deg, #1a0b2e, #2d1b4e, #3b1e6d);
-            border: 1px solid rgba(168,85,247,0.3);
-            padding: 14px 20px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            overflow: hidden;
-            z-index: 2;
-        }
-        
-        .premium-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(168,85,247,0.4), 
-                rgba(192,132,252,0.4),
-                rgba(139,92,246,0.4),
-                transparent);
-            transition: left 0.5s;
-        }
-        
-        .premium-btn:hover::before {
-            left: 100%;
-        }
-        
-        .premium-btn:hover {
-            transform: translateY(-2px);
-            border-color: rgba(168,85,247,0.8);
-            box-shadow: 0 5px 20px rgba(139,92,246,0.4);
-        }
-        
-        .premium-btn .ripple {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(192,132,252,0.6);
-            transform: scale(0);
-            animation: rippleEffect 0.6s linear;
-            pointer-events: none;
-        }
-        
-        .nickname-input {
-            background: rgba(0,0,0,0.5);
-            border: 1px solid rgba(168,85,247,0.3);
-            border-radius: 50px;
-            padding: 12px 18px;
-            width: 100%;
-            color: white;
-            font-size: 0.8rem;
-            transition: all 0.3s;
-            margin-bottom: 16px;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .nickname-input:focus {
-            outline: none;
-            border-color: #a855f7;
-            box-shadow: 0 0 15px rgba(139,92,246,0.3);
-        }
-        
-        .premium-card:hover {
-            transform: translateY(-10px) scale(1.03);
-            box-shadow: 0 30px 50px -25px rgba(139,92,246,0.4), 0 0 0 1px rgba(168,85,247,0.1);
-            border-color: rgba(168,85,247,0.4);
-        }
-        
-        .stat-card {
-            transition: all 0.3s ease;
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-3px);
-            border-color: rgba(168,85,247,0.5);
-            background: rgba(255,255,255,0.08);
-        }
-        
+        .premium-card { position: relative; background: linear-gradient(145deg, #0a0a18, #0d0d1f); border-radius: 24px; padding: 28px 24px; overflow: hidden; transition: all 0.4s ease; border: 1px solid rgba(168,85,247,0.2); animation: cardFloat 3s ease-in-out infinite; }
+        .premium-card::before { content: ''; position: absolute; inset: -2px; background: linear-gradient(135deg, #a855f7, #c084fc, #d8b4fe, #7e22ce, #a855f7, #c084fc, #d8b4fe); background-size: 400% 400%; border-radius: 24px; opacity: 0; transition: opacity 0.3s; z-index: -1; }
+        .premium-card:hover::before { opacity: 1; animation: rainbowMove 3s ease infinite; }
+        .premium-card .holographic-bg { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(139,92,246,0.05), rgba(168,85,247,0.08), rgba(192,132,252,0.05), rgba(139,92,246,0.08), rgba(168,85,247,0.05), rgba(126,34,206,0.08), rgba(139,92,246,0.05)); background-size: 600% 600%; opacity: 0.2; animation: rainbowMove 6s ease infinite; pointer-events: none; border-radius: 24px; }
+        .premium-card:hover .holographic-bg { opacity: 0.35; }
+        .premium-card .gloss { position: absolute; top: 0; left: 0; right: 0; height: 50%; background: linear-gradient(180deg, rgba(168,85,247,0.12) 0%, rgba(255,255,255,0) 100%); pointer-events: none; border-radius: 24px 24px 0 0; }
+        .premium-card .particles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; border-radius: 24px; }
+        .premium-card .particles span { position: absolute; width: 3px; height: 3px; background: radial-gradient(circle, #c084fc, #a855f7); border-radius: 50%; opacity: 0; }
+        .premium-card:hover .particles span { animation: particleFloat 1.5s ease-out forwards; }
+        .card-badge { position: absolute; top: 16px; right: 16px; background: linear-gradient(135deg, #6b21a5, #9333ea, #a855f7); background-size: 200% 100%; padding: 5px 14px; border-radius: 30px; font-size: 0.6rem; font-weight: 800; letter-spacing: 1.5px; color: white; text-transform: uppercase; z-index: 3; box-shadow: 0 0 15px rgba(139,92,246,0.3); animation: gradientFlow 2s ease infinite; }
+        .category-icon { width: 56px; height: 56px; background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 18px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; border: 1px solid rgba(168,85,247,0.3); transition: all 0.3s; position: relative; z-index: 2; }
+        .category-icon::before { content: ''; position: absolute; inset: -2px; background: linear-gradient(135deg, #a855f7, #c084fc, #d8b4fe, #7e22ce); background-size: 400% 400%; border-radius: 20px; opacity: 0; transition: opacity 0.3s; z-index: -1; }
+        .premium-card:hover .category-icon::before { opacity: 1; animation: rainbowMove 2s ease infinite; }
+        .category-icon i { font-size: 1.6rem; color: #c084fc; transition: all 0.3s; }
+        .premium-card:hover .category-icon i { transform: scale(1.1); filter: drop-shadow(0 0 8px #a855f7); color: #e9d5ff; }
+        .product-name { font-size: 1.2rem; margin-bottom: 8px; background: linear-gradient(135deg, #ffffff, #e9d5ff, #c084fc, #d8b4fe); background-size: 300% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 800; position: relative; z-index: 2; }
+        .premium-card:hover .product-name { animation: gradientFlow 1.5s ease infinite; }
+        .price-wrapper { background: rgba(0,0,0,0.4); border-radius: 40px; padding: 10px 20px; display: inline-block; margin: 16px 0; border: 1px solid rgba(168,85,247,0.3); transition: all 0.3s; position: relative; z-index: 2; backdrop-filter: blur(4px); }
+        .premium-card:hover .price-wrapper { border-color: rgba(168,85,247,0.8); box-shadow: 0 0 20px rgba(139,92,246,0.3); transform: scale(1.02); }
+        .price-text { font-size: 1.8rem; background: linear-gradient(135deg, #fbbf24, #ffd700, #f59e0b, #ffd700); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 900; }
+        .product-desc { font-size: 0.6rem; letter-spacing: 2px; color: #a78bfa; text-transform: uppercase; font-weight: 600; position: relative; z-index: 2; }
+        .premium-btn { position: relative; width: 100%; background: linear-gradient(135deg, #1a0b2e, #2d1b4e, #3b1e6d); border: 1px solid rgba(168,85,247,0.3); padding: 14px 20px; border-radius: 50px; font-weight: 700; font-size: 0.85rem; color: white; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 12px; overflow: hidden; z-index: 2; }
+        .premium-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(168,85,247,0.4), rgba(192,132,252,0.4), rgba(139,92,246,0.4), transparent); transition: left 0.5s; }
+        .premium-btn:hover::before { left: 100%; }
+        .premium-btn:hover { transform: translateY(-2px); border-color: rgba(168,85,247,0.8); box-shadow: 0 5px 20px rgba(139,92,246,0.4); }
+        .premium-btn .ripple { position: absolute; border-radius: 50%; background: rgba(192,132,252,0.6); transform: scale(0); animation: rippleEffect 0.6s linear; pointer-events: none; }
+        .nickname-input { background: rgba(0,0,0,0.5); border: 1px solid rgba(168,85,247,0.3); border-radius: 50px; padding: 12px 18px; width: 100%; color: white; font-size: 0.8rem; transition: all 0.3s; margin-bottom: 16px; text-align: center; }
+        .nickname-input:focus { outline: none; border-color: #a855f7; box-shadow: 0 0 15px rgba(139,92,246,0.3); }
+        .premium-card:hover { transform: translateY(-10px) scale(1.03); box-shadow: 0 30px 50px -25px rgba(139,92,246,0.4), 0 0 0 1px rgba(168,85,247,0.1); border-color: rgba(168,85,247,0.4); }
+        .stat-card { transition: all 0.3s ease; background: rgba(255,255,255,0.05); backdrop-filter: blur(4px); border-radius: 16px; padding: 20px; text-align: center; border: 1px solid rgba(255,255,255,0.1); }
+        .stat-card:hover { transform: translateY(-3px); border-color: rgba(168,85,247,0.4); background: rgba(255,255,255,0.08); }
         .footer-link { transition: all 0.2s; }
         .footer-link:hover { color: #a855f7; transform: translateX(3px); }
         .contact-item { transition: all 0.2s; }
         .contact-item:hover { transform: translateX(3px); }
-        
-        .review-card {
-            transition: all 0.3s ease;
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(4px);
-            border-radius: 16px;
-            padding: 16px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        
-        .review-card:hover {
-            transform: translateY(-2px);
-            border-color: rgba(168,85,247,0.4);
-            box-shadow: 0 10px 25px -12px rgba(168,85,247,0.2);
-        }
-        
-        .review-input, .review-textarea {
-            transition: all 0.2s;
-        }
-        
-        .review-input:focus, .review-textarea:focus {
-            outline: none;
-            border-color: #a855f7;
-            box-shadow: 0 0 15px rgba(168,85,247,0.2);
-        }
+        .review-card { transition: all 0.3s ease; background: rgba(255,255,255,0.05); backdrop-filter: blur(4px); border-radius: 16px; padding: 16px; border: 1px solid rgba(255,255,255,0.1); }
+        .review-card:hover { transform: translateY(-2px); border-color: rgba(168,85,247,0.4); box-shadow: 0 10px 25px -12px rgba(168,85,247,0.2); }
+        .review-input, .review-textarea { transition: all 0.2s; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px; color: white; width: 100%; }
+        .review-input:focus, .review-textarea:focus { outline: none; border-color: #a855f7; box-shadow: 0 0 15px rgba(168,85,247,0.2); }
     </style>
 </head>
 <body class="bg-[#050510]">
@@ -538,10 +101,7 @@
     <nav class="glass-nav fixed top-0 left-0 w-full z-50">
         <div class="max-w-7xl mx-auto px-6 py-4">
             <div class="flex justify-between items-center">
-                <div>
-                    <div class="text-white font-bold text-xl tracking-tight elixir-title">ELIXIR<span class="text-purple-400">STORE</span></div>
-                    <div class="text-[9px] text-purple-400/40 tracking-[0.2em]">PROJECTION</div>
-                </div>
+                <div><div class="text-white font-bold text-xl tracking-tight elixir-title">ELIXIR<span class="text-purple-400">STORE</span></div><div class="text-[9px] text-purple-400/40 tracking-[0.2em]">PROJECTION</div></div>
                 <div class="flex gap-6">
                     <a href="#marketplace" class="text-white/50 hover:text-purple-400 transition text-sm"><i class="fas fa-store"></i> MARKET</a>
                     <a href="#reviews" class="text-white/50 hover:text-purple-400 transition text-sm"><i class="fas fa-star"></i> ULASAN</a>
@@ -552,9 +112,7 @@
     </nav>
 
     <div class="relative z-10 max-w-6xl mx-auto px-6 pt-32 pb-16 text-center" data-aos="fade-up">
-        <div class="inline-flex px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/30 mb-6 backdrop-blur-sm">
-            <span class="text-purple-300 text-[10px] font-medium tracking-wider">PREMIUM SOUTHBRONX STORE</span>
-        </div>
+        <div class="inline-flex px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/30 mb-6 backdrop-blur-sm"><span class="text-purple-300 text-[10px] font-medium tracking-wider">PREMIUM SOUTHBRONX STORE</span></div>
         <h1 class="text-6xl md:text-7xl font-extrabold mb-5"><span class="hero-text">ELIXIR60S</span></h1>
         <p class="text-white/50 max-w-lg mx-auto text-base mb-9">Joki SBC • Script Premium • Akun Tier<br>Fast Response & 24/7 Support</p>
         <div class="flex justify-center gap-4 flex-wrap">
@@ -566,10 +124,10 @@
 
     <div class="relative z-10 max-w-5xl mx-auto px-6 py-10">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-5 text-center">
-            <div class="stat-card bg-white/5 backdrop-blur-sm rounded-2xl py-6 border border-white/10"><div class="text-4xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent elixir-title">17</div><div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">PRODUK</div></div>
-            <div class="stat-card bg-white/5 backdrop-blur-sm rounded-2xl py-6 border border-white/10"><div class="text-4xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent elixir-title">100+</div><div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">TERJUAL</div></div>
-            <div class="stat-card bg-white/5 backdrop-blur-sm rounded-2xl py-6 border border-white/10"><div class="text-4xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent elixir-title">12</div><div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">ULASAN</div></div>
-            <div class="stat-card bg-white/5 backdrop-blur-sm rounded-2xl py-6 border border-white/10"><div class="text-4xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent elixir-title">100+</div><div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">CUSTOMER</div></div>
+            <div class="stat-card"><div class="text-4xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent elixir-title">17</div><div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">PRODUK</div></div>
+            <div class="stat-card"><div class="text-4xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent elixir-title">100+</div><div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">TERJUAL</div></div>
+            <div class="stat-card"><div class="text-4xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent elixir-title">12</div><div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">ULASAN</div></div>
+            <div class="stat-card"><div class="text-4xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent elixir-title">100+</div><div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">CUSTOMER</div></div>
         </div>
     </div>
 
@@ -578,28 +136,24 @@
             <div data-aos="fade-right"><h2 class="text-2xl font-bold text-white flex items-center gap-2 elixir-title"><i class="fas fa-cubes text-purple-400"></i>Koleksi Item</h2><p class="text-white/30 text-sm mt-1">17 item premium tersedia</p></div>
             <div class="relative w-full md:w-80" data-aos="fade-left"><i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-white/30 text-sm"></i><input type="text" id="searchInput" placeholder="Cari item..." class="w-full bg-white/5 border border-white/10 rounded-full py-3 pl-11 pr-5 text-white/80 text-sm focus:outline-none focus:border-purple-500/50 transition-all backdrop-blur-sm"></div>
         </div>
-
         <div class="flex flex-wrap gap-3 mb-12" data-aos="fade-up">
             <button data-filter="all" class="filter-btn px-6 py-2.5 rounded-full text-xs font-medium transition-all bg-gradient-to-r from-purple-600 to-purple-700 text-white shadow-md shadow-purple-500/25">Semua</button>
             <button data-filter="sbc" class="filter-btn px-6 py-2.5 rounded-full text-xs font-medium transition-all bg-white/5 text-white/50 hover:text-white hover:bg-white/10">SBC</button>
             <button data-filter="script" class="filter-btn px-6 py-2.5 rounded-full text-xs font-medium transition-all bg-white/5 text-white/50 hover:text-white hover:bg-white/10">Script</button>
             <button data-filter="tier" class="filter-btn px-6 py-2.5 rounded-full text-xs font-medium transition-all bg-white/5 text-white/50 hover:text-white hover:bg-white/10">Akun Tier</button>
         </div>
-
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="productGrid"></div>
     </div>
 
     <div id="reviews" class="relative z-10 max-w-4xl mx-auto px-6 py-16">
         <div class="text-center mb-10" data-aos="fade-up">
-            <h2 class="text-2xl font-bold text-white flex items-center justify-center gap-2 elixir-title">
-                <i class="fas fa-star text-yellow-500"></i> Ulasan Pelanggan <i class="fas fa-star text-yellow-500"></i>
-            </h2>
+            <h2 class="text-2xl font-bold text-white flex items-center justify-center gap-2 elixir-title"><i class="fas fa-star text-yellow-500"></i> Ulasan Pelanggan <i class="fas fa-star text-yellow-500"></i></h2>
             <p class="text-white/30 text-sm mt-2">Apa kata mereka tentang ELIXIRSTORE</p>
         </div>
         
         <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 mb-8" data-aos="fade-up">
             <h3 class="text-white font-semibold mb-4 flex items-center gap-2"><i class="fas fa-pen"></i> Tulis Ulasan</h3>
-            <input type="text" id="reviewName" class="review-input w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 text-white/80 text-sm mb-3" placeholder="Nickname kamu">
+            <input type="text" id="reviewName" class="review-input mb-3" placeholder="Nickname kamu">
             <div class="flex gap-2 mb-3" id="ratingStars">
                 <i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="1"></i>
                 <i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="2"></i>
@@ -607,10 +161,8 @@
                 <i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="4"></i>
                 <i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="5"></i>
             </div>
-            <textarea id="reviewComment" rows="3" class="review-textarea w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 text-white/80 text-sm mb-3" placeholder="Tulis ulasan kamu..."></textarea>
-            <button id="submitReviewBtn" class="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white font-semibold py-3 rounded-xl transition-all flex items-center justify-center gap-2">
-                <i class="fas fa-paper-plane"></i> Kirim Ulasan
-            </button>
+            <textarea id="reviewComment" rows="3" class="review-textarea mb-3" placeholder="Tulis ulasan kamu..."></textarea>
+            <button id="submitReviewBtn" class="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white font-semibold py-3 rounded-xl transition-all flex items-center justify-center gap-2"><i class="fas fa-paper-plane"></i> Kirim Ulasan</button>
         </div>
         
         <div id="reviewsList" class="space-y-4"></div>
@@ -620,11 +172,11 @@
         <div class="max-w-7xl mx-auto px-6 py-12">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
                 <div><div class="text-white font-bold text-xl tracking-tight mb-2 elixir-title">ELIXIR<span class="text-purple-400">STORE</span></div><p class="text-white/40 text-sm leading-relaxed">Premium Shop Southbronx<br>Trusted Southbronx Marketplace</p></div>
-                <div><h3 class="text-white/70 text-sm font-semibold uppercase tracking-wider mb-4">Quick Links</h3><ul class="space-y-2"><li><a href="#marketplace" class="footer-link text-white/40 text-sm hover:text-purple-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[8px]"></i> Marketplace</a></li><li><a href="#reviews" class="footer-link text-white/40 text-sm hover:text-purple-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[8px]"></i> Ulasan</a></li><li><a href="#footer" class="footer-link text-white/40 text-sm hover:text-purple-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[8px]"></i> Contact</a></li></ul></div>
-                <div><h3 class="text-white/70 text-sm font-semibold uppercase tracking-wider mb-4">Contact</h3><ul class="space-y-3"><li><a href="https://wa.me/62895385984764" target="_blank" class="contact-item flex items-center gap-3 text-white/40 text-sm hover:text-green-400 transition group"><i class="fab fa-whatsapp text-green-500"></i><span>WhatsApp</span></a></li><li><a href="https://discord.gg/CxbDP6QmW" target="_blank" class="contact-item flex items-center gap-3 text-white/40 text-sm hover:text-purple-400 transition group"><i class="fab fa-discord text-[#5865F2]"></i><span>Discord</span></a></li></ul></div>
-                <div><h3 class="text-white/70 text-sm font-semibold uppercase tracking-wider mb-4">Powered By</h3><div class="space-y-2"><div class="flex items-center gap-2 text-white/30 text-xs"><i class="fab fa-html5 text-orange-500"></i><span>HTML5 + Tailwind CSS</span></div><div class="flex items-center gap-2 text-white/30 text-xs"><i class="fab fa-js text-yellow-500"></i><span>JavaScript + AOS</span></div><div class="flex items-center gap-2 text-white/30 text-xs"><i class="fas fa-fire text-orange-400"></i><span>FontAwesome</span></div><div class="mt-3 pt-2 border-t border-white/10"><span class="text-[10px] text-white/20 tracking-wider">SECURED | 24/7</span></div></div></div>
+                <div><h3 class="text-white/70 text-sm font-semibold uppercase tracking-wider mb-4">Quick Links</h3><ul class="space-y-2"><li><a href="#marketplace" class="footer-link text-white/40 text-sm hover:text-purple-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[8px]"></i> Marketplace</a></li><li><a href="#reviews" class="footer-link text-white/40 text-sm hover:text-purple-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[8px]"></i> Ulasan</a></li></ul></div>
+                <div><h3 class="text-white/70 text-sm font-semibold uppercase tracking-wider mb-4">Contact</h3><ul class="space-y-3"><li><a href="https://wa.me/62895385984764" target="_blank" class="contact-item flex items-center gap-3 text-white/40 text-sm hover:text-green-400 transition"><i class="fab fa-whatsapp text-green-500"></i><span>WhatsApp</span></a></li><li><a href="https://discord.gg/CxbDP6QmW" target="_blank" class="contact-item flex items-center gap-3 text-white/40 text-sm hover:text-purple-400 transition"><i class="fab fa-discord text-[#5865F2]"></i><span>Discord</span></a></li></ul></div>
+                <div><h3 class="text-white/70 text-sm font-semibold uppercase tracking-wider mb-4">Powered By</h3><div class="space-y-2"><div class="flex items-center gap-2 text-white/30 text-xs"><i class="fab fa-html5 text-orange-500"></i><span>HTML5 + Tailwind CSS</span></div><div class="mt-3 pt-2 border-t border-white/10"><span class="text-[10px] text-white/20 tracking-wider">SECURED | 24/7</span></div></div></div>
             </div>
-            <div class="border-t border-white/10 mt-10 pt-6 text-center"><p class="text-white/20 text-[10px] tracking-wider">2025 ELIXIRSTORE. All rights reserved. | TRUSTED SOUTHBRONX MARKETPLACE</p></div>
+            <div class="border-t border-white/10 mt-10 pt-6 text-center"><p class="text-white/20 text-[10px] tracking-wider">2025 ELIXIRSTORE. All rights reserved.</p></div>
         </div>
     </footer>
 
@@ -632,13 +184,7 @@
     <script>
         AOS.init({ duration: 600, once: true });
 
-        // ========== GOOGLE SHEETS REVIEW SYSTEM (CORS FIXED) ==========
-        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzYHmqvD4QNDi0bK4wFdV0ksN2RbfLZhj-TJTELTzi2ji3vHwVKKtrxKubHo6GMYeJHHA/exec";
-        const CORS_PROXY = "https://api.allorigins.win/raw?url=";
-        
-        let selectedRating = 5;
-        
-        // BINTANG BACKGROUND
+        // STARS BACKGROUND
         for (let i = 0; i < 200; i++) {
             const star = document.createElement('div');
             star.classList.add('star');
@@ -651,104 +197,129 @@
             star.style.opacity = Math.random() * 0.5 + 0.2;
             document.getElementById('starsContainer').appendChild(star);
         }
+
+        // ========== FORMSPREE REVIEW SYSTEM ==========
+        const FORMSPREE_URL = "https://formspree.io/f/mwvjqrnn";
         
-        // BINTANG RATING
-        document.querySelectorAll('.star-select').forEach(star => {
-            star.addEventListener('click', () => {
-                const val = parseInt(star.dataset.val);
-                selectedRating = val;
-                document.querySelectorAll('.star-select').forEach((s, idx) => {
-                    if (idx < val) s.className = "fas fa-star text-2xl text-yellow-500 cursor-pointer star-select";
-                    else s.className = "far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select";
-                });
-            });
-        });
+        let reviews = [];
+        let selectedRating = 5;
         
-        // LOAD ULASAN
-        async function loadReviewsFromSheet() {
-            try {
-                const response = await fetch(CORS_PROXY + GOOGLE_SCRIPT_URL);
-                const result = await response.json();
-                let reviews = [];
-                if (result.success && Array.isArray(result.data)) reviews = result.data;
-                else if (Array.isArray(result)) reviews = result;
-                renderReviewsToHTML(reviews);
-                return reviews;
-            } catch (error) {
-                console.error("Gagal load review:", error);
-                document.getElementById('reviewsList').innerHTML = '<div class="text-center text-white/40 py-8">⚠️ Gagal memuat ulasan. Klik "Request temporary access" di popup.</div>';
-                return [];
+        // LOAD REVIEWS DARI LOCALSTORAGE
+        function loadReviews() {
+            const saved = localStorage.getItem('elixir_reviews_formspree');
+            if (saved) {
+                try {
+                    reviews = JSON.parse(saved);
+                } catch(e) { reviews = []; }
             }
+            if (reviews.length === 0) {
+                reviews = [
+                    { name: "Verns", rating: 5, comment: "Gacor banget Jokinya cepet dan terpercaya", date: "31 May 2026" },
+                    { name: "RIP_BOUNTYY177", rating: 5, comment: "Pengen beli SBC lagi nih recommended", date: "28 May 2026" },
+                    { name: "aww", rating: 4, comment: "Mantap fast response", date: "24 Apr 2026" }
+                ];
+                saveReviews();
+            }
+            renderReviews();
         }
         
-        function renderReviewsToHTML(reviews) {
+        function saveReviews() {
+            localStorage.setItem('elixir_reviews_formspree', JSON.stringify(reviews));
+        }
+        
+        function renderReviews() {
             const container = document.getElementById('reviewsList');
-            if (!reviews || reviews.length === 0) {
+            if (!container) return;
+            if (reviews.length === 0) {
                 container.innerHTML = '<div class="text-center text-white/40 py-8">✨ Belum ada ulasan. Jadi yang pertama!</div>';
                 return;
             }
             let html = '';
-            for (const r of reviews) {
+            for (let r of reviews) {
                 const stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
-                const date = r.timestamp ? r.timestamp.slice(0,10) : new Date().toLocaleDateString('id-ID');
-                html += `<div class="review-card"><div class="flex justify-between items-start mb-2 flex-wrap gap-2"><div><span class="text-white font-semibold text-sm">${escapeHtml(r.name)}</span><div class="text-yellow-500 text-[10px] mt-1">${stars}</div></div><span class="text-white/30 text-[10px]">${date}</span></div><p class="text-white/60 text-sm mt-2">"${escapeHtml(r.comment)}"</p></div>`;
+                const reviewDate = r.date || new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+                html += `<div class="review-card"><div class="flex justify-between items-start flex-wrap gap-2"><div><span class="text-white font-semibold text-sm">${escapeHtml(r.name)}</span><div class="text-yellow-500 text-[10px] mt-1">${stars}</div></div><span class="text-white/30 text-[10px]">${reviewDate}</span></div><p class="text-white/60 text-sm mt-2">"${escapeHtml(r.comment)}"</p></div>`;
             }
             container.innerHTML = html;
         }
         
         function escapeHtml(str) {
             if (!str) return '';
-            return str.replace(/[&<>]/g, m => m === '&' ? '&amp;' : (m === '<' ? '&lt;' : '&gt;'));
+            return str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' })[m]);
         }
         
-        // SUBMIT ULASAN
-        async function submitReviewToSheet(name, rating, comment) {
+        // SUBMIT KE FORMSPREE
+        async function submitToFormspree(name, rating, comment) {
             try {
-                const response = await fetch(CORS_PROXY + GOOGLE_SCRIPT_URL, {
+                const response = await fetch(FORMSPREE_URL, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ name, rating, comment })
+                    body: JSON.stringify({ name: name, rating: rating, comment: comment, _subject: `⭐ Review dari ${name} - ELIXIRSTORE` })
                 });
-                const result = await response.json();
-                return result.success === true;
-            } catch (error) {
-                console.error("Gagal submit:", error);
+                return response.ok;
+            } catch(e) {
+                console.error("Formspree error:", e);
                 return false;
             }
         }
         
-        // EVENT SUBMIT
+        // RATING STARS
+        document.querySelectorAll('#ratingStars .star-select').forEach(star => {
+            star.addEventListener('click', () => {
+                const val = parseInt(star.dataset.val);
+                selectedRating = val;
+                document.querySelectorAll('#ratingStars .star-select').forEach((s, idx) => {
+                    if (idx < val) s.className = "fas fa-star text-2xl text-yellow-500 cursor-pointer star-select";
+                    else s.className = "far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select";
+                });
+            });
+        });
+        
+        // SUBMIT BUTTON
         document.getElementById('submitReviewBtn').addEventListener('click', async () => {
             const name = document.getElementById('reviewName').value.trim();
             const comment = document.getElementById('reviewComment').value.trim();
-            if (!name) { alert('Masukkan nickname'); return; }
-            if (!comment) { alert('Tulis ulasan'); return; }
+            
+            if (!name) { alert('Masukkan nickname!'); return; }
+            if (!comment) { alert('Tulis ulasan!'); return; }
             
             const btn = document.getElementById('submitReviewBtn');
             const originalText = btn.innerHTML;
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengirim...';
             btn.disabled = true;
             
-            const success = await submitReviewToSheet(name, selectedRating, comment);
-            btn.innerHTML = originalText;
-            btn.disabled = false;
+            // Kirim ke Formspree
+            const sent = await submitToFormspree(name, selectedRating, comment);
             
-            if (success) {
-                alert('✅ Ulasan terkirim!');
+            if (sent) {
+                // Simpan ke localStorage
+                const newReview = {
+                    name: name,
+                    rating: selectedRating,
+                    comment: comment,
+                    date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })
+                };
+                reviews.unshift(newReview);
+                saveReviews();
+                renderReviews();
+                
                 document.getElementById('reviewName').value = '';
                 document.getElementById('reviewComment').value = '';
-                document.querySelectorAll('.star-select').forEach((s, idx) => {
-                    if (idx < 5) s.className = "fas fa-star text-2xl text-yellow-500 cursor-pointer star-select";
-                    else s.className = "far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select";
+                document.querySelectorAll('#ratingStars .star-select').forEach((s, idx) => {
+                    s.className = "far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select";
                 });
                 selectedRating = 5;
-                loadReviewsFromSheet();
+                
+                alert('✅ Ulasan terkirim! Terima kasih. Review akan masuk ke email kami.');
             } else {
-                alert('❌ Gagal mengirim. Coba lagi.');
+                alert('❌ Gagal mengirim ulasan. Coba lagi.');
             }
+            
+            btn.innerHTML = originalText;
+            btn.disabled = false;
         });
 
-        // ========== PRODUCTS & MARKETPLACE ==========
+        // ========== PRODUCTS ==========
         const formatRp = (n) => "Rp" + n.toLocaleString('id-ID');
         const waNumber = "62895385984764";
 
@@ -766,6 +337,20 @@
             { name: "TIER 3 - BLUE NAME", price: 350000, category: "tier", needNickname: false, hasDesc: false }
         ];
 
+        function getCategoryIcon(category) {
+            if (category === 'sbc') return 'fa-crown';
+            if (category === 'script') return 'fa-code';
+            if (category === 'tier') return 'fa-gem';
+            return 'fa-box';
+        }
+
+        function getCategoryBadge(category) {
+            if (category === 'sbc') return 'SBC PRO';
+            if (category === 'script') return 'SCRIPT';
+            if (category === 'tier') return 'TIER';
+            return 'PREMIUM';
+        }
+
         function sendWA(product, price, nickname) {
             let msg = `Halo ELIXIRSTORE%0A%0AProduk: ${encodeURIComponent(product)}%0AHarga: ${encodeURIComponent(formatRp(price))}`;
             if (nickname) msg += `%0ANickname: ${encodeURIComponent(nickname)}`;
@@ -777,9 +362,11 @@
             const card = document.createElement('div');
             card.className = 'premium-card';
             card.setAttribute('data-aos', 'fade-up');
-            let iconClass = product.category === 'sbc' ? 'fa-crown' : (product.category === 'script' ? 'fa-code' : 'fa-gem');
-            let badgeText = product.category === 'sbc' ? 'SBC PRO' : (product.category === 'script' ? 'SCRIPT' : 'TIER');
+            
+            const iconClass = getCategoryIcon(product.category);
+            const badgeText = getCategoryBadge(product.category);
             const descHtml = product.hasDesc ? '<div class="product-desc text-center mt-2">VIA TF ON SOUTHBRONX</div>' : '';
+            
             card.innerHTML = `
                 <div class="holographic-bg"></div>
                 <div class="gloss"></div>
@@ -792,69 +379,521 @@
                 ${product.needNickname ? '<input type="text" class="nickname-input" placeholder="Masukkan nickname kamu">' : ''}
                 <button class="premium-btn"><i class="fab fa-whatsapp"></i> ORDER NOW <i class="fas fa-arrow-right"></i></button>
             `;
-            const particles = card.querySelector('.particles');
-            if (particles) {
+
+            const particlesContainer = card.querySelector('.particles');
+            if (particlesContainer) {
                 for (let i = 0; i < 15; i++) {
-                    const p = document.createElement('span');
-                    p.style.left = Math.random() * 100 + '%';
-                    p.style.top = Math.random() * 100 + '%';
-                    p.style.animationDelay = Math.random() * 2 + 's';
-                    p.style.animationDuration = (Math.random() * 1.5 + 0.8) + 's';
-                    particles.appendChild(p);
+                    const particle = document.createElement('span');
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.top = Math.random() * 100 + '%';
+                    particle.style.animationDelay = Math.random() * 2 + 's';
+                    particle.style.animationDuration = (Math.random() * 1.5 + 0.8) + 's';
+                    particlesContainer.appendChild(particle);
                 }
             }
+
             const btn = card.querySelector('.premium-btn');
             btn.addEventListener('click', (e) => {
+                e.stopPropagation();
                 const ripple = document.createElement('span');
                 ripple.classList.add('ripple');
                 const rect = btn.getBoundingClientRect();
-                ripple.style.left = (e.clientX - rect.left) + 'px';
-                ripple.style.top = (e.clientY - rect.top) + 'px';
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
                 btn.appendChild(ripple);
                 setTimeout(() => ripple.remove(), 600);
+                
                 const nickname = card.querySelector('.nickname-input')?.value || '';
                 sendWA(product.name, product.price, nickname);
             });
+            
             return card;
         }
 
-        function renderProducts(filter = 'all', query = '') {
-            const grid = document.getElementById('productGrid');
-            if (!grid) return;
-            const filtered = products.filter(p => {
-                if (filter !== 'all' && p.category !== filter) return false;
-                if (query && !p.name.toLowerCase().includes(query.toLowerCase())) return false;
-                return true;
-            });
-            grid.innerHTML = '';
-            if (filtered.length === 0) {
-                grid.innerHTML = '<div class="col-span-full text-center text-white/30 py-16">Item tidak ditemukan</div>';
+        const productGrid = document.getElementById('productGrid');
+        let currentFilter = 'all', searchQuery = '';
+        
+        function renderProducts() {
+            const filtered = products.filter(p => { 
+                if (currentFilter !== 'all' && p.category !== currentFilter) return false; 
+                if (searchQuery && !p.name.toLowerCase().includes(searchQuery.toLowerCase())) return false; 
+                return true; 
+            });<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>ELIXIRSTORE | Premium Southbronx Store</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        * { font-family: 'Satoshi', sans-serif; }
+        .product-name { font-family: 'Clash Display', 'Unbounded', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+        .price-text { font-family: 'Unbounded', 'Clash Display', sans-serif; font-weight: 800; letter-spacing: -0.02em; }
+        .hero-text { font-family: 'Clash Display', 'Unbounded', sans-serif; font-weight: 800; background: linear-gradient(135deg, #ffffff 0%, #c084fc 30%, #a855f7 60%, #e9d5ff 100%); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gradientFlow 5s linear infinite; }
+        .elixir-title { font-family: 'Clash Display', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+        @keyframes gradientFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        @keyframes meteor1 { 0% { transform: translateX(-100px) translateY(-100px) rotate(45deg); opacity: 1; } 100% { transform: translateX(400px) translateY(400px) rotate(45deg); opacity: 0; } }
+        @keyframes meteor2 { 0% { transform: translateX(-50px) translateY(-150px) rotate(35deg); opacity: 1; } 100% { transform: translateX(500px) translateY(500px) rotate(35deg); opacity: 0; } }
+        @keyframes meteor3 { 0% { transform: translateX(-200px) translateY(-50px) rotate(50deg); opacity: 1; } 100% { transform: translateX(600px) translateY(600px) rotate(50deg); opacity: 0; } }
+        @keyframes floatSlow { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(5deg); } }
+        @keyframes starTwinkle { 0%, 100% { opacity: 0.2; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.2); } }
+        @keyframes rainbowMove { 0% { background-position: 0% 0%; } 25% { background-position: 100% 0%; } 50% { background-position: 100% 100%; } 75% { background-position: 0% 100%; } 100% { background-position: 0% 0%; } }
+        @keyframes rippleEffect { to { transform: scale(5); opacity: 0; } }
+        @keyframes cardFloat { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-5px); } }
+        @keyframes particleFloat { 0% { transform: translateY(0) scale(1); opacity: 0.8; } 100% { transform: translateY(-50px) scale(0); opacity: 0; } }
+        
+        .animated-bg { position: fixed; inset: 0; background: radial-gradient(ellipse at 20% 30%, #0a0a1a, #050510); z-index: -3; }
+        .stars { position: fixed; inset: 0; pointer-events: none; z-index: -2; }
+        .star { position: absolute; background: white; border-radius: 50%; animation: starTwinkle 3s infinite ease-in-out; }
+        .meteor { position: fixed; pointer-events: none; z-index: -1; }
+        .meteor::before { content: ''; position: absolute; top: 0; left: 0; width: 100px; height: 2px; background: linear-gradient(90deg, rgba(168,85,247,0.8), rgba(168,85,247,0.2), transparent); transform: translateX(-100px); border-radius: 2px; }
+        .meteor-1 { top: -100px; left: 20%; animation: meteor1 4s infinite linear; animation-delay: 0s; }
+        .meteor-2 { top: -150px; left: 50%; animation: meteor2 5s infinite linear; animation-delay: 2s; }
+        .meteor-3 { top: -80px; left: 70%; animation: meteor3 3.5s infinite linear; animation-delay: 1s; }
+        .floating-orb { position: fixed; top: 20%; right: 10%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(168,85,247,0.1), transparent 70%); border-radius: 50%; filter: blur(60px); animation: floatSlow 12s infinite ease-in-out; pointer-events: none; z-index: -1; }
+        .floating-orb-2 { position: fixed; bottom: 10%; left: 5%; width: 350px; height: 350px; background: radial-gradient(circle, rgba(59,130,246,0.08), transparent 70%); border-radius: 50%; filter: blur(50px); animation: floatSlow 15s infinite ease-in-out reverse; pointer-events: none; z-index: -1; }
+        .grid-pattern { position: fixed; inset: 0; background-image: linear-gradient(rgba(168,85,247,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(168,85,247,0.02) 1px, transparent 1px); background-size: 50px 50px; pointer-events: none; z-index: -1; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #0a0a0f; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #a855f7, #7e22ce); border-radius: 10px; }
+        .glass-nav { background: rgba(10,10,15,0.4); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(168,85,247,0.2); position: fixed; top: 0; width: 100%; z-index: 50; }
+        
+        .premium-card { position: relative; background: linear-gradient(145deg, #0a0a18, #0d0d1f); border-radius: 24px; padding: 28px 24px; overflow: hidden; transition: all 0.4s ease; border: 1px solid rgba(168,85,247,0.2); animation: cardFloat 3s ease-in-out infinite; }
+        .premium-card::before { content: ''; position: absolute; inset: -2px; background: linear-gradient(135deg, #a855f7, #c084fc, #d8b4fe, #7e22ce, #a855f7, #c084fc, #d8b4fe); background-size: 400% 400%; border-radius: 24px; opacity: 0; transition: opacity 0.3s; z-index: -1; }
+        .premium-card:hover::before { opacity: 1; animation: rainbowMove 3s ease infinite; }
+        .premium-card .holographic-bg { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(139,92,246,0.05), rgba(168,85,247,0.08), rgba(192,132,252,0.05), rgba(139,92,246,0.08), rgba(168,85,247,0.05), rgba(126,34,206,0.08), rgba(139,92,246,0.05)); background-size: 600% 600%; opacity: 0.2; animation: rainbowMove 6s ease infinite; pointer-events: none; border-radius: 24px; }
+        .premium-card:hover .holographic-bg { opacity: 0.35; }
+        .premium-card .gloss { position: absolute; top: 0; left: 0; right: 0; height: 50%; background: linear-gradient(180deg, rgba(168,85,247,0.12) 0%, rgba(255,255,255,0) 100%); pointer-events: none; border-radius: 24px 24px 0 0; }
+        .premium-card .particles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; border-radius: 24px; }
+        .premium-card .particles span { position: absolute; width: 3px; height: 3px; background: radial-gradient(circle, #c084fc, #a855f7); border-radius: 50%; opacity: 0; }
+        .premium-card:hover .particles span { animation: particleFloat 1.5s ease-out forwards; }
+        .card-badge { position: absolute; top: 16px; right: 16px; background: linear-gradient(135deg, #6b21a5, #9333ea, #a855f7); background-size: 200% 100%; padding: 5px 14px; border-radius: 30px; font-size: 0.6rem; font-weight: 800; letter-spacing: 1.5px; color: white; text-transform: uppercase; z-index: 3; box-shadow: 0 0 15px rgba(139,92,246,0.3); animation: gradientFlow 2s ease infinite; }
+        .category-icon { width: 56px; height: 56px; background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 18px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; border: 1px solid rgba(168,85,247,0.3); transition: all 0.3s; position: relative; z-index: 2; }
+        .category-icon::before { content: ''; position: absolute; inset: -2px; background: linear-gradient(135deg, #a855f7, #c084fc, #d8b4fe, #7e22ce); background-size: 400% 400%; border-radius: 20px; opacity: 0; transition: opacity 0.3s; z-index: -1; }
+        .premium-card:hover .category-icon::before { opacity: 1; animation: rainbowMove 2s ease infinite; }
+        .category-icon i { font-size: 1.6rem; color: #c084fc; transition: all 0.3s; }
+        .premium-card:hover .category-icon i { transform: scale(1.1); filter: drop-shadow(0 0 8px #a855f7); color: #e9d5ff; }
+        .product-name { font-size: 1.2rem; margin-bottom: 8px; background: linear-gradient(135deg, #ffffff, #e9d5ff, #c084fc, #d8b4fe); background-size: 300% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 800; position: relative; z-index: 2; }
+        .premium-card:hover .product-name { animation: gradientFlow 1.5s ease infinite; }
+        .price-wrapper { background: rgba(0,0,0,0.4); border-radius: 40px; padding: 10px 20px; display: inline-block; margin: 16px 0; border: 1px solid rgba(168,85,247,0.3); transition: all 0.3s; position: relative; z-index: 2; backdrop-filter: blur(4px); }
+        .premium-card:hover .price-wrapper { border-color: rgba(168,85,247,0.8); box-shadow: 0 0 20px rgba(139,92,246,0.3); transform: scale(1.02); }
+        .price-text { font-size: 1.8rem; background: linear-gradient(135deg, #fbbf24, #ffd700, #f59e0b, #ffd700); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 900; }
+        .product-desc { font-size: 0.6rem; letter-spacing: 2px; color: #a78bfa; text-transform: uppercase; font-weight: 600; position: relative; z-index: 2; }
+        .premium-btn { position: relative; width: 100%; background: linear-gradient(135deg, #1a0b2e, #2d1b4e, #3b1e6d); border: 1px solid rgba(168,85,247,0.3); padding: 14px 20px; border-radius: 50px; font-weight: 700; font-size: 0.85rem; color: white; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 12px; overflow: hidden; z-index: 2; }
+        .premium-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(168,85,247,0.4), rgba(192,132,252,0.4), rgba(139,92,246,0.4), transparent); transition: left 0.5s; }
+        .premium-btn:hover::before { left: 100%; }
+        .premium-btn:hover { transform: translateY(-2px); border-color: rgba(168,85,247,0.8); box-shadow: 0 5px 20px rgba(139,92,246,0.4); }
+        .premium-btn .ripple { position: absolute; border-radius: 50%; background: rgba(192,132,252,0.6); transform: scale(0); animation: rippleEffect 0.6s linear; pointer-events: none; }
+        .nickname-input { background: rgba(0,0,0,0.5); border: 1px solid rgba(168,85,247,0.3); border-radius: 50px; padding: 12px 18px; width: 100%; color: white; font-size: 0.8rem; transition: all 0.3s; margin-bottom: 16px; text-align: center; }
+        .nickname-input:focus { outline: none; border-color: #a855f7; box-shadow: 0 0 15px rgba(139,92,246,0.3); }
+        .premium-card:hover { transform: translateY(-10px) scale(1.03); box-shadow: 0 30px 50px -25px rgba(139,92,246,0.4), 0 0 0 1px rgba(168,85,247,0.1); border-color: rgba(168,85,247,0.4); }
+        .stat-card { transition: all 0.3s ease; background: rgba(255,255,255,0.05); backdrop-filter: blur(4px); border-radius: 16px; padding: 20px; text-align: center; border: 1px solid rgba(255,255,255,0.1); }
+        .stat-card:hover { transform: translateY(-3px); border-color: rgba(168,85,247,0.4); background: rgba(255,255,255,0.08); }
+        .footer-link { transition: all 0.2s; }
+        .footer-link:hover { color: #a855f7; transform: translateX(3px); }
+        .contact-item { transition: all 0.2s; }
+        .contact-item:hover { transform: translateX(3px); }
+        .review-card { transition: all 0.3s ease; background: rgba(255,255,255,0.05); backdrop-filter: blur(4px); border-radius: 16px; padding: 16px; border: 1px solid rgba(255,255,255,0.1); }
+        .review-card:hover { transform: translateY(-2px); border-color: rgba(168,85,247,0.4); box-shadow: 0 10px 25px -12px rgba(168,85,247,0.2); }
+        .review-input, .review-textarea { transition: all 0.2s; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px; color: white; width: 100%; }
+        .review-input:focus, .review-textarea:focus { outline: none; border-color: #a855f7; box-shadow: 0 0 15px rgba(168,85,247,0.2); }
+    </style>
+</head>
+<body class="bg-[#050510]">
+
+    <div class="animated-bg"></div>
+    <div class="stars" id="starsContainer"></div>
+    <div class="meteor meteor-1"></div>
+    <div class="meteor meteor-2"></div>
+    <div class="meteor meteor-3"></div>
+    <div class="floating-orb"></div>
+    <div class="floating-orb-2"></div>
+    <div class="grid-pattern"></div>
+
+    <nav class="glass-nav fixed top-0 left-0 w-full z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div><div class="text-white font-bold text-xl tracking-tight elixir-title">ELIXIR<span class="text-purple-400">STORE</span></div><div class="text-[9px] text-purple-400/40 tracking-[0.2em]">PROJECTION</div></div>
+                <div class="flex gap-6">
+                    <a href="#marketplace" class="text-white/50 hover:text-purple-400 transition text-sm"><i class="fas fa-store"></i> MARKET</a>
+                    <a href="#reviews" class="text-white/50 hover:text-purple-400 transition text-sm"><i class="fas fa-star"></i> ULASAN</a>
+                    <a href="#footer" class="text-white/50 hover:text-purple-400 transition text-sm"><i class="fas fa-headset"></i> CONTACT</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="relative z-10 max-w-6xl mx-auto px-6 pt-32 pb-16 text-center" data-aos="fade-up">
+        <div class="inline-flex px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/30 mb-6 backdrop-blur-sm"><span class="text-purple-300 text-[10px] font-medium tracking-wider">PREMIUM SOUTHBRONX STORE</span></div>
+        <h1 class="text-6xl md:text-7xl font-extrabold mb-5"><span class="hero-text">ELIXIR60S</span></h1>
+        <p class="text-white/50 max-w-lg mx-auto text-base mb-9">Joki SBC • Script Premium • Akun Tier<br>Fast Response & 24/7 Support</p>
+        <div class="flex justify-center gap-4 flex-wrap">
+            <a href="#marketplace" class="premium-btn !w-auto px-8 py-3.5 text-sm"><i class="fas fa-crown"></i> Explore Items <i class="fas fa-arrow-right text-xs"></i></a>
+            <a href="https://discord.gg/CxbDP6QmW" target="_blank" class="px-8 py-3.5 bg-white/5 backdrop-blur-sm border border-white/10 hover:border-purple-500/50 text-white/80 rounded-full font-semibold flex items-center gap-2 transition-all text-sm"><i class="fab fa-discord"></i> Join Discord</a>
+            <a href="https://wa.me/62895385984764?text=Halo%20ELIXIRSTORE%2C%20saya%20mau%20order" target="_blank" class="px-8 py-3.5 bg-white/5 backdrop-blur-sm border border-white/10 hover:border-green-500/50 text-white/80 rounded-full font-semibold flex items-center gap-2 transition-all text-sm"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div>
+    </div>
+
+    <div class="relative z-10 max-w-5xl mx-auto px-6 py-10">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-5 text-center">
+            <div class="stat-card"><div class="text-4xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent elixir-title">17</div><div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">PRODUK</div></div>
+            <div class="stat-card"><div class="text-4xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent elixir-title">100+</div><div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">TERJUAL</div></div>
+            <div class="stat-card"><div class="text-4xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent elixir-title">12</div><div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">ULASAN</div></div>
+            <div class="stat-card"><div class="text-4xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent elixir-title">100+</div><div class="text-white/40 text-[11px] uppercase tracking-wider mt-1">CUSTOMER</div></div>
+        </div>
+    </div>
+
+    <div id="marketplace" class="relative z-10 max-w-7xl mx-auto px-6 py-12">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-5 mb-10">
+            <div data-aos="fade-right"><h2 class="text-2xl font-bold text-white flex items-center gap-2 elixir-title"><i class="fas fa-cubes text-purple-400"></i>Koleksi Item</h2><p class="text-white/30 text-sm mt-1">17 item premium tersedia</p></div>
+            <div class="relative w-full md:w-80" data-aos="fade-left"><i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-white/30 text-sm"></i><input type="text" id="searchInput" placeholder="Cari item..." class="w-full bg-white/5 border border-white/10 rounded-full py-3 pl-11 pr-5 text-white/80 text-sm focus:outline-none focus:border-purple-500/50 transition-all backdrop-blur-sm"></div>
+        </div>
+        <div class="flex flex-wrap gap-3 mb-12" data-aos="fade-up">
+            <button data-filter="all" class="filter-btn px-6 py-2.5 rounded-full text-xs font-medium transition-all bg-gradient-to-r from-purple-600 to-purple-700 text-white shadow-md shadow-purple-500/25">Semua</button>
+            <button data-filter="sbc" class="filter-btn px-6 py-2.5 rounded-full text-xs font-medium transition-all bg-white/5 text-white/50 hover:text-white hover:bg-white/10">SBC</button>
+            <button data-filter="script" class="filter-btn px-6 py-2.5 rounded-full text-xs font-medium transition-all bg-white/5 text-white/50 hover:text-white hover:bg-white/10">Script</button>
+            <button data-filter="tier" class="filter-btn px-6 py-2.5 rounded-full text-xs font-medium transition-all bg-white/5 text-white/50 hover:text-white hover:bg-white/10">Akun Tier</button>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="productGrid"></div>
+    </div>
+
+    <div id="reviews" class="relative z-10 max-w-4xl mx-auto px-6 py-16">
+        <div class="text-center mb-10" data-aos="fade-up">
+            <h2 class="text-2xl font-bold text-white flex items-center justify-center gap-2 elixir-title"><i class="fas fa-star text-yellow-500"></i> Ulasan Pelanggan <i class="fas fa-star text-yellow-500"></i></h2>
+            <p class="text-white/30 text-sm mt-2">Apa kata mereka tentang ELIXIRSTORE</p>
+        </div>
+        
+        <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 mb-8" data-aos="fade-up">
+            <h3 class="text-white font-semibold mb-4 flex items-center gap-2"><i class="fas fa-pen"></i> Tulis Ulasan</h3>
+            <input type="text" id="reviewName" class="review-input mb-3" placeholder="Nickname kamu">
+            <div class="flex gap-2 mb-3" id="ratingStars">
+                <i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="1"></i>
+                <i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="2"></i>
+                <i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="3"></i>
+                <i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="4"></i>
+                <i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="5"></i>
+            </div>
+            <textarea id="reviewComment" rows="3" class="review-textarea mb-3" placeholder="Tulis ulasan kamu..."></textarea>
+            <button id="submitReviewBtn" class="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white font-semibold py-3 rounded-xl transition-all flex items-center justify-center gap-2"><i class="fas fa-paper-plane"></i> Kirim Ulasan</button>
+        </div>
+        
+        <div id="reviewsList" class="space-y-4"></div>
+    </div>
+
+    <footer id="footer" class="relative z-10 border-t border-white/10 bg-black/20 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+                <div><div class="text-white font-bold text-xl tracking-tight mb-2 elixir-title">ELIXIR<span class="text-purple-400">STORE</span></div><p class="text-white/40 text-sm leading-relaxed">Premium Shop Southbronx<br>Trusted Southbronx Marketplace</p></div>
+                <div><h3 class="text-white/70 text-sm font-semibold uppercase tracking-wider mb-4">Quick Links</h3><ul class="space-y-2"><li><a href="#marketplace" class="footer-link text-white/40 text-sm hover:text-purple-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[8px]"></i> Marketplace</a></li><li><a href="#reviews" class="footer-link text-white/40 text-sm hover:text-purple-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[8px]"></i> Ulasan</a></li></ul></div>
+                <div><h3 class="text-white/70 text-sm font-semibold uppercase tracking-wider mb-4">Contact</h3><ul class="space-y-3"><li><a href="https://wa.me/62895385984764" target="_blank" class="contact-item flex items-center gap-3 text-white/40 text-sm hover:text-green-400 transition"><i class="fab fa-whatsapp text-green-500"></i><span>WhatsApp</span></a></li><li><a href="https://discord.gg/CxbDP6QmW" target="_blank" class="contact-item flex items-center gap-3 text-white/40 text-sm hover:text-purple-400 transition"><i class="fab fa-discord text-[#5865F2]"></i><span>Discord</span></a></li></ul></div>
+                <div><h3 class="text-white/70 text-sm font-semibold uppercase tracking-wider mb-4">Powered By</h3><div class="space-y-2"><div class="flex items-center gap-2 text-white/30 text-xs"><i class="fab fa-html5 text-orange-500"></i><span>HTML5 + Tailwind CSS</span></div><div class="mt-3 pt-2 border-t border-white/10"><span class="text-[10px] text-white/20 tracking-wider">SECURED | 24/7</span></div></div></div>
+            </div>
+            <div class="border-t border-white/10 mt-10 pt-6 text-center"><p class="text-white/20 text-[10px] tracking-wider">2025 ELIXIRSTORE. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 600, once: true });
+
+        // STARS BACKGROUND
+        for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.width = (Math.random() * 2 + 1) + 'px';
+            star.style.height = star.style.width;
+            star.style.top = Math.random() * 100 + '%';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 5 + 's';
+            star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            star.style.opacity = Math.random() * 0.5 + 0.2;
+            document.getElementById('starsContainer').appendChild(star);
+        }
+
+        // ========== FORMSPREE REVIEW SYSTEM ==========
+        const FORMSPREE_URL = "https://formspree.io/f/mwvjqrnn";
+        
+        let reviews = [];
+        let selectedRating = 5;
+        
+        // LOAD REVIEWS DARI LOCALSTORAGE
+        function loadReviews() {
+            const saved = localStorage.getItem('elixir_reviews_formspree');
+            if (saved) {
+                try {
+                    reviews = JSON.parse(saved);
+                } catch(e) { reviews = []; }
+            }
+            if (reviews.length === 0) {
+                reviews = [
+                    { name: "Verns", rating: 5, comment: "Gacor banget Jokinya cepet dan terpercaya", date: "31 May 2026" },
+                    { name: "RIP_BOUNTYY177", rating: 5, comment: "Pengen beli SBC lagi nih recommended", date: "28 May 2026" },
+                    { name: "aww", rating: 4, comment: "Mantap fast response", date: "24 Apr 2026" }
+                ];
+                saveReviews();
+            }
+            renderReviews();
+        }
+        
+        function saveReviews() {
+            localStorage.setItem('elixir_reviews_formspree', JSON.stringify(reviews));
+        }
+        
+        function renderReviews() {
+            const container = document.getElementById('reviewsList');
+            if (!container) return;
+            if (reviews.length === 0) {
+                container.innerHTML = '<div class="text-center text-white/40 py-8">✨ Belum ada ulasan. Jadi yang pertama!</div>';
                 return;
             }
-            filtered.forEach(p => grid.appendChild(createCard(p)));
+            let html = '';
+            for (let r of reviews) {
+                const stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+                const reviewDate = r.date || new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+                html += `<div class="review-card"><div class="flex justify-between items-start flex-wrap gap-2"><div><span class="text-white font-semibold text-sm">${escapeHtml(r.name)}</span><div class="text-yellow-500 text-[10px] mt-1">${stars}</div></div><span class="text-white/30 text-[10px]">${reviewDate}</span></div><p class="text-white/60 text-sm mt-2">"${escapeHtml(r.comment)}"</p></div>`;
+            }
+            container.innerHTML = html;
+        }
+        
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' })[m]);
+        }
+        
+        // SUBMIT KE FORMSPREE
+        async function submitToFormspree(name, rating, comment) {
+            try {
+                const response = await fetch(FORMSPREE_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name: name, rating: rating, comment: comment, _subject: `⭐ Review dari ${name} - ELIXIRSTORE` })
+                });
+                return response.ok;
+            } catch(e) {
+                console.error("Formspree error:", e);
+                return false;
+            }
+        }
+        
+        // RATING STARS
+        document.querySelectorAll('#ratingStars .star-select').forEach(star => {
+            star.addEventListener('click', () => {
+                const val = parseInt(star.dataset.val);
+                selectedRating = val;
+                document.querySelectorAll('#ratingStars .star-select').forEach((s, idx) => {
+                    if (idx < val) s.className = "fas fa-star text-2xl text-yellow-500 cursor-pointer star-select";
+                    else s.className = "far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select";
+                });
+            });
+        });
+        
+        // SUBMIT BUTTON
+        document.getElementById('submitReviewBtn').addEventListener('click', async () => {
+            const name = document.getElementById('reviewName').value.trim();
+            const comment = document.getElementById('reviewComment').value.trim();
+            
+            if (!name) { alert('Masukkan nickname!'); return; }
+            if (!comment) { alert('Tulis ulasan!'); return; }
+            
+            const btn = document.getElementById('submitReviewBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengirim...';
+            btn.disabled = true;
+            
+            // Kirim ke Formspree
+            const sent = await submitToFormspree(name, selectedRating, comment);
+            
+            if (sent) {
+                // Simpan ke localStorage
+                const newReview = {
+                    name: name,
+                    rating: selectedRating,
+                    comment: comment,
+                    date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })
+                };
+                reviews.unshift(newReview);
+                saveReviews();
+                renderReviews();
+                
+                document.getElementById('reviewName').value = '';
+                document.getElementById('reviewComment').value = '';
+                document.querySelectorAll('#ratingStars .star-select').forEach((s, idx) => {
+                    s.className = "far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select";
+                });
+                selectedRating = 5;
+                
+                alert('✅ Ulasan terkirim! Terima kasih. Review akan masuk ke email kami.');
+            } else {
+                alert('❌ Gagal mengirim ulasan. Coba lagi.');
+            }
+            
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        });
+
+        // ========== PRODUCTS ==========
+        const formatRp = (n) => "Rp" + n.toLocaleString('id-ID');
+        const waNumber = "62895385984764";
+
+        const products = [
+            ...["100K","200K","300K","400K","500K","600K","700K","800K","900K","1JT","1.1 JT","1.2 JT","1.3 JT","1.4 JT","1.5 JT","1.6 JT","1.7 JT"].map((name, idx) => ({ name: `SBC ${name}`, price: [10000,20000,30000,40000,50000,60000,70000,80000,90000,100000,110000,120000,130000,140000,150000,160000,170000][idx], category: "sbc", needNickname: true, hasDesc: true })),
+            { name: "SCRIPT MARSHMALLOW - HARIAN", price: 13000, category: "script", needNickname: false, hasDesc: false },
+            { name: "SCRIPT MARSHMALLOW - BULANAN", price: 60000, category: "script", needNickname: false, hasDesc: false },
+            { name: "SCRIPT MARSHMALLOW - LIFETIME", price: 150000, category: "script", needNickname: false, hasDesc: false },
+            { name: "SCRIPT COMBAT - HARIAN", price: 20000, category: "script", needNickname: false, hasDesc: false },
+            { name: "SCRIPT COMBAT - BULANAN", price: 80000, category: "script", needNickname: false, hasDesc: false },
+            { name: "SCRIPT COMBAT - LIFETIME", price: 200000, category: "script", needNickname: false, hasDesc: false },
+            { name: "SCRIPT FPS - LIFETIME", price: 50000, category: "script", needNickname: false, hasDesc: false },
+            { name: "TIER 1 - GREEN NAME", price: 150000, category: "tier", needNickname: false, hasDesc: false },
+            { name: "TIER 2 - PINK NAME", price: 250000, category: "tier", needNickname: false, hasDesc: false },
+            { name: "TIER 3 - BLUE NAME", price: 350000, category: "tier", needNickname: false, hasDesc: false }
+        ];
+
+        function getCategoryIcon(category) {
+            if (category === 'sbc') return 'fa-crown';
+            if (category === 'script') return 'fa-code';
+            if (category === 'tier') return 'fa-gem';
+            return 'fa-box';
+        }
+
+        function getCategoryBadge(category) {
+            if (category === 'sbc') return 'SBC PRO';
+            if (category === 'script') return 'SCRIPT';
+            if (category === 'tier') return 'TIER';
+            return 'PREMIUM';
+        }
+
+        function sendWA(product, price, nickname) {
+            let msg = `Halo ELIXIRSTORE%0A%0AProduk: ${encodeURIComponent(product)}%0AHarga: ${encodeURIComponent(formatRp(price))}`;
+            if (nickname) msg += `%0ANickname: ${encodeURIComponent(nickname)}`;
+            msg += `%0A%0ABukti transfer: (kirim foto)`;
+            window.open(`https://wa.me/${waNumber}?text=${msg}`, '_blank');
+        }
+
+        function createCard(product) {
+            const card = document.createElement('div');
+            card.className = 'premium-card';
+            card.setAttribute('data-aos', 'fade-up');
+            
+            const iconClass = getCategoryIcon(product.category);
+            const badgeText = getCategoryBadge(product.category);
+            const descHtml = product.hasDesc ? '<div class="product-desc text-center mt-2">VIA TF ON SOUTHBRONX</div>' : '';
+            
+            card.innerHTML = `
+                <div class="holographic-bg"></div>
+                <div class="gloss"></div>
+                <div class="particles" id="particles-${Date.now()}-${Math.random()}"></div>
+                <div class="card-badge">${badgeText}</div>
+                <div class="category-icon"><i class="fas ${iconClass}"></i></div>
+                <div class="product-name text-center">${product.name}</div>
+                ${descHtml}
+                <div class="flex justify-center"><div class="price-wrapper"><div class="price-text">${formatRp(product.price)}</div></div></div>
+                ${product.needNickname ? '<input type="text" class="nickname-input" placeholder="Masukkan nickname kamu">' : ''}
+                <button class="premium-btn"><i class="fab fa-whatsapp"></i> ORDER NOW <i class="fas fa-arrow-right"></i></button>
+            `;
+
+            const particlesContainer = card.querySelector('.particles');
+            if (particlesContainer) {
+                for (let i = 0; i < 15; i++) {
+                    const particle = document.createElement('span');
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.top = Math.random() * 100 + '%';
+                    particle.style.animationDelay = Math.random() * 2 + 's';
+                    particle.style.animationDuration = (Math.random() * 1.5 + 0.8) + 's';
+                    particlesContainer.appendChild(particle);
+                }
+            }
+
+            const btn = card.querySelector('.premium-btn');
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                btn.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+                
+                const nickname = card.querySelector('.nickname-input')?.value || '';
+                sendWA(product.name, product.price, nickname);
+            });
+            
+            return card;
+        }
+
+        const productGrid = document.getElementById('productGrid');
+        let currentFilter = 'all', searchQuery = '';
+        
+        function renderProducts() {
+            const filtered = products.filter(p => { 
+                if (currentFilter !== 'all' && p.category !== currentFilter) return false; 
+                if (searchQuery && !p.name.toLowerCase().includes(searchQuery.toLowerCase())) return false; 
+                return true; 
+            });
+            productGrid.innerHTML = '';
+            if (filtered.length === 0) { 
+                productGrid.innerHTML = '<div class="col-span-full text-center text-white/30 py-16 text-sm">Item tidak ditemukan</div>'; 
+                return; 
+            }
+            filtered.forEach(p => productGrid.appendChild(createCard(p)));
             AOS.refresh();
         }
 
-        let currentFilter = 'all', searchQuery = '';
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                document.querySelectorAll('.filter-btn').forEach(b => {
-                    b.classList.remove('bg-gradient-to-r', 'from-purple-600', 'to-purple-700', 'text-white', 'shadow-md');
-                    b.classList.add('bg-white/5', 'text-white/50');
+                document.querySelectorAll('.filter-btn').forEach(b => { 
+                    b.classList.remove('bg-gradient-to-r', 'from-purple-600', 'to-purple-700', 'text-white', 'shadow-md', 'shadow-purple-500/25'); 
+                    b.classList.add('bg-white/5', 'text-white/50'); 
                 });
                 btn.classList.remove('bg-white/5', 'text-white/50');
-                btn.classList.add('bg-gradient-to-r', 'from-purple-600', 'to-purple-700', 'text-white', 'shadow-md');
+                btn.classList.add('bg-gradient-to-r', 'from-purple-600', 'to-purple-700', 'text-white', 'shadow-md', 'shadow-purple-500/25');
                 currentFilter = btn.dataset.filter;
-                renderProducts(currentFilter, searchQuery);
+                renderProducts();
             });
         });
-        document.getElementById('searchInput').addEventListener('input', (e) => {
-            searchQuery = e.target.value;
-            renderProducts(currentFilter, searchQuery);
+
+        document.getElementById('searchInput').addEventListener('input', (e) => { 
+            searchQuery = e.target.value; 
+            renderProducts(); 
         });
         
-        renderProducts('all', '');
-        loadReviewsFromSheet();
+        loadReviews();
+        renderProducts();
+    </script>
+</body>
+</html>
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => { 
+                    b.classList.remove('bg-gradient-to-r', 'from-purple-600', 'to-purple-700', 'text-white', 'shadow-md', 'shadow-purple-500/25'); 
+                    b.classList.add('bg-white/5', 'text-white/50'); 
+                });
+                btn.classList.remove('bg-white/5', 'text-white/50');
+                btn.classList.add('bg-gradient-to-r', 'from-purple-600', 'to-purple-700', 'text-white', 'shadow-md', 'shadow-purple-500/25');
+                currentFilter = btn.dataset.filter;
+                renderProducts();
+            });
+        });
+
+        document.getElementById('searchInput').addEventListener('input', (e) => { 
+            searchQuery = e.target.value; 
+            renderProducts(); 
+        });
+        
+        loadReviews();
+        renderProducts();
     </script>
 </body>
 </html>
