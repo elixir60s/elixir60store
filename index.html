@@ -18,31 +18,41 @@
             font-family: 'Satoshi', sans-serif; 
             box-sizing: border-box;
         }
-        
-        body {
-            background: #0a0a1a;
-        }
-        
+        .product-name { font-family: 'Clash Display', 'Unbounded', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+        .price-text { font-family: 'Unbounded', 'Clash Display', sans-serif; font-weight: 800; letter-spacing: -0.02em; }
+        .hero-text { font-family: 'Clash Display', 'Unbounded', sans-serif; font-weight: 800; background: linear-gradient(135deg, #ffffff 0%, #c084fc 30%, #a855f7 60%, #e9d5ff 100%); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gradientFlow 5s linear infinite; }
         .elixir-title { font-family: 'Clash Display', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
         
-        /* Animasi */
         @keyframes gradientFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        @keyframes floatSlow { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
-        @keyframes starTwinkle { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.7; } }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        @keyframes meteor1 { 0% { transform: translateX(-100px) translateY(-100px) rotate(45deg); opacity: 1; } 100% { transform: translateX(400px) translateY(400px) rotate(45deg); opacity: 0; } }
+        @keyframes meteor2 { 0% { transform: translateX(-50px) translateY(-150px) rotate(35deg); opacity: 1; } 100% { transform: translateX(500px) translateY(500px) rotate(35deg); opacity: 0; } }
+        @keyframes meteor3 { 0% { transform: translateX(-200px) translateY(-50px) rotate(50deg); opacity: 1; } 100% { transform: translateX(600px) translateY(600px) rotate(50deg); opacity: 0; } }
+        @keyframes floatSlow { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(5deg); } }
+        @keyframes starTwinkle { 0%, 100% { opacity: 0.2; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.2); } }
+        @keyframes rainbowMove { 0% { background-position: 0% 0%; } 25% { background-position: 100% 0%; } 50% { background-position: 100% 100%; } 75% { background-position: 0% 100%; } 100% { background-position: 0% 0%; } }
+        @keyframes cardFloat { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-5px); } }
         
-        /* Background */
         .animated-bg { position: fixed; inset: 0; background: radial-gradient(ellipse at 20% 30%, #0a0a1a, #050510); z-index: -3; }
         .stars { position: fixed; inset: 0; pointer-events: none; z-index: -2; }
-        .star { position: absolute; background: white; border-radius: 50%; animation: starTwinkle 3s infinite; }
-        
-        .glass-nav { background: rgba(10,10,15,0.8); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(168,85,247,0.2); position: fixed; top: 0; width: 100%; z-index: 50; }
+        .star { position: absolute; background: white; border-radius: 50%; animation: starTwinkle 3s infinite ease-in-out; }
+        .meteor { position: fixed; pointer-events: none; z-index: -1; }
+        .meteor::before { content: ''; position: absolute; top: 0; left: 0; width: 100px; height: 2px; background: linear-gradient(90deg, rgba(168,85,247,0.8), rgba(168,85,247,0.2), transparent); transform: translateX(-100px); border-radius: 2px; }
+        .meteor-1 { top: -100px; left: 20%; animation: meteor1 4s infinite linear; animation-delay: 0s; }
+        .meteor-2 { top: -150px; left: 50%; animation: meteor2 5s infinite linear; animation-delay: 2s; }
+        .meteor-3 { top: -80px; left: 70%; animation: meteor3 3.5s infinite linear; animation-delay: 1s; }
+        .floating-orb { position: fixed; top: 20%; right: 10%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(168,85,247,0.1), transparent 70%); border-radius: 50%; filter: blur(60px); animation: floatSlow 12s infinite ease-in-out; pointer-events: none; z-index: -1; }
+        .floating-orb-2 { position: fixed; bottom: 10%; left: 5%; width: 350px; height: 350px; background: radial-gradient(circle, rgba(59,130,246,0.08), transparent 70%); border-radius: 50%; filter: blur(50px); animation: floatSlow 15s infinite ease-in-out reverse; pointer-events: none; z-index: -1; }
+        .grid-pattern { position: fixed; inset: 0; background-image: linear-gradient(rgba(168,85,247,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(168,85,247,0.02) 1px, transparent 1px); background-size: 50px 50px; pointer-events: none; z-index: -1; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #0a0a0f; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #a855f7, #7e22ce); border-radius: 10px; }
+        .glass-nav { background: rgba(10,10,15,0.4); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(168,85,247,0.2); position: fixed; top: 0; width: 100%; z-index: 50; }
         
         /* Product Card - Style Toko Topup */
         .product-card {
             background: linear-gradient(145deg, #0f0f1a, #0a0a12);
             border-radius: 20px;
-            padding: 16px 12px;
+            padding: 14px 10px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -63,42 +73,42 @@
         .product-card.selected::before {
             content: '✓';
             position: absolute;
-            top: 8px;
-            right: 12px;
+            top: 6px;
+            right: 10px;
             color: #a855f7;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 12px;
         }
         .product-icon {
-            width: 48px;
-            height: 48px;
+            width: 42px;
+            height: 42px;
             background: linear-gradient(135deg, #1a1a2e, #16213e);
-            border-radius: 16px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 10px;
+            margin: 0 auto 8px;
             border: 1px solid rgba(168,85,247,0.3);
         }
         .product-icon i {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: #c084fc;
         }
         .product-name {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 800;
             color: white;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
         .product-desc {
-            font-size: 9px;
+            font-size: 8px;
             color: #a78bfa;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 6px;
+            margin-bottom: 5px;
         }
         .product-price {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 700;
             background: linear-gradient(135deg, #fbbf24, #ffd700);
             -webkit-background-clip: text;
@@ -106,7 +116,7 @@
             color: transparent;
         }
         
-        /* Summary Panel - Kayak Detail Pesanan */
+        /* Summary Panel */
         .summary-panel {
             background: linear-gradient(145deg, #0f0f1a, #0a0a12);
             border-radius: 24px;
@@ -118,19 +128,19 @@
         .summary-row {
             display: flex;
             justify-content: space-between;
-            padding: 14px 16px;
+            padding: 12px 16px;
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         
-        /* Input Nickname */
+        /* Nickname Input */
         .nickname-input {
             background: rgba(0,0,0,0.5);
             border: 1px solid rgba(168,85,247,0.3);
             border-radius: 16px;
-            padding: 14px 18px;
+            padding: 12px 16px;
             width: 100%;
             color: white;
-            font-size: 14px;
+            font-size: 13px;
             text-align: center;
         }
         .nickname-input:focus {
@@ -148,6 +158,10 @@
             color: white;
             box-shadow: 0 0 10px rgba(139,92,246,0.3);
         }
+        
+        /* Stat Card */
+        .stat-card { background: rgba(255,255,255,0.05); backdrop-filter: blur(4px); border-radius: 16px; padding: 16px; text-align: center; border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s; }
+        .stat-card:hover { transform: translateY(-3px); border-color: rgba(168,85,247,0.4); }
         
         /* QRIS Modal */
         .modal-qris {
@@ -204,31 +218,50 @@
         
         @media (max-width: 768px) {
             .summary-panel { position: relative; top: 0; margin-top: 20px; }
-            .product-name { font-size: 12px; }
-            .product-price { font-size: 11px; }
-            .product-icon { width: 40px; height: 40px; }
-            .product-icon i { font-size: 1.2rem; }
+            .product-name { font-size: 10px; }
+            .product-price { font-size: 10px; }
+            .product-icon { width: 36px; height: 36px; }
+            .product-icon i { font-size: 1rem; }
         }
         
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: #0a0a0f; }
-        ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #a855f7, #7e22ce); border-radius: 10px; }
-        
         .review-card { background: rgba(255,255,255,0.05); border-radius: 14px; padding: 12px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 8px; }
+        
+        #productGrid {
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+        #productGrid::-webkit-scrollbar {
+            width: 3px;
+        }
+        #productGrid::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+        }
+        #productGrid::-webkit-scrollbar-thumb {
+            background: #a855f7;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
 
     <div class="animated-bg"></div>
     <div class="stars" id="starsContainer"></div>
+    <div class="meteor meteor-1"></div>
+    <div class="meteor meteor-2"></div>
+    <div class="meteor meteor-3"></div>
+    <div class="floating-orb"></div>
+    <div class="floating-orb-2"></div>
+    <div class="grid-pattern"></div>
 
     <!-- Navbar -->
     <nav class="glass-nav fixed top-0 left-0 w-full z-50">
         <div class="max-w-7xl mx-auto px-5 py-3">
             <div class="flex justify-between items-center">
                 <div>
-                    <div class="text-white font-bold text-xl tracking-tight elixir-title">ELIXIR<span class="text-purple-400">STORE</span></div>
-                    <div class="text-[8px] text-purple-400/40 tracking-[0.2em]">PREMIUM SOUTHBRONX</div>
+                    <div class="text-white font-bold text-lg tracking-tight elixir-title">ELIXIR<span class="text-purple-400">STORE</span></div>
+                    <div class="text-[8px] text-purple-400/40 tracking-[0.2em]">PROJECTION</div>
                 </div>
                 <div class="flex gap-4">
                     <a href="#shop" class="text-white/50 hover:text-purple-400 transition text-xs"><i class="fas fa-store"></i> MARKET</a>
@@ -239,98 +272,107 @@
         </div>
     </nav>
 
-    <!-- Hero -->
-    <div class="relative z-10 max-w-7xl mx-auto px-5 pt-28 pb-8 text-center" data-aos="fade-up">
-        <div class="inline-flex px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 mb-4">
+    <!-- HERO SECTION (Keren kayak awal) -->
+    <div class="relative z-10 max-w-7xl mx-auto px-5 pt-28 pb-10 text-center" data-aos="fade-up">
+        <div class="inline-flex px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 mb-5 backdrop-blur-sm">
             <span class="text-purple-300 text-[9px] font-medium tracking-wider">PREMIUM SOUTHBRONX STORE</span>
         </div>
-        <h1 class="text-3xl md:text-5xl font-extrabold text-white mb-2">ELIXIR<span class="text-purple-400">60S</span></h1>
-        <p class="text-white/40 text-sm max-w-md mx-auto">Joki SBC • Script Premium • Akun Tier<br>Fast Response & 24/7 Support</p>
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-3"><span class="hero-text">ELIXIR60S</span></h1>
+        <p class="text-white/50 max-w-lg mx-auto text-sm mb-6">Joki SBC • Script Premium • Akun Tier<br>Fast Response & 24/7 Support</p>
+        <div class="flex justify-center gap-3 flex-wrap">
+            <a href="#shop" class="px-6 py-2 bg-gradient-to-r from-purple-600 to-purple-700 rounded-full text-white text-xs font-semibold flex items-center gap-2 shadow-md shadow-purple-500/25"><i class="fas fa-crown"></i> Explore Items</a>
+            <a href="https://discord.gg/CxbDP6QmW" target="_blank" class="px-5 py-2 bg-white/5 backdrop-blur-sm border border-white/10 hover:border-purple-500/50 text-white/80 rounded-full font-semibold flex items-center gap-2 transition-all text-xs"><i class="fab fa-discord"></i> Discord</a>
+            <a href="https://wa.me/62895385984764?text=Halo%20ELIXIRSTORE%2C%20saya%20mau%20order" target="_blank" class="px-5 py-2 bg-white/5 backdrop-blur-sm border border-white/10 hover:border-green-500/50 text-white/80 rounded-full font-semibold flex items-center gap-2 transition-all text-xs"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div>
     </div>
 
-    <!-- Main Content - Layout Toko Topup -->
-    <div id="shop" class="relative z-10 max-w-7xl mx-auto px-5 py-5">
+    <!-- STATISTIK -->
+    <div class="relative z-10 max-w-5xl mx-auto px-5 py-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-center">
+            <div class="stat-card"><div class="text-2xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent elixir-title">28</div><div class="text-white/40 text-[9px] uppercase mt-1">PRODUK</div></div>
+            <div class="stat-card"><div class="text-2xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent elixir-title">100+</div><div class="text-white/40 text-[9px] uppercase mt-1">TERJUAL</div></div>
+            <div class="stat-card"><div class="text-2xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent elixir-title">12</div><div class="text-white/40 text-[9px] uppercase mt-1">ULASAN</div></div>
+            <div class="stat-card"><div class="text-2xl font-black bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent elixir-title">100+</div><div class="text-white/40 text-[9px] uppercase mt-1">CUSTOMER</div></div>
+        </div>
+    </div>
+
+    <!-- SHOP SECTION - Layout Toko Topup -->
+    <div id="shop" class="relative z-10 max-w-7xl mx-auto px-5 py-8">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             
-            <!-- KOLOM KIRI & TENGAH: Nickname + Grid Produk -->
+            <!-- KOLOM KIRI & TENGAH -->
             <div class="lg:col-span-2">
-                <!-- Input Nickname (opsional) -->
-                <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-5 border border-white/10 mb-6" data-aos="fade-up">
-                    <label class="text-white/70 text-xs font-semibold uppercase tracking-wider mb-2 block">MASUKKAN NICKNAME (OPSIONAL)</label>
-                    <div class="flex gap-3">
+                <!-- Input Nickname -->
+                <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-4 border border-white/10 mb-6" data-aos="fade-up">
+                    <label class="text-white/70 text-[10px] font-semibold uppercase tracking-wider mb-2 block">MASUKKAN NICKNAME (OPSIONAL)</label>
+                    <div class="flex gap-2">
                         <input type="text" id="nicknameInput" class="nickname-input flex-1" placeholder="Nickname kamu">
-                        <button id="gantiNickBtn" class="px-5 py-3 bg-purple-600/50 hover:bg-purple-600 rounded-2xl text-white text-sm font-semibold transition">GANTI</button>
+                        <button id="gantiNickBtn" class="px-4 py-2 bg-purple-600/50 hover:bg-purple-600 rounded-xl text-white text-xs font-semibold transition">GANTI</button>
                     </div>
-                    <p class="text-white/30 text-[10px] mt-2"><i class="fas fa-info-circle"></i> Masukkan nickname kamu (opsional untuk produk SBC)</p>
+                    <p class="text-white/30 text-[9px] mt-2"><i class="fas fa-info-circle"></i> Masukkan nickname kamu (opsional untuk produk SBC)</p>
                 </div>
                 
                 <!-- Filter Tab -->
-                <div class="flex flex-wrap gap-2 mb-6" data-aos="fade-up">
-                    <button data-filter="all" class="filter-tab active px-5 py-2 rounded-full text-xs font-semibold bg-purple-600 text-white shadow-md">ALL</button>
-                    <button data-filter="sbc" class="filter-tab px-5 py-2 rounded-full text-xs font-semibold bg-white/5 text-white/70 hover:bg-white/10">SBC</button>
-                    <button data-filter="script" class="filter-tab px-5 py-2 rounded-full text-xs font-semibold bg-white/5 text-white/70 hover:bg-white/10">SCRIPT</button>
-                    <button data-filter="tier" class="filter-tab px-5 py-2 rounded-full text-xs font-semibold bg-white/5 text-white/70 hover:bg-white/10">AKUN TIER</button>
+                <div class="flex flex-wrap gap-2 mb-5" data-aos="fade-up">
+                    <button data-filter="all" class="filter-tab active px-4 py-1.5 rounded-full text-[10px] font-semibold bg-purple-600 text-white shadow-md">ALL</button>
+                    <button data-filter="sbc" class="filter-tab px-4 py-1.5 rounded-full text-[10px] font-semibold bg-white/5 text-white/70 hover:bg-white/10">SBC</button>
+                    <button data-filter="script" class="filter-tab px-4 py-1.5 rounded-full text-[10px] font-semibold bg-white/5 text-white/70 hover:bg-white/10">SCRIPT</button>
+                    <button data-filter="tier" class="filter-tab px-4 py-1.5 rounded-full text-[10px] font-semibold bg-white/5 text-white/70 hover:bg-white/10">AKUN TIER</button>
                 </div>
                 
                 <!-- Grid Produk -->
                 <div class="mb-4">
-                    <h3 class="text-white/60 text-xs font-semibold uppercase tracking-wider mb-3">SEMUA PRODUK</h3>
+                    <h3 class="text-white/60 text-[10px] font-semibold uppercase tracking-wider mb-3">SEMUA PRODUK</h3>
                     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3" id="productGrid"></div>
                 </div>
                 
                 <!-- Info Layanan -->
-                <div class="bg-gradient-to-r from-purple-900/20 to-pink-900/20 rounded-2xl p-4 mt-6 border border-purple-500/20">
+                <div class="bg-gradient-to-r from-purple-900/20 to-pink-900/20 rounded-2xl p-3 mt-5 border border-purple-500/20">
                     <div class="flex justify-center gap-6 text-center">
-                        <div><i class="fas fa-bolt text-purple-400 text-xl"></i><p class="text-white/60 text-xs mt-1">FAST RESPON</p></div>
-                        <div><i class="fas fa-clock text-purple-400 text-xl"></i><p class="text-white/60 text-xs mt-1">PROSES INSTAN</p></div>
-                        <div><i class="fas fa-shield-alt text-purple-400 text-xl"></i><p class="text-white/60 text-xs mt-1">AMAN TERPERCAYA</p></div>
+                        <div><i class="fas fa-bolt text-purple-400 text-lg"></i><p class="text-white/60 text-[10px] mt-1">FAST RESPON</p></div>
+                        <div><i class="fas fa-clock text-purple-400 text-lg"></i><p class="text-white/60 text-[10px] mt-1">PROSES INSTAN</p></div>
+                        <div><i class="fas fa-shield-alt text-purple-400 text-lg"></i><p class="text-white/60 text-[10px] mt-1">AMAN</p></div>
                     </div>
                 </div>
             </div>
             
-            <!-- KOLOM KANAN: Detail Pesanan (Summary Panel) -->
+            <!-- KOLOM KANAN: Detail Pesanan -->
             <div data-aos="fade-left">
                 <div class="summary-panel">
-                    <div class="bg-gradient-to-r from-purple-800 to-purple-600 px-5 py-4">
-                        <h3 class="text-white font-bold text-sm flex items-center gap-2"><i class="fas fa-receipt"></i> DETAIL PESANAN</h3>
+                    <div class="bg-gradient-to-r from-purple-800 to-purple-600 px-4 py-3">
+                        <h3 class="text-white font-bold text-xs flex items-center gap-2"><i class="fas fa-receipt"></i> DETAIL PESANAN</h3>
                     </div>
                     
-                    <div class="p-4">
-                        <!-- Produk -->
+                    <div class="p-3">
                         <div class="summary-row">
-                            <span class="text-white/50 text-xs">PRODUK</span>
-                            <span class="text-white font-semibold text-sm" id="selectedProductName">-</span>
+                            <span class="text-white/50 text-[10px]">PRODUK</span>
+                            <span class="text-white font-semibold text-xs" id="selectedProductName">-</span>
                         </div>
-                        <!-- Harga -->
                         <div class="summary-row">
-                            <span class="text-white/50 text-xs">HARGA</span>
-                            <span class="text-yellow-400 font-bold" id="selectedProductPrice">Rp 0</span>
+                            <span class="text-white/50 text-[10px]">HARGA</span>
+                            <span class="text-yellow-400 font-bold text-xs" id="selectedProductPrice">Rp 0</span>
                         </div>
-                        <!-- Metode Pembayaran -->
                         <div class="summary-row">
-                            <span class="text-white/50 text-xs">METODE</span>
-                            <span class="text-white text-sm"><i class="fas fa-qrcode text-purple-400"></i> QRIS</span>
+                            <span class="text-white/50 text-[10px]">METODE</span>
+                            <span class="text-white text-xs"><i class="fas fa-qrcode text-purple-400"></i> QRIS</span>
                         </div>
-                        <!-- Total -->
                         <div class="summary-row border-b-0">
-                            <span class="text-white/70 text-sm font-semibold">TOTAL</span>
-                            <span class="text-yellow-400 font-black text-xl" id="totalPrice">Rp 0</span>
+                            <span class="text-white/70 text-xs font-semibold">TOTAL</span>
+                            <span class="text-yellow-400 font-black text-base" id="totalPrice">Rp 0</span>
                         </div>
                     </div>
                     
-                    <!-- Tombol Bayar -->
-                    <div class="p-4 pt-2">
-                        <button id="bayarBtn" class="btn-bayar w-full py-4 rounded-2xl text-white font-bold text-base flex items-center justify-center gap-2">
+                    <div class="p-3 pt-0">
+                        <button id="bayarBtn" class="btn-bayar w-full py-3 rounded-xl text-white font-bold text-xs flex items-center justify-center gap-2">
                             <i class="fas fa-credit-card"></i> BAYAR SEKARANG
                         </button>
                     </div>
                     
-                    <!-- Bantuan -->
-                    <div class="border-t border-white/10 p-4 text-center">
-                        <p class="text-white/40 text-[10px] mb-2">PERLU BANTUAN?</p>
+                    <div class="border-t border-white/10 p-3 text-center">
+                        <p class="text-white/40 text-[9px] mb-2">PERLU BANTUAN?</p>
                         <div class="flex justify-center gap-4">
-                            <a href="https://wa.me/62895385984764" target="_blank" class="text-green-400 text-xs flex items-center gap-1"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                            <a href="https://discord.gg/CxbDP6QmW" target="_blank" class="text-purple-400 text-xs flex items-center gap-1"><i class="fab fa-discord"></i> Discord</a>
+                            <a href="https://wa.me/62895385984764" target="_blank" class="text-green-400 text-[10px] flex items-center gap-1"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                            <a href="https://discord.gg/CxbDP6QmW" target="_blank" class="text-purple-400 text-[10px] flex items-center gap-1"><i class="fab fa-discord"></i> Discord</a>
                         </div>
                     </div>
                 </div>
@@ -353,7 +395,7 @@
                 <i class="far fa-star text-xl text-white/30 cursor-pointer star-select" data-val="5"></i>
             </div>
             <textarea id="reviewComment" rows="2" class="w-full bg-black/30 border border-white/10 rounded-xl p-3 text-white text-sm mb-2" placeholder="Tulis ulasan kamu..."></textarea>
-            <button id="submitReviewBtn" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-semibold py-2 rounded-xl">Kirim Ulasan</button>
+            <button id="submitReviewBtn" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-semibold py-2 rounded-xl text-sm">Kirim Ulasan</button>
         </div>
         <div id="reviewsList" class="space-y-2"></div>
     </div>
@@ -361,7 +403,7 @@
     <!-- Footer -->
     <footer id="footer" class="relative z-10 border-t border-white/10 bg-black/20 py-8">
         <div class="max-w-7xl mx-auto px-5 text-center">
-            <p class="text-white/20 text-[10px]">2025 ELIXIRSTORE • PREMIUM SOUTHBRONX • All rights reserved</p>
+            <p class="text-white/20 text-[9px]">2025 ELIXIRSTORE • PREMIUM SOUTHBRONX • All rights reserved</p>
         </div>
     </footer>
 
@@ -408,15 +450,13 @@
         const formatRp = (n) => "Rp" + n.toLocaleString('id-ID');
         
         const products = [
-            // SBC
-            ...["100K","200K","300K","400K","500K","600K","700K","800K","900K","1JT","1.1 JT","1.2 JT","1.3 JT","1.4 JT","1.5 JT","1.6 JT","1.7 JT"].map((name, idx) => ({ 
+            ...["100K","200K","300K","400K","500K","600K","700K","800K","900K","1JT","1.1JT","1.2JT","1.3JT","1.4JT","1.5JT","1.6JT","1.7JT"].map((name, idx) => ({ 
                 name: `SBC ${name}`, 
                 price: [10000,20000,30000,40000,50000,60000,70000,80000,90000,100000,110000,120000,130000,140000,150000,160000,170000][idx], 
                 category: "sbc", 
                 icon: "fa-crown",
                 desc: "VIA TF ON SOUTHBRONX"
             })),
-            // Script
             { name: "SCRIPT MARSHMALLOW - HARIAN", price: 13000, category: "script", icon: "fa-code", desc: "PREMIUM SCRIPT" },
             { name: "SCRIPT MARSHMALLOW - BULANAN", price: 60000, category: "script", icon: "fa-code", desc: "PREMIUM SCRIPT" },
             { name: "SCRIPT MARSHMALLOW - LIFETIME", price: 150000, category: "script", icon: "fa-code", desc: "PREMIUM SCRIPT" },
@@ -424,7 +464,6 @@
             { name: "SCRIPT COMBAT - BULANAN", price: 80000, category: "script", icon: "fa-code", desc: "PREMIUM SCRIPT" },
             { name: "SCRIPT COMBAT - LIFETIME", price: 200000, category: "script", icon: "fa-code", desc: "PREMIUM SCRIPT" },
             { name: "SCRIPT FPS - LIFETIME", price: 50000, category: "script", icon: "fa-code", desc: "PREMIUM SCRIPT" },
-            // Tier
             { name: "TIER 1 - GREEN NAME", price: 150000, category: "tier", icon: "fa-gem", desc: "PREMIUM TIER" },
             { name: "TIER 2 - PINK NAME", price: 250000, category: "tier", icon: "fa-gem", desc: "PREMIUM TIER" },
             { name: "TIER 3 - BLUE NAME", price: 350000, category: "tier", icon: "fa-gem", desc: "PREMIUM TIER" }
@@ -434,7 +473,6 @@
         let currentFilter = 'all';
         const waNumber = "62895385984764";
         
-        // Render produk grid
         function renderProducts() {
             const filtered = products.filter(p => currentFilter === 'all' || p.category === currentFilter);
             const container = document.getElementById('productGrid');
@@ -466,7 +504,6 @@
             }
         }
         
-        // Filter tabs
         document.querySelectorAll('.filter-tab').forEach(btn => {
             btn.onclick = () => {
                 document.querySelectorAll('.filter-tab').forEach(b => {
@@ -493,26 +530,19 @@
         let currentTotal = 0;
         
         function openPaymentModal() {
-            if (!selectedProduct) {
-                alert('Pilih produk terlebih dahulu!');
-                return;
-            }
-            
+            if (!selectedProduct) { alert('Pilih produk dulu!'); return; }
             currentTotal = selectedProduct.price;
             document.getElementById('modalAmount').innerHTML = formatRp(currentTotal);
             qrisModal.classList.add('active');
         }
         
         function closeModal() { qrisModal.classList.remove('active'); }
-        
         document.getElementById('closeModalBtn').onclick = closeModal;
         qrisModal.onclick = (e) => { if (e.target === qrisModal) closeModal(); };
-        
         document.getElementById('copyAmountBtn').onclick = () => {
             navigator.clipboard.writeText(currentTotal.toString());
             alert('Nominal ' + formatRp(currentTotal) + ' disalin!');
         };
-        
         document.getElementById('confirmWaBtn').onclick = () => {
             const nickname = document.getElementById('nicknameInput').value;
             let msg = `Halo ELIXIRSTORE%0A%0A*KONFIRMASI PEMBAYARAN*%0A%0AProduk: ${encodeURIComponent(selectedProduct.name)}%0AHarga: ${encodeURIComponent(formatRp(selectedProduct.price))}%0ATotal: ${encodeURIComponent(formatRp(currentTotal))}%0AMetode: QRIS`;
@@ -521,7 +551,6 @@
             window.open(`https://wa.me/${waNumber}?text=${msg}`, '_blank');
             closeModal();
         };
-        
         document.getElementById('bayarBtn').onclick = openPaymentModal;
         
         // Review System
@@ -529,7 +558,7 @@
         let selectedRating = 5;
         
         function loadReviews() {
-            const saved = localStorage.getItem('elixir_reviews_toko');
+            const saved = localStorage.getItem('elixir_reviews_final');
             if (saved) try { reviews = JSON.parse(saved); } catch(e) { reviews = []; }
             if (reviews.length === 0) reviews = [
                 { name: "Verns", rating: 5, comment: "Gacor banget Jokinya cepet dan terpercaya", date: "31 May 2026" },
@@ -542,11 +571,11 @@
         function renderReviews() {
             const container = document.getElementById('reviewsList');
             if (!container) return;
-            if (reviews.length === 0) { container.innerHTML = '<div class="text-center text-white/40 py-4">✨ Belum ada ulasan.</div>'; return; }
+            if (reviews.length === 0) { container.innerHTML = '<div class="text-center text-white/40 py-4 text-xs">✨ Belum ada ulasan.</div>'; return; }
             let html = '';
             for (let r of reviews) {
                 const stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
-                html += `<div class="review-card"><div class="flex justify-between"><div><span class="text-white text-sm font-semibold">${escapeHtml(r.name)}</span><div class="text-yellow-500 text-[10px]">${stars}</div></div><span class="text-white/30 text-[10px]">${r.date || ''}</span></div><p class="text-white/60 text-xs mt-1">"${escapeHtml(r.comment)}"</p></div>`;
+                html += `<div class="review-card"><div class="flex justify-between"><div><span class="text-white text-xs font-semibold">${escapeHtml(r.name)}</span><div class="text-yellow-500 text-[9px]">${stars}</div></div><span class="text-white/30 text-[9px]">${r.date || ''}</span></div><p class="text-white/60 text-[10px] mt-1">"${escapeHtml(r.comment)}"</p></div>`;
             }
             container.innerHTML = html;
         }
@@ -568,14 +597,13 @@
             const comment = document.getElementById('reviewComment').value.trim();
             if (!name || !comment) { alert('Isi nickname & ulasan!'); return; }
             reviews.unshift({ name, rating: selectedRating, comment, date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) });
-            localStorage.setItem('elixir_reviews_toko', JSON.stringify(reviews));
+            localStorage.setItem('elixir_reviews_final', JSON.stringify(reviews));
             renderReviews();
             document.getElementById('reviewName').value = '';
             document.getElementById('reviewComment').value = '';
             alert('✅ Ulasan terkirim!');
         };
         
-        // Init
         renderProducts();
         updateSummary();
         loadReviews();
