@@ -56,20 +56,7 @@
         .stat-card { background: rgba(255,255,255,0.05); backdrop-filter: blur(4px); border-radius: 16px; padding: 16px; text-align: center; border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s; }
         .stat-card:hover { transform: translateY(-3px); border-color: rgba(168,85,247,0.4); background: rgba(255,255,255,0.08); }
         
-        /* TAB PREMIUM - BENERAN TENGAH */
-        .tabs-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            margin-bottom: 30px;
-        }
-        .tabs-wrapper {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            justify-content: center;
-        }
+        /* TAB PREMIUM */
         .premium-tab {
             position: relative;
             padding: 10px 24px;
@@ -122,7 +109,7 @@
             border: 1px solid rgba(168,85,247,0.2);
             position: relative;
             overflow: hidden;
-            width: 100%;
+            width: 180px;
         }
         .product-card:hover {
             transform: translateY(-5px);
@@ -171,22 +158,33 @@
             color: transparent;
         }
         
-        /* GRID PRODUCT - BENERAN TENGAH PAKE FLEX */
-        .grid-wrapper {
+        /* ========== INI YANG DIUBAH - BIKIN TENGAH ========== */
+        .shop-left-col {
+            text-align: center;
+        }
+        .tabs-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 30px;
             width: 100%;
         }
         #productGrid {
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
             justify-content: center;
             align-items: center;
+            gap: 20px;
             margin: 0 auto;
+            width: 100%;
         }
-        #productGrid > div {
-            flex: 0 0 auto;
-            width: 180px;
+        .grid-wrapper {
+            width: 100%;
+            text-align: center;
         }
+        /* ================================================ */
         
         /* SUMMARY PANEL */
         .summary-panel {
@@ -276,20 +274,12 @@
             .product-icon { width: 45px; height: 45px; }
             .product-icon i { font-size: 1.3rem; }
             .premium-tab { padding: 6px 16px; font-size: 0.7rem; }
-            #productGrid > div {
-                width: 155px;
-            }
-            #productGrid {
-                gap: 12px;
-            }
+            .product-card { width: 155px; }
+            #productGrid { gap: 12px; }
         }
         
         .footer-link { transition: all 0.2s; }
         .footer-link:hover { color: #a855f7; transform: translateX(3px); }
-        
-        .text-center-custom {
-            text-align: center;
-        }
     </style>
 </head>
 <body>
@@ -348,22 +338,20 @@
     <div id="shop" class="relative z-10 max-w-7xl mx-auto px-5 py-8">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             
-            <!-- KOLOM KIRI: Tabs + Grid Produk -->
-            <div class="lg:col-span-2">
+            <!-- KOLOM KIRI: Tabs + Grid Produk (DI TENGAH) -->
+            <div class="lg:col-span-2 shop-left-col">
                 
-                <!-- Tabs Premium - BENERAN TENGAH -->
-                <div class="tabs-container" data-aos="fade-up">
-                    <div class="tabs-wrapper">
-                        <button data-filter="all" class="premium-tab active">🔥 ALL</button>
-                        <button data-filter="sbc" class="premium-tab">⚡ SBC</button>
-                        <button data-filter="script" class="premium-tab">📜 SCRIPT</button>
-                        <button data-filter="tier" class="premium-tab">💎 TIER</button>
-                    </div>
+                <!-- Tabs Premium - TENGAH -->
+                <div class="tabs-wrapper" data-aos="fade-up">
+                    <button data-filter="all" class="premium-tab active">🔥 ALL</button>
+                    <button data-filter="sbc" class="premium-tab">⚡ SBC</button>
+                    <button data-filter="script" class="premium-tab">📜 SCRIPT</button>
+                    <button data-filter="tier" class="premium-tab">💎 TIER</button>
                 </div>
                 
-                <!-- Grid Produk - BENERAN TENGAH -->
+                <!-- Grid Produk - TENGAH -->
                 <div class="grid-wrapper">
-                    <h3 class="text-white/60 text-[10px] font-semibold uppercase tracking-wider mb-3 text-center">SEMUA PRODUK</h3>
+                    <h3 class="text-white/60 text-[10px] font-semibold uppercase tracking-wider mb-3">SEMUA PRODUK</h3>
                     <div id="productGrid"></div>
                 </div>
                 
@@ -536,7 +524,6 @@
                 const isSelected = selectedProduct && selectedProduct.name === product.name;
                 const card = document.createElement('div');
                 card.className = `product-card ${isSelected ? 'selected' : ''}`;
-                card.style.width = '100%';
                 card.innerHTML = `
                     <div class="product-icon"><i class="fas ${product.icon}"></i></div>
                     <div class="product-name">${product.name}</div>
@@ -619,7 +606,7 @@
         let selectedRating = 5;
         
         function loadReviews() {
-            const saved = localStorage.getItem('elixir_reviews_final_center2');
+            const saved = localStorage.getItem('elixir_reviews_final_middle');
             if (saved) try { reviews = JSON.parse(saved); } catch(e) { reviews = []; }
             if (reviews.length === 0) reviews = [
                 { name: "Verns", rating: 5, comment: "Gacor banget Jokinya cepet dan terpercaya", date: "31 May 2026" },
@@ -658,7 +645,7 @@
             const comment = document.getElementById('reviewComment').value.trim();
             if (!name || !comment) { alert('Isi nickname & ulasan!'); return; }
             reviews.unshift({ name, rating: selectedRating, comment, date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) });
-            localStorage.setItem('elixir_reviews_final_center2', JSON.stringify(reviews));
+            localStorage.setItem('elixir_reviews_final_middle', JSON.stringify(reviews));
             renderReviews();
             document.getElementById('reviewName').value = '';
             document.getElementById('reviewComment').value = '';
