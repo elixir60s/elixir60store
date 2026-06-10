@@ -93,6 +93,11 @@
             50% { transform: translateY(-5px); }
         }
         
+        @keyframes particleFloat {
+            0% { transform: translateY(0) scale(1); opacity: 0.8; }
+            100% { transform: translateY(-50px) scale(0); opacity: 0; }
+        }
+        
         .animated-bg {
             position: fixed;
             top: 0;
@@ -276,17 +281,6 @@
         
         .premium-card:hover .particles span {
             animation: particleFloat 1.5s ease-out forwards;
-        }
-        
-        @keyframes particleFloat {
-            0% {
-                transform: translateY(0) scale(1);
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(-50px) scale(0);
-                opacity: 0;
-            }
         }
         
         .card-badge {
@@ -528,19 +522,6 @@
             border-color: #a855f7;
             box-shadow: 0 0 15px rgba(168,85,247,0.2);
         }
-        
-        .gloss {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 50%;
-            background: linear-gradient(180deg, 
-                rgba(168,85,247,0.12) 0%, 
-                rgba(255,255,255,0) 100%);
-            pointer-events: none;
-            border-radius: 24px 24px 0 0;
-        }
     </style>
 </head>
 <body class="bg-[#050510]">
@@ -618,7 +599,7 @@
         
         <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 mb-8" data-aos="fade-up">
             <h3 class="text-white font-semibold mb-4 flex items-center gap-2"><i class="fas fa-pen"></i> Tulis Ulasan</h3>
-            <input type="text" id="reviewName" class="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 text-white/80 text-sm mb-3" placeholder="Nickname kamu">
+            <input type="text" id="reviewName" class="review-input w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 text-white/80 text-sm mb-3" placeholder="Nickname kamu">
             <div class="flex gap-2 mb-3" id="ratingStars">
                 <i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="1"></i>
                 <i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="2"></i>
@@ -626,7 +607,7 @@
                 <i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="4"></i>
                 <i class="far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select" data-val="5"></i>
             </div>
-            <textarea id="reviewComment" rows="3" class="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 text-white/80 text-sm mb-3" placeholder="Tulis ulasan kamu..."></textarea>
+            <textarea id="reviewComment" rows="3" class="review-textarea w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 text-white/80 text-sm mb-3" placeholder="Tulis ulasan kamu..."></textarea>
             <button id="submitReviewBtn" class="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white font-semibold py-3 rounded-xl transition-all flex items-center justify-center gap-2">
                 <i class="fas fa-paper-plane"></i> Kirim Ulasan
             </button>
@@ -651,133 +632,13 @@
     <script>
         AOS.init({ duration: 600, once: true });
 
-        // ========== GOOGLE SHEETS REVIEW SYSTEM ==========
+        // ========== GOOGLE SHEETS REVIEW SYSTEM (CORS FIXED) ==========
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzYHmqvD4QNDi0bK4wFdV0ksN2RbfLZhj-TJTELTzi2ji3vHwVKKtrxKubHo6GMYeJHHA/exec";
+        const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
         
         let selectedRating = 5;
         
-        // BINTANG RATING
-        document.querySelectorAll('.star-select').forEach(star => {
-            star.addEventListener('click', () => {
-                const val = parseInt(star.dataset.val);
-                selectedRating = val;
-                document.querySelectorAll('.star-select').forEach((s, idx) => {
-                    if (idx < val) {
-                        s.className = "fas fa-star text-2xl text-yellow-500 cursor-pointer star-select";
-                    } else {
-                        s.className = "far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select";
-                    }
-                });
-            });
-        });
-        
-        // LOAD ULASAN DARI GOOGLE SHEETS
-        async function loadReviewsFromSheet() {
-            try {
-                const response = await fetch(GOOGLE_SCRIPT_URL);
-                const result = await response.json();
-                
-                let reviews = [];
-                if (result.success && Array.isArray(result.data)) {
-                    reviews = result.data;
-                } else if (Array.isArray(result)) {
-                    reviews = result;
-                }
-                
-                renderReviewsToHTML(reviews);
-                return reviews;
-            } catch (error) {
-                console.error("Gagal load review:", error);
-                document.getElementById('reviewsList').innerHTML = '<div class="text-center text-white/40 py-8">Gagal memuat ulasan. Coba lagi nanti.</div>';
-                return [];
-            }
-        }
-        
-        function renderReviewsToHTML(reviews) {
-            const container = document.getElementById('reviewsList');
-            if (!reviews || reviews.length === 0) {
-                container.innerHTML = '<div class="text-center text-white/40 py-8">Belum ada ulasan. Jadi yang pertama!</div>';
-                return;
-            }
-            
-            let html = '';
-            for (const r of reviews) {
-                const stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
-                const date = r.timestamp ? r.timestamp.slice(0,10) : new Date().toLocaleDateString('id-ID');
-                html += `
-                    <div class="review-card">
-                        <div class="flex justify-between items-start mb-2 flex-wrap gap-2">
-                            <div>
-                                <span class="text-white font-semibold text-sm">${escapeHtml(r.name)}</span>
-                                <div class="text-yellow-500 text-[10px] mt-1">${stars}</div>
-                            </div>
-                            <span class="text-white/30 text-[10px]">${date}</span>
-                        </div>
-                        <p class="text-white/60 text-sm mt-2">"${escapeHtml(r.comment)}"</p>
-                    </div>
-                `;
-            }
-            container.innerHTML = html;
-        }
-        
-        function escapeHtml(str) {
-            if (!str) return '';
-            return str.replace(/[&<>]/g, function(m) {
-                if (m === '&') return '&amp;';
-                if (m === '<') return '&lt;';
-                if (m === '>') return '&gt;';
-                return m;
-            });
-        }
-        
-        // SUBMIT ULASAN KE GOOGLE SHEETS
-        async function submitReviewToSheet(name, rating, comment) {
-            try {
-                await fetch(GOOGLE_SCRIPT_URL, {
-                    method: "POST",
-                    mode: "no-cors",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ name, rating, comment })
-                });
-                return true;
-            } catch (error) {
-                console.error("Gagal submit:", error);
-                return false;
-            }
-        }
-        
-        // EVENT SUBMIT REVIEW
-        document.getElementById('submitReviewBtn').addEventListener('click', async () => {
-            const name = document.getElementById('reviewName').value.trim();
-            const comment = document.getElementById('reviewComment').value.trim();
-            
-            if (!name) { 
-                alert('Masukkan nickname'); 
-                return; 
-            }
-            if (!comment) { 
-                alert('Masukkan ulasan'); 
-                return; 
-            }
-            
-            const success = await submitReviewToSheet(name, selectedRating, comment);
-            if (success) {
-                alert('Ulasan terkirim! Terima kasih.');
-                document.getElementById('reviewName').value = '';
-                document.getElementById('reviewComment').value = '';
-                // Reset bintang ke 5
-                document.querySelectorAll('.star-select').forEach((s, idx) => {
-                    if (idx < 5) s.className = "fas fa-star text-2xl text-yellow-500 cursor-pointer star-select";
-                    else s.className = "far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select";
-                });
-                selectedRating = 5;
-                loadReviewsFromSheet(); // Refresh tampilan
-            } else {
-                alert('Gagal mengirim ulasan. Coba lagi.');
-            }
-        });
-        
-        // ========== STARS BACKGROUND ==========
+        // BINTANG BACKGROUND
         for (let i = 0; i < 200; i++) {
             const star = document.createElement('div');
             star.classList.add('star');
@@ -790,10 +651,106 @@
             star.style.opacity = Math.random() * 0.5 + 0.2;
             document.getElementById('starsContainer').appendChild(star);
         }
+        
+        // BINTANG RATING
+        document.querySelectorAll('.star-select').forEach(star => {
+            star.addEventListener('click', () => {
+                const val = parseInt(star.dataset.val);
+                selectedRating = val;
+                document.querySelectorAll('.star-select').forEach((s, idx) => {
+                    if (idx < val) s.className = "fas fa-star text-2xl text-yellow-500 cursor-pointer star-select";
+                    else s.className = "far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select";
+                });
+            });
+        });
+        
+        // LOAD ULASAN
+        async function loadReviewsFromSheet() {
+            try {
+                const response = await fetch(CORS_PROXY + GOOGLE_SCRIPT_URL);
+                const result = await response.json();
+                let reviews = [];
+                if (result.success && Array.isArray(result.data)) reviews = result.data;
+                else if (Array.isArray(result)) reviews = result;
+                renderReviewsToHTML(reviews);
+                return reviews;
+            } catch (error) {
+                console.error("Gagal load review:", error);
+                document.getElementById('reviewsList').innerHTML = '<div class="text-center text-white/40 py-8">⚠️ Gagal memuat ulasan. Klik "Request temporary access" di popup.</div>';
+                return [];
+            }
+        }
+        
+        function renderReviewsToHTML(reviews) {
+            const container = document.getElementById('reviewsList');
+            if (!reviews || reviews.length === 0) {
+                container.innerHTML = '<div class="text-center text-white/40 py-8">✨ Belum ada ulasan. Jadi yang pertama!</div>';
+                return;
+            }
+            let html = '';
+            for (const r of reviews) {
+                const stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+                const date = r.timestamp ? r.timestamp.slice(0,10) : new Date().toLocaleDateString('id-ID');
+                html += `<div class="review-card"><div class="flex justify-between items-start mb-2 flex-wrap gap-2"><div><span class="text-white font-semibold text-sm">${escapeHtml(r.name)}</span><div class="text-yellow-500 text-[10px] mt-1">${stars}</div></div><span class="text-white/30 text-[10px]">${date}</span></div><p class="text-white/60 text-sm mt-2">"${escapeHtml(r.comment)}"</p></div>`;
+            }
+            container.innerHTML = html;
+        }
+        
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>]/g, m => m === '&' ? '&amp;' : (m === '<' ? '&lt;' : '&gt;'));
+        }
+        
+        // SUBMIT ULASAN
+        async function submitReviewToSheet(name, rating, comment) {
+            try {
+                const response = await fetch(CORS_PROXY + GOOGLE_SCRIPT_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name, rating, comment })
+                });
+                const result = await response.json();
+                return result.success === true;
+            } catch (error) {
+                console.error("Gagal submit:", error);
+                return false;
+            }
+        }
+        
+        // EVENT SUBMIT
+        document.getElementById('submitReviewBtn').addEventListener('click', async () => {
+            const name = document.getElementById('reviewName').value.trim();
+            const comment = document.getElementById('reviewComment').value.trim();
+            if (!name) { alert('Masukkan nickname'); return; }
+            if (!comment) { alert('Tulis ulasan'); return; }
+            
+            const btn = document.getElementById('submitReviewBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengirim...';
+            btn.disabled = true;
+            
+            const success = await submitReviewToSheet(name, selectedRating, comment);
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+            
+            if (success) {
+                alert('✅ Ulasan terkirim!');
+                document.getElementById('reviewName').value = '';
+                document.getElementById('reviewComment').value = '';
+                document.querySelectorAll('.star-select').forEach((s, idx) => {
+                    if (idx < 5) s.className = "fas fa-star text-2xl text-yellow-500 cursor-pointer star-select";
+                    else s.className = "far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select";
+                });
+                selectedRating = 5;
+                loadReviewsFromSheet();
+            } else {
+                alert('❌ Gagal mengirim. Coba lagi.');
+            }
+        });
 
         // ========== PRODUCTS & MARKETPLACE ==========
-        const waNumber = "62895385984764";
         const formatRp = (n) => "Rp" + n.toLocaleString('id-ID');
+        const waNumber = "62895385984764";
 
         const products = [
             ...["100K","200K","300K","400K","500K","600K","700K","800K","900K","1JT","1.1 JT","1.2 JT","1.3 JT","1.4 JT","1.5 JT","1.6 JT","1.7 JT"].map((name, idx) => ({ name: `SBC ${name}`, price: [10000,20000,30000,40000,50000,60000,70000,80000,90000,100000,110000,120000,130000,140000,150000,160000,170000][idx], category: "sbc", needNickname: true, hasDesc: true })),
@@ -809,24 +766,6 @@
             { name: "TIER 3 - BLUE NAME", price: 350000, category: "tier", needNickname: false, hasDesc: false }
         ];
 
-        function getCategoryIcon(category) {
-            switch(category) {
-                case 'sbc': return 'fa-crown';
-                case 'script': return 'fa-code';
-                case 'tier': return 'fa-gem';
-                default: return 'fa-box';
-            }
-        }
-
-        function getCategoryBadge(category) {
-            switch(category) {
-                case 'sbc': return 'SBC PRO';
-                case 'script': return 'SCRIPT';
-                case 'tier': return 'TIER';
-                default: return 'PREMIUM';
-            }
-        }
-
         function sendWA(product, price, nickname) {
             let msg = `Halo ELIXIRSTORE%0A%0AProduk: ${encodeURIComponent(product)}%0AHarga: ${encodeURIComponent(formatRp(price))}`;
             if (nickname) msg += `%0ANickname: ${encodeURIComponent(nickname)}`;
@@ -838,109 +777,83 @@
             const card = document.createElement('div');
             card.className = 'premium-card';
             card.setAttribute('data-aos', 'fade-up');
-            
-            const iconClass = getCategoryIcon(product.category);
-            const badgeText = getCategoryBadge(product.category);
+            let iconClass = product.category === 'sbc' ? 'fa-crown' : (product.category === 'script' ? 'fa-code' : 'fa-gem');
+            let badgeText = product.category === 'sbc' ? 'SBC PRO' : (product.category === 'script' ? 'SCRIPT' : 'TIER');
             const descHtml = product.hasDesc ? '<div class="product-desc text-center mt-2">VIA TF ON SOUTHBRONX</div>' : '';
-            
             card.innerHTML = `
                 <div class="holographic-bg"></div>
                 <div class="gloss"></div>
                 <div class="particles" id="particles-${Date.now()}-${Math.random()}"></div>
                 <div class="card-badge">${badgeText}</div>
-                <div class="category-icon">
-                    <i class="fas ${iconClass}"></i>
-                </div>
+                <div class="category-icon"><i class="fas ${iconClass}"></i></div>
                 <div class="product-name text-center">${product.name}</div>
                 ${descHtml}
-                <div class="flex justify-center">
-                    <div class="price-wrapper">
-                        <div class="price-text">${formatRp(product.price)}</div>
-                    </div>
-                </div>
+                <div class="flex justify-center"><div class="price-wrapper"><div class="price-text">${formatRp(product.price)}</div></div></div>
                 ${product.needNickname ? '<input type="text" class="nickname-input" placeholder="Masukkan nickname kamu">' : ''}
-                <button class="premium-btn">
-                    <i class="fab fa-whatsapp"></i> ORDER NOW
-                    <i class="fas fa-arrow-right"></i>
-                </button>
+                <button class="premium-btn"><i class="fab fa-whatsapp"></i> ORDER NOW <i class="fas fa-arrow-right"></i></button>
             `;
-
-            const particlesContainer = card.querySelector('.particles');
-            if (particlesContainer) {
+            const particles = card.querySelector('.particles');
+            if (particles) {
                 for (let i = 0; i < 15; i++) {
-                    const particle = document.createElement('span');
-                    particle.style.left = Math.random() * 100 + '%';
-                    particle.style.top = Math.random() * 100 + '%';
-                    particle.style.animationDelay = Math.random() * 2 + 's';
-                    particle.style.animationDuration = (Math.random() * 1.5 + 0.8) + 's';
-                    particlesContainer.appendChild(particle);
+                    const p = document.createElement('span');
+                    p.style.left = Math.random() * 100 + '%';
+                    p.style.top = Math.random() * 100 + '%';
+                    p.style.animationDelay = Math.random() * 2 + 's';
+                    p.style.animationDuration = (Math.random() * 1.5 + 0.8) + 's';
+                    particles.appendChild(p);
                 }
             }
-
             const btn = card.querySelector('.premium-btn');
             btn.addEventListener('click', (e) => {
-                e.stopPropagation();
                 const ripple = document.createElement('span');
                 ripple.classList.add('ripple');
                 const rect = btn.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                ripple.style.left = x + 'px';
-                ripple.style.top = y + 'px';
+                ripple.style.left = (e.clientX - rect.left) + 'px';
+                ripple.style.top = (e.clientY - rect.top) + 'px';
                 btn.appendChild(ripple);
                 setTimeout(() => ripple.remove(), 600);
-                
                 const nickname = card.querySelector('.nickname-input')?.value || '';
                 sendWA(product.name, product.price, nickname);
             });
-            
             return card;
         }
 
-        const productGrid = document.getElementById('productGrid');
-        let currentFilter = 'all', searchQuery = '';
-        
-        function renderProducts() {
-            const filtered = products.filter(p => { 
-                if (currentFilter !== 'all' && p.category !== currentFilter) return false; 
-                if (searchQuery && !p.name.toLowerCase().includes(searchQuery.toLowerCase())) return false; 
-                return true; 
+        function renderProducts(filter = 'all', query = '') {
+            const grid = document.getElementById('productGrid');
+            if (!grid) return;
+            const filtered = products.filter(p => {
+                if (filter !== 'all' && p.category !== filter) return false;
+                if (query && !p.name.toLowerCase().includes(query.toLowerCase())) return false;
+                return true;
             });
-            productGrid.innerHTML = '';
-            if (filtered.length === 0) { 
-                productGrid.innerHTML = '<div class="col-span-full text-center text-white/30 py-16 text-sm">Item tidak ditemukan</div>'; 
-                return; 
+            grid.innerHTML = '';
+            if (filtered.length === 0) {
+                grid.innerHTML = '<div class="col-span-full text-center text-white/30 py-16">Item tidak ditemukan</div>';
+                return;
             }
-            filtered.forEach(p => productGrid.appendChild(createCard(p)));
-            
-            if (typeof AOS !== 'undefined' && AOS.refresh) {
-                AOS.refresh();
-            }
+            filtered.forEach(p => grid.appendChild(createCard(p)));
+            AOS.refresh();
         }
 
+        let currentFilter = 'all', searchQuery = '';
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                document.querySelectorAll('.filter-btn').forEach(b => { 
-                    b.classList.remove('bg-gradient-to-r', 'from-purple-600', 'to-purple-700', 'text-white', 'shadow-md', 'shadow-purple-500/25'); 
-                    b.classList.add('bg-white/5', 'text-white/50'); 
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.remove('bg-gradient-to-r', 'from-purple-600', 'to-purple-700', 'text-white', 'shadow-md');
+                    b.classList.add('bg-white/5', 'text-white/50');
                 });
                 btn.classList.remove('bg-white/5', 'text-white/50');
-                btn.classList.add('bg-gradient-to-r', 'from-purple-600', 'to-purple-700', 'text-white', 'shadow-md', 'shadow-purple-500/25');
+                btn.classList.add('bg-gradient-to-r', 'from-purple-600', 'to-purple-700', 'text-white', 'shadow-md');
                 currentFilter = btn.dataset.filter;
-                renderProducts();
+                renderProducts(currentFilter, searchQuery);
             });
         });
-
-        const searchInput = document.getElementById('searchInput');
-        if (searchInput) {
-            searchInput.addEventListener('input', (e) => { 
-                searchQuery = e.target.value; 
-                renderProducts(); 
-            });
-        }
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            renderProducts(currentFilter, searchQuery);
+        });
         
-        // INITIAL LOAD
-        renderProducts();
+        renderProducts('all', '');
         loadReviewsFromSheet();
     </script>
 </body>
