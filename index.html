@@ -22,38 +22,12 @@
             font-family: 'Clash Display', 'Unbounded', sans-serif;
             font-weight: 700;
             letter-spacing: -0.02em;
-            background: linear-gradient(135deg, #ffffff, #e9d5ff, #c084fc);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-transform: uppercase;
-            font-size: 1.1rem;
         }
         
         .price-text {
             font-family: 'Unbounded', 'Clash Display', sans-serif;
             font-weight: 800;
             letter-spacing: -0.02em;
-            background: linear-gradient(135deg, #fbbf24, #ffd700, #f59e0b, #fbbf24);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .product-desc {
-            font-family: 'Satoshi', monospace;
-            font-weight: 600;
-            letter-spacing: 1.5px;
-            color: #a78bfa;
-            text-transform: uppercase;
-            font-size: 0.6rem;
-        }
-        
-        .premium-btn {
-            font-family: 'Satoshi', sans-serif;
-            font-weight: 700;
-            letter-spacing: 0.5px;
         }
         
         .hero-text {
@@ -102,17 +76,7 @@
             50% { opacity: 0.7; transform: scale(1.2); }
         }
         
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-        
-        @keyframes borderRotate {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 200% 50%; }
-        }
-        
-        @keyframes holographicShift {
+        @keyframes rainbowMove {
             0% { background-position: 0% 0%; }
             25% { background-position: 100% 0%; }
             50% { background-position: 100% 100%; }
@@ -120,8 +84,26 @@
             100% { background-position: 0% 0%; }
         }
         
+        @keyframes borderRainbow {
+            0% { border-image-source: linear-gradient(0deg, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff, #ff00ff); }
+            25% { border-image-source: linear-gradient(90deg, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff, #ff00ff); }
+            50% { border-image-source: linear-gradient(180deg, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff, #ff00ff); }
+            75% { border-image-source: linear-gradient(270deg, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff, #ff00ff); }
+            100% { border-image-source: linear-gradient(360deg, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff, #ff00ff); }
+        }
+        
         @keyframes rippleEffect {
             to { transform: scale(5); opacity: 0; }
+        }
+        
+        @keyframes cardFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        @keyframes holographicPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
         }
         
         .animated-bg {
@@ -166,8 +148,6 @@
         .meteor-1 { top: -100px; left: 20%; animation: meteor1 4s infinite linear; animation-delay: 0s; }
         .meteor-2 { top: -150px; left: 50%; animation: meteor2 5s infinite linear; animation-delay: 2s; }
         .meteor-3 { top: -80px; left: 70%; animation: meteor3 3.5s infinite linear; animation-delay: 1s; }
-        .meteor-4 { top: -120px; left: 85%; animation: meteor1 4.5s infinite linear; animation-delay: 3s; }
-        .meteor-5 { top: -200px; left: 10%; animation: meteor2 6s infinite linear; animation-delay: 1.5s; }
         
         .floating-orb {
             position: fixed;
@@ -220,309 +200,321 @@
             border-bottom: 1px solid rgba(168,85,247,0.2);
         }
         
-        /* HOLOGRAPHIC PREMIUM CARD */
+        /* HOLOGRAPHIC CARD - VERSI BARU DENGAN PERUBAHAN VISUAL YANG JELAS */
         .premium-card {
             position: relative;
-            background: rgba(8, 8, 20, 0.6);
-            backdrop-filter: blur(16px);
-            border-radius: 28px;
+            background: linear-gradient(145deg, #0a0a18, #0d0d1f);
+            border-radius: 24px;
             padding: 28px 24px;
             overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            cursor: pointer;
-            isolation: isolate;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            animation: cardFloat 3s ease-in-out infinite;
         }
         
-        /* Holographic gradient border */
+        /* RAINBOW BORDER YANG BERGERAK */
         .premium-card::before {
             content: '';
             position: absolute;
-            inset: 0;
-            border-radius: 28px;
-            padding: 2px;
+            inset: -2px;
             background: linear-gradient(135deg, 
-                #a855f7, #ec4899, #f43f5e, #f97316, #eab308, 
-                #84cc16, #06b6d4, #3b82f6, #a855f7);
+                #ff0000, #ff7700, #ffff00, #00ff00, 
+                #0000ff, #4b0082, #9400d3, #ff0000);
             background-size: 400% 400%;
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
+            border-radius: 24px;
             opacity: 0;
-            transition: opacity 0.5s ease;
-            animation: borderRotate 4s linear infinite;
-            pointer-events: none;
+            transition: opacity 0.3s;
+            z-index: -1;
         }
         
         .premium-card:hover::before {
             opacity: 1;
+            animation: borderRainbow 2s linear infinite;
         }
         
-        /* Holographic shimmer overlay */
-        .premium-card .holographic-overlay {
+        /* HOLOGRAPHIC OVERLAY - WARNA FULL */
+        .premium-card .holographic-bg {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
             background: linear-gradient(135deg,
-                transparent 0%,
-                rgba(168,85,247,0.05) 25%,
-                rgba(236,72,153,0.05) 50%,
-                rgba(168,85,247,0.05) 75%,
-                transparent 100%);
-            background-size: 400% 400%;
-            opacity: 0;
-            transition: opacity 0.4s;
+                rgba(255,0,0,0.08),
+                rgba(255,165,0,0.08),
+                rgba(255,255,0,0.08),
+                rgba(0,255,0,0.08),
+                rgba(0,0,255,0.08),
+                rgba(75,0,130,0.08),
+                rgba(148,0,211,0.08));
+            background-size: 600% 600%;
+            opacity: 0.2;
+            animation: rainbowMove 6s ease infinite;
             pointer-events: none;
-            border-radius: 28px;
+            border-radius: 24px;
         }
         
-        .premium-card:hover .holographic-overlay {
-            opacity: 1;
-            animation: holographicShift 3s ease infinite;
-        }
-        
-        /* Rainbow reflection on hover */
-        .premium-card .rainbow-reflection {
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(
-                from 0deg,
-                rgba(168,85,247,0),
-                rgba(236,72,153,0.08),
-                rgba(251,191,36,0.08),
-                rgba(34,197,94,0.08),
-                rgba(6,182,212,0.08),
-                rgba(168,85,247,0),
-                rgba(236,72,153,0.08),
-                rgba(168,85,247,0)
-            );
-            animation: rotate 8s linear infinite;
-            opacity: 0;
-            transition: opacity 0.4s;
-            pointer-events: none;
-            border-radius: 28px;
-        }
-        
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        .premium-card:hover .rainbow-reflection {
+        .premium-card:hover .holographic-bg {
             opacity: 0.4;
         }
         
-        /* Hover transform */
-        .premium-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 30px 50px -25px rgba(168,85,247,0.5), 
-                        0 0 0 1px rgba(168,85,247,0.2) inset;
+        /* GLOSSY EFFECT ATAS */
+        .premium-card .gloss {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(180deg, 
+                rgba(255,255,255,0.15) 0%, 
+                rgba(255,255,255,0) 100%);
+            pointer-events: none;
+            border-radius: 24px 24px 0 0;
         }
         
-        /* Premium badge holographic */
+        /* PARTICLE EFFECT */
+        .premium-card .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            overflow: hidden;
+            border-radius: 24px;
+        }
+        
+        .premium-card .particles span {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: radial-gradient(circle, #fff, #a855f7);
+            border-radius: 50%;
+            opacity: 0;
+        }
+        
+        .premium-card:hover .particles span {
+            animation: particleFloat 1.5s ease-out forwards;
+        }
+        
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-50px) scale(0);
+                opacity: 0;
+            }
+        }
+        
+        /* BADGE PREMIUM DENGAN RAINBOW */
         .card-badge {
             position: absolute;
             top: 16px;
             right: 16px;
-            background: linear-gradient(135deg, #a855f7, #ec4899, #f97316);
-            background-size: 200% 200%;
+            background: linear-gradient(135deg, #ff0000, #ff7700, #ffaa00);
+            background-size: 200% 100%;
             padding: 5px 14px;
-            border-radius: 40px;
+            border-radius: 30px;
             font-size: 0.6rem;
-            font-weight: 700;
-            letter-spacing: 1px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
             color: white;
             text-transform: uppercase;
-            backdrop-filter: blur(4px);
-            box-shadow: 0 2px 10px rgba(168,85,247,0.3);
-            z-index: 2;
-            animation: gradientFlow 3s ease infinite;
+            z-index: 3;
+            box-shadow: 0 0 15px rgba(255,0,0,0.3);
+            animation: gradientFlow 2s ease infinite;
         }
         
-        /* Category icon holographic */
+        /* CATEGORY ICON DENGAN BACKGROUND RAINBOW */
         .category-icon {
-            width: 52px;
-            height: 52px;
-            background: linear-gradient(135deg, rgba(168,85,247,0.2), rgba(236,72,153,0.1));
-            border-radius: 20px;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 20px;
-            border: 1px solid rgba(168,85,247,0.3);
-            transition: all 0.4s;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+            position: relative;
+            z-index: 2;
         }
         
-        .premium-card:hover .category-icon {
-            transform: scale(1.08);
-            border-color: rgba(236,72,153,0.5);
-            box-shadow: 0 0 25px rgba(168,85,247,0.3);
-            background: linear-gradient(135deg, rgba(168,85,247,0.3), rgba(236,72,153,0.15));
+        .category-icon::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(135deg, #ff0000, #ff7700, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+            background-size: 400% 400%;
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: -1;
+        }
+        
+        .premium-card:hover .category-icon::before {
+            opacity: 1;
+            animation: rainbowMove 2s ease infinite;
         }
         
         .category-icon i {
             font-size: 1.6rem;
-            background: linear-gradient(135deg, #c084fc, #ec4899, #f97316);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: white;
+            transition: all 0.3s;
         }
         
-        /* Product name holographic */
+        .premium-card:hover .category-icon i {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 8px #a855f7);
+        }
+        
+        /* PRODUCT NAME HOLOGRAPHIC */
         .product-name {
-            font-family: 'Clash Display', 'Unbounded', sans-serif;
-            font-weight: 700;
             font-size: 1.2rem;
-            letter-spacing: -0.02em;
-            background: linear-gradient(135deg, #ffffff 0%, #e9d5ff 40%, #c084fc 70%, #f0abfc 100%);
-            background-size: 200% auto;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #ffffff, #e9d5ff, #c084fc, #f0abfc);
+            background-size: 300% 100%;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-bottom: 8px;
-            transition: all 0.3s;
+            font-weight: 800;
+            position: relative;
+            z-index: 2;
         }
         
         .premium-card:hover .product-name {
-            background-position: 100% 0;
+            animation: gradientFlow 1.5s ease infinite;
         }
         
-        /* Price wrapper holographic */
+        /* PRICE WRAPPER HOLOGRAPHIC */
         .price-wrapper {
-            background: linear-gradient(135deg, rgba(251,191,36,0.12), rgba(245,158,11,0.06));
-            border-radius: 60px;
-            padding: 10px 18px;
+            background: rgba(0,0,0,0.4);
+            border-radius: 40px;
+            padding: 10px 20px;
             display: inline-block;
             margin: 16px 0;
-            border: 1px solid rgba(251,191,36,0.25);
+            border: 1px solid rgba(255,215,0,0.3);
             transition: all 0.3s;
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(4px);
         }
         
         .premium-card:hover .price-wrapper {
-            border-color: rgba(251,191,36,0.5);
-            box-shadow: 0 0 20px rgba(251,191,36,0.15);
+            border-color: rgba(255,215,0,0.8);
+            box-shadow: 0 0 20px rgba(255,215,0,0.3);
+            transform: scale(1.02);
         }
         
         .price-text {
-            font-family: 'Unbounded', 'Clash Display', sans-serif;
-            font-weight: 800;
             font-size: 1.8rem;
-            background: linear-gradient(135deg, #fbbf24, #ffd700, #f59e0b, #fbbf24);
+            background: linear-gradient(135deg, #fbbf24, #ffd700, #f59e0b, #ffd700);
             background-size: 200% auto;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            font-weight: 900;
         }
         
-        /* Premium button holographic */
+        /* PRODUCT DESC */
+        .product-desc {
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            color: #a78bfa;
+            text-transform: uppercase;
+            font-weight: 600;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* PREMIUM BUTTON HOLOGRAPHIC */
         .premium-btn {
             position: relative;
             width: 100%;
-            background: linear-gradient(135deg, #6b21a5, #9333ea, #ec4899, #a855f7);
-            background-size: 300% auto;
-            border: none;
+            background: linear-gradient(135deg, #1a0b2e, #2d1b4e, #4a2c6d);
+            border: 1px solid rgba(168,85,247,0.3);
             padding: 14px 20px;
             border-radius: 50px;
             font-weight: 700;
             font-size: 0.85rem;
             color: white;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+            transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 12px;
-            letter-spacing: 0.5px;
             overflow: hidden;
-            z-index: 1;
+            z-index: 2;
         }
         
         .premium-btn::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, #9333ea, #ec4899, #c084fc, #a855f7);
-            background-size: 300% auto;
-            opacity: 0;
-            transition: opacity 0.4s;
-            z-index: -1;
-            border-radius: 50px;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(168,85,247,0.4), 
+                rgba(236,72,153,0.4),
+                rgba(251,191,36,0.4),
+                transparent);
+            transition: left 0.5s;
         }
         
         .premium-btn:hover::before {
-            opacity: 1;
-            animation: gradientFlow 1.5s ease infinite;
+            left: 100%;
         }
         
         .premium-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px -8px rgba(168,85,247,0.6);
-        }
-        
-        .premium-btn:active {
-            transform: translateY(1px);
-        }
-        
-        .premium-btn i:first-child {
-            transition: all 0.25s ease;
-        }
-        
-        .premium-btn:hover i:first-child {
-            transform: scale(1.15);
-        }
-        
-        .premium-btn i:last-child {
-            transition: all 0.25s ease;
-            opacity: 0.8;
-        }
-        
-        .premium-btn:hover i:last-child {
-            transform: translateX(8px);
-            opacity: 1;
+            transform: translateY(-2px);
+            border-color: rgba(168,85,247,0.8);
+            box-shadow: 0 5px 20px rgba(168,85,247,0.4);
         }
         
         .premium-btn .ripple {
             position: absolute;
             border-radius: 50%;
-            background: rgba(255,255,255,0.5);
+            background: rgba(255,255,255,0.6);
             transform: scale(0);
             animation: rippleEffect 0.6s linear;
             pointer-events: none;
         }
         
-        /* Nickname input */
+        /* NICKNAME INPUT */
         .nickname-input {
             background: rgba(0,0,0,0.5);
             border: 1px solid rgba(168,85,247,0.3);
-            border-radius: 60px;
-            padding: 12px 20px;
+            border-radius: 50px;
+            padding: 12px 18px;
             width: 100%;
             color: white;
             font-size: 0.8rem;
             transition: all 0.3s;
             margin-bottom: 16px;
             text-align: center;
-            backdrop-filter: blur(4px);
+            position: relative;
+            z-index: 2;
         }
         
         .nickname-input:focus {
             outline: none;
             border-color: #a855f7;
-            box-shadow: 0 0 20px rgba(168,85,247,0.3);
-            background: rgba(0,0,0,0.7);
+            box-shadow: 0 0 15px rgba(168,85,247,0.3);
         }
         
-        .nickname-input::placeholder {
-            color: rgba(255,255,255,0.3);
+        /* HOVER EFFECT UTAMA */
+        .premium-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 30px 50px -25px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.05);
         }
         
+        /* STAT CARD */
         .stat-card {
             transition: all 0.3s ease;
         }
@@ -557,6 +549,15 @@
             border-color: #a855f7;
             box-shadow: 0 0 15px rgba(168,85,247,0.2);
         }
+        
+        /* PARTICLE GENERATOR */
+        .particles span {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, #ff00ff, #00ffff);
+            border-radius: 50%;
+        }
     </style>
 </head>
 <body class="bg-[#050510]">
@@ -566,8 +567,6 @@
     <div class="meteor meteor-1"></div>
     <div class="meteor meteor-2"></div>
     <div class="meteor meteor-3"></div>
-    <div class="meteor meteor-4"></div>
-    <div class="meteor meteor-5"></div>
     <div class="floating-orb"></div>
     <div class="floating-orb-2"></div>
     <div class="grid-pattern"></div>
@@ -623,7 +622,7 @@
             <button data-filter="tier" class="filter-btn px-6 py-2.5 rounded-full text-xs font-medium transition-all bg-white/5 text-white/50 hover:text-white hover:bg-white/10">Akun Tier</button>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="productGrid"></div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="productGrid"></div>
     </div>
 
     <div id="reviews" class="relative z-10 max-w-4xl mx-auto px-6 py-16">
@@ -659,9 +658,9 @@
                 <div><div class="text-white font-bold text-xl tracking-tight mb-2 elixir-title">ELIXIR<span class="text-purple-400">STORE</span></div><p class="text-white/40 text-sm leading-relaxed">Premium Shop Southbronx<br>Trusted Southbronx Marketplace</p></div>
                 <div><h3 class="text-white/70 text-sm font-semibold uppercase tracking-wider mb-4">Quick Links</h3><ul class="space-y-2"><li><a href="#marketplace" class="footer-link text-white/40 text-sm hover:text-purple-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[8px]"></i> Marketplace</a></li><li><a href="#reviews" class="footer-link text-white/40 text-sm hover:text-purple-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[8px]"></i> Ulasan</a></li><li><a href="#footer" class="footer-link text-white/40 text-sm hover:text-purple-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[8px]"></i> Contact</a></li></ul></div>
                 <div><h3 class="text-white/70 text-sm font-semibold uppercase tracking-wider mb-4">Contact</h3><ul class="space-y-3"><li><a href="https://wa.me/62895385984764" target="_blank" class="contact-item flex items-center gap-3 text-white/40 text-sm hover:text-green-400 transition group"><i class="fab fa-whatsapp text-green-500"></i><span>Owner 1 - WhatsApp</span><i class="fas fa-external-link-alt text-[8px] opacity-0 group-hover:opacity-100 transition"></i></a></li><li><a href="https://discord.gg/CxbDP6QmW" target="_blank" class="contact-item flex items-center gap-3 text-white/40 text-sm hover:text-purple-400 transition group"><i class="fab fa-discord text-[#5865F2]"></i><span>Owner 2 - Discord</span><i class="fas fa-external-link-alt text-[8px] opacity-0 group-hover:opacity-100 transition"></i></a></li></ul></div>
-                <div><h3 class="text-white/70 text-sm font-semibold uppercase tracking-wider mb-4">Powered By</h3><div class="space-y-2"><div class="flex items-center gap-2 text-white/30 text-xs"><i class="fab fa-html5 text-orange-500"></i><span>HTML5 + Tailwind CSS</span></div><div class="flex items-center gap-2 text-white/30 text-xs"><i class="fab fa-js text-yellow-500"></i><span>JavaScript + AOS</span></div><div class="flex items-center gap-2 text-white/30 text-xs"><i class="fas fa-fire text-orange-400"></i><span>FontAwesome + GSAP</span></div><div class="mt-3 pt-2 border-t border-white/10"><span class="text-[10px] text-white/20 tracking-wider">SECURED | 24/7</span></div></div></div>
+                <div><h3 class="text-white/70 text-sm font-semibold uppercase tracking-wider mb-4">Powered By</h3><div class="space-y-2"><div class="flex items-center gap-2 text-white/30 text-xs"><i class="fab fa-html5 text-orange-500"></i><span>HTML5 + Tailwind CSS</span></div><div class="flex items-center gap-2 text-white/30 text-xs"><i class="fab fa-js text-yellow-500"></i><span>JavaScript + AOS</span></div><div class="flex items-center gap-2 text-white/30 text-xs"><i class="fas fa-fire text-orange-400"></i><span>FontAwesome</span></div><div class="mt-3 pt-2 border-t border-white/10"><span class="text-[10px] text-white/20 tracking-wider">SECURED | 24/7</span></div></div></div>
             </div>
-            <div class="border-t border-white/10 mt-10 pt-6 text-center"><p class="text-white/20 text-[10px] tracking-wider">© 2025 ELIXIRSTORE. All rights reserved. | TRUSTED SOUTHBRONX MARKETPLACE</p></div>
+            <div class="border-t border-white/10 mt-10 pt-6 text-center"><p class="text-white/20 text-[10px] tracking-wider">2025 ELIXIRSTORE. All rights reserved. | TRUSTED SOUTHBRONX MARKETPLACE</p></div>
         </div>
     </footer>
 
@@ -669,7 +668,6 @@
     <script>
         AOS.init({ duration: 600, once: true });
 
-        const starsContainer = document.getElementById('starsContainer');
         for (let i = 0; i < 200; i++) {
             const star = document.createElement('div');
             star.classList.add('star');
@@ -680,7 +678,7 @@
             star.style.animationDelay = Math.random() * 5 + 's';
             star.style.animationDuration = (Math.random() * 3 + 2) + 's';
             star.style.opacity = Math.random() * 0.5 + 0.2;
-            starsContainer.appendChild(star);
+            document.getElementById('starsContainer').appendChild(star);
         }
 
         const waNumber = "62895385984764";
@@ -711,7 +709,7 @@
 
         function getCategoryBadge(category) {
             switch(category) {
-                case 'sbc': return 'SBC';
+                case 'sbc': return 'SBC PRO';
                 case 'script': return 'SCRIPT';
                 case 'tier': return 'TIER';
                 default: return 'PREMIUM';
@@ -735,15 +733,15 @@
             const card = document.createElement('div');
             card.className = 'premium-card';
             card.setAttribute('data-aos', 'fade-up');
-            card.setAttribute('data-aos-delay', '50');
             
             const iconClass = getCategoryIcon(product.category);
             const badgeText = getCategoryBadge(product.category);
-            const descHtml = product.hasDesc ? '<div class="product-desc text-center">VIA TF ON SOUTHBRONX</div>' : '';
+            const descHtml = product.hasDesc ? '<div class="product-desc text-center mt-2">VIA TF ON SOUTHBRONX</div>' : '';
             
             card.innerHTML = `
-                <div class="holographic-overlay"></div>
-                <div class="rainbow-reflection"></div>
+                <div class="holographic-bg"></div>
+                <div class="gloss"></div>
+                <div class="particles" id="particles-${Date.now()}-${Math.random()}"></div>
                 <div class="card-badge">${badgeText}</div>
                 <div class="category-icon">
                     <i class="fas ${iconClass}"></i>
@@ -761,6 +759,16 @@
                     <i class="fas fa-arrow-right"></i>
                 </button>
             `;
+
+            const particlesContainer = card.querySelector('.particles');
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('span');
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 2 + 's';
+                particle.style.animationDuration = (Math.random() * 1.5 + 0.8) + 's';
+                particlesContainer.appendChild(particle);
+            }
 
             const btn = card.querySelector('.premium-btn');
             btn.addEventListener('click', (e) => {
