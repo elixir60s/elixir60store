@@ -19,7 +19,6 @@
             font-family: 'Satoshi', sans-serif;
         }
         
-        /* Nama Produk - Clash Display + Unbounded backup */
         .product-name {
             font-family: 'Clash Display', 'Unbounded', sans-serif;
             font-weight: 700;
@@ -32,7 +31,6 @@
             font-size: 1.1rem;
         }
         
-        /* Harga - Unbounded (futuristic, gaming vibe) */
         .price-text {
             font-family: 'Unbounded', 'Clash Display', sans-serif;
             font-weight: 800;
@@ -45,7 +43,6 @@
             text-shadow: 0 0 15px rgba(251,191,36,0.2);
         }
         
-        /* Deskripsi - Satoshi uppercase */
         .product-desc {
             font-family: 'Satoshi', monospace;
             font-weight: 600;
@@ -55,14 +52,12 @@
             font-size: 0.6rem;
         }
         
-        /* Button font */
         .premium-btn {
             font-family: 'Satoshi', sans-serif;
             font-weight: 700;
             letter-spacing: 0.5px;
         }
         
-        /* Hero text */
         .hero-text {
             font-family: 'Clash Display', 'Unbounded', sans-serif;
             font-weight: 800;
@@ -74,14 +69,12 @@
             animation: gradientFlow 5s linear infinite;
         }
         
-        /* Title lainnya */
         .elixir-title {
             font-family: 'Clash Display', sans-serif;
             font-weight: 700;
             letter-spacing: -0.02em;
         }
         
-        /* Animations */
         @keyframes gradientFlow {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -633,32 +626,8 @@
             return card;
         }
 
-        function renderReviews() {
-            const container = document.getElementById('reviewsList');
-            if (reviews.length === 0) {
-                container.innerHTML = '<div class="text-center text-white/40 py-8">Belum ada ulasan. Jadi yang pertama! ✨</div>';
-                return;
-            }
-            let html = '';
-            reviews.forEach(r => {
-                const stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
-                html += `
-                    <div class="review-card bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4">
-                        <div class="flex justify-between items-start mb-2 flex-wrap gap-2">
-                            <div>
-                                <span class="text-white font-semibold text-sm">${escapeHtml(r.name)}</span>
-                                <div class="text-yellow-500 text-[10px] mt-1">${stars}</div>
-                            </div>
-                            <span class="text-white/30 text-[10px]">${r.date}</span>
-                        </div>
-                        <p class="text-white/60 text-sm mt-2">"${escapeHtml(r.comment)}"</p>
-                    </div>
-                `;
-            });
-            container.innerHTML = html;
-        }
-
         function escapeHtml(str) {
+            if (!str) return '';
             return str.replace(/[&<>]/g, function(m) {
                 if (m === '&') return '&amp;';
                 if (m === '<') return '&lt;';
@@ -667,14 +636,59 @@
             });
         }
 
+        function renderReviews() {
+            const container = document.getElementById('reviewsList');
+            if (!container) return;
+            
+            if (reviews.length === 0) {
+                container.innerHTML = '<div class="text-center text-white/40 py-8">Belum ada ulasan. Jadi yang pertama! ✨</div>';
+                return;
+            }
+            
+            let html = '';
+            for (let i = 0; i < reviews.length; i++) {
+                const r = reviews[i];
+                if (!r || !r.name) continue;
+                
+                const stars = '★'.repeat(r.rating || 0) + '☆'.repeat(5 - (r.rating || 0));
+                const safeName = escapeHtml(r.name);
+                const safeComment = escapeHtml(r.comment || '');
+                const reviewDate = r.date || new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+                
+                html += `
+                    <div class="review-card bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4">
+                        <div class="flex justify-between items-start mb-2 flex-wrap gap-2">
+                            <div>
+                                <span class="text-white font-semibold text-sm">${safeName}</span>
+                                <div class="text-yellow-500 text-[10px] mt-1">${stars}</div>
+                            </div>
+                            <span class="text-white/30 text-[10px]">${reviewDate}</span>
+                        </div>
+                        <p class="text-white/60 text-sm mt-2">"${safeComment}"</p>
+                    </div>
+                `;
+            }
+            
+            if (html === '') {
+                container.innerHTML = '<div class="text-center text-white/40 py-8">Belum ada ulasan. Jadi yang pertama! ✨</div>';
+            } else {
+                container.innerHTML = html;
+            }
+        }
+
         let selectedRating = 5;
+        
+        // Setup rating stars click
         document.querySelectorAll('#ratingStars .star-select').forEach(star => {
             star.addEventListener('click', () => {
                 const val = parseInt(star.dataset.val);
                 selectedRating = val;
-                document.querySelectorAll('#ratingStars .star-select').forEach((s, i) => {
-                    if (i < val) s.className = "fas fa-star text-2xl text-yellow-500 cursor-pointer star-select";
-                    else s.className = "far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select";
+                document.querySelectorAll('#ratingStars .star-select').forEach((s, idx) => {
+                    if (idx < val) {
+                        s.className = "fas fa-star text-2xl text-yellow-500 cursor-pointer star-select";
+                    } else {
+                        s.className = "far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select";
+                    }
                 });
             });
         });
@@ -682,8 +696,15 @@
         document.getElementById('submitReviewBtn').addEventListener('click', () => {
             const name = document.getElementById('reviewName').value.trim();
             const comment = document.getElementById('reviewComment').value.trim();
-            if (!name) { alert('Masukkan nickname!'); return; }
-            if (!comment) { alert('Masukkan ulasan!'); return; }
+            
+            if (!name) { 
+                alert('Masukkan nickname!'); 
+                return; 
+            }
+            if (!comment) { 
+                alert('Masukkan ulasan!'); 
+                return; 
+            }
             
             const newReview = {
                 name: name,
@@ -691,30 +712,46 @@
                 comment: comment,
                 date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })
             };
+            
             reviews.unshift(newReview);
             renderReviews();
             
+            // Reset form
             document.getElementById('reviewName').value = '';
             document.getElementById('reviewComment').value = '';
-            document.querySelectorAll('#ratingStars .star-select').forEach((s, i) => {
-                if (i < 5) s.className = "far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select";
+            
+            // Reset rating stars visual
+            document.querySelectorAll('#ratingStars .star-select').forEach((star, idx) => {
+                star.className = "far fa-star text-2xl text-white/30 cursor-pointer hover:text-yellow-500 transition star-select";
             });
             selectedRating = 5;
+            
             alert('Ulasan terkirim! Terima kasih 😊');
         });
 
         const productGrid = document.getElementById('productGrid');
         let currentFilter = 'all', searchQuery = '';
+        
         function renderProducts() {
-            const filtered = products.filter(p => { if (currentFilter !== 'all' && p.category !== currentFilter) return false; if (searchQuery && !p.name.toLowerCase().includes(searchQuery.toLowerCase())) return false; return true; });
+            const filtered = products.filter(p => { 
+                if (currentFilter !== 'all' && p.category !== currentFilter) return false; 
+                if (searchQuery && !p.name.toLowerCase().includes(searchQuery.toLowerCase())) return false; 
+                return true; 
+            });
             productGrid.innerHTML = '';
-            if (filtered.length === 0) { productGrid.innerHTML = '<div class="col-span-full text-center text-white/30 py-16 text-sm">✨ Item tidak ditemukan</div>'; return; }
+            if (filtered.length === 0) { 
+                productGrid.innerHTML = '<div class="col-span-full text-center text-white/30 py-16 text-sm">✨ Item tidak ditemukan</div>'; 
+                return; 
+            }
             filtered.forEach(p => productGrid.appendChild(createCard(p)));
         }
 
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                document.querySelectorAll('.filter-btn').forEach(b => { b.classList.remove('bg-gradient-to-r', 'from-purple-600', 'to-purple-700', 'text-white', 'shadow-md', 'shadow-purple-500/25'); b.classList.add('bg-white/5', 'text-white/50'); });
+                document.querySelectorAll('.filter-btn').forEach(b => { 
+                    b.classList.remove('bg-gradient-to-r', 'from-purple-600', 'to-purple-700', 'text-white', 'shadow-md', 'shadow-purple-500/25'); 
+                    b.classList.add('bg-white/5', 'text-white/50'); 
+                });
                 btn.classList.remove('bg-white/5', 'text-white/50');
                 btn.classList.add('bg-gradient-to-r', 'from-purple-600', 'to-purple-700', 'text-white', 'shadow-md', 'shadow-purple-500/25');
                 currentFilter = btn.dataset.filter;
@@ -722,7 +759,11 @@
             });
         });
 
-        document.getElementById('searchInput').addEventListener('input', (e) => { searchQuery = e.target.value; renderProducts(); });
+        document.getElementById('searchInput').addEventListener('input', (e) => { 
+            searchQuery = e.target.value; 
+            renderProducts(); 
+        });
+        
         renderProducts();
         renderReviews();
     </script>
