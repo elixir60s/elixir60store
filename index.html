@@ -20,7 +20,6 @@
         }
         .elixir-title { font-family: 'Clash Display', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
         
-        /* Animasi */
         @keyframes gradientFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         @keyframes meteor1 { 0% { transform: translateX(-100px) translateY(-100px) rotate(45deg); opacity: 1; } 100% { transform: translateX(400px) translateY(400px) rotate(45deg); opacity: 0; } }
         @keyframes meteor2 { 0% { transform: translateX(-50px) translateY(-150px) rotate(35deg); opacity: 1; } 100% { transform: translateX(500px) translateY(500px) rotate(35deg); opacity: 0; } }
@@ -30,7 +29,6 @@
         @keyframes cardFloat { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-5px); } }
         @keyframes glowPulse { 0%, 100% { box-shadow: 0 0 5px rgba(168,85,247,0.3); } 50% { box-shadow: 0 0 20px rgba(168,85,247,0.6); } }
         
-        /* Background */
         .animated-bg { position: fixed; inset: 0; background: radial-gradient(ellipse at 20% 30%, #0a0a1a, #050510); z-index: -3; }
         .stars { position: fixed; inset: 0; pointer-events: none; z-index: -2; }
         .star { position: absolute; background: white; border-radius: 50%; animation: starTwinkle 3s infinite ease-in-out; }
@@ -49,14 +47,21 @@
         
         .glass-nav { background: rgba(10,10,15,0.4); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(168,85,247,0.2); position: fixed; top: 0; width: 100%; z-index: 50; }
         
-        /* HERO TEXT */
         .hero-text { font-family: 'Clash Display', 'Unbounded', sans-serif; font-weight: 800; background: linear-gradient(135deg, #ffffff 0%, #c084fc 30%, #a855f7 60%, #e9d5ff 100%); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gradientFlow 5s linear infinite; }
         
-        /* STAT CARD */
         .stat-card { background: rgba(255,255,255,0.05); backdrop-filter: blur(4px); border-radius: 16px; padding: 16px; text-align: center; border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s; }
         .stat-card:hover { transform: translateY(-3px); border-color: rgba(168,85,247,0.4); background: rgba(255,255,255,0.08); }
         
-        /* TAB PREMIUM */
+        /* TAB PREMIUM - TENGAH */
+        .tabs-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 30px;
+            width: 100%;
+        }
         .premium-tab {
             position: relative;
             padding: 10px 24px;
@@ -81,9 +86,7 @@
             background: linear-gradient(90deg, transparent, rgba(168,85,247,0.2), transparent);
             transition: left 0.5s;
         }
-        .premium-tab:hover::before {
-            left: 100%;
-        }
+        .premium-tab:hover::before { left: 100%; }
         .premium-tab:hover {
             border-color: rgba(168,85,247,0.6);
             color: rgba(255,255,255,0.8);
@@ -132,45 +135,12 @@
             margin: 0 auto 12px;
             border: 1px solid rgba(168,85,247,0.3);
         }
-        .product-icon i {
-            font-size: 1.6rem;
-            color: #c084fc;
-        }
-        .product-name {
-            font-size: 0.9rem;
-            font-weight: 800;
-            color: white;
-            margin-bottom: 4px;
-        }
-        .product-desc {
-            font-size: 0.55rem;
-            color: #a78bfa;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-        }
-        .product-price {
-            font-size: 1rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #fbbf24, #ffd700);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
+        .product-icon i { font-size: 1.6rem; color: #c084fc; }
+        .product-name { font-size: 0.9rem; font-weight: 800; color: white; margin-bottom: 4px; }
+        .product-desc { font-size: 0.55rem; color: #a78bfa; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .product-price { font-size: 1rem; font-weight: 700; background: linear-gradient(135deg, #fbbf24, #ffd700); -webkit-background-clip: text; background-clip: text; color: transparent; }
         
-        /* ========== INI YANG DIUBAH - BIKIN TENGAH ========== */
-        .shop-left-col {
-            text-align: center;
-        }
-        .tabs-wrapper {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 30px;
-            width: 100%;
-        }
+        /* GRID PRODUK - TENGAH */
         #productGrid {
             display: flex;
             flex-wrap: wrap;
@@ -179,12 +149,8 @@
             gap: 20px;
             margin: 0 auto;
             width: 100%;
+            min-height: 300px;
         }
-        .grid-wrapper {
-            width: 100%;
-            text-align: center;
-        }
-        /* ================================================ */
         
         /* SUMMARY PANEL */
         .summary-panel {
@@ -214,10 +180,7 @@
             border: none;
             cursor: pointer;
         }
-        .btn-bayar:hover {
-            transform: scale(1.02);
-            box-shadow: 0 5px 20px rgba(245,158,11,0.4);
-        }
+        .btn-bayar:hover { transform: scale(1.02); box-shadow: 0 5px 20px rgba(245,158,11,0.4); }
         
         /* QRIS MODAL */
         .modal-qris {
@@ -266,7 +229,6 @@
         .review-card { background: rgba(255,255,255,0.05); border-radius: 14px; padding: 12px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 8px; }
         .review-input, .review-textarea { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 10px; color: white; width: 100%; font-size: 0.8rem; }
         
-        /* RESPONSIVE HP */
         @media (max-width: 768px) {
             .summary-panel { position: relative; top: 0; margin-top: 20px; }
             .product-name { font-size: 0.75rem; }
@@ -338,21 +300,28 @@
     <div id="shop" class="relative z-10 max-w-7xl mx-auto px-5 py-8">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             
-            <!-- KOLOM KIRI: Tabs + Grid Produk (DI TENGAH) -->
-            <div class="lg:col-span-2 shop-left-col">
+            <!-- KOLOM KIRI: Tabs + Grid Produk -->
+            <div class="lg:col-span-2">
                 
                 <!-- Tabs Premium - TENGAH -->
                 <div class="tabs-wrapper" data-aos="fade-up">
-                    <button data-filter="all" class="premium-tab active">🔥 ALL</button>
+                    <button data-filter="all" class="premium-tab">🔥 ALL</button>
                     <button data-filter="sbc" class="premium-tab">⚡ SBC</button>
                     <button data-filter="script" class="premium-tab">📜 SCRIPT</button>
                     <button data-filter="tier" class="premium-tab">💎 TIER</button>
                 </div>
                 
-                <!-- Grid Produk - TENGAH -->
+                <!-- Grid Produk - KOSONG AWAL, muncul setelah klik tab -->
                 <div class="grid-wrapper">
-                    <h3 class="text-white/60 text-[10px] font-semibold uppercase tracking-wider mb-3">SEMUA PRODUK</h3>
-                    <div id="productGrid"></div>
+                    <h3 class="text-white/60 text-[10px] font-semibold uppercase tracking-wider mb-3 text-center">SEMUA PRODUK</h3>
+                    <div id="productGrid">
+                        <!-- PESAN AWAL -->
+                        <div style="width:100%; text-align:center; padding:60px 20px; color:rgba(255,255,255,0.4);">
+                            <i class="fas fa-hand-pointer text-4xl mb-3 block text-purple-400"></i>
+                            <p class="text-sm">Pilih kategori terlebih dahulu</p>
+                            <p class="text-[11px] mt-1">Klik ALL / SBC / SCRIPT / TIER</p>
+                        </div>
+                    </div>
                 </div>
                 
                 <!-- Info Layanan -->
@@ -365,7 +334,7 @@
                 </div>
             </div>
             
-            <!-- KOLOM KANAN: Detail Pesanan -->
+            <!-- KOLOM KANAN: Detail Pesanan (AWALNYA HILANG) -->
             <div data-aos="fade-left">
                 <div class="summary-panel" id="summaryPanel">
                     <div class="bg-gradient-to-r from-purple-800 to-purple-600 px-5 py-4">
@@ -500,12 +469,25 @@
             { name: "TIER 3 - BLUE NAME", price: 350000, category: "tier", icon: "fa-gem", desc: "PREMIUM TIER" }
         ];
         
-        let currentFilter = 'all';
+        let currentFilter = null;  // AWALNYA NULL (BELUM PILIH TAB)
         let selectedProduct = null;
         const summaryPanel = document.getElementById('summaryPanel');
         const productGrid = document.getElementById('productGrid');
         
         function renderProducts() {
+            // KALAU BELUM PILIH TAB
+            if (!currentFilter) {
+                productGrid.innerHTML = `
+                    <div style="width:100%; text-align:center; padding:60px 20px; color:rgba(255,255,255,0.4);">
+                        <i class="fas fa-hand-pointer text-4xl mb-3 block text-purple-400"></i>
+                        <p class="text-sm">Pilih kategori terlebih dahulu</p>
+                        <p class="text-[11px] mt-1">Klik ALL / SBC / SCRIPT / TIER</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // FILTER PRODUK
             let filtered = [];
             if (currentFilter === 'all') {
                 filtered = products;
@@ -555,14 +537,21 @@
         // EVENT TAB
         document.querySelectorAll('.premium-tab').forEach(tab => {
             tab.onclick = () => {
+                // Update active class
                 document.querySelectorAll('.premium-tab').forEach(t => {
                     t.classList.remove('active');
                 });
                 tab.classList.add('active');
+                
+                // Set filter
                 currentFilter = tab.dataset.filter;
                 selectedProduct = null;
+                
+                // Render ulang
                 renderProducts();
                 updateSummary();
+                
+                // Sembunyikan summary panel
                 summaryPanel.style.display = 'none';
             };
         });
@@ -606,7 +595,7 @@
         let selectedRating = 5;
         
         function loadReviews() {
-            const saved = localStorage.getItem('elixir_reviews_final_middle');
+            const saved = localStorage.getItem('elixir_reviews_final_awal_kosong');
             if (saved) try { reviews = JSON.parse(saved); } catch(e) { reviews = []; }
             if (reviews.length === 0) reviews = [
                 { name: "Verns", rating: 5, comment: "Gacor banget Jokinya cepet dan terpercaya", date: "31 May 2026" },
@@ -645,13 +634,14 @@
             const comment = document.getElementById('reviewComment').value.trim();
             if (!name || !comment) { alert('Isi nickname & ulasan!'); return; }
             reviews.unshift({ name, rating: selectedRating, comment, date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) });
-            localStorage.setItem('elixir_reviews_final_middle', JSON.stringify(reviews));
+            localStorage.setItem('elixir_reviews_final_awal_kosong', JSON.stringify(reviews));
             renderReviews();
             document.getElementById('reviewName').value = '';
             document.getElementById('reviewComment').value = '';
             alert('✅ Ulasan terkirim!');
         };
         
+        // INITIAL - RENDER KOSONG
         renderProducts();
         updateSummary();
         summaryPanel.style.display = 'none';
