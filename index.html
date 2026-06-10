@@ -48,7 +48,7 @@
         ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #a855f7, #7e22ce); border-radius: 10px; }
         .glass-nav { background: rgba(10,10,15,0.4); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(168,85,247,0.2); position: fixed; top: 0; width: 100%; z-index: 50; }
         
-        /* Product Card - Style Toko Topup */
+        /* Product Card */
         .product-card {
             background: linear-gradient(145deg, #0f0f1a, #0a0a12);
             border-radius: 20px;
@@ -152,6 +152,7 @@
         /* Filter Tab */
         .filter-tab {
             transition: all 0.2s;
+            cursor: pointer;
         }
         .filter-tab.active {
             background: linear-gradient(135deg, #6b21a5, #9333ea);
@@ -230,6 +231,7 @@
             max-height: 500px;
             overflow-y: auto;
             padding-right: 4px;
+            min-height: 200px;
         }
         #productGrid::-webkit-scrollbar {
             width: 3px;
@@ -241,6 +243,11 @@
         #productGrid::-webkit-scrollbar-thumb {
             background: #a855f7;
             border-radius: 10px;
+        }
+        .empty-state {
+            grid-column: span 4;
+            text-align: center;
+            padding: 40px 20px;
         }
     </style>
 </head>
@@ -272,7 +279,7 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION (Keren kayak awal) -->
+    <!-- HERO SECTION -->
     <div class="relative z-10 max-w-7xl mx-auto px-5 pt-28 pb-10 text-center" data-aos="fade-up">
         <div class="inline-flex px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 mb-5 backdrop-blur-sm">
             <span class="text-purple-300 text-[9px] font-medium tracking-wider">PREMIUM SOUTHBRONX STORE</span>
@@ -296,7 +303,7 @@
         </div>
     </div>
 
-    <!-- SHOP SECTION - Layout Toko Topup -->
+    <!-- SHOP SECTION -->
     <div id="shop" class="relative z-10 max-w-7xl mx-auto px-5 py-8">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             
@@ -314,16 +321,23 @@
                 
                 <!-- Filter Tab -->
                 <div class="flex flex-wrap gap-2 mb-5" data-aos="fade-up">
-                    <button data-filter="all" class="filter-tab active px-4 py-1.5 rounded-full text-[10px] font-semibold bg-purple-600 text-white shadow-md">ALL</button>
+                    <button data-filter="all" class="filter-tab px-4 py-1.5 rounded-full text-[10px] font-semibold bg-white/5 text-white/70 hover:bg-white/10">ALL</button>
                     <button data-filter="sbc" class="filter-tab px-4 py-1.5 rounded-full text-[10px] font-semibold bg-white/5 text-white/70 hover:bg-white/10">SBC</button>
                     <button data-filter="script" class="filter-tab px-4 py-1.5 rounded-full text-[10px] font-semibold bg-white/5 text-white/70 hover:bg-white/10">SCRIPT</button>
                     <button data-filter="tier" class="filter-tab px-4 py-1.5 rounded-full text-[10px] font-semibold bg-white/5 text-white/70 hover:bg-white/10">AKUN TIER</button>
                 </div>
                 
-                <!-- Grid Produk -->
+                <!-- Grid Produk (AWALNYA KOSONG) -->
                 <div class="mb-4">
                     <h3 class="text-white/60 text-[10px] font-semibold uppercase tracking-wider mb-3">SEMUA PRODUK</h3>
-                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3" id="productGrid"></div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3" id="productGrid">
+                        <!-- Empty state akan diisi JS -->
+                        <div class="col-span-full text-center text-white/40 py-10 text-sm">
+                            <i class="fas fa-hand-pointer text-3xl mb-3 block text-purple-400"></i>
+                            Pilih kategori terlebih dahulu<br>
+                            <span class="text-[10px] text-white/30">Klik ALL / SBC / Script / Akun Tier</span>
+                        </div>
+                    </div>
                 </div>
                 
                 <!-- Info Layanan -->
@@ -433,7 +447,7 @@
     <script>
         AOS.init({ duration: 600, once: true });
         
-        // Stars
+        // Stars background
         for (let i = 0; i < 150; i++) {
             const star = document.createElement('div');
             star.classList.add('star');
@@ -469,13 +483,34 @@
             { name: "TIER 3 - BLUE NAME", price: 350000, category: "tier", icon: "fa-gem", desc: "PREMIUM TIER" }
         ];
         
-        let selectedProduct = products[0];
-        let currentFilter = 'all';
+        let selectedProduct = null;
+        let currentFilter = null;  // AWALNYA NULL, BELUM PILIH TAB
+        
         const waNumber = "62895385984764";
         
         function renderProducts() {
-            const filtered = products.filter(p => currentFilter === 'all' || p.category === currentFilter);
             const container = document.getElementById('productGrid');
+            
+            // KALAU BELUM PILIH FILTER (currentFilter = null)
+            if (!currentFilter) {
+                container.innerHTML = `
+                    <div class="col-span-full text-center text-white/40 py-12">
+                        <i class="fas fa-hand-pointer text-4xl mb-3 block text-purple-400"></i>
+                        <p class="text-sm font-medium">Pilih kategori terlebih dahulu</p>
+                        <p class="text-[10px] text-white/30 mt-1">Klik ALL / SBC / Script / Akun Tier</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // FILTER PRODUK SESUAI KATEGORI
+            const filtered = products.filter(p => currentFilter === 'all' || p.category === currentFilter);
+            
+            if (filtered.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center text-white/40 py-12">Tidak ada produk di kategori ini</div>`;
+                return;
+            }
+            
             container.innerHTML = '';
             filtered.forEach(product => {
                 const isSelected = selectedProduct && selectedProduct.name === product.name;
@@ -501,22 +536,35 @@
                 document.getElementById('selectedProductName').innerHTML = selectedProduct.name;
                 document.getElementById('selectedProductPrice').innerHTML = formatRp(selectedProduct.price);
                 document.getElementById('totalPrice').innerHTML = formatRp(selectedProduct.price);
+            } else {
+                document.getElementById('selectedProductName').innerHTML = '-';
+                document.getElementById('selectedProductPrice').innerHTML = 'Rp 0';
+                document.getElementById('totalPrice').innerHTML = 'Rp 0';
             }
         }
         
+        // EVENT KLIK TAB FILTER
         document.querySelectorAll('.filter-tab').forEach(btn => {
             btn.onclick = () => {
+                // Update active class
                 document.querySelectorAll('.filter-tab').forEach(b => {
                     b.classList.remove('active', 'bg-purple-600', 'text-white');
                     b.classList.add('bg-white/5', 'text-white/70');
                 });
                 btn.classList.remove('bg-white/5', 'text-white/70');
                 btn.classList.add('active', 'bg-purple-600', 'text-white');
+                
+                // Set filter dan reset selected product
                 currentFilter = btn.dataset.filter;
+                selectedProduct = null;
+                
+                // Render ulang produk dan reset summary
                 renderProducts();
+                updateSummary();
             };
         });
         
+        // Ganti Nickname
         document.getElementById('gantiNickBtn').onclick = () => {
             const newNick = prompt('Masukkan nickname kamu:', document.getElementById('nicknameInput').value);
             if (newNick && newNick.trim()) {
@@ -530,19 +578,25 @@
         let currentTotal = 0;
         
         function openPaymentModal() {
-            if (!selectedProduct) { alert('Pilih produk dulu!'); return; }
+            if (!selectedProduct) {
+                alert('Pilih produk terlebih dahulu!');
+                return;
+            }
             currentTotal = selectedProduct.price;
             document.getElementById('modalAmount').innerHTML = formatRp(currentTotal);
             qrisModal.classList.add('active');
         }
         
         function closeModal() { qrisModal.classList.remove('active'); }
+        
         document.getElementById('closeModalBtn').onclick = closeModal;
         qrisModal.onclick = (e) => { if (e.target === qrisModal) closeModal(); };
+        
         document.getElementById('copyAmountBtn').onclick = () => {
             navigator.clipboard.writeText(currentTotal.toString());
             alert('Nominal ' + formatRp(currentTotal) + ' disalin!');
         };
+        
         document.getElementById('confirmWaBtn').onclick = () => {
             const nickname = document.getElementById('nicknameInput').value;
             let msg = `Halo ELIXIRSTORE%0A%0A*KONFIRMASI PEMBAYARAN*%0A%0AProduk: ${encodeURIComponent(selectedProduct.name)}%0AHarga: ${encodeURIComponent(formatRp(selectedProduct.price))}%0ATotal: ${encodeURIComponent(formatRp(currentTotal))}%0AMetode: QRIS`;
@@ -551,6 +605,7 @@
             window.open(`https://wa.me/${waNumber}?text=${msg}`, '_blank');
             closeModal();
         };
+        
         document.getElementById('bayarBtn').onclick = openPaymentModal;
         
         // Review System
@@ -604,6 +659,7 @@
             alert('✅ Ulasan terkirim!');
         };
         
+        // INITIAL - RENDER KOSONG (karena currentFilter = null)
         renderProducts();
         updateSummary();
         loadReviews();
