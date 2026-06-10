@@ -157,7 +157,7 @@
             color: transparent;
         }
         
-        /* SUMMARY PANEL (DETAIL PESANAN) */
+        /* SUMMARY PANEL (DETAIL PESANAN) - AWALNYA HILANG */
         .summary-panel {
             background: linear-gradient(145deg, #0f0f1a, #0a0a12);
             border-radius: 24px;
@@ -165,6 +165,7 @@
             overflow: hidden;
             position: sticky;
             top: 80px;
+            display: none;
         }
         .summary-row {
             display: flex;
@@ -201,6 +202,11 @@
         .btn-bayar:hover {
             transform: scale(1.02);
             box-shadow: 0 5px 20px rgba(245,158,11,0.4);
+        }
+        
+        /* INPUT NICKNAME SECTION - AWALNYA HILANG */
+        .nickname-section {
+            display: none;
         }
         
         /* QRIS MODAL */
@@ -322,17 +328,8 @@
     <div id="shop" class="relative z-10 max-w-7xl mx-auto px-5 py-8">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             
-            <!-- KOLOM KIRI: Input Nickname + Tabs + Grid Produk -->
+            <!-- KOLOM KIRI: Tabs + Grid Produk (Nickname HILANG AWAL) -->
             <div class="lg:col-span-2">
-                <!-- Input Nickname -->
-                <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-4 border border-white/10 mb-6" data-aos="fade-up">
-                    <label class="text-white/70 text-[10px] font-semibold uppercase tracking-wider mb-2 block">MASUKKAN NICKNAME (OPSIONAL)</label>
-                    <div class="flex gap-2">
-                        <input type="text" id="nicknameInput" class="nickname-input flex-1" placeholder="Nickname kamu">
-                        <button id="gantiNickBtn" class="px-4 py-2 bg-purple-600/50 hover:bg-purple-600 rounded-xl text-white text-xs font-semibold transition">GANTI</button>
-                    </div>
-                    <p class="text-white/30 text-[9px] mt-2"><i class="fas fa-info-circle"></i> Masukkan nickname kamu (opsional untuk produk SBC)</p>
-                </div>
                 
                 <!-- Tabs Premium -->
                 <div class="flex justify-start gap-3 mb-8 flex-wrap" data-aos="fade-up">
@@ -357,9 +354,9 @@
                 </div>
             </div>
             
-            <!-- KOLOM KANAN: Detail Pesanan (Summary Panel) -->
+            <!-- KOLOM KANAN: Detail Pesanan (HILANG AWAL, MUNCUL SETELAH KLIK PRODUK) -->
             <div data-aos="fade-left">
-                <div class="summary-panel">
+                <div class="summary-panel" id="summaryPanel">
                     <div class="bg-gradient-to-r from-purple-800 to-purple-600 px-5 py-4">
                         <h3 class="text-white font-bold text-sm flex items-center gap-2"><i class="fas fa-receipt"></i> DETAIL PESANAN</h3>
                     </div>
@@ -494,6 +491,7 @@
         
         let currentFilter = null;
         let selectedProduct = null;
+        const summaryPanel = document.getElementById('summaryPanel');
         
         function renderProducts() {
             const container = document.getElementById('productGrid');
@@ -531,6 +529,8 @@
                     selectedProduct = product;
                     updateSummary();
                     renderProducts();
+                    // TAMPILKAN SUMMARY PANEL setelah pilih produk
+                    summaryPanel.style.display = 'block';
                 };
                 container.appendChild(card);
             });
@@ -559,17 +559,10 @@
                 selectedProduct = null;
                 renderProducts();
                 updateSummary();
+                // SEMBUNYIKAN SUMMARY PANEL saat ganti tab
+                summaryPanel.style.display = 'none';
             };
         });
-        
-        // GANTI NICKNAME
-        document.getElementById('gantiNickBtn').onclick = () => {
-            const newNick = prompt('Masukkan nickname kamu:', document.getElementById('nicknameInput').value);
-            if (newNick && newNick.trim()) {
-                document.getElementById('nicknameInput').value = newNick.trim();
-                alert('Nickname berhasil diubah!');
-            }
-        };
         
         // QRIS MODAL
         const qrisModal = document.getElementById('qrisModal');
@@ -596,9 +589,8 @@
         };
         
         document.getElementById('confirmWaBtn').onclick = () => {
-            const nickname = document.getElementById('nicknameInput').value;
+            if (!selectedProduct) return;
             let msg = `Halo ELIXIRSTORE%0A%0A*KONFIRMASI PEMBAYARAN*%0A%0AProduk: ${encodeURIComponent(selectedProduct.name)}%0AHarga: ${encodeURIComponent(formatRp(selectedProduct.price))}%0ATotal: ${encodeURIComponent(formatRp(currentTotal))}%0AMetode: QRIS`;
-            if (nickname && nickname.trim()) msg += `%0ANickname: ${encodeURIComponent(nickname.trim())}`;
             msg += `%0A%0ASaya sudah melakukan pembayaran. Berikut bukti transfer saya.`;
             window.open(`https://wa.me/${waNumber}?text=${msg}`, '_blank');
             closeModal();
@@ -611,7 +603,7 @@
         let selectedRating = 5;
         
         function loadReviews() {
-            const saved = localStorage.getItem('elixir_reviews_valforum');
+            const saved = localStorage.getItem('elixir_reviews_valforum_fix');
             if (saved) try { reviews = JSON.parse(saved); } catch(e) { reviews = []; }
             if (reviews.length === 0) reviews = [
                 { name: "Verns", rating: 5, comment: "Gacor banget Jokinya cepet dan terpercaya", date: "31 May 2026" },
@@ -650,15 +642,17 @@
             const comment = document.getElementById('reviewComment').value.trim();
             if (!name || !comment) { alert('Isi nickname & ulasan!'); return; }
             reviews.unshift({ name, rating: selectedRating, comment, date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) });
-            localStorage.setItem('elixir_reviews_valforum', JSON.stringify(reviews));
+            localStorage.setItem('elixir_reviews_valforum_fix', JSON.stringify(reviews));
             renderReviews();
             document.getElementById('reviewName').value = '';
             document.getElementById('reviewComment').value = '';
             alert('✅ Ulasan terkirim!');
         };
         
+        // INITIAL - SEMUA HILANG
         renderProducts();
         updateSummary();
+        summaryPanel.style.display = 'none'; // AWALNYA HILANG
         loadReviews();
     </script>
 </body>
