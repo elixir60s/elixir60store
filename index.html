@@ -109,6 +109,7 @@
             border: 1px solid rgba(168,85,247,0.2);
             position: relative;
             overflow: hidden;
+            width: 100%;
         }
         .product-card:hover {
             transform: translateY(-5px);
@@ -157,7 +158,16 @@
             color: transparent;
         }
         
-        /* SUMMARY PANEL (DETAIL PESANAN) - AWALNYA HILANG */
+        /* GRID PRODUCT - DI CENTER */
+        #productGrid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 200px));
+            gap: 20px;
+            justify-content: center;
+            align-items: start;
+        }
+        
+        /* SUMMARY PANEL */
         .summary-panel {
             background: linear-gradient(145deg, #0f0f1a, #0a0a12);
             border-radius: 24px;
@@ -173,21 +183,6 @@
             padding: 14px 16px;
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-        .nickname-input {
-            background: rgba(0,0,0,0.5);
-            border: 1px solid rgba(168,85,247,0.3);
-            border-radius: 14px;
-            padding: 12px 16px;
-            width: 100%;
-            color: white;
-            font-size: 0.85rem;
-            text-align: center;
-        }
-        .nickname-input:focus {
-            outline: none;
-            border-color: #a855f7;
-            box-shadow: 0 0 12px rgba(139,92,246,0.3);
-        }
         .btn-bayar {
             background: linear-gradient(135deg, #f59e0b, #d97706);
             transition: all 0.3s;
@@ -202,11 +197,6 @@
         .btn-bayar:hover {
             transform: scale(1.02);
             box-shadow: 0 5px 20px rgba(245,158,11,0.4);
-        }
-        
-        /* INPUT NICKNAME SECTION - AWALNYA HILANG */
-        .nickname-section {
-            display: none;
         }
         
         /* QRIS MODAL */
@@ -263,11 +253,12 @@
             .product-icon { width: 45px; height: 45px; }
             .product-icon i { font-size: 1.3rem; }
             .premium-tab { padding: 6px 16px; font-size: 0.7rem; }
+            #productGrid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 160px));
+                gap: 12px;
+            }
         }
         
-        #productGrid {
-            min-height: 300px;
-        }
         .footer-link { transition: all 0.2s; }
         .footer-link:hover { color: #a855f7; transform: translateX(3px); }
     </style>
@@ -324,28 +315,29 @@
         </div>
     </div>
 
-    <!-- MAIN SHOP SECTION - MODEL VALFORUM -->
+    <!-- MAIN SHOP SECTION -->
     <div id="shop" class="relative z-10 max-w-7xl mx-auto px-5 py-8">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             
-            <!-- KOLOM KIRI: Tabs + Grid Produk (Nickname HILANG AWAL) -->
+            <!-- KOLOM KIRI: Tabs + Grid Produk -->
             <div class="lg:col-span-2">
                 
-                <!-- Tabs Premium -->
-                <div class="flex justify-start gap-3 mb-8 flex-wrap" data-aos="fade-up">
+                <!-- Tabs Premium: ALL, SBC, SCRIPT, TIER -->
+                <div class="flex justify-center gap-3 mb-10 flex-wrap" data-aos="fade-up">
+                    <button data-filter="all" class="premium-tab active">🔥 ALL</button>
                     <button data-filter="sbc" class="premium-tab">⚡ SBC</button>
                     <button data-filter="script" class="premium-tab">📜 SCRIPT</button>
                     <button data-filter="tier" class="premium-tab">💎 TIER</button>
                 </div>
                 
-                <!-- Grid Produk -->
+                <!-- Grid Produk (CENTER) -->
                 <div>
-                    <h3 class="text-white/60 text-[10px] font-semibold uppercase tracking-wider mb-3">SEMUA PRODUK</h3>
-                    <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="productGrid"></div>
+                    <h3 class="text-white/60 text-[10px] font-semibold uppercase tracking-wider mb-3 text-center">SEMUA PRODUK</h3>
+                    <div id="productGrid"></div>
                 </div>
                 
                 <!-- Info Layanan -->
-                <div class="bg-gradient-to-r from-purple-900/20 to-pink-900/20 rounded-2xl p-4 mt-8 border border-purple-500/20">
+                <div class="bg-gradient-to-r from-purple-900/20 to-pink-900/20 rounded-2xl p-4 mt-10 border border-purple-500/20">
                     <div class="flex justify-center gap-6 text-center flex-wrap">
                         <div><i class="fas fa-bolt text-purple-400 text-lg"></i><p class="text-white/60 text-[10px] mt-1">FAST RESPON</p></div>
                         <div><i class="fas fa-clock text-purple-400 text-lg"></i><p class="text-white/60 text-[10px] mt-1">PROSES INSTAN</p></div>
@@ -354,7 +346,7 @@
                 </div>
             </div>
             
-            <!-- KOLOM KANAN: Detail Pesanan (HILANG AWAL, MUNCUL SETELAH KLIK PRODUK) -->
+            <!-- KOLOM KANAN: Detail Pesanan -->
             <div data-aos="fade-left">
                 <div class="summary-panel" id="summaryPanel">
                     <div class="bg-gradient-to-r from-purple-800 to-purple-600 px-5 py-4">
@@ -489,25 +481,20 @@
             { name: "TIER 3 - BLUE NAME", price: 350000, category: "tier", icon: "fa-gem", desc: "PREMIUM TIER" }
         ];
         
-        let currentFilter = null;
+        let currentFilter = 'all';
         let selectedProduct = null;
         const summaryPanel = document.getElementById('summaryPanel');
         
         function renderProducts() {
             const container = document.getElementById('productGrid');
             
-            if (!currentFilter) {
-                container.innerHTML = `
-                    <div class="col-span-full text-center text-white/40 py-12">
-                        <i class="fas fa-hand-pointer text-4xl mb-3 block text-purple-400"></i>
-                        <p class="text-sm font-medium">Pilih kategori terlebih dahulu</p>
-                        <p class="text-[10px] text-white/30 mt-1">Klik SBC / SCRIPT / TIER</p>
-                    </div>
-                `;
-                return;
+            let filtered = [];
+            if (currentFilter === 'all') {
+                filtered = products;
+            } else {
+                filtered = products.filter(p => p.category === currentFilter);
             }
             
-            const filtered = products.filter(p => p.category === currentFilter);
             container.innerHTML = '';
             
             if (filtered.length === 0) {
@@ -529,7 +516,6 @@
                     selectedProduct = product;
                     updateSummary();
                     renderProducts();
-                    // TAMPILKAN SUMMARY PANEL setelah pilih produk
                     summaryPanel.style.display = 'block';
                 };
                 container.appendChild(card);
@@ -559,7 +545,6 @@
                 selectedProduct = null;
                 renderProducts();
                 updateSummary();
-                // SEMBUNYIKAN SUMMARY PANEL saat ganti tab
                 summaryPanel.style.display = 'none';
             };
         });
@@ -603,7 +588,7 @@
         let selectedRating = 5;
         
         function loadReviews() {
-            const saved = localStorage.getItem('elixir_reviews_valforum_fix');
+            const saved = localStorage.getItem('elixir_reviews_final_all');
             if (saved) try { reviews = JSON.parse(saved); } catch(e) { reviews = []; }
             if (reviews.length === 0) reviews = [
                 { name: "Verns", rating: 5, comment: "Gacor banget Jokinya cepet dan terpercaya", date: "31 May 2026" },
@@ -642,17 +627,16 @@
             const comment = document.getElementById('reviewComment').value.trim();
             if (!name || !comment) { alert('Isi nickname & ulasan!'); return; }
             reviews.unshift({ name, rating: selectedRating, comment, date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) });
-            localStorage.setItem('elixir_reviews_valforum_fix', JSON.stringify(reviews));
+            localStorage.setItem('elixir_reviews_final_all', JSON.stringify(reviews));
             renderReviews();
             document.getElementById('reviewName').value = '';
             document.getElementById('reviewComment').value = '';
             alert('✅ Ulasan terkirim!');
         };
         
-        // INITIAL - SEMUA HILANG
         renderProducts();
         updateSummary();
-        summaryPanel.style.display = 'none'; // AWALNYA HILANG
+        summaryPanel.style.display = 'none';
         loadReviews();
     </script>
 </body>
