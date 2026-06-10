@@ -56,7 +56,7 @@
         .stat-card { background: rgba(255,255,255,0.05); backdrop-filter: blur(4px); border-radius: 16px; padding: 16px; text-align: center; border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s; }
         .stat-card:hover { transform: translateY(-3px); border-color: rgba(168,85,247,0.4); background: rgba(255,255,255,0.08); }
         
-        /* TAB PREMIUM - TENGAH PERSIS KAYAK CONTOH */
+        /* TAB PREMIUM - TENGAH */
         .tabs-wrapper {
             display: flex;
             flex-wrap: wrap;
@@ -133,7 +133,7 @@
         .product-desc { font-size: 0.55rem; color: #a78bfa; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
         .product-price { font-size: 1rem; font-weight: 700; background: linear-gradient(135deg, #fbbf24, #ffd700); -webkit-background-clip: text; background-clip: text; color: transparent; }
         
-        /* GRID PRODUK - TENGAH */
+        /* GRID PRODUK */
         #productGrid {
             display: flex;
             flex-wrap: wrap;
@@ -143,6 +143,16 @@
             margin: 0 auto;
             width: 100%;
             min-height: 300px;
+        }
+        
+        /* INFO LAYANAN - AWALNYA HILANG */
+        .info-layanan {
+            display: none;
+            background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(168,85,247,0.05));
+            border-radius: 20px;
+            padding: 16px 20px;
+            margin-top: 30px;
+            border: 1px solid rgba(168,85,247,0.2);
         }
         
         /* SUMMARY PANEL */
@@ -293,18 +303,18 @@
     <div id="shop" class="relative z-10 max-w-7xl mx-auto px-5 py-8">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             
-            <!-- KOLOM KIRI: Tabs + Grid Produk -->
+            <!-- KOLOM KIRI -->
             <div class="lg:col-span-2">
                 
-                <!-- TABS PREMIUM - TENGAH PERSIS KAYAK CONTOH -->
+                <!-- TABS TENGAH -->
                 <div class="tabs-wrapper" data-aos="fade-up">
-                    <button data-filter="all" class="premium-tab active">🔥 ALL</button>
+                    <button data-filter="all" class="premium-tab">🔥 ALL</button>
                     <button data-filter="sbc" class="premium-tab">⚡ SBC</button>
                     <button data-filter="script" class="premium-tab">📜 SCRIPT</button>
                     <button data-filter="tier" class="premium-tab">💎 TIER</button>
                 </div>
                 
-                <!-- Grid Produk - AWAL KOSONG -->
+                <!-- GRID PRODUK -->
                 <div class="grid-wrapper">
                     <h3 class="text-white/60 text-[10px] font-semibold uppercase tracking-wider mb-3 text-center">SEMUA PRODUK</h3>
                     <div id="productGrid">
@@ -316,17 +326,17 @@
                     </div>
                 </div>
                 
-                <!-- Info Layanan -->
-                <div class="bg-gradient-to-r from-purple-900/20 to-pink-900/20 rounded-2xl p-4 mt-10 border border-purple-500/20">
-                    <div class="flex justify-center gap-6 text-center flex-wrap">
-                        <div><i class="fas fa-bolt text-purple-400 text-lg"></i><p class="text-white/60 text-[10px] mt-1">FAST RESPON</p></div>
-                        <div><i class="fas fa-clock text-purple-400 text-lg"></i><p class="text-white/60 text-[10px] mt-1">PROSES INSTAN</p></div>
-                        <div><i class="fas fa-shield-alt text-purple-400 text-lg"></i><p class="text-white/60 text-[10px] mt-1">AMAN TERPERCAYA</p></div>
+                <!-- INFO LAYANAN - AWALNYA HILANG, MUNCUL SETELAH PILIH TAB -->
+                <div class="info-layanan" id="infoLayanan">
+                    <div class="flex justify-center gap-8 text-center flex-wrap">
+                        <div><i class="fas fa-bolt text-purple-400 text-xl"></i><p class="text-white/70 text-xs mt-1 font-medium">FAST RESPON</p></div>
+                        <div><i class="fas fa-clock text-purple-400 text-xl"></i><p class="text-white/70 text-xs mt-1 font-medium">PROSES INSTAN</p></div>
+                        <div><i class="fas fa-shield-alt text-purple-400 text-xl"></i><p class="text-white/70 text-xs mt-1 font-medium">AMAN TERPERCAYA</p></div>
                     </div>
                 </div>
             </div>
             
-            <!-- KOLOM KANAN: Detail Pesanan (AWALNYA HILANG) -->
+            <!-- KOLOM KANAN: DETAIL PESANAN -->
             <div data-aos="fade-left">
                 <div class="summary-panel" id="summaryPanel">
                     <div class="bg-gradient-to-r from-purple-800 to-purple-600 px-5 py-4">
@@ -464,9 +474,11 @@
         let currentFilter = null;
         let selectedProduct = null;
         const summaryPanel = document.getElementById('summaryPanel');
+        const infoLayanan = document.getElementById('infoLayanan');
         const productGrid = document.getElementById('productGrid');
         
         function renderProducts() {
+            // KALAU BELUM PILIH TAB
             if (!currentFilter) {
                 productGrid.innerHTML = `
                     <div style="width:100%; text-align:center; padding:60px 20px; color:rgba(255,255,255,0.4);">
@@ -475,15 +487,18 @@
                         <p class="text-[11px] mt-1">Klik ALL / SBC / SCRIPT / TIER</p>
                     </div>
                 `;
+                infoLayanan.style.display = 'none';
                 return;
             }
             
+            // KALAU SUDAH PILIH TAB
             let filtered = currentFilter === 'all' ? products : products.filter(p => p.category === currentFilter);
             
             productGrid.innerHTML = '';
             
             if (filtered.length === 0) {
                 productGrid.innerHTML = `<div style="width:100%; text-align:center; padding:40px; color:rgba(255,255,255,0.4);">Tidak ada produk di kategori ini</div>`;
+                infoLayanan.style.display = 'flex';
                 return;
             }
             
@@ -505,6 +520,9 @@
                 };
                 productGrid.appendChild(card);
             });
+            
+            // TAMPILKAN INFO LAYANAN
+            infoLayanan.style.display = 'flex';
         }
         
         function updateSummary() {
@@ -566,7 +584,7 @@
         let selectedRating = 5;
         
         function loadReviews() {
-            const saved = localStorage.getItem('elixir_reviews_final_tengah');
+            const saved = localStorage.getItem('elixir_reviews_final_oke');
             if (saved) try { reviews = JSON.parse(saved); } catch(e) { reviews = []; }
             if (reviews.length === 0) reviews = [
                 { name: "Verns", rating: 5, comment: "Gacor banget Jokinya cepet dan terpercaya", date: "31 May 2026" },
@@ -605,7 +623,7 @@
             const comment = document.getElementById('reviewComment').value.trim();
             if (!name || !comment) { alert('Isi nickname & ulasan!'); return; }
             reviews.unshift({ name, rating: selectedRating, comment, date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) });
-            localStorage.setItem('elixir_reviews_final_tengah', JSON.stringify(reviews));
+            localStorage.setItem('elixir_reviews_final_oke', JSON.stringify(reviews));
             renderReviews();
             document.getElementById('reviewName').value = '';
             document.getElementById('reviewComment').value = '';
