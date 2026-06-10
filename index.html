@@ -211,7 +211,7 @@
             border: 1px solid rgba(168,85,247,0.2);
         }
         
-        /* MODAL 2 KOLOM - KIRI DETAIL, KANAN QRIS */
+        /* MODAL 2 KOLOM - UKURAN PAS, NGGAK GEPENG */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -221,41 +221,38 @@
             z-index: 1000;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 16px;
         }
-        .modal-overlay.active {
-            display: flex;
-        }
+        .modal-overlay.active { display: flex; }
         .modal-container {
             background: linear-gradient(145deg, #0f0f1a, #0a0a12);
-            border-radius: 28px;
-            max-width: 700px;
+            border-radius: 24px;
+            max-width: 520px;
             width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
             border: 1px solid rgba(168,85,247,0.3);
             box-shadow: 0 25px 50px rgba(0,0,0,0.5);
             animation: modalFadeIn 0.3s ease;
+            overflow: hidden;
         }
         .modal-header {
             background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(168,85,247,0.1));
-            padding: 16px 20px;
+            padding: 14px 16px;
             text-align: center;
             border-bottom: 1px solid rgba(168,85,247,0.2);
             position: relative;
         }
         .modal-header h3 {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 700;
             color: white;
         }
         .modal-close {
             position: absolute;
-            top: 12px;
-            right: 16px;
+            top: 10px;
+            right: 14px;
             background: rgba(255,255,255,0.1);
-            width: 30px;
-            height: 30px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -263,37 +260,37 @@
             cursor: pointer;
             transition: all 0.2s;
             color: white;
-            font-size: 18px;
+            font-size: 16px;
         }
         .modal-close:hover {
             background: rgba(255,255,255,0.2);
             transform: rotate(90deg);
         }
         .modal-body {
-            padding: 20px;
+            padding: 16px;
             display: flex;
-            gap: 24px;
+            gap: 16px;
             flex-wrap: wrap;
         }
         /* KOLOM KIRI - DETAIL PESANAN */
         .modal-left {
             flex: 1;
-            min-width: 200px;
+            min-width: 180px;
         }
         .modal-row {
             display: flex;
             justify-content: space-between;
-            padding: 10px 0;
+            padding: 8px 0;
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         .modal-row-label {
             color: rgba(255,255,255,0.5);
-            font-size: 0.75rem;
+            font-size: 0.7rem;
         }
         .modal-row-value {
             color: white;
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
         }
         .modal-price {
             color: #fbbf24;
@@ -301,13 +298,13 @@
         }
         .modal-username-input {
             width: 100%;
-            padding: 10px 12px;
+            padding: 8px 10px;
             background: rgba(0,0,0,0.5);
             border: 1px solid rgba(168,85,247,0.3);
-            border-radius: 12px;
+            border-radius: 10px;
             color: white;
-            font-size: 0.8rem;
-            margin-top: 8px;
+            font-size: 0.7rem;
+            margin-top: 4px;
         }
         .modal-username-input:focus {
             outline: none;
@@ -315,44 +312,44 @@
         }
         /* KOLOM KANAN - QRIS */
         .modal-right {
-            flex: 0.8;
-            min-width: 180px;
+            flex: 0.7;
+            min-width: 140px;
             text-align: center;
         }
         .modal-qr {
             background: white;
-            border-radius: 20px;
-            padding: 16px;
+            border-radius: 16px;
+            padding: 10px;
             text-align: center;
         }
         .modal-qr img {
-            width: 160px;
-            height: 160px;
+            width: 110px;
+            height: 110px;
             margin: 0 auto;
             display: block;
-            border-radius: 12px;
+            border-radius: 10px;
         }
         .modal-qr-text {
-            font-size: 0.65rem;
+            font-size: 0.55rem;
             color: #888;
-            margin-top: 10px;
+            margin-top: 6px;
         }
         .modal-btn-wa {
             background: linear-gradient(135deg, #25D366, #128C7E);
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             border-radius: 40px;
             color: white;
             font-weight: bold;
             border: none;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
             transition: all 0.3s;
-            margin-top: 16px;
+            margin-top: 10px;
         }
         .modal-btn-wa:hover {
             transform: scale(1.02);
@@ -415,7 +412,7 @@
         .review-card { background: rgba(255,255,255,0.05); border-radius: 14px; padding: 12px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 8px; }
         .review-input, .review-textarea { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 10px; color: white; width: 100%; font-size: 0.8rem; }
         
-        @media (max-width: 640px) {
+        @media (max-width: 480px) {
             .product-card { max-width: 155px; }
             .product-name { font-size: 0.75rem; }
             .product-price { font-size: 0.85rem; }
@@ -426,10 +423,12 @@
             .step-item { font-size: 0.65rem; padding: 4px 12px; }
             .cara-steps { gap: 8px; }
             .splash-logo { font-size: 36px; }
-            .modal-qr img { width: 130px; height: 130px; }
-            .modal-body { flex-direction: column; gap: 16px; }
+            .modal-body { flex-direction: column; gap: 12px; }
             .modal-left { min-width: auto; }
             .modal-right { min-width: auto; }
+            .modal-qr img { width: 100px; height: 100px; }
+            .modal-container { max-width: 95%; }
+            .modal-row { padding: 6px 0; }
         }
     </style>
 </head>
@@ -531,7 +530,7 @@
         </div>
     </div>
 
-    <!-- MODAL 2 KOLOM (KIRI DETAIL | KANAN QRIS) -->
+    <!-- MODAL 2 KOLOM - UKURAN PAS, NGGAK GEPENG -->
     <div id="paymentModal" class="modal-overlay">
         <div class="modal-container">
             <div class="modal-header">
@@ -539,7 +538,7 @@
                 <div class="modal-close" id="closeModalBtn">&times;</div>
             </div>
             <div class="modal-body">
-                <!-- KOLOM KIRI - DETAIL PESANAN -->
+                <!-- KOLOM KIRI -->
                 <div class="modal-left">
                     <div class="modal-row">
                         <span class="modal-row-label">PRODUK</span>
@@ -550,7 +549,7 @@
                         <span class="modal-row-value modal-price" id="modalProductPrice">Rp 0</span>
                     </div>
                     <div id="modalUsernameRow" style="display: none;">
-                        <div style="padding: 10px 0;">
+                        <div style="padding: 4px 0;">
                             <span class="modal-row-label">USERNAME</span>
                             <input type="text" id="modalUsernameInput" class="modal-username-input" placeholder="Masukkan username kamu">
                         </div>
@@ -565,7 +564,7 @@
                     </div>
                 </div>
                 
-                <!-- KOLOM KANAN - QRIS -->
+                <!-- KOLOM KANAN -->
                 <div class="modal-right">
                     <div class="modal-qr">
                         <img id="modalQrImage" src="https://i.ibb.co.com/Cp2N3cf8/IMG-9954.jpg" alt="QRIS">
@@ -641,20 +640,16 @@
     <script>
         AOS.init({ duration: 600, once: true });
         
-        // HILANGIN SPLASH SCREEN
         window.addEventListener('load', function() {
             setTimeout(function() {
                 const splash = document.getElementById('splashScreen');
                 if (splash) {
                     splash.style.opacity = '0';
-                    setTimeout(function() {
-                        splash.style.display = 'none';
-                    }, 500);
+                    setTimeout(function() { splash.style.display = 'none'; }, 500);
                 }
             }, 1500);
         });
         
-        // BINTANG BACKGROUND
         for (let i = 0; i < 200; i++) {
             const star = document.createElement('div');
             star.classList.add('star');
@@ -667,18 +662,14 @@
             document.getElementById('starsContainer').appendChild(star);
         }
         
-        // DATA PRODUK
         const formatRp = (n) => "Rp" + n.toLocaleString('id-ID');
         const waNumber = "62895385984764";
         const QRIS_IMAGE_URL = "https://i.ibb.co.com/Cp2N3cf8/IMG-9954.jpg";
         
         const products = [
             ...["100K","200K","300K","400K","500K","600K","700K","800K","900K","1JT","1.1JT","1.2JT","1.3JT","1.4JT","1.5JT","1.6JT","1.7JT"].map((name, idx) => ({ 
-                name: `SBC ${name}`, 
-                price: [10000,20000,30000,40000,50000,60000,70000,80000,90000,100000,110000,120000,130000,140000,150000,160000,170000][idx], 
-                category: "sbc", 
-                icon: "fa-crown",
-                desc: "VIA TF ON SOUTHBRONX"
+                name: `SBC ${name}`, price: [10000,20000,30000,40000,50000,60000,70000,80000,90000,100000,110000,120000,130000,140000,150000,160000,170000][idx], 
+                category: "sbc", icon: "fa-crown", desc: "VIA TF ON SOUTHBRONX"
             })),
             { name: "MARSHMALLOW - HARIAN", price: 13000, category: "script", icon: "fa-code", desc: "PREMIUM SCRIPT" },
             { name: "MARSHMALLOW - BULANAN", price: 60000, category: "script", icon: "fa-code", desc: "PREMIUM SCRIPT" },
@@ -699,7 +690,6 @@
         const caraOrderBox = document.getElementById('caraOrderBox');
         const caraStepsContainer = document.getElementById('caraStepsContainer');
         
-        // MODAL ELEMENTS
         const modal = document.getElementById('paymentModal');
         const closeModalBtn = document.getElementById('closeModalBtn');
         const modalProductName = document.getElementById('modalProductName');
@@ -709,7 +699,6 @@
         const modalUsernameInput = document.getElementById('modalUsernameInput');
         const modalConfirmBtn = document.getElementById('modalConfirmBtn');
         
-        // TATA CARA STEPS
         const caraStepsMap = {
             all: [{ num: "!", text: "Pilih kategori (ALL/SBC/SCRIPT/TIER) terlebih dahulu" }],
             sbc: [{ num: 1, text: "Pilih produk SBC" }, { num: 2, text: "Isi username" }, { num: 3, text: "Bayar via QRIS" }, { num: 4, text: "Konfirmasi ke WhatsApp" }],
@@ -719,9 +708,7 @@
         
         function updateCaraOrder(category) {
             let steps = caraStepsMap[category] || caraStepsMap.all;
-            caraStepsContainer.innerHTML = steps.map(step => `
-                <div class="step-item"><div class="step-num">${step.num}</div><span>${step.text}</span></div>
-            `).join('');
+            caraStepsContainer.innerHTML = steps.map(step => `<div class="step-item"><div class="step-num">${step.num}</div><span>${step.text}</span></div>`).join('');
             caraOrderBox.classList.add('show');
         }
         
@@ -730,53 +717,36 @@
             modalProductName.textContent = product.name;
             modalProductPrice.textContent = formatRp(product.price);
             modalTotalPrice.textContent = formatRp(product.price);
-            
             if (currentFilter === 'sbc' || product.category === 'sbc') {
                 modalUsernameRow.style.display = 'block';
                 modalUsernameInput.value = '';
             } else {
                 modalUsernameRow.style.display = 'none';
             }
-            
             modal.classList.add('active');
         }
         
-        function closeModal() {
-            modal.classList.remove('active');
-            selectedProduct = null;
-        }
+        function closeModal() { modal.classList.remove('active'); selectedProduct = null; }
         
         function renderProducts() {
             if (!currentFilter) {
-                productGrid.innerHTML = `<div style="width:100%; text-align:center; padding:60px 20px; color:rgba(255,255,255,0.4);">
-                    <i class="fas fa-hand-pointer text-4xl mb-3 block text-purple-400"></i>
-                    <p class="text-sm">Pilih kategori terlebih dahulu</p>
-                    <p class="text-[11px] mt-1">Klik ALL / SBC / SCRIPT / TIER</p>
-                </div>`;
+                productGrid.innerHTML = `<div style="width:100%; text-align:center; padding:60px 20px; color:rgba(255,255,255,0.4);"><i class="fas fa-hand-pointer text-4xl mb-3 block text-purple-400"></i><p class="text-sm">Pilih kategori terlebih dahulu</p><p class="text-[11px] mt-1">Klik ALL / SBC / SCRIPT / TIER</p></div>`;
                 infoLayanan.style.display = 'none';
                 caraOrderBox.classList.remove('show');
                 return;
             }
-            
             let filtered = currentFilter === 'all' ? products : products.filter(p => p.category === currentFilter);
             productGrid.innerHTML = '';
-            
             if (filtered.length === 0) {
                 productGrid.innerHTML = `<div style="width:100%; text-align:center; padding:40px; color:rgba(255,255,255,0.4);">Tidak ada produk di kategori ini</div>`;
                 infoLayanan.style.display = 'flex';
                 updateCaraOrder(currentFilter);
                 return;
             }
-            
             filtered.forEach(product => {
                 const card = document.createElement('div');
                 card.className = 'product-card';
-                card.innerHTML = `
-                    <div class="product-icon"><i class="fas ${product.icon}"></i></div>
-                    <div class="product-name">${product.name}</div>
-                    <div class="product-desc">${product.desc || ''}</div>
-                    <div class="product-price">${formatRp(product.price)}</div>
-                `;
+                card.innerHTML = `<div class="product-icon"><i class="fas ${product.icon}"></i></div><div class="product-name">${product.name}</div><div class="product-desc">${product.desc || ''}</div><div class="product-price">${formatRp(product.price)}</div>`;
                 card.onclick = () => {
                     document.querySelectorAll('.product-card').forEach(c => c.classList.remove('selected'));
                     card.classList.add('selected');
@@ -784,12 +754,10 @@
                 };
                 productGrid.appendChild(card);
             });
-            
             infoLayanan.style.display = 'flex';
             updateCaraOrder(currentFilter);
         }
         
-        // EVENT TAB
         document.querySelectorAll('.premium-tab').forEach(tab => {
             tab.onclick = () => {
                 document.querySelectorAll('.premium-tab').forEach(t => t.classList.remove('active'));
@@ -801,29 +769,24 @@
             };
         });
         
-        // MODAL CLOSE
         closeModalBtn.onclick = closeModal;
         modal.onclick = (e) => { if (e.target === modal) closeModal(); };
         
-        // KONFIRMASI PEMBAYARAN
         modalConfirmBtn.onclick = () => {
             if (!selectedProduct) { closeModal(); return; }
             let username = modalUsernameInput.value.trim();
             let msg = `Halo ELIXIRSTORE%0A%0A*KONFIRMASI PEMBAYARAN*%0A%0AProduk: ${encodeURIComponent(selectedProduct.name)}%0AHarga: ${encodeURIComponent(formatRp(selectedProduct.price))}%0ATotal: ${encodeURIComponent(formatRp(selectedProduct.price))}%0AMetode: QRIS`;
-            if (username && (currentFilter === 'sbc' || selectedProduct.category === 'sbc')) {
-                msg += `%0AUsername: ${encodeURIComponent(username)}`;
-            }
+            if (username && (currentFilter === 'sbc' || selectedProduct.category === 'sbc')) msg += `%0AUsername: ${encodeURIComponent(username)}`;
             msg += `%0A%0ASaya sudah melakukan pembayaran. Berikut bukti transfer saya.`;
             window.open(`https://wa.me/${waNumber}?text=${msg}`, '_blank');
             closeModal();
         };
         
-        // REVIEW SYSTEM
         let reviews = [];
         let selectedRating = 5;
         
         function loadReviews() {
-            const saved = localStorage.getItem('elixir_reviews_2col_final');
+            const saved = localStorage.getItem('elixir_reviews_fix_gepeng');
             if (saved) try { reviews = JSON.parse(saved); } catch(e) { reviews = []; }
             if (reviews.length === 0) reviews = [
                 { name: "Verns", rating: 5, comment: "Gacor banget Jokinya cepet dan terpercaya", date: "31 May 2026" },
@@ -850,10 +813,7 @@
         document.querySelectorAll('.star-select').forEach(star => {
             star.onclick = () => {
                 selectedRating = parseInt(star.dataset.val);
-                document.querySelectorAll('.star-select').forEach((s, i) => {
-                    if (i < selectedRating) s.className = "fas fa-star text-xl text-yellow-500 cursor-pointer star-select";
-                    else s.className = "far fa-star text-xl text-white/30 cursor-pointer star-select";
-                });
+                document.querySelectorAll('.star-select').forEach((s, i) => { if (i < selectedRating) s.className = "fas fa-star text-xl text-yellow-500 cursor-pointer star-select"; else s.className = "far fa-star text-xl text-white/30 cursor-pointer star-select"; });
             };
         });
         
@@ -862,7 +822,7 @@
             const comment = document.getElementById('reviewComment').value.trim();
             if (!name || !comment) { alert('Isi nickname & ulasan!'); return; }
             reviews.unshift({ name, rating: selectedRating, comment, date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) });
-            localStorage.setItem('elixir_reviews_2col_final', JSON.stringify(reviews));
+            localStorage.setItem('elixir_reviews_fix_gepeng', JSON.stringify(reviews));
             renderReviews();
             document.getElementById('reviewName').value = '';
             document.getElementById('reviewComment').value = '';
