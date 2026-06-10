@@ -56,7 +56,12 @@
         .stat-card { background: rgba(255,255,255,0.05); backdrop-filter: blur(4px); border-radius: 16px; padding: 16px; text-align: center; border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s; }
         .stat-card:hover { transform: translateY(-3px); border-color: rgba(168,85,247,0.4); background: rgba(255,255,255,0.08); }
         
-        /* TAB PREMIUM */
+        /* TAB PREMIUM - DI TENGAH */
+        .tabs-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
         .premium-tab {
             position: relative;
             padding: 10px 24px;
@@ -158,18 +163,23 @@
             color: transparent;
         }
         
-        /* GRID PRODUCT - RESPONSIVE */
+        /* GRID PRODUCT - AWAL TENGAH */
+        .grid-container {
+            width: 100%;
+        }
         #productGrid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(160px, 200px));
             gap: 20px;
             justify-content: center;
             transition: all 0.3s ease;
+            margin: 0 auto;
         }
         
-        /* Saat summary panel muncul, grid bergeser ke kiri (hanya di desktop) */
+        /* Saat summary panel muncul, grid bergeser ke kiri (desktop) */
         #productGrid.shift-left {
             justify-content: flex-start;
+            margin: 0;
         }
         
         /* SUMMARY PANEL */
@@ -273,6 +283,10 @@
         
         .footer-link { transition: all 0.2s; }
         .footer-link:hover { color: #a855f7; transform: translateX(3px); }
+        
+        .text-center-custom {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -334,16 +348,18 @@
             <!-- KOLOM KIRI: Tabs + Grid Produk -->
             <div class="lg:col-span-2">
                 
-                <!-- Tabs Premium: ALL, SBC, SCRIPT, TIER -->
-                <div class="flex justify-center gap-3 mb-10 flex-wrap" data-aos="fade-up">
-                    <button data-filter="all" class="premium-tab active">🔥 ALL</button>
-                    <button data-filter="sbc" class="premium-tab">⚡ SBC</button>
-                    <button data-filter="script" class="premium-tab">📜 SCRIPT</button>
-                    <button data-filter="tier" class="premium-tab">💎 TIER</button>
+                <!-- Tabs Premium - DI TENGAH -->
+                <div class="tabs-wrapper" data-aos="fade-up">
+                    <div class="flex flex-wrap gap-3 justify-center">
+                        <button data-filter="all" class="premium-tab active">🔥 ALL</button>
+                        <button data-filter="sbc" class="premium-tab">⚡ SBC</button>
+                        <button data-filter="script" class="premium-tab">📜 SCRIPT</button>
+                        <button data-filter="tier" class="premium-tab">💎 TIER</button>
+                    </div>
                 </div>
                 
                 <!-- Grid Produk -->
-                <div>
+                <div class="grid-container">
                     <h3 class="text-white/60 text-[10px] font-semibold uppercase tracking-wider mb-3 text-center">SEMUA PRODUK</h3>
                     <div id="productGrid"></div>
                 </div>
@@ -528,7 +544,7 @@
                     updateSummary();
                     renderProducts();
                     summaryPanel.style.display = 'block';
-                    // GSER KE KIRI (DESKTOP) / TETAP TENGAH (HP) via CSS media query
+                    // Geser grid ke kiri (desktop) atau tetap tengah (HP via CSS media)
                     productGrid.classList.add('shift-left');
                 };
                 productGrid.appendChild(card);
@@ -559,7 +575,7 @@
                 renderProducts();
                 updateSummary();
                 summaryPanel.style.display = 'none';
-                // BALIKIN KE TENGAH
+                // Kembalikan grid ke tengah
                 productGrid.classList.remove('shift-left');
             };
         });
@@ -603,7 +619,7 @@
         let selectedRating = 5;
         
         function loadReviews() {
-            const saved = localStorage.getItem('elixir_reviews_final_shift');
+            const saved = localStorage.getItem('elixir_reviews_final_center');
             if (saved) try { reviews = JSON.parse(saved); } catch(e) { reviews = []; }
             if (reviews.length === 0) reviews = [
                 { name: "Verns", rating: 5, comment: "Gacor banget Jokinya cepet dan terpercaya", date: "31 May 2026" },
@@ -642,7 +658,7 @@
             const comment = document.getElementById('reviewComment').value.trim();
             if (!name || !comment) { alert('Isi nickname & ulasan!'); return; }
             reviews.unshift({ name, rating: selectedRating, comment, date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) });
-            localStorage.setItem('elixir_reviews_final_shift', JSON.stringify(reviews));
+            localStorage.setItem('elixir_reviews_final_center', JSON.stringify(reviews));
             renderReviews();
             document.getElementById('reviewName').value = '';
             document.getElementById('reviewComment').value = '';
