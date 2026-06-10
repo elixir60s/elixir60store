@@ -84,14 +84,6 @@
             100% { background-position: 0% 0%; }
         }
         
-        @keyframes borderRainbow {
-            0% { border-image-source: linear-gradient(0deg, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff, #ff00ff); }
-            25% { border-image-source: linear-gradient(90deg, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff, #ff00ff); }
-            50% { border-image-source: linear-gradient(180deg, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff, #ff00ff); }
-            75% { border-image-source: linear-gradient(270deg, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff, #ff00ff); }
-            100% { border-image-source: linear-gradient(360deg, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff, #ff00ff); }
-        }
-        
         @keyframes rippleEffect {
             to { transform: scale(5); opacity: 0; }
         }
@@ -99,11 +91,6 @@
         @keyframes cardFloat {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-5px); }
-        }
-        
-        @keyframes holographicPulse {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.7; }
         }
         
         .animated-bg {
@@ -200,7 +187,7 @@
             border-bottom: 1px solid rgba(168,85,247,0.2);
         }
         
-        /* HOLOGRAPHIC CARD - VERSI BARU DENGAN PERUBAHAN VISUAL YANG JELAS */
+        /* HOLOGRAPHIC CARD - SEMUA EFEK UNGU */
         .premium-card {
             position: relative;
             background: linear-gradient(145deg, #0a0a18, #0d0d1f);
@@ -208,18 +195,17 @@
             padding: 28px 24px;
             overflow: hidden;
             transition: all 0.4s ease;
-            border: 2px solid transparent;
+            border: 1px solid rgba(168,85,247,0.2);
             animation: cardFloat 3s ease-in-out infinite;
         }
         
-        /* RAINBOW BORDER YANG BERGERAK */
+        /* UNGU BORDER YANG BERGERAK */
         .premium-card::before {
             content: '';
             position: absolute;
             inset: -2px;
             background: linear-gradient(135deg, 
-                #ff0000, #ff7700, #ffff00, #00ff00, 
-                #0000ff, #4b0082, #9400d3, #ff0000);
+                #a855f7, #c084fc, #d8b4fe, #7e22ce, #a855f7, #c084fc, #d8b4fe);
             background-size: 400% 400%;
             border-radius: 24px;
             opacity: 0;
@@ -229,10 +215,10 @@
         
         .premium-card:hover::before {
             opacity: 1;
-            animation: borderRainbow 2s linear infinite;
+            animation: rainbowMove 3s ease infinite;
         }
         
-        /* HOLOGRAPHIC OVERLAY - WARNA FULL */
+        /* HOLOGRAPHIC OVERLAY - WARNA UNGU */
         .premium-card .holographic-bg {
             position: absolute;
             top: 0;
@@ -240,13 +226,13 @@
             right: 0;
             bottom: 0;
             background: linear-gradient(135deg,
-                rgba(255,0,0,0.08),
-                rgba(255,165,0,0.08),
-                rgba(255,255,0,0.08),
-                rgba(0,255,0,0.08),
-                rgba(0,0,255,0.08),
-                rgba(75,0,130,0.08),
-                rgba(148,0,211,0.08));
+                rgba(139,92,246,0.05),
+                rgba(168,85,247,0.08),
+                rgba(192,132,252,0.05),
+                rgba(139,92,246,0.08),
+                rgba(168,85,247,0.05),
+                rgba(126,34,206,0.08),
+                rgba(139,92,246,0.05));
             background-size: 600% 600%;
             opacity: 0.2;
             animation: rainbowMove 6s ease infinite;
@@ -255,7 +241,7 @@
         }
         
         .premium-card:hover .holographic-bg {
-            opacity: 0.4;
+            opacity: 0.35;
         }
         
         /* GLOSSY EFFECT ATAS */
@@ -266,13 +252,13 @@
             right: 0;
             height: 50%;
             background: linear-gradient(180deg, 
-                rgba(255,255,255,0.15) 0%, 
+                rgba(168,85,247,0.12) 0%, 
                 rgba(255,255,255,0) 100%);
             pointer-events: none;
             border-radius: 24px 24px 0 0;
         }
         
-        /* PARTICLE EFFECT */
+        /* PARTICLE EFFECT UNGU */
         .premium-card .particles {
             position: absolute;
             top: 0;
@@ -288,7 +274,7 @@
             position: absolute;
             width: 3px;
             height: 3px;
-            background: radial-gradient(circle, #fff, #a855f7);
+            background: radial-gradient(circle, #c084fc, #a855f7);
             border-radius: 50%;
             opacity: 0;
         }
@@ -308,12 +294,12 @@
             }
         }
         
-        /* BADGE PREMIUM DENGAN RAINBOW */
+        /* BADGE PREMIUM UNGU */
         .card-badge {
             position: absolute;
             top: 16px;
             right: 16px;
-            background: linear-gradient(135deg, #ff0000, #ff7700, #ffaa00);
+            background: linear-gradient(135deg, #6b21a5, #9333ea, #a855f7);
             background-size: 200% 100%;
             padding: 5px 14px;
             border-radius: 30px;
@@ -323,11 +309,11 @@
             color: white;
             text-transform: uppercase;
             z-index: 3;
-            box-shadow: 0 0 15px rgba(255,0,0,0.3);
+            box-shadow: 0 0 15px rgba(139,92,246,0.3);
             animation: gradientFlow 2s ease infinite;
         }
         
-        /* CATEGORY ICON DENGAN BACKGROUND RAINBOW */
+        /* CATEGORY ICON UNGU */
         .category-icon {
             width: 56px;
             height: 56px;
@@ -337,7 +323,7 @@
             align-items: center;
             justify-content: center;
             margin-bottom: 20px;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(168,85,247,0.3);
             transition: all 0.3s;
             position: relative;
             z-index: 2;
@@ -347,7 +333,7 @@
             content: '';
             position: absolute;
             inset: -2px;
-            background: linear-gradient(135deg, #ff0000, #ff7700, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+            background: linear-gradient(135deg, #a855f7, #c084fc, #d8b4fe, #7e22ce);
             background-size: 400% 400%;
             border-radius: 20px;
             opacity: 0;
@@ -362,20 +348,21 @@
         
         .category-icon i {
             font-size: 1.6rem;
-            color: white;
+            color: #c084fc;
             transition: all 0.3s;
         }
         
         .premium-card:hover .category-icon i {
             transform: scale(1.1);
             filter: drop-shadow(0 0 8px #a855f7);
+            color: #e9d5ff;
         }
         
-        /* PRODUCT NAME HOLOGRAPHIC */
+        /* PRODUCT NAME */
         .product-name {
             font-size: 1.2rem;
             margin-bottom: 8px;
-            background: linear-gradient(135deg, #ffffff, #e9d5ff, #c084fc, #f0abfc);
+            background: linear-gradient(135deg, #ffffff, #e9d5ff, #c084fc, #d8b4fe);
             background-size: 300% 100%;
             -webkit-background-clip: text;
             background-clip: text;
@@ -389,14 +376,14 @@
             animation: gradientFlow 1.5s ease infinite;
         }
         
-        /* PRICE WRAPPER HOLOGRAPHIC */
+        /* PRICE WRAPPER */
         .price-wrapper {
             background: rgba(0,0,0,0.4);
             border-radius: 40px;
             padding: 10px 20px;
             display: inline-block;
             margin: 16px 0;
-            border: 1px solid rgba(255,215,0,0.3);
+            border: 1px solid rgba(168,85,247,0.3);
             transition: all 0.3s;
             position: relative;
             z-index: 2;
@@ -404,8 +391,8 @@
         }
         
         .premium-card:hover .price-wrapper {
-            border-color: rgba(255,215,0,0.8);
-            box-shadow: 0 0 20px rgba(255,215,0,0.3);
+            border-color: rgba(168,85,247,0.8);
+            box-shadow: 0 0 20px rgba(139,92,246,0.3);
             transform: scale(1.02);
         }
         
@@ -430,11 +417,11 @@
             z-index: 2;
         }
         
-        /* PREMIUM BUTTON HOLOGRAPHIC */
+        /* PREMIUM BUTTON UNGU */
         .premium-btn {
             position: relative;
             width: 100%;
-            background: linear-gradient(135deg, #1a0b2e, #2d1b4e, #4a2c6d);
+            background: linear-gradient(135deg, #1a0b2e, #2d1b4e, #3b1e6d);
             border: 1px solid rgba(168,85,247,0.3);
             padding: 14px 20px;
             border-radius: 50px;
@@ -461,8 +448,8 @@
             background: linear-gradient(90deg, 
                 transparent, 
                 rgba(168,85,247,0.4), 
-                rgba(236,72,153,0.4),
-                rgba(251,191,36,0.4),
+                rgba(192,132,252,0.4),
+                rgba(139,92,246,0.4),
                 transparent);
             transition: left 0.5s;
         }
@@ -474,13 +461,13 @@
         .premium-btn:hover {
             transform: translateY(-2px);
             border-color: rgba(168,85,247,0.8);
-            box-shadow: 0 5px 20px rgba(168,85,247,0.4);
+            box-shadow: 0 5px 20px rgba(139,92,246,0.4);
         }
         
         .premium-btn .ripple {
             position: absolute;
             border-radius: 50%;
-            background: rgba(255,255,255,0.6);
+            background: rgba(192,132,252,0.6);
             transform: scale(0);
             animation: rippleEffect 0.6s linear;
             pointer-events: none;
@@ -505,16 +492,16 @@
         .nickname-input:focus {
             outline: none;
             border-color: #a855f7;
-            box-shadow: 0 0 15px rgba(168,85,247,0.3);
+            box-shadow: 0 0 15px rgba(139,92,246,0.3);
         }
         
         /* HOVER EFFECT UTAMA */
         .premium-card:hover {
             transform: translateY(-10px) scale(1.03);
-            box-shadow: 0 30px 50px -25px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.05);
+            box-shadow: 0 30px 50px -25px rgba(139,92,246,0.4), 0 0 0 1px rgba(168,85,247,0.1);
+            border-color: rgba(168,85,247,0.4);
         }
         
-        /* STAT CARD */
         .stat-card {
             transition: all 0.3s ease;
         }
@@ -548,15 +535,6 @@
             outline: none;
             border-color: #a855f7;
             box-shadow: 0 0 15px rgba(168,85,247,0.2);
-        }
-        
-        /* PARTICLE GENERATOR */
-        .particles span {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: radial-gradient(circle, #ff00ff, #00ffff);
-            border-radius: 50%;
         }
     </style>
 </head>
@@ -716,11 +694,31 @@
             }
         }
 
-        let reviews = [
-            { name: "Verns", rating: 5, comment: "Gacor banget Jokinya cepet dan terpercaya", date: "31 May 2026" },
-            { name: "RIP_BOUNTYY177", rating: 5, comment: "Pengen beli SBC lagi nih recommended", date: "28 May 2026" },
-            { name: "aww", rating: 4, comment: "Mantap fast response", date: "24 Apr 2026" }
-        ];
+        // LOAD REVIEWS FROM LOCALSTORAGE
+        let reviews = [];
+        
+        function loadReviews() {
+            const saved = localStorage.getItem('elixir_reviews');
+            if (saved) {
+                try {
+                    reviews = JSON.parse(saved);
+                } catch(e) {
+                    reviews = [];
+                }
+            }
+            if (reviews.length === 0) {
+                reviews = [
+                    { name: "Verns", rating: 5, comment: "Gacor banget Jokinya cepet dan terpercaya", date: "31 May 2026" },
+                    { name: "RIP_BOUNTYY177", rating: 5, comment: "Pengen beli SBC lagi nih recommended", date: "28 May 2026" },
+                    { name: "aww", rating: 4, comment: "Mantap fast response", date: "24 Apr 2026" }
+                ];
+                saveReviews();
+            }
+        }
+        
+        function saveReviews() {
+            localStorage.setItem('elixir_reviews', JSON.stringify(reviews));
+        }
 
         function sendWA(product, price, nickname) {
             let msg = `Halo ELIXIRSTORE%0A%0AProduk: ${encodeURIComponent(product)}%0AHarga: ${encodeURIComponent(formatRp(price))}`;
@@ -877,6 +875,7 @@
             };
             
             reviews.unshift(newReview);
+            saveReviews();
             renderReviews();
             
             document.getElementById('reviewName').value = '';
@@ -927,6 +926,7 @@
             renderProducts(); 
         });
         
+        loadReviews();
         renderProducts();
         renderReviews();
     </script>
