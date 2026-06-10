@@ -49,7 +49,7 @@
         ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #a855f7, #7e22ce); border-radius: 10px; }
         .glass-nav { background: rgba(10,10,15,0.4); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(168,85,247,0.2); position: fixed; top: 0; width: 100%; z-index: 50; }
         
-        /* CARD PRODUK */
+        /* CARD PRODUK - RAPI */
         .premium-card { 
             position: relative; 
             background: linear-gradient(145deg, #0a0a18, #0d0d1f); 
@@ -125,86 +125,114 @@
         .review-card { background: rgba(255,255,255,0.05); backdrop-filter: blur(4px); border-radius: 14px; padding: 10px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 8px; }
         .review-input, .review-textarea { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 8px; color: white; width: 100%; font-size: 0.75rem; }
         
-        /* QRIS MODAL - QR BESAR DI KIRI, INFO KANAN */
-        .modal-qris { 
-            display: none; 
-            position: fixed; 
-            inset: 0; 
-            background: rgba(0,0,0,0.95); 
-            backdrop-filter: blur(12px); 
-            z-index: 1000; 
-            align-items: center; 
-            justify-content: center; 
-            padding: 16px;
-        }
-        .modal-qris.active { display: flex; animation: fadeIn 0.2s ease; }
-        .modal-content { 
-            background: linear-gradient(145deg, #11111f, #0a0a18); 
-            border-radius: 28px; 
-            max-width: 500px; 
-            width: 100%; 
-            border: 1px solid rgba(168,85,247,0.4); 
-            overflow: hidden; 
-        }
-        .modal-header { padding: 16px 16px 8px 16px; text-align: center; position: relative; }
-        .modal-body { padding: 16px 20px 20px 20px; }
-        .qris-container { background: white; border-radius: 20px; padding: 16px; text-align: center; }
-        #qrcode img { 
-            width: 180px !important; 
-            height: 180px !important; 
-            border-radius: 16px; 
-            display: block; 
-            margin: 0 auto;
-        }
-        .payment-amount { 
-            background: linear-gradient(135deg, #1a1a2e, #16213e); 
-            border-radius: 20px; 
-            padding: 16px 12px; 
-            text-align: center; 
-            border: 1px solid rgba(168,85,247,0.3); 
-            margin-bottom: 16px;
-        }
-        .payment-amount .label { font-size: 0.7rem; color: #a78bfa; letter-spacing: 1px; text-transform: uppercase; }
-        .payment-amount .amount { 
-            font-size: 1.8rem; font-weight: 800; 
-            background: linear-gradient(135deg, #ffd700, #fbbf24); 
-            -webkit-background-clip: text; background-clip: text; color: transparent;
-        }
-        .copy-amount { 
-            background: rgba(168,85,247,0.2); 
-            border: 1px solid rgba(168,85,247,0.4); 
-            border-radius: 30px; 
-            padding: 6px 14px; 
-            font-size: 0.7rem; 
-            color: #c084fc; 
-            cursor: pointer; 
-            display: inline-flex;
+        /* QRIS MODAL - NORMAL & GEDE */
+        .modal-qris {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 1000;
             align-items: center;
-            gap: 6px;
-            margin-top: 10px;
-            transition: all 0.2s;
+            justify-content: center;
+            padding: 20px;
         }
-        .copy-amount:hover { background: rgba(168,85,247,0.4); color: white; }
-        .payment-method-badge { 
-            display: inline-flex; align-items: center; gap: 6px; 
-            background: rgba(0,0,0,0.4); padding: 5px 12px; 
-            border-radius: 50px; font-size: 0.6rem; color: #a78bfa; 
-            margin-top: 10px;
+        .modal-qris.active {
+            display: flex;
         }
-        .instruction-text { font-size: 0.65rem; color: #aaa; text-align: center; margin-bottom: 16px; line-height: 1.4; }
-        .confirm-wa-btn { background: linear-gradient(135deg, #25D366, #128C7E); border: none; padding: 12px !important; font-size: 0.75rem !important; }
-        
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .close-modal { position: absolute; top: 12px; right: 16px; background: rgba(255,255,255,0.1); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s; z-index: 10; }
-        .close-modal:hover { background: rgba(255,255,255,0.2); transform: rotate(90deg); }
-        
-        @media (max-width: 480px) {
-            #qrcode img { width: 140px !important; height: 140px !important; }
-            .modal-content { max-width: 95%; }
-            .payment-amount .amount { font-size: 1.4rem; }
-            .payment-amount { padding: 12px 10px; }
-            .instruction-text { font-size: 0.55rem; }
-            .confirm-wa-btn { font-size: 0.65rem !important; padding: 10px !important; }
+        .modal-qris .modal-card {
+            background: white;
+            border-radius: 28px;
+            max-width: 400px;
+            width: 100%;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .modal-qris .modal-header {
+            padding: 16px 20px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+            position: relative;
+        }
+        .modal-qris .close-modal {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #999;
+            line-height: 1;
+        }
+        .modal-qris .close-modal:hover {
+            color: #333;
+        }
+        .modal-qris .modal-body {
+            padding: 24px 20px 20px 20px;
+            text-align: center;
+        }
+        .modal-qris .qr-container {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+        .modal-qris .qr-container img {
+            width: 100%;
+            max-width: 260px;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+            border-radius: 12px;
+        }
+        .modal-qris .total-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
+            color: white;
+        }
+        .modal-qris .total-label {
+            font-size: 12px;
+            opacity: 0.8;
+            letter-spacing: 1px;
+        }
+        .modal-qris .total-amount {
+            font-size: 28px;
+            font-weight: 800;
+            margin-top: 4px;
+        }
+        .modal-qris .copy-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            padding: 6px 14px;
+            border-radius: 30px;
+            color: white;
+            font-size: 12px;
+            margin-top: 8px;
+            cursor: pointer;
+        }
+        .modal-qris .instruction {
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        .modal-qris .confirm-btn {
+            width: 100%;
+            background: #25D366;
+            border: none;
+            padding: 14px;
+            border-radius: 40px;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        .modal-qris .confirm-btn:hover {
+            background: #128C7E;
         }
         
         .footer-link:hover { color: #a855f7; }
@@ -303,39 +331,29 @@
         </div>
     </footer>
 
-    <!-- QRIS MODAL - QR BESAR DI KIRI, INFO DI KANAN -->
+    <!-- QRIS MODAL - NORMAL & GEDE, TIDAK GEPENG -->
     <div id="qrisModal" class="modal-qris">
-        <div class="modal-content">
-            <div class="close-modal" id="closeModalBtn"><i class="fas fa-times text-white/70 text-sm"></i></div>
+        <div class="modal-card">
             <div class="modal-header">
-                <h3 class="text-white text-base font-bold elixir-title"><i class="fas fa-qrcode text-purple-400 mr-2"></i>Scan QRIS</h3>
+                <span class="close-modal" id="closeModalBtn">&times;</span>
+                <h3 style="font-size: 18px; font-weight: 700; margin: 0;">Scan QRIS</h3>
             </div>
             <div class="modal-body">
-                <div style="display: flex; gap: 20px; align-items: center; justify-content: center; flex-wrap: wrap;">
-                    <!-- KIRI: QR BESAR -->
-                    <div style="flex: 1.2; min-width: 170px; text-align: center;">
-                        <div class="qris-container">
-                            <div id="qrcode"></div>
-                        </div>
-                        <div class="payment-method-badge">
-                            <i class="fas fa-university"></i> QRIS (Semua E-Wallet & Bank)
-                        </div>
-                    </div>
-                    <!-- KANAN: Info & Tombol -->
-                    <div style="flex: 1; min-width: 150px;">
-                        <div class="payment-amount">
-                            <div class="label">TOTAL BAYAR</div>
-                            <div class="amount" id="modalAmount">Rp0</div>
-                            <button class="copy-amount" id="copyAmountBtn"><i class="fas fa-copy"></i> Salin Nominal</button>
-                        </div>
-                        <div class="instruction-text">
-                            <i class="fas fa-mobile-alt"></i> Buka GoPay / OVO / DANA<br>LinkAja / Mobile Banking<br>Pilih QRIS → Scan kode
-                        </div>
-                        <button id="confirmWaBtn" class="premium-btn confirm-wa-btn w-full">
-                            <i class="fab fa-whatsapp"></i> Konfirmasi Pembayaran
-                        </button>
-                    </div>
+                <div class="qr-container">
+                    <img id="qrImage" src="" alt="QRIS Code">
                 </div>
+                <div class="total-box">
+                    <div class="total-label">TOTAL PEMBAYARAN</div>
+                    <div class="total-amount" id="modalAmount">Rp0</div>
+                    <button class="copy-btn" id="copyAmountBtn"><i class="fas fa-copy"></i> Salin Nominal</button>
+                </div>
+                <div class="instruction">
+                    <i class="fas fa-mobile-alt"></i> Buka GoPay / OVO / DANA / LinkAja / Mobile Banking<br>
+                    Pilih QRIS → Scan kode di atas → Transfer sesuai nominal
+                </div>
+                <button class="confirm-btn" id="confirmWaBtn">
+                    <i class="fab fa-whatsapp"></i> Konfirmasi Pembayaran via WhatsApp
+                </button>
             </div>
         </div>
     </div>
@@ -344,7 +362,7 @@
     <script>
         AOS.init({ duration: 600, once: true });
         
-        // Stars
+        // Stars background
         for (let i = 0; i < 150; i++) {
             const star = document.createElement('div');
             star.classList.add('star');
@@ -367,8 +385,8 @@
             const saved = localStorage.getItem('elixir_reviews_formspree');
             if (saved) try { reviews = JSON.parse(saved); } catch(e) { reviews = []; }
             if (reviews.length === 0) reviews = [ 
-                { name: "Verns", rating: 5, comment: "Gacor banget Jokinya cepet", date: "31 May 2026" }, 
-                { name: "RIP_BOUNTYY177", rating: 5, comment: "Pengen beli SBC lagi", date: "28 May 2026" }, 
+                { name: "Verns", rating: 5, comment: "Gacor banget Jokinya cepet dan terpercaya", date: "31 May 2026" }, 
+                { name: "RIP_BOUNTYY177", rating: 5, comment: "Pengen beli SBC lagi nih recommended", date: "28 May 2026" }, 
                 { name: "aww", rating: 4, comment: "Mantap fast response", date: "24 Apr 2026" } 
             ];
             saveReviews(); renderReviews();
@@ -387,7 +405,9 @@
         }
         function escapeHtml(str){ if(!str) return ''; return str.replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'})[m]); }
         async function submitToFormspree(name, rating, comment) { try{ const res=await fetch(FORMSPREE_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,rating,comment,_subject:`⭐ Review dari ${name} - ELIXIRSTORE`})}); return res.ok; }catch(e){ return false; } }
+        
         document.querySelectorAll('#ratingStars .star-select').forEach(star=>{ star.addEventListener('click',()=>{ const val=parseInt(star.dataset.val); selectedRating=val; document.querySelectorAll('#ratingStars .star-select').forEach((s,idx)=>{ if(idx<val) s.className="fas fa-star text-lg text-yellow-500 cursor-pointer star-select"; else s.className="far fa-star text-lg text-white/30 cursor-pointer hover:text-yellow-500 transition star-select"; }); }); });
+        
         document.getElementById('submitReviewBtn').addEventListener('click',async()=>{ const name=document.getElementById('reviewName').value.trim(); const comment=document.getElementById('reviewComment').value.trim(); if(!name||!comment){ alert('Isi nickname & ulasan!'); return; } const btn=document.getElementById('submitReviewBtn'); const original=btn.innerHTML; btn.innerHTML='<i class="fas fa-spinner fa-spin"></i>'; btn.disabled=true; const sent=await submitToFormspree(name,selectedRating,comment); if(sent){ reviews.unshift({name,rating:selectedRating,comment,date:new Date().toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'})}); saveReviews(); renderReviews(); document.getElementById('reviewName').value=''; document.getElementById('reviewComment').value=''; document.querySelectorAll('#ratingStars .star-select').forEach((s,idx)=>{ s.className="far fa-star text-lg text-white/30 cursor-pointer hover:text-yellow-500 transition star-select"; }); selectedRating=5; alert('✅ Ulasan terkirim!'); } else alert('❌ Gagal mengirim.'); btn.innerHTML=original; btn.disabled=false; });
 
         // PRODUCTS
@@ -410,7 +430,7 @@
         function getCategoryIcon(cat){ if(cat==='sbc') return 'fa-crown'; if(cat==='script') return 'fa-code'; return 'fa-gem'; }
         function getCategoryBadge(cat){ if(cat==='sbc') return 'SBC'; if(cat==='script') return 'SCRIPT'; return 'TIER'; }
 
-        // QRIS
+        // QRIS 
         const QRIS_IMAGE_URL = "https://i.ibb.co.com/Cp2N3cf8/IMG-9954.jpg";
         
         let currentPendingProduct = null;
@@ -421,9 +441,7 @@
             currentPendingNickname = nickname || '';
             
             document.getElementById('modalAmount').innerHTML = formatRp(price);
-            
-            const qrContainer = document.getElementById('qrcode');
-            qrContainer.innerHTML = `<img src="${QRIS_IMAGE_URL}" alt="QRIS ELIXIR STORE" style="width:100%; max-width:180px; height:auto; border-radius:16px;">`;
+            document.getElementById('qrImage').src = QRIS_IMAGE_URL;
             
             document.getElementById('qrisModal').classList.add('active');
         }
@@ -434,7 +452,9 @@
         }
         
         document.getElementById('closeModalBtn').addEventListener('click', closeModal);
-        document.getElementById('qrisModal').addEventListener('click', (e) => { if(e.target === document.getElementById('qrisModal')) closeModal(); });
+        document.getElementById('qrisModal').addEventListener('click', (e) => { 
+            if(e.target === document.getElementById('qrisModal')) closeModal(); 
+        });
         
         document.getElementById('copyAmountBtn').addEventListener('click', () => {
             if(currentPendingProduct) {
@@ -465,74 +485,31 @@
                     <div class="category-icon"><i class="fas ${iconClass}"></i></div>
                     <div class="product-name text-center">${product.name}</div>
                     <div class="flex justify-center"><div class="price-wrapper"><div class="price-text">${formatRp(product.price)}</div></div></div>
-                    ${product.needNickname ? '<input type="text" class="nickname-input" placeholder="Nickname">' : ''}
+                    ${product.needNickname ? '<input type="text" class="nickname-input" placeholder="Masukkan nickname kamu">' : ''}
                 </div>
-                <button class="premium-btn"><i class="fas fa-qrcode"></i> QRIS <i class="fas fa-arrow-right"></i></button>
+                <button class="premium-btn"><i class="fas fa-qrcode"></i> BAYAR VIA QRIS <i class="fas fa-arrow-right"></i></button>
             `;
             const btn = card.querySelector('.premium-btn');
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                const ripple = document.createElement('span'); ripple.classList.add('ripple'); 
-                const rect = btn.getBoundingClientRect(); 
-                const x = e.clientX - rect.left; 
-                const y = e.clientY - rect.top; 
-                ripple.style.left = x + 'px'; 
-                ripple.style.top = y + 'px'; 
-                ripple.style.position = 'absolute'; 
-                ripple.style.width = '10px'; 
-                ripple.style.height = '10px'; 
-                ripple.style.borderRadius = '50%'; 
-                ripple.style.background = 'rgba(192,132,252,0.6)'; 
-                ripple.style.transform = 'scale(0)'; 
-                ripple.style.animation = 'rippleEffect 0.6s linear'; 
-                ripple.style.pointerEvents = 'none';
-                btn.appendChild(ripple); 
-                setTimeout(() => ripple.remove(), 600);
                 const nickname = card.querySelector('.nickname-input')?.value || '';
                 openPaymentModal(product.name, product.price, nickname);
             });
             return card;
         }
 
-        // Tambahkan animasi ripple
-        const style = document.createElement('style');
-        style.textContent = `@keyframes rippleEffect { to { transform: scale(5); opacity: 0; } }`;
-        document.head.appendChild(style);
-
-        let currentFilter = 'all', searchQuery = '';
-        const productGrid = document.getElementById('productGrid');
-        function renderProducts() {
-            const filtered = products.filter(p => { 
-                if (currentFilter !== 'all' && p.category !== currentFilter) return false; 
-                if (searchQuery && !p.name.toLowerCase().includes(searchQuery.toLowerCase())) return false; 
-                return true; 
-            });
-            productGrid.innerHTML = '';
-            if (filtered.length === 0) { 
-                productGrid.innerHTML = '<div class="col-span-full text-center text-white/30 py-8 text-xs">Item tidak ditemukan</div>'; 
-                return; 
-            }
-            filtered.forEach(p => productGrid.appendChild(createCard(p)));
-            if (typeof AOS !== 'undefined' && AOS.refresh) AOS.refresh();
+        let currentFilter='all', searchQuery='';
+        const productGrid=document.getElementById('productGrid');
+        function renderProducts(){
+            const filtered=products.filter(p=>{ if(currentFilter!=='all' && p.category!==currentFilter) return false; if(searchQuery && !p.name.toLowerCase().includes(searchQuery.toLowerCase())) return false; return true; });
+            productGrid.innerHTML='';
+            if(filtered.length===0){ productGrid.innerHTML='<div class="col-span-full text-center text-white/30 py-8 text-xs">Item tidak ditemukan</div>'; return; }
+            filtered.forEach(p=>productGrid.appendChild(createCard(p)));
+            if(typeof AOS!=='undefined' && AOS.refresh) AOS.refresh();
         }
         
-        document.querySelectorAll('.filter-btn').forEach(btn => { 
-            btn.addEventListener('click', () => { 
-                document.querySelectorAll('.filter-btn').forEach(b => { 
-                    b.classList.remove('bg-gradient-to-r', 'from-purple-600', 'to-purple-700', 'text-white'); 
-                    b.classList.add('bg-white/5', 'text-white/50'); 
-                }); 
-                btn.classList.remove('bg-white/5', 'text-white/50'); 
-                btn.classList.add('bg-gradient-to-r', 'from-purple-600', 'to-purple-700', 'text-white'); 
-                currentFilter = btn.dataset.filter; 
-                renderProducts(); 
-            }); 
-        });
-        
-        document.getElementById('searchInput').addEventListener('input', (e) => { 
-            searchQuery = e.target.value; 
-            renderProducts(); 
-        });
+        document.querySelectorAll('.filter-btn').forEach(btn=>{ btn.addEventListener('click',()=>{ document.querySelectorAll('.filter-btn').forEach(b=>{ b.classList.remove('bg-gradient-to-r','from-purple-600','to-purple-700','text-white'); b.classList.add('bg-white/5','text-white/50'); }); btn.classList.remove('bg-white/5','text-white/50'); btn.classList.add('bg-gradient-to-r','from-purple-600','to-purple-700','text-white'); currentFilter=btn.dataset.filter; renderProducts(); }); });
+        document.getElementById('searchInput').addEventListener('input',(e)=>{ searchQuery=e.target.value; renderProducts(); });
         
         loadReviews();
         renderProducts();
