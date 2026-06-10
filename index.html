@@ -56,11 +56,19 @@
         .stat-card { background: rgba(255,255,255,0.05); backdrop-filter: blur(4px); border-radius: 16px; padding: 16px; text-align: center; border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s; }
         .stat-card:hover { transform: translateY(-3px); border-color: rgba(168,85,247,0.4); background: rgba(255,255,255,0.08); }
         
-        /* TAB PREMIUM - DI TENGAH */
-        .tabs-wrapper {
+        /* TAB PREMIUM - BENERAN TENGAH */
+        .tabs-container {
             display: flex;
             justify-content: center;
+            align-items: center;
+            width: 100%;
             margin-bottom: 30px;
+        }
+        .tabs-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
         }
         .premium-tab {
             position: relative;
@@ -163,23 +171,21 @@
             color: transparent;
         }
         
-        /* GRID PRODUCT - AWAL TENGAH */
-        .grid-container {
+        /* GRID PRODUCT - BENERAN TENGAH PAKE FLEX */
+        .grid-wrapper {
             width: 100%;
         }
         #productGrid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 200px));
+            display: flex;
+            flex-wrap: wrap;
             gap: 20px;
             justify-content: center;
-            transition: all 0.3s ease;
+            align-items: center;
             margin: 0 auto;
         }
-        
-        /* Saat summary panel muncul, grid bergeser ke kiri (desktop) */
-        #productGrid.shift-left {
-            justify-content: flex-start;
-            margin: 0;
+        #productGrid > div {
+            flex: 0 0 auto;
+            width: 180px;
         }
         
         /* SUMMARY PANEL */
@@ -270,14 +276,11 @@
             .product-icon { width: 45px; height: 45px; }
             .product-icon i { font-size: 1.3rem; }
             .premium-tab { padding: 6px 16px; font-size: 0.7rem; }
-            #productGrid {
-                grid-template-columns: repeat(auto-fill, minmax(140px, 160px));
-                gap: 12px;
-                justify-content: center;
+            #productGrid > div {
+                width: 155px;
             }
-            /* Di HP, grid tetap di tengah meskipun summary muncul */
-            #productGrid.shift-left {
-                justify-content: center;
+            #productGrid {
+                gap: 12px;
             }
         }
         
@@ -348,9 +351,9 @@
             <!-- KOLOM KIRI: Tabs + Grid Produk -->
             <div class="lg:col-span-2">
                 
-                <!-- Tabs Premium - DI TENGAH -->
-                <div class="tabs-wrapper" data-aos="fade-up">
-                    <div class="flex flex-wrap gap-3 justify-center">
+                <!-- Tabs Premium - BENERAN TENGAH -->
+                <div class="tabs-container" data-aos="fade-up">
+                    <div class="tabs-wrapper">
                         <button data-filter="all" class="premium-tab active">🔥 ALL</button>
                         <button data-filter="sbc" class="premium-tab">⚡ SBC</button>
                         <button data-filter="script" class="premium-tab">📜 SCRIPT</button>
@@ -358,8 +361,8 @@
                     </div>
                 </div>
                 
-                <!-- Grid Produk -->
-                <div class="grid-container">
+                <!-- Grid Produk - BENERAN TENGAH -->
+                <div class="grid-wrapper">
                     <h3 class="text-white/60 text-[10px] font-semibold uppercase tracking-wider mb-3 text-center">SEMUA PRODUK</h3>
                     <div id="productGrid"></div>
                 </div>
@@ -525,7 +528,7 @@
             productGrid.innerHTML = '';
             
             if (filtered.length === 0) {
-                productGrid.innerHTML = `<div class="col-span-full text-center text-white/40 py-12">Tidak ada produk di kategori ini</div>`;
+                productGrid.innerHTML = `<div style="width:100%; text-align:center; padding:40px; color:rgba(255,255,255,0.4);">Tidak ada produk di kategori ini</div>`;
                 return;
             }
             
@@ -533,6 +536,7 @@
                 const isSelected = selectedProduct && selectedProduct.name === product.name;
                 const card = document.createElement('div');
                 card.className = `product-card ${isSelected ? 'selected' : ''}`;
+                card.style.width = '100%';
                 card.innerHTML = `
                     <div class="product-icon"><i class="fas ${product.icon}"></i></div>
                     <div class="product-name">${product.name}</div>
@@ -544,8 +548,6 @@
                     updateSummary();
                     renderProducts();
                     summaryPanel.style.display = 'block';
-                    // Geser grid ke kiri (desktop) atau tetap tengah (HP via CSS media)
-                    productGrid.classList.add('shift-left');
                 };
                 productGrid.appendChild(card);
             });
@@ -575,8 +577,6 @@
                 renderProducts();
                 updateSummary();
                 summaryPanel.style.display = 'none';
-                // Kembalikan grid ke tengah
-                productGrid.classList.remove('shift-left');
             };
         });
         
@@ -619,7 +619,7 @@
         let selectedRating = 5;
         
         function loadReviews() {
-            const saved = localStorage.getItem('elixir_reviews_final_center');
+            const saved = localStorage.getItem('elixir_reviews_final_center2');
             if (saved) try { reviews = JSON.parse(saved); } catch(e) { reviews = []; }
             if (reviews.length === 0) reviews = [
                 { name: "Verns", rating: 5, comment: "Gacor banget Jokinya cepet dan terpercaya", date: "31 May 2026" },
@@ -658,7 +658,7 @@
             const comment = document.getElementById('reviewComment').value.trim();
             if (!name || !comment) { alert('Isi nickname & ulasan!'); return; }
             reviews.unshift({ name, rating: selectedRating, comment, date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) });
-            localStorage.setItem('elixir_reviews_final_center', JSON.stringify(reviews));
+            localStorage.setItem('elixir_reviews_final_center2', JSON.stringify(reviews));
             renderReviews();
             document.getElementById('reviewName').value = '';
             document.getElementById('reviewComment').value = '';
