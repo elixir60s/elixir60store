@@ -487,7 +487,7 @@
       border-color: #7c6cf0;
     }
 
-    .detail-content .btn-add-to-cart {
+    .detail-content .btn-checkout-now {
       width: 100%;
       padding: 14px;
       border-radius: 60px;
@@ -496,16 +496,16 @@
       font-size: 1rem;
       cursor: pointer;
       transition: 0.3s;
-      background: linear-gradient(135deg, #7c6cf0, #5b4bd5);
+      background: linear-gradient(135deg, #22c55e, #16a34a);
       color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
     }
-    .detail-content .btn-add-to-cart:hover {
+    .detail-content .btn-checkout-now:hover {
       transform: scale(1.02);
-      box-shadow: 0 4px 20px rgba(124, 108, 240, 0.4);
+      box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4);
     }
 
     /* ---------- CART SIDEBAR ---------- */
@@ -622,7 +622,7 @@
       background: #3f2a2a;
     }
 
-    /* ---------- CHECKOUT MODAL (Step 2 Payment) ---------- */
+    /* ---------- CHECKOUT MODAL (Step 2: Payment) ---------- */
     .checkout-modal {
       position: fixed;
       top: 0;
@@ -1069,11 +1069,11 @@
     </footer>
   </div>
 
-  <!-- ===== DETAIL MODAL (Step 1: Pilih Produk + Durasi) ===== -->
+  <!-- ===== DETAIL MODAL (Step 1: Pilih Produk + Durasi + Username) ===== -->
   <div class="detail-modal" id="detailModal">
     <div class="detail-content">
       <div class="detail-header">
-        <h3>Pilih Produk</h3>
+        <h3>Detail Pesanan</h3>
         <button class="close-detail" id="closeDetail">&times;</button>
       </div>
       <div class="detail-product-info">
@@ -1095,8 +1095,8 @@
         <input type="text" id="detailUsername" placeholder="Masukkan username kamu..." />
       </div>
 
-      <button class="btn-add-to-cart" id="btnAddToCart">
-        <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+      <button class="btn-checkout-now" id="btnCheckoutNow">
+        <i class="fas fa-arrow-right"></i> Lanjut ke Pembayaran
       </button>
     </div>
   </div>
@@ -1398,7 +1398,7 @@
     }
 
     // =============================================================
-    // DETAIL MODAL (Step 1)
+    // DETAIL MODAL (Step 1) → LANGSUNG KE CHECKOUT
     // =============================================================
     function openDetailModal(product) {
       selectedProduct = product;
@@ -1458,8 +1458,10 @@
       }
     });
 
-    // Tombol Tambah ke Keranjang
-    document.getElementById('btnAddToCart').addEventListener('click', () => {
+    // =============================================================
+    // TOMBOL "Lanjut ke Pembayaran" → LANGSUNG BUKA CHECKOUT
+    // =============================================================
+    document.getElementById('btnCheckoutNow').addEventListener('click', () => {
       if (!selectedProduct || !selectedDuration) return;
 
       const username = detailUsername.value.trim();
@@ -1471,25 +1473,19 @@
         return;
       }
 
-      // Tambahkan ke cart
-      const existing = cart.find(item =>
-        item.productId === selectedProduct.id &&
-        item.duration === selectedDuration.value
-      );
+      // Kosongkan cart dulu (beli 1 item langsung)
+      cart = [];
 
-      if (existing) {
-        existing.quantity += 1;
-      } else {
-        cart.push({
-          productId: selectedProduct.id,
-          productName: selectedProduct.name,
-          duration: selectedDuration.value,
-          durationLabel: selectedDuration.label,
-          price: selectedDuration.price,
-          quantity: 1,
-          username: username || null
-        });
-      }
+      // Tambahkan produk ke cart
+      cart.push({
+        productId: selectedProduct.id,
+        productName: selectedProduct.name,
+        duration: selectedDuration.value,
+        durationLabel: selectedDuration.label,
+        price: selectedDuration.price,
+        quantity: 1,
+        username: username || null
+      });
 
       saveCart();
       updateCartUI();
@@ -1497,15 +1493,8 @@
       // Tutup detail modal
       detailModal.classList.remove('open');
 
-      // Feedback
-      const btn = document.getElementById('btnAddToCart');
-      const originalText = btn.innerHTML;
-      btn.innerHTML = '<i class="fas fa-check"></i> Ditambahkan!';
-      btn.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
-      setTimeout(() => {
-        btn.innerHTML = originalText;
-        btn.style.background = '';
-      }, 1500);
+      // LANGSUNG BUKA CHECKOUT MODAL
+      openCheckoutModal();
 
       selectedProduct = null;
       selectedDuration = null;
@@ -1514,7 +1503,7 @@
     // Enter key pada input username
     detailUsername.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
-        document.getElementById('btnAddToCart').click();
+        document.getElementById('btnCheckoutNow').click();
       }
     });
 
@@ -1563,39 +1552,9 @@
     });
 
     // =============================================================
-    // CHECKOUT (Step 2: Payment)
+    // CHECKOUT MODAL (Step 2: Payment)
     // =============================================================
-    function updatePaymentDetail(method) {
-      let total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-      let html = '';
-      if (method === 'qris') {
-        html = `
-              <div class="detail-row"><span class="label">Amount</span><span class="value">${formatPrice(total)}</span></div>
-              <div class="detail-row"><span class="label">Method</span><span class="value">QRIS (Quick Response Code)</span></div>
-              <div class="qris-placeholder">
-                <img src="https://i.ibb.co.com/Cp2N3cf8/IMG-9954.jpg" alt="QRIS" />
-              </div>
-              <div class="detail-row"><span class="label">Instructions</span><span class="value" style="font-weight:400;font-size:0.8rem;color:#9aa3b8;">1. Open your e-wallet or banking app<br>2. Scan the QR code above<br>3. Enter the exact amount and pay</span></div>
-            `;
-      } else if (method === 'paypal') {
-        const paypalEmail = 'elixirstore@gmail.com';
-        html = `
-              <div class="detail-row"><span class="label">Amount</span><span class="value">${formatPrice(total)}</span></div>
-              <div class="detail-row"><span class="label">Send to</span><span class="value">${paypalEmail} <button class="copy-btn" onclick="navigator.clipboard.writeText('${paypalEmail}')">Copy</button></span></div>
-              <div class="detail-row"><span class="label">Instructions</span><span class="value" style="font-weight:400;font-size:0.8rem;color:#9aa3b8;">Send as Friends & Family. Include your Order ID in the note.</span></div>
-            `;
-      } else if (method === 'bank') {
-        html = `
-              <div class="detail-row"><span class="label">Amount</span><span class="value">${formatPrice(total)}</span></div>
-              <div class="detail-row"><span class="label">Bank</span><span class="value">BCA / Mandiri</span></div>
-              <div class="detail-row"><span class="label">Account</span><span class="value">123-456-7890 (a.n. ELIXIRSTORE)</span></div>
-              <div class="detail-row"><span class="label">Instructions</span><span class="value" style="font-weight:400;font-size:0.8rem;color:#9aa3b8;">Transfer the exact amount. Send the proof to our support.</span></div>
-            `;
-      }
-      paymentDetail.innerHTML = html;
-    }
-
-    document.getElementById('checkoutBtn').addEventListener('click', () => {
+    function openCheckoutModal() {
       if (cart.length === 0) {
         alert('Your cart is empty.');
         return;
@@ -1636,6 +1595,40 @@
 
       checkoutModal.classList.add('open');
       cartOverlay.classList.remove('open');
+    }
+
+    function updatePaymentDetail(method) {
+      let total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      let html = '';
+      if (method === 'qris') {
+        html = `
+              <div class="detail-row"><span class="label">Amount</span><span class="value">${formatPrice(total)}</span></div>
+              <div class="detail-row"><span class="label">Method</span><span class="value">QRIS (Quick Response Code)</span></div>
+              <div class="qris-placeholder">
+                <img src="https://i.ibb.co.com/Cp2N3cf8/IMG-9954.jpg" alt="QRIS" />
+              </div>
+              <div class="detail-row"><span class="label">Instructions</span><span class="value" style="font-weight:400;font-size:0.8rem;color:#9aa3b8;">1. Open your e-wallet or banking app<br>2. Scan the QR code above<br>3. Enter the exact amount and pay</span></div>
+            `;
+      } else if (method === 'paypal') {
+        const paypalEmail = 'elixirstore@gmail.com';
+        html = `
+              <div class="detail-row"><span class="label">Amount</span><span class="value">${formatPrice(total)}</span></div>
+              <div class="detail-row"><span class="label">Send to</span><span class="value">${paypalEmail} <button class="copy-btn" onclick="navigator.clipboard.writeText('${paypalEmail}')">Copy</button></span></div>
+              <div class="detail-row"><span class="label">Instructions</span><span class="value" style="font-weight:400;font-size:0.8rem;color:#9aa3b8;">Send as Friends & Family. Include your Order ID in the note.</span></div>
+            `;
+      } else if (method === 'bank') {
+        html = `
+              <div class="detail-row"><span class="label">Amount</span><span class="value">${formatPrice(total)}</span></div>
+              <div class="detail-row"><span class="label">Bank</span><span class="value">BCA / Mandiri</span></div>
+              <div class="detail-row"><span class="label">Account</span><span class="value">123-456-7890 (a.n. ELIXIRSTORE)</span></div>
+              <div class="detail-row"><span class="label">Instructions</span><span class="value" style="font-weight:400;font-size:0.8rem;color:#9aa3b8;">Transfer the exact amount. Send the proof to our support.</span></div>
+            `;
+      }
+      paymentDetail.innerHTML = html;
+    }
+
+    document.getElementById('checkoutBtn').addEventListener('click', () => {
+      openCheckoutModal();
     });
 
     document.querySelectorAll('.method-card').forEach(card => {
@@ -1805,8 +1798,8 @@
 
     console.log('🛒 ELIXIRSTORE ready.');
     console.log('📋 Step 1: Klik card → Detail modal (pilih durasi, isi username)');
-    console.log('📋 Step 2: Klik "Tambah ke Keranjang" → Cart');
-    console.log('📋 Step 3: Buka Cart → Checkout → Payment');
+    console.log('📋 Step 2: Klik "Lanjut ke Pembayaran" → LANGSUNG ke Checkout Modal');
+    console.log('📋 Step 3: Pilih metode bayar → Konfirmasi');
   </script>
 </body>
 </html>
