@@ -76,47 +76,59 @@
       -webkit-text-fill-color: transparent;
     }
 
-    /* --- PROMO BANNER --- */
+    /* --- PROMO BANNER (2 tombol: WA + Discord) --- */
     .promo-banner {
       flex: 1;
       text-align: center;
       min-width: 180px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
     }
     .promo-banner a {
-      display: inline-block;
-      background: linear-gradient(135deg, #1e1b33, #2a1f3f);
-      border: 1.5px solid #7c6cf0;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       border-radius: 60px;
-      padding: 8px 24px;
+      padding: 8px 20px;
       font-weight: 700;
-      font-size: 0.9rem;
-      color: #c4b5fd;
+      font-size: 0.85rem;
       text-decoration: none;
       transition: 0.3s;
-      box-shadow: 0 0 20px rgba(124, 108, 240, 0.15);
-      animation: glowPulse 2.5s ease-in-out infinite;
-      white-space: nowrap;
       letter-spacing: 0.3px;
+      white-space: nowrap;
     }
-    .promo-banner a:hover {
-      background: linear-gradient(135deg, #3f3570, #7c6cf0);
+    .promo-banner .btn-wa {
+      background: linear-gradient(135deg, #25D366, #128C7E);
       color: #fff;
-      box-shadow: 0 0 40px rgba(124, 108, 240, 0.4);
-      transform: scale(1.04);
+      border: 1.5px solid #25D366;
+      box-shadow: 0 0 20px rgba(37, 211, 102, 0.15);
+      animation: glowPulseWA 2.5s ease-in-out infinite;
     }
-    .promo-banner a i {
-      margin-right: 8px;
-      color: #6ee7b7;
+    .promo-banner .btn-wa:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 40px rgba(37, 211, 102, 0.4);
+    }
+    .promo-banner .btn-discord {
+      background: linear-gradient(135deg, #5865F2, #4752c4);
+      color: #fff;
+      border: 1.5px solid #5865F2;
+      box-shadow: 0 0 20px rgba(88, 101, 242, 0.15);
+      animation: glowPulseDC 2.5s ease-in-out infinite 0.5s;
+    }
+    .promo-banner .btn-discord:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 40px rgba(88, 101, 242, 0.4);
     }
 
-    @keyframes glowPulse {
-      0%,
-      100% {
-        box-shadow: 0 0 15px rgba(124, 108, 240, 0.2);
-      }
-      50% {
-        box-shadow: 0 0 35px rgba(124, 108, 240, 0.5), 0 0 60px rgba(124, 108, 240, 0.1);
-      }
+    @keyframes glowPulseWA {
+      0%, 100% { box-shadow: 0 0 15px rgba(37, 211, 102, 0.2); }
+      50% { box-shadow: 0 0 35px rgba(37, 211, 102, 0.5), 0 0 60px rgba(37, 211, 102, 0.1); }
+    }
+    @keyframes glowPulseDC {
+      0%, 100% { box-shadow: 0 0 15px rgba(88, 101, 242, 0.2); }
+      50% { box-shadow: 0 0 35px rgba(88, 101, 242, 0.5), 0 0 60px rgba(88, 101, 242, 0.1); }
     }
 
     .nav-actions {
@@ -265,6 +277,18 @@
       flex-direction: column;
       position: relative;
       cursor: pointer;
+      overflow: hidden;
+    }
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(124, 108, 240, 0.05), transparent 60%);
+      pointer-events: none;
+      border-radius: 24px;
     }
     .product-card:hover {
       transform: translateY(-6px);
@@ -283,22 +307,46 @@
       background: rgba(124, 108, 240, 0.2);
       color: #b8acff;
       letter-spacing: 0.5px;
+      z-index: 1;
     }
     .product-card .product-icon {
-      font-size: 2rem;
+      font-size: 2.8rem;
       color: #7c6cf0;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(124, 108, 240, 0.1);
+      border-radius: 16px;
+      border: 1px solid rgba(124, 108, 240, 0.2);
+      transition: 0.3s;
+    }
+    .product-card:hover .product-icon {
+      background: rgba(124, 108, 240, 0.2);
+      border-color: #7c6cf0;
+      transform: scale(1.05);
+    }
+    .product-card .product-icon i {
+      font-size: 1.8rem;
     }
     .product-card h3 {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       font-weight: 700;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
+      position: relative;
+      z-index: 1;
     }
     .product-card .desc {
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       color: #9aa3b8;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       flex: 1;
+      position: relative;
+      z-index: 1;
     }
     .product-card .price-row {
       display: flex;
@@ -307,6 +355,8 @@
       border-top: 1px solid rgba(255, 255, 255, 0.06);
       padding-top: 14px;
       margin-top: 4px;
+      position: relative;
+      z-index: 1;
     }
     .product-card .price {
       font-size: 1.3rem;
@@ -332,13 +382,15 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      position: relative;
+      z-index: 1;
     }
     .product-card .btn-select:hover {
       transform: scale(1.05);
       box-shadow: 0 4px 16px rgba(124, 108, 240, 0.4);
     }
 
-    /* ---------- DETAIL MODAL (Step 1) ---------- */
+    /* ---------- DETAIL MODAL ---------- */
     .detail-modal {
       position: fixed;
       top: 0;
@@ -413,8 +465,14 @@
     .detail-content .detail-product-info .icon {
       font-size: 2.2rem;
       color: #7c6cf0;
-      width: 50px;
-      text-align: center;
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(124, 108, 240, 0.1);
+      border-radius: 14px;
+      border: 1px solid rgba(124, 108, 240, 0.2);
     }
     .detail-content .detail-product-info .info .name {
       font-weight: 700;
@@ -460,7 +518,6 @@
       color: #4a5070;
     }
 
-    /* Duration select di detail modal */
     .detail-content .detail-durations {
       display: flex;
       flex-wrap: wrap;
@@ -622,7 +679,7 @@
       background: #3f2a2a;
     }
 
-    /* ---------- CHECKOUT MODAL (Step 2: Payment) ---------- */
+    /* ---------- CHECKOUT MODAL ---------- */
     .checkout-modal {
       position: fixed;
       top: 0;
@@ -690,13 +747,8 @@
       animation: blink 1.2s step-end infinite;
     }
     @keyframes blink {
-      0%,
-      100% {
-        opacity: 1;
-      }
-      50% {
-        opacity: 0.2;
-      }
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
     }
 
     .checkout-content .order-summary {
@@ -734,9 +786,11 @@
       align-items: center;
       gap: 8px;
     }
+
+    /* HANYA 2 METODE: QRIS + PAYPAL */
     .checkout-content .payment-methods-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: 1fr 1fr;
       gap: 12px;
       margin-bottom: 16px;
     }
@@ -760,7 +814,7 @@
       box-shadow: 0 0 25px rgba(124, 108, 240, 0.15);
     }
     .checkout-content .method-card i {
-      font-size: 2rem;
+      font-size: 2.5rem;
       display: block;
       margin-bottom: 6px;
     }
@@ -769,9 +823,6 @@
     }
     .checkout-content .method-card .qris-icon {
       color: #6ee7b7;
-    }
-    .checkout-content .method-card .bank-icon {
-      color: #fbbf24;
     }
     .checkout-content .method-card .label {
       font-size: 0.75rem;
@@ -824,19 +875,79 @@
       background: #3f3570;
       color: #fff;
     }
-    .checkout-content .payment-detail .qris-placeholder {
+
+    /* QRIS - lebih besar dan jelas */
+    .checkout-content .payment-detail .qris-container {
       display: flex;
-      justify-content: center;
-      margin: 8px 0;
-    }
-    .checkout-content .payment-detail .qris-placeholder img {
-      width: 140px;
-      height: 140px;
-      object-fit: cover;
+      flex-direction: column;
+      align-items: center;
+      margin: 12px 0;
+      padding: 16px;
+      background: #ffffff;
       border-radius: 16px;
-      border: 1px solid #1e2335;
-      background: #fff;
-      padding: 8px;
+      border: 2px solid #1e2335;
+    }
+    .checkout-content .payment-detail .qris-container img {
+      width: 220px;
+      height: 220px;
+      max-width: 220px;
+      max-height: 220px;
+      object-fit: contain;
+      display: block;
+      border-radius: 8px;
+    }
+    .checkout-content .payment-detail .qris-container .qris-label {
+      margin-top: 10px;
+      font-size: 0.7rem;
+      color: #6f7a94;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    /* PayPal detail */
+    .checkout-content .payment-detail .paypal-detail {
+      text-align: center;
+      padding: 8px 0;
+    }
+    .checkout-content .payment-detail .paypal-detail .paypal-email {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #1e88e5;
+      background: rgba(30, 136, 229, 0.1);
+      padding: 8px 20px;
+      border-radius: 12px;
+      display: inline-block;
+      border: 1px solid rgba(30, 136, 229, 0.2);
+    }
+
+    .checkout-content .payment-detail .instruction-text {
+      font-size: 0.8rem;
+      color: #9aa3b8;
+      line-height: 1.6;
+      margin-top: 8px;
+    }
+
+    /* Tombol Konfirmasi ke WA */
+    .checkout-content .btn-confirm-wa {
+      width: 100%;
+      padding: 14px;
+      border-radius: 60px;
+      border: none;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .checkout-content .btn-confirm-wa:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
     }
 
     .checkout-content .trust-badges {
@@ -844,7 +955,7 @@
       justify-content: center;
       gap: 24px;
       flex-wrap: wrap;
-      margin: 20px 0 16px;
+      margin: 16px 0 12px;
       padding-top: 16px;
       border-top: 1px solid #1e2335;
     }
@@ -958,54 +1069,33 @@
         align-items: stretch;
         gap: 12px;
       }
-      .logo {
-        text-align: center;
-      }
-      .promo-banner {
-        min-width: unset;
-      }
-      .promo-banner a {
-        white-space: normal;
-        font-size: 0.8rem;
-        padding: 6px 16px;
-        width: 100%;
-      }
-      .nav-actions {
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-      .checkout-content {
-        padding: 24px 18px;
-      }
-      .checkout-content .payment-methods-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-      .hero h1 {
-        font-size: 2.2rem;
-      }
-      .detail-content {
-        padding: 24px 20px;
+      .logo { text-align: center; }
+      .promo-banner { min-width: unset; gap: 8px; }
+      .promo-banner a { font-size: 0.75rem; padding: 6px 14px; white-space: normal; }
+      .nav-actions { justify-content: center; flex-wrap: wrap; }
+      .checkout-content { padding: 24px 18px; }
+      .checkout-content .payment-methods-grid { grid-template-columns: 1fr 1fr; }
+      .hero h1 { font-size: 2.2rem; }
+      .detail-content { padding: 24px 20px; }
+      .checkout-content .payment-detail .qris-container img {
+        width: 160px;
+        height: 160px;
+        max-width: 160px;
+        max-height: 160px;
       }
     }
     @media (max-width: 500px) {
-      .checkout-content .payment-methods-grid {
-        grid-template-columns: 1fr;
-      }
-      .product-grid {
-        grid-template-columns: 1fr;
-      }
-      .checkout-content .order-header {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .filter-bar {
-        gap: 6px 10px;
-        padding: 8px 12px;
-        border-radius: 30px;
-      }
-      .filter-bar span {
-        font-size: 0.7rem;
-        padding: 4px 12px;
+      .checkout-content .payment-methods-grid { grid-template-columns: 1fr 1fr; }
+      .product-grid { grid-template-columns: 1fr; }
+      .checkout-content .order-header { flex-direction: column; align-items: stretch; }
+      .filter-bar { gap: 6px 10px; padding: 8px 12px; border-radius: 30px; }
+      .filter-bar span { font-size: 0.7rem; padding: 4px 12px; }
+      .promo-banner a { font-size: 0.65rem; padding: 4px 10px; }
+      .checkout-content .payment-detail .qris-container img {
+        width: 140px;
+        height: 140px;
+        max-width: 140px;
+        max-height: 140px;
       }
     }
   </style>
@@ -1022,8 +1112,11 @@
     <header>
       <div class="logo">ELIXIR<span>STORE</span></div>
       <div class="promo-banner">
-        <a href="https://discord.gg/CxbDP6QmW" target="_blank">
-          <i class="fas fa-gift"></i> Free Trial Script! Join Discord
+        <a href="https://wa.me/62895385984764?text=Halo%20ELIXIRSTORE" target="_blank" class="btn-wa">
+          <i class="fab fa-whatsapp"></i> WhatsApp
+        </a>
+        <a href="https://discord.gg/CxbDP6QmW" target="_blank" class="btn-discord">
+          <i class="fab fa-discord"></i> Discord
         </a>
       </div>
       <div class="nav-actions">
@@ -1043,12 +1136,12 @@
       <h1>Premium <span class="accent">Southbronx</span> Store</h1>
       <p class="desc-en">
         Joki SBC, Script premium, dan Akun Tier dengan pengiriman instan.
-        Pilih dari berbagai produk dengan harga terjangkau. Pembayaran aman via QRIS, PayPal, dan Bank Transfer.
+        Pilih dari berbagai produk dengan harga terjangkau. Pembayaran aman via QRIS dan PayPal.
         Trusted by 100+ customers.
       </p>
       <p class="desc-id">
         SBC, Script, dan Tier Southbronx premium dengan pengiriman instan.
-        Pembayaran aman via QRIS, PayPal, dan Bank Transfer. Dipercaya oleh 100+ pelanggan.
+        Pembayaran aman via QRIS dan PayPal. Dipercaya oleh 100+ pelanggan.
       </p>
     </section>
 
@@ -1069,7 +1162,7 @@
     </footer>
   </div>
 
-  <!-- ===== DETAIL MODAL (Step 1: Pilih Produk + Durasi + Username) ===== -->
+  <!-- ===== DETAIL MODAL ===== -->
   <div class="detail-modal" id="detailModal">
     <div class="detail-content">
       <div class="detail-header">
@@ -1120,7 +1213,7 @@
     </div>
   </div>
 
-  <!-- ===== CHECKOUT MODAL (Step 2: Payment) ===== -->
+  <!-- ===== CHECKOUT MODAL ===== -->
   <div class="checkout-modal" id="checkoutModal">
     <div class="checkout-content">
       <div class="order-header">
@@ -1147,14 +1240,14 @@
           <div class="label">PayPal</div>
           <div class="sub">Friends & Family</div>
         </div>
-        <div class="method-card" data-method="bank">
-          <i class="fas fa-university bank-icon"></i>
-          <div class="label">Bank Transfer</div>
-          <div class="sub">BCA / Mandiri</div>
-        </div>
       </div>
 
       <div class="payment-detail" id="paymentDetail"></div>
+
+      <!-- Tombol Konfirmasi ke WA -->
+      <button class="btn-confirm-wa" id="confirmWaBtn">
+        <i class="fab fa-whatsapp"></i> Konfirmasi Pembayaran via WhatsApp
+      </button>
 
       <div class="trust-badges">
         <span><i class="fas fa-lock"></i> SSL Secure</span>
@@ -1229,6 +1322,7 @@
     let timerInterval = null;
     let selectedProduct = null;
     let selectedDuration = null;
+    let currentOrderId = '';
 
     // =============================================================
     // DOM REFS
@@ -1282,6 +1376,11 @@
       return map[category] || category;
     }
 
+    function getIconForCategory(category) {
+      const map = { sbc: 'fa-crown', script: 'fa-code', tier: 'fa-gem' };
+      return map[category] || 'fa-cube';
+    }
+
     function updateCartUI() {
       const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
       cartCountEl.textContent = totalItems;
@@ -1298,15 +1397,15 @@
         const subtotal = item.price * item.quantity;
         total += subtotal;
         html += `
-              <div class="cart-item">
-                <div class="item-info">
-                  <div class="name">${item.productName}</div>
-                  <div class="detail">${item.durationLabel} × ${item.quantity}</div>
-                </div>
-                <div class="item-price">${formatPrice(subtotal)}</div>
-                <button class="remove-item" data-index="${idx}"><i class="fas fa-trash"></i></button>
-              </div>
-            `;
+          <div class="cart-item">
+            <div class="item-info">
+              <div class="name">${item.productName}</div>
+              <div class="detail">${item.durationLabel} × ${item.quantity}</div>
+            </div>
+            <div class="item-price">${formatPrice(subtotal)}</div>
+            <button class="remove-item" data-index="${idx}"><i class="fas fa-trash"></i></button>
+          </div>
+        `;
       });
       cartItemsEl.innerHTML = html;
       cartTotalEl.textContent = formatPrice(total);
@@ -1346,25 +1445,25 @@
         const categoryLabel = getCategoryLabel(product.category);
         const defaultDur = product.durations[0];
         const price = defaultDur ? defaultDur.price : 0;
+        const icon = product.icon || getIconForCategory(product.category);
 
         html += `
-              <div class="product-card" data-id="${product.id}">
-                <div class="category-tag">${categoryLabel}</div>
-                <div class="product-icon"><i class="fas ${product.icon}"></i></div>
-                <h3>${product.name}</h3>
-                <p class="desc">${product.desc}</p>
-                <div class="price-row">
-                  <span class="price" data-base-price="${price}">${formatPrice(price)} <small>${currency}</small></span>
-                  <button class="btn-select" data-product='${JSON.stringify(product).replace(/'/g,"&#39;")}'>
-                    <i class="fas fa-chevron-right"></i> Select
-                  </button>
-                </div>
-              </div>
-            `;
+          <div class="product-card" data-id="${product.id}">
+            <div class="category-tag">${categoryLabel}</div>
+            <div class="product-icon"><i class="fas ${icon}"></i></div>
+            <h3>${product.name}</h3>
+            <p class="desc">${product.desc}</p>
+            <div class="price-row">
+              <span class="price" data-base-price="${price}">${formatPrice(price)} <small>${currency}</small></span>
+              <button class="btn-select" data-product='${JSON.stringify(product).replace(/'/g,"&#39;")}'>
+                <i class="fas fa-chevron-right"></i> Select
+              </button>
+            </div>
+          </div>
+        `;
       });
       grid.innerHTML = html;
 
-      // Event listener untuk tombol Select
       grid.querySelectorAll('.btn-select').forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
@@ -1373,7 +1472,6 @@
         });
       });
 
-      // Click pada card juga membuka detail
       grid.querySelectorAll('.product-card').forEach(card => {
         card.addEventListener('click', () => {
           const btn = card.querySelector('.btn-select');
@@ -1398,24 +1496,22 @@
     }
 
     // =============================================================
-    // DETAIL MODAL (Step 1) → LANGSUNG KE CHECKOUT
+    // DETAIL MODAL
     // =============================================================
     function openDetailModal(product) {
       selectedProduct = product;
       selectedDuration = product.durations[0];
 
-      // Isi data produk
-      detailIcon.innerHTML = `<i class="fas ${product.icon}"></i>`;
+      const icon = product.icon || getIconForCategory(product.category);
+      detailIcon.innerHTML = `<i class="fas ${icon}"></i>`;
       detailName.textContent = product.name;
       detailPrice.textContent = formatPrice(product.durations[0].price);
       detailCategory.textContent = `Kategori: ${getCategoryLabel(product.category)}`;
 
-      // Render durasi
       detailDurations.innerHTML = product.durations.map((d, i) => `
-            <button class="${i === 0 ? 'active' : ''}" data-dur="${d.value}" data-price="${d.price}">${d.label}</button>
-          `).join('');
+        <button class="${i === 0 ? 'active' : ''}" data-dur="${d.value}" data-price="${d.price}">${d.label}</button>
+      `).join('');
 
-      // Event durasi di detail modal
       detailDurations.querySelectorAll('button').forEach(btn => {
         btn.addEventListener('click', () => {
           detailDurations.querySelectorAll('button').forEach(b => b.classList.remove('active'));
@@ -1430,7 +1526,6 @@
         });
       });
 
-      // Tampilkan input username hanya untuk SBC
       if (product.category === 'sbc') {
         usernameGroup.style.display = 'block';
         detailUsername.value = '';
@@ -1443,7 +1538,6 @@
       detailModal.classList.add('open');
     }
 
-    // Close detail modal
     document.getElementById('closeDetail').addEventListener('click', () => {
       detailModal.classList.remove('open');
       selectedProduct = null;
@@ -1459,24 +1553,20 @@
     });
 
     // =============================================================
-    // TOMBOL "Lanjut ke Pembayaran" → LANGSUNG BUKA CHECKOUT
+    // TOMBOL "Lanjut ke Pembayaran" → LANGSUNG KE CHECKOUT
     // =============================================================
     document.getElementById('btnCheckoutNow').addEventListener('click', () => {
       if (!selectedProduct || !selectedDuration) return;
 
       const username = detailUsername.value.trim();
 
-      // Validasi: untuk SBC harus isi username
       if (selectedProduct.category === 'sbc' && !username) {
         alert('⚠️ Mohon isi username kamu terlebih dahulu!');
         detailUsername.focus();
         return;
       }
 
-      // Kosongkan cart dulu (beli 1 item langsung)
       cart = [];
-
-      // Tambahkan produk ke cart
       cart.push({
         productId: selectedProduct.id,
         productName: selectedProduct.name,
@@ -1489,18 +1579,14 @@
 
       saveCart();
       updateCartUI();
-
-      // Tutup detail modal
       detailModal.classList.remove('open');
 
-      // LANGSUNG BUKA CHECKOUT MODAL
       openCheckoutModal();
 
       selectedProduct = null;
       selectedDuration = null;
     });
 
-    // Enter key pada input username
     detailUsername.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
         document.getElementById('btnCheckoutNow').click();
@@ -1551,8 +1637,16 @@
       }
     });
 
+    document.getElementById('checkoutBtn').addEventListener('click', () => {
+      if (cart.length === 0) {
+        alert('Your cart is empty.');
+        return;
+      }
+      openCheckoutModal();
+    });
+
     // =============================================================
-    // CHECKOUT MODAL (Step 2: Payment)
+    // CHECKOUT MODAL
     // =============================================================
     function openCheckoutModal() {
       if (cart.length === 0) {
@@ -1560,8 +1654,8 @@
         return;
       }
 
-      const orderId = generateOrderId();
-      orderIdDisplay.textContent = orderId;
+      currentOrderId = generateOrderId();
+      orderIdDisplay.textContent = currentOrderId;
       const now = new Date();
       orderDateDisplay.textContent = now.toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' });
 
@@ -1600,36 +1694,48 @@
     function updatePaymentDetail(method) {
       let total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
       let html = '';
+
       if (method === 'qris') {
         html = `
-              <div class="detail-row"><span class="label">Amount</span><span class="value">${formatPrice(total)}</span></div>
-              <div class="detail-row"><span class="label">Method</span><span class="value">QRIS (Quick Response Code)</span></div>
-              <div class="qris-placeholder">
-                <img src="https://i.ibb.co.com/Cp2N3cf8/IMG-9954.jpg" alt="QRIS" />
-              </div>
-              <div class="detail-row"><span class="label">Instructions</span><span class="value" style="font-weight:400;font-size:0.8rem;color:#9aa3b8;">1. Open your e-wallet or banking app<br>2. Scan the QR code above<br>3. Enter the exact amount and pay</span></div>
-            `;
+          <div class="detail-row"><span class="label">Amount</span><span class="value">${formatPrice(total)}</span></div>
+          <div class="detail-row"><span class="label">Method</span><span class="value">QRIS (Quick Response Code)</span></div>
+          <div class="qris-container">
+            <img src="https://i.ibb.co.com/Cp2N3cf8/IMG-9954.jpg" alt="QRIS" />
+            <div class="qris-label">SCAN QR CODE</div>
+          </div>
+          <div class="instruction-text">
+            <strong>📱 Cara Bayar:</strong><br>
+            1. Buka aplikasi e-wallet atau mobile banking<br>
+            2. Scan QR code di atas<br>
+            3. Masukkan nominal tepat <strong>${formatPrice(total)}</strong><br>
+            4. Konfirmasi pembayaran via WhatsApp
+          </div>
+        `;
       } else if (method === 'paypal') {
-        const paypalEmail = 'elixirstore@gmail.com';
+        const paypalUser = 'Elixir60s';
         html = `
-              <div class="detail-row"><span class="label">Amount</span><span class="value">${formatPrice(total)}</span></div>
-              <div class="detail-row"><span class="label">Send to</span><span class="value">${paypalEmail} <button class="copy-btn" onclick="navigator.clipboard.writeText('${paypalEmail}')">Copy</button></span></div>
-              <div class="detail-row"><span class="label">Instructions</span><span class="value" style="font-weight:400;font-size:0.8rem;color:#9aa3b8;">Send as Friends & Family. Include your Order ID in the note.</span></div>
-            `;
-      } else if (method === 'bank') {
-        html = `
-              <div class="detail-row"><span class="label">Amount</span><span class="value">${formatPrice(total)}</span></div>
-              <div class="detail-row"><span class="label">Bank</span><span class="value">BCA / Mandiri</span></div>
-              <div class="detail-row"><span class="label">Account</span><span class="value">123-456-7890 (a.n. ELIXIRSTORE)</span></div>
-              <div class="detail-row"><span class="label">Instructions</span><span class="value" style="font-weight:400;font-size:0.8rem;color:#9aa3b8;">Transfer the exact amount. Send the proof to our support.</span></div>
-            `;
+          <div class="detail-row"><span class="label">Amount</span><span class="value">${formatPrice(total)}</span></div>
+          <div class="detail-row"><span class="label">Method</span><span class="value">PayPal</span></div>
+          <div class="paypal-detail">
+            <div class="paypal-email">
+              <i class="fab fa-paypal"></i> @${paypalUser}
+            </div>
+            <div style="margin-top:8px;font-size:0.75rem;color:#6f7a94;">
+              Kirim sebagai Friends & Family
+            </div>
+          </div>
+          <div class="instruction-text">
+            <strong>📱 Cara Bayar:</strong><br>
+            1. Buka aplikasi PayPal<br>
+            2. Kirim ke <strong>@${paypalUser}</strong> (Friends & Family)<br>
+            3. Masukkan nominal <strong>${formatPrice(total)}</strong><br>
+            4. Cantumkan Order ID: <strong>${currentOrderId}</strong><br>
+            5. Konfirmasi pembayaran via WhatsApp
+          </div>
+        `;
       }
       paymentDetail.innerHTML = html;
     }
-
-    document.getElementById('checkoutBtn').addEventListener('click', () => {
-      openCheckoutModal();
-    });
 
     document.querySelectorAll('.method-card').forEach(card => {
       card.addEventListener('click', () => {
@@ -1637,6 +1743,20 @@
         card.classList.add('active');
         updatePaymentDetail(card.dataset.method);
       });
+    });
+
+    // Tombol Konfirmasi ke WA
+    document.getElementById('confirmWaBtn').addEventListener('click', () => {
+      if (cart.length === 0) return;
+
+      let total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      let itemList = cart.map(item => {
+        const usernameDisplay = item.username ? ` @${item.username}` : '';
+        return `${item.productName}${usernameDisplay} (${item.durationLabel} × ${item.quantity})`;
+      }).join('%0A');
+
+      const msg = `Halo ELIXIRSTORE%0A%0A*KONFIRMASI PEMBAYARAN*%0A%0AOrder ID: ${currentOrderId}%0AProduk:%0A${itemList}%0ATotal: ${formatPrice(total)}%0A%0ASaya sudah melakukan pembayaran. Berikut bukti transfer saya.`;
+      window.open(`https://wa.me/62895385984764?text=${msg}`, '_blank');
     });
 
     document.getElementById('closeCheckout').addEventListener('click', () => {
@@ -1799,7 +1919,7 @@
     console.log('🛒 ELIXIRSTORE ready.');
     console.log('📋 Step 1: Klik card → Detail modal (pilih durasi, isi username)');
     console.log('📋 Step 2: Klik "Lanjut ke Pembayaran" → LANGSUNG ke Checkout Modal');
-    console.log('📋 Step 3: Pilih metode bayar → Konfirmasi');
+    console.log('📋 Step 3: Pilih QRIS/PayPal → Konfirmasi ke WA');
   </script>
 </body>
 </html>
