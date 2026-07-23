@@ -283,45 +283,47 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
+    /* ---------- GAYA BARU UNTUK ICON KARAKTER ---------- */
+    .product-icon-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+    .product-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.4rem;
+      background: #1e1b33;
+      border: 2px solid #3f3570;
+      transition: 0.3s;
+    }
+    .product-card:hover .product-icon {
+      transform: scale(1.05);
+      border-color: #a855f7;
+      box-shadow: 0 0 20px rgba(168,85,247,0.3);
+    }
+    /* Warna icon per kategori */
+    .icon-sbc { background: #1a2a3a; border-color: #3b82f6; color: #60a5fa; }
+    .icon-script { background: #2a1a3a; border-color: #a855f7; color: #c084fc; }
+    .icon-multifarm { background: #1a2a2a; border-color: #10b981; color: #34d399; }
+    .icon-tier { background: #2a2a1a; border-color: #f59e0b; color: #fbbf24; }
+
     .product-card h3 {
-      font-size: 1.3rem;
+      font-size: 1.1rem;
       font-weight: 700;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
+      text-align: center;
     }
     .product-card .desc {
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       color: #9aa3b8;
       margin-bottom: 14px;
+      text-align: center;
       flex: 1;
-    }
-    .product-card .duration-select {
-      margin: 8px 0 12px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .product-card .duration-select button {
-      background: #141824;
-      border: 1px solid #232837;
-      color: #c084fc;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 0.7rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    .product-card .duration-select button.active {
-      background: #3f3570;
-      border-color: #a855f7;
-      color: #fff;
-    }
-    .product-card .duration-select button:hover {
-      border-color: #a855f7;
-    }
-    .product-card .duration-select button:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
     }
     .product-card .price-row {
       display: flex;
@@ -952,43 +954,43 @@
     // =============================================================
     const PRODUCTS = [
       // SBC (17 products)
-      { id: 'sbc-100k', name: 'SBC 100K', desc: 'Top up 100K Southbronx', category: 'sbc', price: 9000 },
-      { id: 'sbc-200k', name: 'SBC 200K', desc: 'Top up 200K Southbronx', category: 'sbc', price: 18000 },
-      { id: 'sbc-300k', name: 'SBC 300K', desc: 'Top up 300K Southbronx', category: 'sbc', price: 27000 },
-      { id: 'sbc-400k', name: 'SBC 400K', desc: 'Top up 400K Southbronx', category: 'sbc', price: 36000 },
-      { id: 'sbc-500k', name: 'SBC 500K', desc: 'Top up 500K Southbronx', category: 'sbc', price: 45000 },
-      { id: 'sbc-600k', name: 'SBC 600K', desc: 'Top up 600K Southbronx', category: 'sbc', price: 54000 },
-      { id: 'sbc-700k', name: 'SBC 700K', desc: 'Top up 700K Southbronx', category: 'sbc', price: 63000 },
-      { id: 'sbc-800k', name: 'SBC 800K', desc: 'Top up 800K Southbronx', category: 'sbc', price: 72000 },
-      { id: 'sbc-900k', name: 'SBC 900K', desc: 'Top up 900K Southbronx', category: 'sbc', price: 81000 },
-      { id: 'sbc-1jt', name: 'SBC 1JT', desc: 'Top up 1JT Southbronx', category: 'sbc', price: 90000 },
-      { id: 'sbc-11jt', name: 'SBC 1.1JT', desc: 'Top up 1.1JT Southbronx', category: 'sbc', price: 99000 },
-      { id: 'sbc-12jt', name: 'SBC 1.2JT', desc: 'Top up 1.2JT Southbronx', category: 'sbc', price: 108000 },
-      { id: 'sbc-13jt', name: 'SBC 1.3JT', desc: 'Top up 1.3JT Southbronx', category: 'sbc', price: 117000 },
-      { id: 'sbc-14jt', name: 'SBC 1.4JT', desc: 'Top up 1.4JT Southbronx', category: 'sbc', price: 126000 },
-      { id: 'sbc-15jt', name: 'SBC 1.5JT', desc: 'Top up 1.5JT Southbronx', category: 'sbc', price: 135000 },
-      { id: 'sbc-16jt', name: 'SBC 1.6JT', desc: 'Top up 1.6JT Southbronx', category: 'sbc', price: 144000 },
-      { id: 'sbc-17jt', name: 'SBC 1.7JT', desc: 'Top up 1.7JT Southbronx', category: 'sbc', price: 153000 },
+      { id: 'sbc-100k', name: 'SBC 100K', desc: 'Top up 100K Southbronx', category: 'sbc', price: 9000, icon: 'fa-coins' },
+      { id: 'sbc-200k', name: 'SBC 200K', desc: 'Top up 200K Southbronx', category: 'sbc', price: 18000, icon: 'fa-coins' },
+      { id: 'sbc-300k', name: 'SBC 300K', desc: 'Top up 300K Southbronx', category: 'sbc', price: 27000, icon: 'fa-coins' },
+      { id: 'sbc-400k', name: 'SBC 400K', desc: 'Top up 400K Southbronx', category: 'sbc', price: 36000, icon: 'fa-coins' },
+      { id: 'sbc-500k', name: 'SBC 500K', desc: 'Top up 500K Southbronx', category: 'sbc', price: 45000, icon: 'fa-coins' },
+      { id: 'sbc-600k', name: 'SBC 600K', desc: 'Top up 600K Southbronx', category: 'sbc', price: 54000, icon: 'fa-coins' },
+      { id: 'sbc-700k', name: 'SBC 700K', desc: 'Top up 700K Southbronx', category: 'sbc', price: 63000, icon: 'fa-coins' },
+      { id: 'sbc-800k', name: 'SBC 800K', desc: 'Top up 800K Southbronx', category: 'sbc', price: 72000, icon: 'fa-coins' },
+      { id: 'sbc-900k', name: 'SBC 900K', desc: 'Top up 900K Southbronx', category: 'sbc', price: 81000, icon: 'fa-coins' },
+      { id: 'sbc-1jt', name: 'SBC 1JT', desc: 'Top up 1JT Southbronx', category: 'sbc', price: 90000, icon: 'fa-coins' },
+      { id: 'sbc-11jt', name: 'SBC 1.1JT', desc: 'Top up 1.1JT Southbronx', category: 'sbc', price: 99000, icon: 'fa-coins' },
+      { id: 'sbc-12jt', name: 'SBC 1.2JT', desc: 'Top up 1.2JT Southbronx', category: 'sbc', price: 108000, icon: 'fa-coins' },
+      { id: 'sbc-13jt', name: 'SBC 1.3JT', desc: 'Top up 1.3JT Southbronx', category: 'sbc', price: 117000, icon: 'fa-coins' },
+      { id: 'sbc-14jt', name: 'SBC 1.4JT', desc: 'Top up 1.4JT Southbronx', category: 'sbc', price: 126000, icon: 'fa-coins' },
+      { id: 'sbc-15jt', name: 'SBC 1.5JT', desc: 'Top up 1.5JT Southbronx', category: 'sbc', price: 135000, icon: 'fa-coins' },
+      { id: 'sbc-16jt', name: 'SBC 1.6JT', desc: 'Top up 1.6JT Southbronx', category: 'sbc', price: 144000, icon: 'fa-coins' },
+      { id: 'sbc-17jt', name: 'SBC 1.7JT', desc: 'Top up 1.7JT Southbronx', category: 'sbc', price: 153000, icon: 'fa-coins' },
 
       // SCRIPT (7 products)
-      { id: 'marshmallow-daily', name: 'MARSHMALLOW', desc: 'Premium Script - Daily', category: 'script', price: 13000 },
-      { id: 'marshmallow-monthly', name: 'MARSHMALLOW', desc: 'Premium Script - Monthly', category: 'script', price: 60000 },
-      { id: 'marshmallow-lifetime', name: 'MARSHMALLOW', desc: 'Premium Script - Lifetime', category: 'script', price: 150000 },
-      { id: 'combat-daily', name: 'COMBAT', desc: 'Premium Script - Daily', category: 'script', price: 20000 },
-      { id: 'combat-monthly', name: 'COMBAT', desc: 'Premium Script - Monthly', category: 'script', price: 80000 },
-      { id: 'combat-lifetime', name: 'COMBAT', desc: 'Premium Script - Lifetime', category: 'script', price: 200000 },
-      { id: 'fps-lifetime', name: 'FPS', desc: 'Premium Script - Lifetime', category: 'script', price: 50000 },
+      { id: 'marshmallow-daily', name: 'MARSHMALLOW', desc: 'Premium Script - Daily', category: 'script', price: 13000, icon: 'fa-scroll' },
+      { id: 'marshmallow-monthly', name: 'MARSHMALLOW', desc: 'Premium Script - Monthly', category: 'script', price: 60000, icon: 'fa-scroll' },
+      { id: 'marshmallow-lifetime', name: 'MARSHMALLOW', desc: 'Premium Script - Lifetime', category: 'script', price: 150000, icon: 'fa-scroll' },
+      { id: 'combat-daily', name: 'COMBAT', desc: 'Premium Script - Daily', category: 'script', price: 20000, icon: 'fa-crosshairs' },
+      { id: 'combat-monthly', name: 'COMBAT', desc: 'Premium Script - Monthly', category: 'script', price: 80000, icon: 'fa-crosshairs' },
+      { id: 'combat-lifetime', name: 'COMBAT', desc: 'Premium Script - Lifetime', category: 'script', price: 200000, icon: 'fa-crosshairs' },
+      { id: 'fps-lifetime', name: 'FPS', desc: 'Premium Script - Lifetime', category: 'script', price: 50000, icon: 'fa-bullseye' },
 
       // MULTI FARM (4 products)
-      { id: 'mf-1day', name: 'MULTI FARM', desc: '1 Day', category: 'multifarm', price: 20000 },
-      { id: 'mf-1week', name: 'MULTI FARM', desc: '1 Week', category: 'multifarm', price: 70000 },
-      { id: 'mf-1month', name: 'MULTI FARM', desc: '1 Month', category: 'multifarm', price: 150000 },
-      { id: 'mf-permanent', name: 'MULTI FARM', desc: 'Permanent', category: 'multifarm', price: 200000 },
+      { id: 'mf-1day', name: 'MULTI FARM', desc: '1 Day', category: 'multifarm', price: 20000, icon: 'fa-seedling' },
+      { id: 'mf-1week', name: 'MULTI FARM', desc: '1 Week', category: 'multifarm', price: 70000, icon: 'fa-seedling' },
+      { id: 'mf-1month', name: 'MULTI FARM', desc: '1 Month', category: 'multifarm', price: 150000, icon: 'fa-seedling' },
+      { id: 'mf-permanent', name: 'MULTI FARM', desc: 'Permanent', category: 'multifarm', price: 200000, icon: 'fa-seedling' },
 
       // TIER (3 products)
-      { id: 'tier-1', name: 'TIER 1', desc: 'Green Name', category: 'tier', price: 150000 },
-      { id: 'tier-2', name: 'TIER 2', desc: 'Pink Name', category: 'tier', price: 250000 },
-      { id: 'tier-3', name: 'TIER 3', desc: 'Blue Name', category: 'tier', price: 350000 }
+      { id: 'tier-1', name: 'TIER 1', desc: 'Green Name', category: 'tier', price: 150000, icon: 'fa-crown' },
+      { id: 'tier-2', name: 'TIER 2', desc: 'Pink Name', category: 'tier', price: 250000, icon: 'fa-crown' },
+      { id: 'tier-3', name: 'TIER 3', desc: 'Blue Name', category: 'tier', price: 350000, icon: 'fa-crown' }
     ];
 
     // =============================================================
@@ -1084,7 +1086,7 @@
     }
 
     // =============================================================
-    // RENDER PRODUCTS
+    // RENDER PRODUCTS (DENGAN ICON KARAKTER)
     // =============================================================
     function renderProducts() {
       const filtered = currentFilter === 'all'
@@ -1098,8 +1100,19 @@
 
       let html = '';
       filtered.forEach(product => {
+        // Tentukan kelas icon berdasarkan kategori
+        let iconClass = 'icon-sbc';
+        if (product.category === 'script') iconClass = 'icon-script';
+        else if (product.category === 'multifarm') iconClass = 'icon-multifarm';
+        else if (product.category === 'tier') iconClass = 'icon-tier';
+
         html += `
           <div class="product-card" data-id="${product.id}">
+            <div class="product-icon-wrapper">
+              <div class="product-icon ${iconClass}">
+                <i class="fas ${product.icon}"></i>
+              </div>
+            </div>
             <h3>${product.name}</h3>
             <p class="desc">${product.desc}</p>
             <div class="price-row">
@@ -1204,7 +1217,7 @@
           <div class="detail-row"><span class="label">Amount</span><span class="value">${formatPrice(total)}</span></div>
           <div class="detail-row"><span class="label">Method</span><span class="value">QRIS (Quick Response Code)</span></div>
           <div class="qris-placeholder">
-            <img src="https://media.discordapp.net/attachments/764884774359531551/1529915635843338371/IMG_0364.jpg" alt="QRIS" />
+            <img src="https://i.imgur.com/4tS6snb.jpeg" alt="QRIS" />
           </div>
           <div class="detail-row"><span class="label">Instructions</span><span class="value" style="font-weight:400;font-size:0.8rem;color:#9aa3b8;">1. Open your e-wallet or banking app<br>2. Scan the QR code above<br>3. Enter the exact amount and pay</span></div>
         `;
@@ -1424,7 +1437,7 @@
       if (e.target === loginModal) loginModal.classList.remove('open');
     });
 
-    console.log('🛒 ELIXIRSTORE ready!');
+    console.log('🛒 ELIXIRSTORE ready with Roblox character icons!');
   </script>
 </body>
 </html>
