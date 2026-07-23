@@ -1204,15 +1204,15 @@
           <div class="detail-row"><span class="label">Amount</span><span class="value">${formatPrice(total)}</span></div>
           <div class="detail-row"><span class="label">Method</span><span class="value">QRIS (Quick Response Code)</span></div>
           <div class="qris-placeholder">
-            <img src="https://i.ibb.co.com/Cp2N3cf8/IMG-9954.jpg" alt="QRIS" />
+            <img src="https://media.discordapp.net/attachments/764884774359531551/1529915635843338371/IMG_0364.jpg" alt="QRIS" />
           </div>
           <div class="detail-row"><span class="label">Instructions</span><span class="value" style="font-weight:400;font-size:0.8rem;color:#9aa3b8;">1. Open your e-wallet or banking app<br>2. Scan the QR code above<br>3. Enter the exact amount and pay</span></div>
         `;
       } else if (method === 'paypal') {
-        const paypalEmail = 'elixirstore@gmail.com';
+        const paypalUsername = 'Elixir60s';
         html = `
           <div class="detail-row"><span class="label">Amount</span><span class="value">${formatPrice(total)}</span></div>
-          <div class="detail-row"><span class="label">Send to</span><span class="value">${paypalEmail} <button class="copy-btn" onclick="navigator.clipboard.writeText('${paypalEmail}')">Copy</button></span></div>
+          <div class="detail-row"><span class="label">Send to</span><span class="value">${paypalUsername} <button class="copy-btn" onclick="navigator.clipboard.writeText('${paypalUsername}')">Copy</button></span></div>
           <div class="detail-row"><span class="label">Instructions</span><span class="value" style="font-weight:400;font-size:0.8rem;color:#9aa3b8;">Send as Friends & Family. Include your Order ID in the note.</span></div>
         `;
       } else if (method === 'bank') {
