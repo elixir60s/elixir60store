@@ -264,6 +264,7 @@
       display: flex;
       flex-direction: column;
       position: relative;
+      cursor: pointer;
     }
     .product-card:hover {
       transform: translateY(-6px);
@@ -299,31 +300,6 @@
       margin-bottom: 14px;
       flex: 1;
     }
-    .product-card .duration-select {
-      margin: 8px 0 12px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .product-card .duration-select button {
-      background: #141824;
-      border: 1px solid #232837;
-      color: #b8acff;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 0.7rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    .product-card .duration-select button.active {
-      background: #3f3570;
-      border-color: #7c6cf0;
-      color: #fff;
-    }
-    .product-card .duration-select button:hover {
-      border-color: #7c6cf0;
-    }
     .product-card .price-row {
       display: flex;
       justify-content: space-between;
@@ -343,7 +319,7 @@
       color: #6f7a94;
       margin-left: 4px;
     }
-    .product-card .btn-add {
+    .product-card .btn-select {
       background: linear-gradient(135deg, #7c6cf0, #5b4bd5);
       border: none;
       color: #fff;
@@ -357,9 +333,179 @@
       align-items: center;
       gap: 6px;
     }
-    .product-card .btn-add:hover {
+    .product-card .btn-select:hover {
       transform: scale(1.05);
       box-shadow: 0 4px 16px rgba(124, 108, 240, 0.4);
+    }
+
+    /* ---------- DETAIL MODAL (Step 1) ---------- */
+    .detail-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 1500;
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+    .detail-modal.open {
+      display: flex;
+    }
+    .detail-content {
+      background: #131724;
+      border-radius: 32px;
+      padding: 36px 40px;
+      max-width: 480px;
+      width: 94%;
+      border: 1px solid #2a2f45;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+      animation: modalFadeIn 0.3s ease;
+    }
+    @keyframes modalFadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .detail-content .detail-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #1e2335;
+    }
+    .detail-content .detail-header h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+    .detail-content .detail-header .close-detail {
+      background: none;
+      border: none;
+      color: #9aa3b8;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .detail-content .detail-header .close-detail:hover {
+      color: #fff;
+      transform: rotate(90deg);
+    }
+
+    .detail-content .detail-product-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+      background: #0d101a;
+      border-radius: 16px;
+      padding: 16px;
+    }
+    .detail-content .detail-product-info .icon {
+      font-size: 2.2rem;
+      color: #7c6cf0;
+      width: 50px;
+      text-align: center;
+    }
+    .detail-content .detail-product-info .info .name {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    .detail-content .detail-product-info .info .price {
+      color: #fbbf24;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .detail-content .detail-product-info .info .category {
+      font-size: 0.7rem;
+      color: #9aa3b8;
+      margin-top: 2px;
+    }
+
+    .detail-content .form-group {
+      margin-bottom: 16px;
+    }
+    .detail-content .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #9aa3b8;
+      margin-bottom: 4px;
+    }
+    .detail-content .form-group input {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid #232837;
+      background: #0d101a;
+      color: #fff;
+      font-size: 0.95rem;
+      transition: 0.2s;
+    }
+    .detail-content .form-group input:focus {
+      outline: none;
+      border-color: #7c6cf0;
+      box-shadow: 0 0 20px rgba(124, 108, 240, 0.1);
+    }
+    .detail-content .form-group input::placeholder {
+      color: #4a5070;
+    }
+
+    /* Duration select di detail modal */
+    .detail-content .detail-durations {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0 16px;
+    }
+    .detail-content .detail-durations button {
+      background: #141824;
+      border: 1px solid #232837;
+      color: #b8acff;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .detail-content .detail-durations button.active {
+      background: #3f3570;
+      border-color: #7c6cf0;
+      color: #fff;
+    }
+    .detail-content .detail-durations button:hover {
+      border-color: #7c6cf0;
+    }
+
+    .detail-content .btn-add-to-cart {
+      width: 100%;
+      padding: 14px;
+      border-radius: 60px;
+      border: none;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      background: linear-gradient(135deg, #7c6cf0, #5b4bd5);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .detail-content .btn-add-to-cart:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 20px rgba(124, 108, 240, 0.4);
     }
 
     /* ---------- CART SIDEBAR ---------- */
@@ -476,7 +622,7 @@
       background: #3f2a2a;
     }
 
-    /* ---------- CHECKOUT MODAL ---------- */
+    /* ---------- CHECKOUT MODAL (Step 2 Payment) ---------- */
     .checkout-modal {
       position: fixed;
       top: 0;
@@ -503,6 +649,7 @@
       max-height: 92vh;
       overflow-y: auto;
       box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+      animation: modalFadeIn 0.3s ease;
     }
 
     .checkout-content .order-header {
@@ -738,7 +885,7 @@
       height: 100%;
       background: rgba(0, 0, 0, 0.6);
       backdrop-filter: blur(4px);
-      z-index: 1500;
+      z-index: 3000;
       display: none;
       justify-content: center;
       align-items: center;
@@ -753,6 +900,7 @@
       max-width: 380px;
       width: 90%;
       border: 1px solid #2a2f45;
+      animation: modalFadeIn 0.3s ease;
     }
     .login-content h2 {
       margin-bottom: 16px;
@@ -834,6 +982,9 @@
       }
       .hero h1 {
         font-size: 2.2rem;
+      }
+      .detail-content {
+        padding: 24px 20px;
       }
     }
     @media (max-width: 500px) {
@@ -918,6 +1069,38 @@
     </footer>
   </div>
 
+  <!-- ===== DETAIL MODAL (Step 1: Pilih Produk + Durasi) ===== -->
+  <div class="detail-modal" id="detailModal">
+    <div class="detail-content">
+      <div class="detail-header">
+        <h3>Pilih Produk</h3>
+        <button class="close-detail" id="closeDetail">&times;</button>
+      </div>
+      <div class="detail-product-info">
+        <div class="icon" id="detailIcon"><i class="fas fa-crown"></i></div>
+        <div class="info">
+          <div class="name" id="detailName">Nama Produk</div>
+          <div class="price" id="detailPrice">Rp 0</div>
+          <div class="category" id="detailCategory">Kategori</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label><i class="fas fa-clock"></i> Pilih Durasi</label>
+        <div class="detail-durations" id="detailDurations"></div>
+      </div>
+
+      <div class="form-group" id="usernameGroup">
+        <label for="detailUsername"><i class="fas fa-user"></i> Username (untuk SBC)</label>
+        <input type="text" id="detailUsername" placeholder="Masukkan username kamu..." />
+      </div>
+
+      <button class="btn-add-to-cart" id="btnAddToCart">
+        <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+      </button>
+    </div>
+  </div>
+
   <!-- ===== CART SIDEBAR ===== -->
   <div class="cart-overlay" id="cartOverlay">
     <div class="cart-panel">
@@ -937,7 +1120,7 @@
     </div>
   </div>
 
-  <!-- ===== CHECKOUT MODAL ===== -->
+  <!-- ===== CHECKOUT MODAL (Step 2: Payment) ===== -->
   <div class="checkout-modal" id="checkoutModal">
     <div class="checkout-content">
       <div class="order-header">
@@ -1002,280 +1185,37 @@
     // =============================================================
     const PRODUCTS = [
       // SBC Products
-      {
-        id: 'sbc100k',
-        name: 'SBC 100K',
-        desc: 'Via TF on Southbronx',
-        category: 'sbc',
-        icon: 'fa-crown',
-        durations: [
-          { label: '1x', value: '1x', price: 10000 }
-        ]
-      },
-      {
-        id: 'sbc200k',
-        name: 'SBC 200K',
-        desc: 'Via TF on Southbronx',
-        category: 'sbc',
-        icon: 'fa-crown',
-        durations: [
-          { label: '1x', value: '1x', price: 20000 }
-        ]
-      },
-      {
-        id: 'sbc300k',
-        name: 'SBC 300K',
-        desc: 'Via TF on Southbronx',
-        category: 'sbc',
-        icon: 'fa-crown',
-        durations: [
-          { label: '1x', value: '1x', price: 30000 }
-        ]
-      },
-      {
-        id: 'sbc400k',
-        name: 'SBC 400K',
-        desc: 'Via TF on Southbronx',
-        category: 'sbc',
-        icon: 'fa-crown',
-        durations: [
-          { label: '1x', value: '1x', price: 40000 }
-        ]
-      },
-      {
-        id: 'sbc500k',
-        name: 'SBC 500K',
-        desc: 'Via TF on Southbronx',
-        category: 'sbc',
-        icon: 'fa-crown',
-        durations: [
-          { label: '1x', value: '1x', price: 50000 }
-        ]
-      },
-      {
-        id: 'sbc600k',
-        name: 'SBC 600K',
-        desc: 'Via TF on Southbronx',
-        category: 'sbc',
-        icon: 'fa-crown',
-        durations: [
-          { label: '1x', value: '1x', price: 60000 }
-        ]
-      },
-      {
-        id: 'sbc700k',
-        name: 'SBC 700K',
-        desc: 'Via TF on Southbronx',
-        category: 'sbc',
-        icon: 'fa-crown',
-        durations: [
-          { label: '1x', value: '1x', price: 70000 }
-        ]
-      },
-      {
-        id: 'sbc800k',
-        name: 'SBC 800K',
-        desc: 'Via TF on Southbronx',
-        category: 'sbc',
-        icon: 'fa-crown',
-        durations: [
-          { label: '1x', value: '1x', price: 80000 }
-        ]
-      },
-      {
-        id: 'sbc900k',
-        name: 'SBC 900K',
-        desc: 'Via TF on Southbronx',
-        category: 'sbc',
-        icon: 'fa-crown',
-        durations: [
-          { label: '1x', value: '1x', price: 90000 }
-        ]
-      },
-      {
-        id: 'sbc1jt',
-        name: 'SBC 1JT',
-        desc: 'Via TF on Southbronx',
-        category: 'sbc',
-        icon: 'fa-crown',
-        durations: [
-          { label: '1x', value: '1x', price: 100000 }
-        ]
-      },
-      {
-        id: 'sbc11jt',
-        name: 'SBC 1.1JT',
-        desc: 'Via TF on Southbronx',
-        category: 'sbc',
-        icon: 'fa-crown',
-        durations: [
-          { label: '1x', value: '1x', price: 110000 }
-        ]
-      },
-      {
-        id: 'sbc12jt',
-        name: 'SBC 1.2JT',
-        desc: 'Via TF on Southbronx',
-        category: 'sbc',
-        icon: 'fa-crown',
-        durations: [
-          { label: '1x', value: '1x', price: 120000 }
-        ]
-      },
-      {
-        id: 'sbc13jt',
-        name: 'SBC 1.3JT',
-        desc: 'Via TF on Southbronx',
-        category: 'sbc',
-        icon: 'fa-crown',
-        durations: [
-          { label: '1x', value: '1x', price: 130000 }
-        ]
-      },
-      {
-        id: 'sbc14jt',
-        name: 'SBC 1.4JT',
-        desc: 'Via TF on Southbronx',
-        category: 'sbc',
-        icon: 'fa-crown',
-        durations: [
-          { label: '1x', value: '1x', price: 140000 }
-        ]
-      },
-      {
-        id: 'sbc15jt',
-        name: 'SBC 1.5JT',
-        desc: 'Via TF on Southbronx',
-        category: 'sbc',
-        icon: 'fa-crown',
-        durations: [
-          { label: '1x', value: '1x', price: 150000 }
-        ]
-      },
-      {
-        id: 'sbc16jt',
-        name: 'SBC 1.6JT',
-        desc: 'Via TF on Southbronx',
-        category: 'sbc',
-        icon: 'fa-crown',
-        durations: [
-          { label: '1x', value: '1x', price: 160000 }
-        ]
-      },
-      {
-        id: 'sbc17jt',
-        name: 'SBC 1.7JT',
-        desc: 'Via TF on Southbronx',
-        category: 'sbc',
-        icon: 'fa-crown',
-        durations: [
-          { label: '1x', value: '1x', price: 170000 }
-        ]
-      },
+      { id: 'sbc100k', name: 'SBC 100K', desc: 'Via TF on Southbronx', category: 'sbc', icon: 'fa-crown', durations: [{ label: '1x', value: '1x', price: 10000 }] },
+      { id: 'sbc200k', name: 'SBC 200K', desc: 'Via TF on Southbronx', category: 'sbc', icon: 'fa-crown', durations: [{ label: '1x', value: '1x', price: 20000 }] },
+      { id: 'sbc300k', name: 'SBC 300K', desc: 'Via TF on Southbronx', category: 'sbc', icon: 'fa-crown', durations: [{ label: '1x', value: '1x', price: 30000 }] },
+      { id: 'sbc400k', name: 'SBC 400K', desc: 'Via TF on Southbronx', category: 'sbc', icon: 'fa-crown', durations: [{ label: '1x', value: '1x', price: 40000 }] },
+      { id: 'sbc500k', name: 'SBC 500K', desc: 'Via TF on Southbronx', category: 'sbc', icon: 'fa-crown', durations: [{ label: '1x', value: '1x', price: 50000 }] },
+      { id: 'sbc600k', name: 'SBC 600K', desc: 'Via TF on Southbronx', category: 'sbc', icon: 'fa-crown', durations: [{ label: '1x', value: '1x', price: 60000 }] },
+      { id: 'sbc700k', name: 'SBC 700K', desc: 'Via TF on Southbronx', category: 'sbc', icon: 'fa-crown', durations: [{ label: '1x', value: '1x', price: 70000 }] },
+      { id: 'sbc800k', name: 'SBC 800K', desc: 'Via TF on Southbronx', category: 'sbc', icon: 'fa-crown', durations: [{ label: '1x', value: '1x', price: 80000 }] },
+      { id: 'sbc900k', name: 'SBC 900K', desc: 'Via TF on Southbronx', category: 'sbc', icon: 'fa-crown', durations: [{ label: '1x', value: '1x', price: 90000 }] },
+      { id: 'sbc1jt', name: 'SBC 1JT', desc: 'Via TF on Southbronx', category: 'sbc', icon: 'fa-crown', durations: [{ label: '1x', value: '1x', price: 100000 }] },
+      { id: 'sbc11jt', name: 'SBC 1.1JT', desc: 'Via TF on Southbronx', category: 'sbc', icon: 'fa-crown', durations: [{ label: '1x', value: '1x', price: 110000 }] },
+      { id: 'sbc12jt', name: 'SBC 1.2JT', desc: 'Via TF on Southbronx', category: 'sbc', icon: 'fa-crown', durations: [{ label: '1x', value: '1x', price: 120000 }] },
+      { id: 'sbc13jt', name: 'SBC 1.3JT', desc: 'Via TF on Southbronx', category: 'sbc', icon: 'fa-crown', durations: [{ label: '1x', value: '1x', price: 130000 }] },
+      { id: 'sbc14jt', name: 'SBC 1.4JT', desc: 'Via TF on Southbronx', category: 'sbc', icon: 'fa-crown', durations: [{ label: '1x', value: '1x', price: 140000 }] },
+      { id: 'sbc15jt', name: 'SBC 1.5JT', desc: 'Via TF on Southbronx', category: 'sbc', icon: 'fa-crown', durations: [{ label: '1x', value: '1x', price: 150000 }] },
+      { id: 'sbc16jt', name: 'SBC 1.6JT', desc: 'Via TF on Southbronx', category: 'sbc', icon: 'fa-crown', durations: [{ label: '1x', value: '1x', price: 160000 }] },
+      { id: 'sbc17jt', name: 'SBC 1.7JT', desc: 'Via TF on Southbronx', category: 'sbc', icon: 'fa-crown', durations: [{ label: '1x', value: '1x', price: 170000 }] },
 
       // Script Products
-      {
-        id: 'marshmallow_harian',
-        name: 'Marshmallow - Harian',
-        desc: 'Premium Script',
-        category: 'script',
-        icon: 'fa-code',
-        durations: [
-          { label: '1 Day', value: '1d', price: 13000 }
-        ]
-      },
-      {
-        id: 'marshmallow_bulanan',
-        name: 'Marshmallow - Bulanan',
-        desc: 'Premium Script',
-        category: 'script',
-        icon: 'fa-code',
-        durations: [
-          { label: '1 Month', value: '30d', price: 60000 }
-        ]
-      },
-      {
-        id: 'marshmallow_lifetime',
-        name: 'Marshmallow - Lifetime',
-        desc: 'Premium Script',
-        category: 'script',
-        icon: 'fa-code',
-        durations: [
-          { label: 'Lifetime', value: 'perm', price: 150000 }
-        ]
-      },
-      {
-        id: 'combat_harian',
-        name: 'Combat - Harian',
-        desc: 'Premium Script',
-        category: 'script',
-        icon: 'fa-code',
-        durations: [
-          { label: '1 Day', value: '1d', price: 20000 }
-        ]
-      },
-      {
-        id: 'combat_bulanan',
-        name: 'Combat - Bulanan',
-        desc: 'Premium Script',
-        category: 'script',
-        icon: 'fa-code',
-        durations: [
-          { label: '1 Month', value: '30d', price: 80000 }
-        ]
-      },
-      {
-        id: 'combat_lifetime',
-        name: 'Combat - Lifetime',
-        desc: 'Premium Script',
-        category: 'script',
-        icon: 'fa-code',
-        durations: [
-          { label: 'Lifetime', value: 'perm', price: 200000 }
-        ]
-      },
-      {
-        id: 'fps_lifetime',
-        name: 'FPS - Lifetime',
-        desc: 'Premium Script',
-        category: 'script',
-        icon: 'fa-code',
-        durations: [
-          { label: 'Lifetime', value: 'perm', price: 50000 }
-        ]
-      },
+      { id: 'marshmallow_harian', name: 'Marshmallow - Harian', desc: 'Premium Script', category: 'script', icon: 'fa-code', durations: [{ label: '1 Day', value: '1d', price: 13000 }] },
+      { id: 'marshmallow_bulanan', name: 'Marshmallow - Bulanan', desc: 'Premium Script', category: 'script', icon: 'fa-code', durations: [{ label: '1 Month', value: '30d', price: 60000 }] },
+      { id: 'marshmallow_lifetime', name: 'Marshmallow - Lifetime', desc: 'Premium Script', category: 'script', icon: 'fa-code', durations: [{ label: 'Lifetime', value: 'perm', price: 150000 }] },
+      { id: 'combat_harian', name: 'Combat - Harian', desc: 'Premium Script', category: 'script', icon: 'fa-code', durations: [{ label: '1 Day', value: '1d', price: 20000 }] },
+      { id: 'combat_bulanan', name: 'Combat - Bulanan', desc: 'Premium Script', category: 'script', icon: 'fa-code', durations: [{ label: '1 Month', value: '30d', price: 80000 }] },
+      { id: 'combat_lifetime', name: 'Combat - Lifetime', desc: 'Premium Script', category: 'script', icon: 'fa-code', durations: [{ label: 'Lifetime', value: 'perm', price: 200000 }] },
+      { id: 'fps_lifetime', name: 'FPS - Lifetime', desc: 'Premium Script', category: 'script', icon: 'fa-code', durations: [{ label: 'Lifetime', value: 'perm', price: 50000 }] },
 
       // Tier Products
-      {
-        id: 'tier1',
-        name: 'Tier 1 - Green Name',
-        desc: 'Premium Tier Southbronx',
-        category: 'tier',
-        icon: 'fa-gem',
-        durations: [
-          { label: '1x', value: '1x', price: 150000 }
-        ]
-      },
-      {
-        id: 'tier2',
-        name: 'Tier 2 - Pink Name',
-        desc: 'Premium Tier Southbronx',
-        category: 'tier',
-        icon: 'fa-gem',
-        durations: [
-          { label: '1x', value: '1x', price: 250000 }
-        ]
-      },
-      {
-        id: 'tier3',
-        name: 'Tier 3 - Blue Name',
-        desc: 'Premium Tier Southbronx',
-        category: 'tier',
-        icon: 'fa-gem',
-        durations: [
-          { label: '1x', value: '1x', price: 350000 }
-        ]
-      }
+      { id: 'tier1', name: 'Tier 1 - Green Name', desc: 'Premium Tier Southbronx', category: 'tier', icon: 'fa-gem', durations: [{ label: '1x', value: '1x', price: 150000 }] },
+      { id: 'tier2', name: 'Tier 2 - Pink Name', desc: 'Premium Tier Southbronx', category: 'tier', icon: 'fa-gem', durations: [{ label: '1x', value: '1x', price: 250000 }] },
+      { id: 'tier3', name: 'Tier 3 - Blue Name', desc: 'Premium Tier Southbronx', category: 'tier', icon: 'fa-gem', durations: [{ label: '1x', value: '1x', price: 350000 }] }
     ];
 
     // =============================================================
@@ -1287,6 +1227,8 @@
     let cart = JSON.parse(localStorage.getItem('elixir_cart') || '[]');
     let currentFilter = 'all';
     let timerInterval = null;
+    let selectedProduct = null;
+    let selectedDuration = null;
 
     // =============================================================
     // DOM REFS
@@ -1298,12 +1240,22 @@
     const cartOverlay = document.getElementById('cartOverlay');
     const checkoutModal = document.getElementById('checkoutModal');
     const loginModal = document.getElementById('loginModal');
+    const detailModal = document.getElementById('detailModal');
     const userDisplay = document.getElementById('userDisplay');
     const orderIdDisplay = document.getElementById('orderIdDisplay');
     const orderDateDisplay = document.getElementById('orderDateDisplay');
     const timerDisplay = document.getElementById('timerDisplay');
     const orderSummary = document.getElementById('orderSummary');
     const paymentDetail = document.getElementById('paymentDetail');
+
+    // Detail Modal refs
+    const detailIcon = document.getElementById('detailIcon');
+    const detailName = document.getElementById('detailName');
+    const detailPrice = document.getElementById('detailPrice');
+    const detailCategory = document.getElementById('detailCategory');
+    const detailDurations = document.getElementById('detailDurations');
+    const detailUsername = document.getElementById('detailUsername');
+    const usernameGroup = document.getElementById('usernameGroup');
 
     // =============================================================
     // UTILITY
@@ -1401,62 +1353,34 @@
                 <div class="product-icon"><i class="fas ${product.icon}"></i></div>
                 <h3>${product.name}</h3>
                 <p class="desc">${product.desc}</p>
-                <div class="duration-select" data-product="${product.id}">
-                  ${product.durations.map((d, i) => `
-                    <button class="${i === 0 ? 'active' : ''}" data-dur="${d.value}" data-price="${d.price}">${d.label}</button>
-                  `).join('')}
-                </div>
                 <div class="price-row">
                   <span class="price" data-base-price="${price}">${formatPrice(price)} <small>${currency}</small></span>
-                  <button class="btn-add" data-product="${product.id}"><i class="fas fa-plus"></i> Add</button>
+                  <button class="btn-select" data-product='${JSON.stringify(product).replace(/'/g,"&#39;")}'>
+                    <i class="fas fa-chevron-right"></i> Select
+                  </button>
                 </div>
               </div>
             `;
       });
       grid.innerHTML = html;
 
-      grid.querySelectorAll('.product-card').forEach(card => {
-        const productId = card.dataset.id;
-        const durBtns = card.querySelectorAll('.duration-select button');
-        const priceSpan = card.querySelector('.price');
-        const addBtn = card.querySelector('.btn-add');
-
-        durBtns.forEach(btn => {
-          btn.addEventListener('click', () => {
-            durBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const price = parseInt(btn.dataset.price);
-            priceSpan.dataset.basePrice = price;
-            priceSpan.innerHTML = `${formatPrice(price)} <small>${currency}</small>`;
-          });
+      // Event listener untuk tombol Select
+      grid.querySelectorAll('.btn-select').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const product = JSON.parse(btn.dataset.product);
+          openDetailModal(product);
         });
+      });
 
-        addBtn.addEventListener('click', () => {
-          const activeDur = card.querySelector('.duration-select .active');
-          if (!activeDur) return;
-          const durValue = activeDur.dataset.dur;
-          const price = parseInt(activeDur.dataset.price);
-          const label = activeDur.textContent;
-          const product = PRODUCTS.find(p => p.id === productId);
-          if (!product) return;
-
-          const existing = cart.find(item => item.productId === productId && item.duration === durValue);
-          if (existing) {
-            existing.quantity += 1;
-          } else {
-            cart.push({
-              productId: productId,
-              productName: product.name,
-              duration: durValue,
-              durationLabel: label,
-              price: price,
-              quantity: 1
-            });
+      // Click pada card juga membuka detail
+      grid.querySelectorAll('.product-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const btn = card.querySelector('.btn-select');
+          if (btn) {
+            const product = JSON.parse(btn.dataset.product);
+            openDetailModal(product);
           }
-          saveCart();
-          updateCartUI();
-          addBtn.textContent = '✓ Added';
-          setTimeout(() => { addBtn.innerHTML = '<i class="fas fa-plus"></i> Add'; }, 1000);
         });
       });
 
@@ -1472,6 +1396,127 @@
       });
       updateCartUI();
     }
+
+    // =============================================================
+    // DETAIL MODAL (Step 1)
+    // =============================================================
+    function openDetailModal(product) {
+      selectedProduct = product;
+      selectedDuration = product.durations[0];
+
+      // Isi data produk
+      detailIcon.innerHTML = `<i class="fas ${product.icon}"></i>`;
+      detailName.textContent = product.name;
+      detailPrice.textContent = formatPrice(product.durations[0].price);
+      detailCategory.textContent = `Kategori: ${getCategoryLabel(product.category)}`;
+
+      // Render durasi
+      detailDurations.innerHTML = product.durations.map((d, i) => `
+            <button class="${i === 0 ? 'active' : ''}" data-dur="${d.value}" data-price="${d.price}">${d.label}</button>
+          `).join('');
+
+      // Event durasi di detail modal
+      detailDurations.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          detailDurations.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const price = parseInt(btn.dataset.price);
+          detailPrice.textContent = formatPrice(price);
+          selectedDuration = {
+            label: btn.textContent,
+            value: btn.dataset.dur,
+            price: price
+          };
+        });
+      });
+
+      // Tampilkan input username hanya untuk SBC
+      if (product.category === 'sbc') {
+        usernameGroup.style.display = 'block';
+        detailUsername.value = '';
+        detailUsername.placeholder = 'Masukkan username kamu (contoh: Verns)';
+      } else {
+        usernameGroup.style.display = 'none';
+        detailUsername.value = '';
+      }
+
+      detailModal.classList.add('open');
+    }
+
+    // Close detail modal
+    document.getElementById('closeDetail').addEventListener('click', () => {
+      detailModal.classList.remove('open');
+      selectedProduct = null;
+      selectedDuration = null;
+    });
+
+    detailModal.addEventListener('click', (e) => {
+      if (e.target === detailModal) {
+        detailModal.classList.remove('open');
+        selectedProduct = null;
+        selectedDuration = null;
+      }
+    });
+
+    // Tombol Tambah ke Keranjang
+    document.getElementById('btnAddToCart').addEventListener('click', () => {
+      if (!selectedProduct || !selectedDuration) return;
+
+      const username = detailUsername.value.trim();
+
+      // Validasi: untuk SBC harus isi username
+      if (selectedProduct.category === 'sbc' && !username) {
+        alert('⚠️ Mohon isi username kamu terlebih dahulu!');
+        detailUsername.focus();
+        return;
+      }
+
+      // Tambahkan ke cart
+      const existing = cart.find(item =>
+        item.productId === selectedProduct.id &&
+        item.duration === selectedDuration.value
+      );
+
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({
+          productId: selectedProduct.id,
+          productName: selectedProduct.name,
+          duration: selectedDuration.value,
+          durationLabel: selectedDuration.label,
+          price: selectedDuration.price,
+          quantity: 1,
+          username: username || null
+        });
+      }
+
+      saveCart();
+      updateCartUI();
+
+      // Tutup detail modal
+      detailModal.classList.remove('open');
+
+      // Feedback
+      const btn = document.getElementById('btnAddToCart');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<i class="fas fa-check"></i> Ditambahkan!';
+      btn.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.style.background = '';
+      }, 1500);
+
+      selectedProduct = null;
+      selectedDuration = null;
+    });
+
+    // Enter key pada input username
+    detailUsername.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        document.getElementById('btnAddToCart').click();
+      }
+    });
 
     // =============================================================
     // FILTER
@@ -1518,7 +1563,7 @@
     });
 
     // =============================================================
-    // CHECKOUT
+    // CHECKOUT (Step 2: Payment)
     // =============================================================
     function updatePaymentDetail(method) {
       let total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
@@ -1579,7 +1624,8 @@
       let lines = cart.map(item => {
         const subtotal = item.price * item.quantity;
         total += subtotal;
-        return `<div class="line"><span>${item.productName} <span class="qty">(×${item.quantity})</span></span><span>${formatPrice(subtotal)}</span></div>`;
+        const usernameDisplay = item.username ? ` @${item.username}` : '';
+        return `<div class="line"><span>${item.productName}${usernameDisplay} <span class="qty">(×${item.quantity})</span></span><span>${formatPrice(subtotal)}</span></div>`;
       }).join('');
       orderSummary.innerHTML = lines +
         `<div class="line total"><span>Total</span><span>${formatPrice(total)}</span></div>`;
@@ -1757,7 +1803,10 @@
       if (e.target === cartOverlay) cartOverlay.classList.remove('open');
     });
 
-    console.log('🛒 ELIXIRSTORE ready (Phantom.wtf template).');
+    console.log('🛒 ELIXIRSTORE ready.');
+    console.log('📋 Step 1: Klik card → Detail modal (pilih durasi, isi username)');
+    console.log('📋 Step 2: Klik "Tambah ke Keranjang" → Cart');
+    console.log('📋 Step 3: Buka Cart → Checkout → Payment');
   </script>
 </body>
 </html>
